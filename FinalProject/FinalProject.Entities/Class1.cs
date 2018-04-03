@@ -8,6 +8,8 @@ namespace FinalProject.Entities
 {
     public class Class1
     {
+		
+		int test;
 
     }
 }
