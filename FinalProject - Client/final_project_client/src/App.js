@@ -6,8 +6,9 @@ class App extends Component {
   render() {
     return (
       <div className="App">
+        avi 
         <User />
-		MeitalTe11565
+		
       </div>
     );
   }
