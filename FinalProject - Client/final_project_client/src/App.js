@@ -11,14 +11,10 @@ import './App.css';
 
 class App extends Component {
 
-onClickLoginPage(event){
-
-}
 
   render() {
     return (
       <div className="App">
-<<<<<<< HEAD
         <Router>
         <div>
           <Route exact path="/" component={GuestScreen} />
@@ -27,11 +23,8 @@ onClickLoginPage(event){
           <Route path="/BusinessSignUpScreen" component={BusinessSignUpScreen} />
         </div>
         </Router>
-=======
-        avi 123123123
-        <User />
-		
->>>>>>> fb55e47adb9b07374b4a4c42ddd5e3e0ad9caf39
+
+
       </div>
     );
   }
