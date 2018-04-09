@@ -1,5 +1,10 @@
 import React, { Component } from 'react';
+import Login from './Login/Login.js';
 import './GuestScreen.css';
+import {Route, Link } from "react-router-dom";
+import App from '../App';
+
+
 
 class GuestScreen extends Component {
 
@@ -7,7 +12,8 @@ class GuestScreen extends Component {
     {
         return(
 
-            <div className = "gusetScreenWrapper">
+            <div className = "guestScreenWrapper">
+                <Login />
                 <div className="explanationWrapper">
                     <h1>
                         <span>It's</span><span>A</span><span>Deal</span>!!
@@ -18,12 +24,9 @@ class GuestScreen extends Component {
                     </div>
                     <iframe width="420" height="345" src="https://www.youtube.com/embed/FlsCjmMhFmw">
                     </iframe>
-                    {/* <video width="320" height="240" controls> */}
-                        {/* <source src="./../images/video1.mp4" type="video/mp4"/>                        
-                        Your browser does not support the video tag.
-                    </video> */}
+                    
                 </div>
-                
+                {/* <Route exact path="/" component={App} /> */}
             </div>
 
         );

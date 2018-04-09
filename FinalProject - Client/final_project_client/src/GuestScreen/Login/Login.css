@@ -1,0 +1,19 @@
+
+.insideLoginWrapper{
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    width: 100%;
+}
+
+.loginWrapper{
+    display: flex;
+    flex-wrap: nowrap;
+}
+
+button{
+    width: 100%;
+
+}
