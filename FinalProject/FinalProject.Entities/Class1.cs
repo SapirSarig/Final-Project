@@ -11,6 +11,7 @@ namespace FinalProject.Entities
 		
 		int test;
 		int odmashoo;
+		//fafasfasfafasf
 
     }
 }
