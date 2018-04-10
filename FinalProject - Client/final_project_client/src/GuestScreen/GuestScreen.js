@@ -18,7 +18,8 @@ class GuestScreen extends Component {
                     <h1>
                         <span>It's</span><span>A</span><span>Deal</span>!!
                     </h1>
-                    <div className="explanation">
+                    <div className="explanation"> 
+                                       
                         jkhdfgjhglkhgkjgkrjgkrgjr
                         lkgjgkfjgkjgkfjgfkgjfkgjfk!
                     </div>
