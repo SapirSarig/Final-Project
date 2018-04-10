@@ -4,7 +4,7 @@ class LoginScreen extends Component {
     render() {
         return (
             <div>
-                hello login page
+                Hello login page
             </div>
         );
     }
