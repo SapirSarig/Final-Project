@@ -1,4 +1,4 @@
-import React, { Component, } from 'react';
+import React, { Component } from 'react';
 import Login from './Login/Login.js';
 import './GuestScreen.css';
 import {Route, Link } from "react-router-dom";
