@@ -2,6 +2,8 @@
     display: flex;
     flex-direction: column;
     width: 105%;
+    height: 105%;
+    justify-content: space-between;
 }
 
 .siteHeader{
