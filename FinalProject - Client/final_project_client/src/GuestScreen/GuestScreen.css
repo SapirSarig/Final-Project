@@ -1,7 +1,16 @@
 .guestScreenWrapper{
     display: flex;
+    flex-direction: column;
+    width: 105%;
 }
+
 .siteHeader{
     color: white; 
 }
 
+.explanation {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between center;
+    flex-wrap: wrap;
+}
