@@ -4,7 +4,7 @@ class BusinessSignUpScreen extends Component {
     render() {
         return (
             <div>
-                hello BusinessSignUpScreen page
+                <h1>Business Sign Up screen </h1>
             </div>
         );
     }

@@ -4,7 +4,7 @@ class StarSignUpScreen extends Component {
     render() {
         return (
             <div>
-                hello StarSignUp page
+                <h1>Star Sign Up Screen</h1>
             </div>
         );
     }
