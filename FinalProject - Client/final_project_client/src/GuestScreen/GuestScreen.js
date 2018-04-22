@@ -13,7 +13,6 @@ class GuestScreen extends Component {
 
             <div className="guestScreenWrapper">
                     <div className="siteHeader"><h1> It's A Deal !! </h1></div>
-
                     <div>
                         Are you a star on social networks like Facebook or Instagram?<br></br>
                         Do you own a business and looking for an opportunity to sell your products?<br></br>
