@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
-import User from './Components/User/User.js'
-import GuestScreen from './GuestScreen/GuestScreen.js'
-import LoginScreen from './LoginScreen/LoginScreen.js'
-import StarSignUpScreen from './StarSignUpScreen/StarSignUpScreen.js'
-import BusinessSignUpScreen from './BusinessSignUpScreen/BusinessSignUpScreen.js'
+import HomePage from './components/views/homePage/HomePage'
+import LoginPage from './components/views/loginPage/LoginPage'
+import StarSignUpPage from './components/views/starSignUpPage/StarSignUpPage'
+import BusinessSignUpPage from './components/views/businessSignUpPage/BusinessSignUpPage'
 
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import './App.css';
@@ -17,10 +16,10 @@ class App extends Component {
       <div className="App">
         <Router>
         <div>
-          <Route exact path="/" component={GuestScreen} />
-          <Route path="/loginPage" component={LoginScreen} />
-          <Route path="/StarSignUpScreen" component={StarSignUpScreen} />
-          <Route path="/BusinessSignUpScreen" component={BusinessSignUpScreen} />
+          <Route exact path="/" component={HomePage} />
+          <Route path="/login" component={LoginPage} />
+          <Route path="/starSignUp" component={StarSignUpPage} />
+          <Route path="/businessSignUp" component={BusinessSignUpPage} />
         </div>
         </Router>
 

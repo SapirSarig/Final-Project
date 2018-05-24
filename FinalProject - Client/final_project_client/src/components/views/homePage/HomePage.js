@@ -1,13 +1,8 @@
 import React, { Component } from 'react';
-import Login from './Login/Login.js';
-import './GuestScreen.css';
-import { Route, Link } from "react-router-dom";
-import App from '../App';
+import Home from '../../../components/home/Home';
+import './HomePage.css';
 
-
-
-class GuestScreen extends Component {
-
+class HomePage extends Component {
     render() {
         return (
 
@@ -19,7 +14,7 @@ class GuestScreen extends Component {
                         Use our website to connect with each other!
                              </div>
                     <div className="explanation">
-                        <Login />
+                        <Home />
                         <div>
                             <iframe width="420" height="345" src="https://www.youtube.com/embed/FlsCjmMhFmw" />
                         </div>
@@ -32,4 +27,4 @@ class GuestScreen extends Component {
     }
 }
 
-export default GuestScreen;
+export default HomePage;
