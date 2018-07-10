@@ -139,8 +139,8 @@ namespace FinalProject.Entities
         public DateTime DateTime { get; set; }
     }
 
-    public abstract class SocialNetwork
-    {
+    public abstract class SocialNetwork { 
+    
         [Key]
         public int Id { get; set; }
 
