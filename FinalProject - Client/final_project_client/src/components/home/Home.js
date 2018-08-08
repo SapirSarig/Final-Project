@@ -25,7 +25,7 @@ class Home extends Component {
 
                     <Link className="BusinessSignUp" to="/businessSignUp">
                     <button className="BusinessSignUp">
-                        Sign up as a business man 
+                        Sign up as a business owner
                     </button>
                     </Link>
                 </div>

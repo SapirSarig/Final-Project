@@ -13,14 +13,29 @@ namespace FinalProject.Controllers
 {
     [RoutePrefix("api/Users")]
     [EnableCors(origins: "*", headers: "*", methods: "*")]
-
     public class UsersController : ApiController
     {
+        private UsersBL usersBL = new UsersBL();
+
         // GET api/<controller>
         [HttpGet]
         public IHttpActionResult GetUser(int id)
         {
             return Ok("bla bla bla");
+        }
+
+        [HttpPost]
+        public IHttpActionResult CreateAdvertiserUser([FromBody]AdvertiserUser user)
+        {
+             bool isCreated = usersBL.AddUser(user);
+            if (isCreated)
+            {
+                return Ok(user);
+             }
+            else
+            {
+                return BadRequest();
+            }
         }
 
         //// GET api/<controller>/5
