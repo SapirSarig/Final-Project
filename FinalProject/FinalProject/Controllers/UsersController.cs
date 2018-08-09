@@ -27,7 +27,7 @@ namespace FinalProject.Controllers
         [HttpPost]
         public IHttpActionResult CreateAdvertiserUser([FromBody]AdvertiserUser user)
         {
-             bool isCreated = usersBL.AddUser(user);
+            bool isCreated = usersBL.AddUser(user);
             if (isCreated)
             {
                 return Ok(user);

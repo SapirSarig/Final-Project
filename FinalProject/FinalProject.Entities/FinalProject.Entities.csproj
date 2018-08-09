@@ -70,8 +70,16 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Class1.cs" />
+    <Compile Include="AdvertiserUser.cs" />
+    <Compile Include="Auction.cs" />
+    <Compile Include="Youtube.cs" />
+    <Compile Include="InfluencerUser.cs" />
+    <Compile Include="Message.cs" />
+    <Compile Include="Negotiation.cs" />
+    <Compile Include="Offer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SocialNetwork.cs" />
+    <Compile Include="User.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
