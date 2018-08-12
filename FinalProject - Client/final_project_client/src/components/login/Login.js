@@ -3,6 +3,7 @@ import UserService from '../../services/apis/UserService';
 import RegisterService from '../../services/register/RegisterService';
 import StringUtil from '../../utils/StringUtil';
 import './Login.css';
+import FacebookLogin from 'react-facebook-login';
 
 const initialState = {
     name: "",
@@ -29,6 +30,8 @@ class Login extends Component {
         this.loginUser = this.loginUser.bind(this);
         this.checkValidation = this.checkValidation.bind(this);
         this.saveDataOnLocalStorage = this.saveDataOnLocalStorage.bind(this);
+        this.responseFacebook = this.responseFacebook.bind(this);
+        this.componentClicked = this.componentClicked.bind(this);
         this.userService = new UserService();
     }
 
@@ -60,6 +63,16 @@ class Login extends Component {
             alert("No Web Storage support");
         }
 
+    }
+
+    saveLoginTokenLocalStorage(userLogin) {
+        if (typeof (Storage) !== "undefined") {
+            localStorage.setItem("userLogin", JSON.stringify(userLogin));
+            return true;
+        } else {
+            alert("No Web Storage support");
+        }
+        return false;
     }
 
     deleteDataFromLocalStorage() {
@@ -107,6 +120,17 @@ class Login extends Component {
         });
     }
 
+    responseFacebook(response) {
+        let isLogged = this.saveLoginTokenLocalStorage(response);
+        if(isLogged) {
+            console.log("logged");
+        }
+    }
+
+    componentClicked(res) {
+        console.log(res);
+    } 
+
     render() {
         const { name, password, rememberMe, errors } = this.state;
 
@@ -121,7 +145,12 @@ class Login extends Component {
                 {<span className="errorInput">{errors["password"] && errors["password"]}</span>}
 
                 <input type="button" value="Login" className={`${this.isAllValid() ? "" : "disableElement"}`} onClick={this.loginUser} />
-                <input type="button" value="Login With Facebook" />
+                <FacebookLogin
+                    appId="271386353659285"
+                    autoLoad={true}
+                    fields="name,email,picture"
+                    onClick={this.componentClicked}
+                    callback={this.responseFacebook} />
                 <input type="button" value="Login With Google" />
                 <div>
                     <input type="checkbox" checked={rememberMe} onChange={this.handleInputChange} name="rememberMe" />
