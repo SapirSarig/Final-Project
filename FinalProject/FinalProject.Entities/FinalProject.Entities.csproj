@@ -72,6 +72,9 @@
   <ItemGroup>
     <Compile Include="AdvertiserUser.cs" />
     <Compile Include="Auction.cs" />
+    <Compile Include="Interest.cs" />
+    <Compile Include="OfferStatus.cs" />
+    <Compile Include="OfferType.cs" />
     <Compile Include="Youtube.cs" />
     <Compile Include="InfluencerUser.cs" />
     <Compile Include="Message.cs" />

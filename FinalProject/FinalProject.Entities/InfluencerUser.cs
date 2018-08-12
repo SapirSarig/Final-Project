@@ -23,5 +23,7 @@ namespace FinalProject.Entities
 
         [Required]
         public IList<Interest> Interests { get; set; }
+        
+        public IList<Offer> Offers { get; set; }
     }
 }

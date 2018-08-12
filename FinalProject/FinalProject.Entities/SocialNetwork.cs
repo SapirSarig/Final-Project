@@ -7,17 +7,28 @@ using System.Threading.Tasks;
 
 namespace FinalProject.Entities
 {
-    public abstract class SocialNetwork
+    //public abstract class SocialNetwork
+    //{
+
+    //    [Key]
+    //    public int Id { get; set; }
+
+    //    [Required]
+    //    public int Name { get; set; }
+
+    //    [Required]
+    //    public int Link { get; set; }
+    //    //...
+    //}
+
+    public enum SocialNetwork
     {
-
-        [Key]
-        public int Id { get; set; }
-
-        [Required]
-        public int Name { get; set; }
-
-        [Required]
-        public int Link { get; set; }
-        //...
+        Facebook,
+        Youtube,
+        Instagram,
+        Twitter
     }
+
+
+
 }
