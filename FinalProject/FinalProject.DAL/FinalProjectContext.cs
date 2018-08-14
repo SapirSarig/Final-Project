@@ -24,7 +24,8 @@ namespace FinalProject.DAL
             modelBuilder.Conventions.Remove<OneToManyCascadeDeleteConvention>();
         }
 
-        public DbSet<User> Users { get; set; }
+        public DbSet<InfluencerUser> InfluencerUsers { get; set; }
+        public DbSet<AdvertiserUser> AdvertiserUsers { get; set; }
         public DbSet<Auction> Auctions { get; set; }
         public DbSet<Offer> Offers { get; set; }
     }
