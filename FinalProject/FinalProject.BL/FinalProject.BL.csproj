@@ -78,6 +78,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AdvertiserUsersBL.cs" />
+    <Compile Include="InfluencerUsersBL.cs" />
     <Compile Include="UsersBL.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

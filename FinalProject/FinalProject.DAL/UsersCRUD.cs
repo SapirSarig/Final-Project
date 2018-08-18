@@ -5,6 +5,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+// This File wiil not be use, it will replace by InfluencerUserCRUD and AdvertiserUserCRUD
+
 namespace FinalProject.DAL
 {
     public class UsersCRUD : IDisposable
@@ -13,7 +15,7 @@ namespace FinalProject.DAL
 
         public void AddUser(User user)
         {
-            context.Users.Add(user);
+            //context.Users.Add(user);
             context.SaveChanges();
         }
 

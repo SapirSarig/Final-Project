@@ -9,6 +9,10 @@ using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Cors;
 
+
+// This File wiil not be use, it will replace by InfluencerUserController and AdvertiserUserController
+
+
 namespace FinalProject.Controllers
 {
     [RoutePrefix("api/Users")]
@@ -31,7 +35,7 @@ namespace FinalProject.Controllers
             if (isCreated)
             {
                 return Ok(user);
-             }
+            }
             else
             {
                 return BadRequest();
