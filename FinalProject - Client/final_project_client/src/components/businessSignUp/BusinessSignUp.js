@@ -30,7 +30,7 @@ class BusinessSignUp extends Component {
     render() {
         return (
             <div>
-                <Register onCreateUser={this.onCreateUser}/>
+                <Register {...this.props} onCreateUser={this.onCreateUser}/>
             </div>
         );
     }

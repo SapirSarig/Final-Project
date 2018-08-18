@@ -4,12 +4,16 @@ import RegisterService from '../../services/register/RegisterService';
 import StringUtil from '../../utils/StringUtil';
 import './Login.css';
 import FacebookLogin from 'react-facebook-login';
+import { Route, Redirect } from 'react-router';
 
 const initialState = {
     name: "",
     password: "",
     errors: { name: "", password: "" },
-    rememberMe: false
+    rememberMe: false,
+    loggedIn: false,
+    externalLogin: false,
+    loggedUserInfo: {}
 };
 
 class Login extends Component {
@@ -57,7 +61,7 @@ class Login extends Component {
 
     saveDataOnLocalStorage() {
         const { password, name } = this.state;
-        if (typeof (Storage) !== "undefined") {
+        if (typeof (Storage) !== "undefined") { //don't save the password here!!
             localStorage.setItem("userLogin", JSON.stringify({ name, password }));
         } else {
             alert("No Web Storage support");
@@ -122,42 +126,50 @@ class Login extends Component {
 
     responseFacebook(response) {
         let isLogged = this.saveLoginTokenLocalStorage(response);
-        if(isLogged) {
+        //if(isLogged && this.checkIfUserSignUp(response.email))
+        //false 
+        if (isLogged) {
+            this.setState({ loggedIn: true, externalLogin: true, loggedUserInfo: response })
+
             console.log("logged");
         }
     }
 
     componentClicked(res) {
         console.log(res);
-    } 
+    }
 
     render() {
-        const { name, password, rememberMe, errors } = this.state;
+        const { name, password, rememberMe, errors, loggedIn, loggedUserInfo, externalLogin } = this.state;
 
         return (
-            <div className="Container">
-                <span> Name </span>
-                <input type="text" name="name" value={name} onChange={this.handleInputChange} />
-                {<span className="errorInput">{errors["name"] && errors["name"]}</span>}
+            loggedIn ? <Redirect to={{
+                pathname: '/businessSignUp',
+                state: { loggedUserInfo, externalLogin }
+            }} /> :
+                (<div className="Container">
+                    <span> Name </span>
+                    <input type="text" name="name" value={name} onChange={this.handleInputChange} />
+                    {<span className="errorInput">{errors["name"] && errors["name"]}</span>}
 
-                <span> Password </span>
-                <input type="password" name="password" value={password} onChange={this.handleInputChange} />
-                {<span className="errorInput">{errors["password"] && errors["password"]}</span>}
+                    <span> Password </span>
+                    <input type="password" name="password" value={password} onChange={this.handleInputChange} />
+                    {<span className="errorInput">{errors["password"] && errors["password"]}</span>}
 
-                <input type="button" value="Login" className={`${this.isAllValid() ? "" : "disableElement"}`} onClick={this.loginUser} />
-                <FacebookLogin
-                    appId="271386353659285"
-                    autoLoad={true}
-                    fields="name,email,picture"
-                    onClick={this.componentClicked}
-                    callback={this.responseFacebook} />
-                <input type="button" value="Login With Google" />
-                <div>
-                    <input type="checkbox" checked={rememberMe} onChange={this.handleInputChange} name="rememberMe" />
-                    <span>Remember me</span>
-                </div>
-                <span>Forgot my username/ password </span>
-            </div>
+                    <input type="button" value="Login" className={`${this.isAllValid() ? "" : "disableElement"}`} onClick={this.loginUser} />
+                    <FacebookLogin
+                        appId="271386353659285"
+                        autoLoad={true}
+                        fields="name,email,picture"
+                        onClick={this.componentClicked}
+                        callback={this.responseFacebook} />
+                    <input type="button" value="Login With Google" />
+                    <div>
+                        <input type="checkbox" checked={rememberMe} onChange={this.handleInputChange} name="rememberMe" />
+                        <span>Remember me</span>
+                    </div>
+                    <span>Forgot my username/ password </span>
+                </div>)
         );
     }
 

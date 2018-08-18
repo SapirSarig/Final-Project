@@ -2,6 +2,9 @@ import React, { Component } from 'react';
 import './Register.css';
 import RegisterService from '../../services/register/RegisterService';
 import StringUtil from '../../utils/StringUtil';
+import InfluencerRegister from './InfluencerRegister';
+import BusinessRegister from './BusinessRegister';
+import Interests from "./Interests";
 
 const initialState = {
     name: "",
@@ -9,23 +12,35 @@ const initialState = {
     password: "",
     confirmPassword: "",
     confirmMail: "",
-    errors: { name: "", email: "", password: "", confirmPassword:"", confirmMail:"" }
+    type: "Social Influencer",
+    chooseTypeState: {},
+    interests: [],
+    description: "",
+    errors: { name: "", email: "", password: "", confirmPassword: "", confirmMail: "" }
 };
 
 class Register extends Component {
     constructor(props) {
         super(props);
-        initialState.name = "";
-        initialState.email = "";
-        initialState.password = "";
-        initialState.confirmPassword = "",
-        initialState.errors = { name: "", email: "", password: "", confirmPassword:"", confirmMail:"" };
-
         this.state = initialState;
         this.handleInputChange = this.handleInputChange.bind(this);
         this.onCreateUser = this.onCreateUser.bind(this);
         this.isAllValid = this.isAllValid.bind(this);
-       // this.isPasswordSet = this.isPasswordSet.bind(this);
+        this.updateChooseTypeStateObject = this.updateChooseTypeStateObject.bind(this);
+        // this.isPasswordSet = this.isPasswordSet.bind(this);
+    }
+
+    componentDidMount() {
+        const { location } = this.props;
+        if (location && location.state) {
+            const { loggedUserInfo } = location.state;
+            if (loggedUserInfo) {
+                const { email, name } = loggedUserInfo;
+                this.setState({ email, name })
+            }
+        }
+
+
     }
 
     handleInputChange(event) {
@@ -33,11 +48,35 @@ class Register extends Component {
         const target = event.target;
         const value = target.value;
         const name = target.name;
-        this.setState({
-            [name]: value
-        });
+        let { interests } = this.state;
 
-       this.checkValidation(name, value);
+        if (name === "Interests") {
+            value && interests.push(value);
+
+            this.setState({
+                interests
+            })
+
+            //let arr = this.state.[name];
+
+            // arr.push(value);
+            // this.setState({
+            //     arr: arr 
+            //   });
+        }
+        else {
+            this.setState({
+                [name]: value
+            });
+        }
+        this.checkValidation(name, value);
+        console.log("******", this.state);
+    }
+
+    updateChooseTypeStateObject(obj) {
+        console.log(obj);
+
+        this.setState({ chooseTypeState: obj });
     }
 
     checkValidation(fieldName, value) {
@@ -56,7 +95,7 @@ class Register extends Component {
         else if (fieldName === "confirmPassword") {
             errorMessage = RegisterService.confirmValidation(value, password);
         }
-        else if(fieldName === "confirmMail"){
+        else if (fieldName === "confirmMail") {
             errorMessage = RegisterService.confirmValidation(value, email);
         }
 
@@ -81,8 +120,8 @@ class Register extends Component {
         isValidInputs = (StringUtil.isEmptyString(RegisterService.nameValidation(name)))
             && (StringUtil.isEmptyString(RegisterService.emailValidation(email)))
             && (StringUtil.isEmptyString(RegisterService.passwordValidation(password)))
-            && (StringUtil.isEmptyString(RegisterService.confirmValidation(confirmPassword,password)))
-            && (StringUtil.isEmptyString(RegisterService.confirmValidation(confirmMail,email))); //init, check all fields
+            && (StringUtil.isEmptyString(RegisterService.confirmValidation(confirmPassword, password)))
+            && (StringUtil.isEmptyString(RegisterService.confirmValidation(confirmMail, email))); //init, check all fields
 
         return isValidInputs;
     }
@@ -93,15 +132,14 @@ class Register extends Component {
 
     render() {
         const { children } = this.props;
-        const { name, email, confirmMail, password, confirmPassword, errors } = this.state;
+        const { name, email, confirmMail, password, confirmPassword, type,
+            dateOfBirth, socialNetworks, logo, description, imgUrl, errors } = this.state;
         return (
             <div className="Container">
                 <span> Name </span>
                 <input type="text" name="name" value={name} onChange={this.handleInputChange} />
                 <span className="errorInput">{errors["name"] && errors["name"]}</span>
 
-                {children && children}
-                
                 <span> Email </span>
                 <input type="email" name="email" value={email} onChange={this.handleInputChange} />
                 <span className="errorInput">{errors["email"] && errors["email"]}</span>
@@ -113,11 +151,26 @@ class Register extends Component {
                 <span> Password </span>
                 <input type="password" name="password" value={password} onChange={this.handleInputChange} />
                 <span className="errorInput">{errors["password"] && errors["password"]}</span>
-                
+
                 <span> Confirm Password </span>
                 <input type="password" name="confirmPassword" value={confirmPassword} onChange={this.handleInputChange} />
                 <span className="errorInput">{errors["confirmPassword"] && errors["confirmPassword"]}</span>
-                
+
+
+                <span> I'm a: </span>
+                <select name="type" onChange={this.handleInputChange}>
+                    <option value="Social Influencer" >Social Influencer</option>
+                    <option value="Business Owner" >Business Owner</option>
+                </select>
+
+                <Interests handleInputChange={this.handleInputChange} />
+
+                {type === "Social Influencer" ? <InfluencerRegister errors={errors} updateChooseTypeStateObject={this.updateChooseTypeStateObject} />
+                    : <BusinessRegister updateChooseTypeStateObject={this.updateChooseTypeStateObject} />}
+
+                <span>Description:</span>
+                <input type="text" name="description" onChange={this.handleInputChange} />
+
                 <input type="button" className={`${this.isAllValid() ? "" : "disableElement"}`} onClick={this.onCreateUser} value="Sign up!" />
             </div>
         );
