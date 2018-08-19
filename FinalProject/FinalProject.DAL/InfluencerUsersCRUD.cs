@@ -33,7 +33,7 @@ namespace FinalProject.DAL
 
         public InfluencerUser GetUser(int id)
         {
-            return context.InfluencerUsers.Find(id);            
+            return context.InfluencerUsers.FirstOrDefault(inf => inf.Id == id);
         }
 
         #region IDisposable - Do Using

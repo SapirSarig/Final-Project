@@ -1,0 +1,74 @@
+.editProdPicWrapper{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.productImgContainer{
+    display: flex;
+    position: relative;
+    border: 1px solid white;
+    min-width: 20vw;
+    min-height: 20vh;
+    max-width: 23vw;
+    margin-bottom: 1em;
+    border-radius: 5px;
+}
+
+.imgContainer{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    align-content: space-around;
+    padding: 10px;
+}
+
+img{
+    width: 100%;
+}
+
+.editPicBtn.designBtn{
+    font-size: 13px;
+    height: 35px;
+}
+
+.editPicInput{
+    width: 0.1px;
+	height: 0.1px;
+	opacity: 0;
+	overflow: hidden;
+	position: absolute;
+	z-index: -1;
+}
+
+.editPicInput + label{
+    cursor: pointer;
+}
+
+.editPicInput + label{
+    display: inline-block;
+    padding:0.5em 1em;
+    border:0.16em solid #FFFFFF;
+    /*margin:0 0.3em 0.3em 0;*/
+    box-sizing: border-box;
+    text-decoration:none;
+    text-transform:uppercase;
+    font-family:'Roboto',sans-serif;
+    font-weight:400;
+    color:#FFFFFF;
+    text-align:center;
+    transition: all 0.15s;
+    height: 50px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.editPicInput:hover + label{
+    color:#DDDDDD;
+    border-color:#DDDDDD;
+}
+
+.editPicInput:active + label{
+    color:#BBBBBB;
+    border-color:#BBBBBB;
+}

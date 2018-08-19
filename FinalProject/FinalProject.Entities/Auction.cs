@@ -9,13 +9,19 @@ namespace FinalProject.Entities
 {
     public class Auction
     {
+        Auction()
+        {
+            Offers = new HashSet<Offer>();
+            Interests = new HashSet<Interest>();
+        }
+
         [Key]
         public int Id { get; set; }
 
         [Required]
         public AdvertiserUser AdvertiserUser { get; set; }
 
-        public IList<Offer> Offers { get; set; }
+        public ICollection<Offer> Offers { get; set; }
 
         [Required, MaxLength(40)]
         public string Name { get; set; }
@@ -24,7 +30,7 @@ namespace FinalProject.Entities
         public string Description { get; set; }
 
         [Required]
-        public IList<Interest> Interests { get; set; }
+        public ICollection<Interest> Interests { get; set; }
 
         public int MinFollowers { get; set; }
 

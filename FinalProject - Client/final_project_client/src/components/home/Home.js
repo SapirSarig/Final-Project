@@ -28,6 +28,12 @@ class Home extends Component {
                         Sign up as a business owner
                     </button>
                     </Link>
+
+                    <Link className="auction" to="/auction">
+                    <button className="auctionBtn">
+                        auction
+                    </button>
+                    </Link>
                 </div>
             </div>
                 
