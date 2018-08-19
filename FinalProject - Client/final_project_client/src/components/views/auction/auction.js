@@ -21,7 +21,7 @@ const styles = theme => ({
 
 class Auction extends Component {
     constructor(props){
-        super(props);
+        super(props);//
 
         this.state = {
             name: '',
