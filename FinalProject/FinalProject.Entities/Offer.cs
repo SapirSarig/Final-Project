@@ -10,6 +10,11 @@ namespace FinalProject.Entities
 {
     public class Offer
     {
+        Offer()
+        {
+            SocialNetworks = new HashSet<SocialNetwork>();
+        }
+
         [Key]
         public int Id { get; set; }
 
@@ -21,10 +26,10 @@ namespace FinalProject.Entities
         public int AuctionRefId { get; set; }
         public Auction Auction { get; set; }
 
-        [Required]
-        [ForeignKey("InfluencerUser")]
-        public int InfluencerUserRefId { get; set; }
-        public InfluencerUser InfluencerUser { get; set; }
+        //[Required]
+        //[ForeignKey("InfluencerUser")]
+        //public int InfluencerUserRefId { get; set; }
+        public InfluencerUserOffers InfluencerUser { get; set; }
 
         public string UserRequirements { get; set; }
 
@@ -37,7 +42,7 @@ namespace FinalProject.Entities
         public string OfferDescription { get; set; }
 
         [Required]
-        public IList<SocialNetwork> SocialNetworks { get; set; }
+        public ICollection<SocialNetwork> SocialNetworks { get; set; }
 
         [Required]
         public OfferStatus Status { get; set; }
