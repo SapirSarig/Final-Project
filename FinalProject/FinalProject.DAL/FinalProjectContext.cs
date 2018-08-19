@@ -25,8 +25,10 @@ namespace FinalProject.DAL
         }
 
         public DbSet<InfluencerUser> InfluencerUsers { get; set; }
+        public DbSet<Offer> Offers { get; set; }
+        public DbSet<InfluencerUserOffers> InfluencerUserOffers { get; set; }
         public DbSet<AdvertiserUser> AdvertiserUsers { get; set; }
         public DbSet<Auction> Auctions { get; set; }
-        public DbSet<Offer> Offers { get; set; }
+        
     }
 }

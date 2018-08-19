@@ -7,7 +7,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace FinalProject.Entities
 {
-    //Base class for InfluencerUser and  AdvertiserUser
+    //Base class for InfluencerUser and AdvertiserUser
     public abstract class User
     {
         [Key]
