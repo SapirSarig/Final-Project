@@ -10,7 +10,7 @@ class BusinessSignUpPage extends Component {
     render() {
         return (
             <div>
-                <BusinessSignUp/>
+                <BusinessSignUp {...this.props}/>
             </div>
         );
     }
