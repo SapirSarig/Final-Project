@@ -11,7 +11,8 @@ class InfluencerRegister extends Component {
         this.state = {
             src: require('../../images/AddAnImage.png'),
             dateOfBirth: "",
-            socialNetworks: []
+            socialNetworks: [],
+            LinksToProfiles: []
         }
 
         this.handleInputChange = this.handleInputChange.bind(this);
@@ -79,15 +80,26 @@ class InfluencerRegister extends Component {
                 <div className="SocialNetworksContainer">
                     <input type="checkbox" name="socialNetworks" value="Twitter" onChange={this.handleInputChange} />
                     <img src={require("../../images/Twitter.jpg")} className="logo" />
+                    <span>Link To Profile:</span>
+                    <input type="text" name="LinkToTwitterProfile" onChange={this.handleInputChange} />
                     <br />
+
                     <input type="checkbox" name="socialNetworks" value="Facebook" onChange={this.handleInputChange} />
                     <img src={require("../../images/Facebook.png")} className="logo" />
+                    <span>Link To Profile:</span>
+                    <input type="text" name="LinkToFacebookProfile" onChange={this.handleInputChange} />
                     <br />
+
                     <input type="checkbox" name="socialNetworks" value="Instagram" onChange={this.handleInputChange} />
                     <img src={require("../../images/Instagram.png")} className="logo" />
+                    <span>Link To Profile:</span>
+                    <input type="text" name="LinkToInstagramProfile" onChange={this.handleInputChange} />
+
                     <br />
                     <input type="checkbox" name="socialNetworks" value="YouTube" onChange={this.handleInputChange} />
                     <img src={require("../../images/YouTube.png")} className="logo" />
+                    <span>Link To Profile:</span>
+                    <input type="text" name="LinkToYouTubeProfile" onChange={this.handleInputChange} />
 
                 </div>
 
