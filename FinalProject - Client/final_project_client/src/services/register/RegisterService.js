@@ -51,5 +51,21 @@ export default class RegisterService {
         return isValidInputs;
     }
 
+    static linkValidation(value){
+        let linkError = undefined; 
+        if(!ValidationUtil.validateLink(value)){
+            linkError = "Link not valid";
+        }
+        return linkError;
+    }
+    static dateValidation(value) {
+        let dateError = undefined;
+        var msecCurrentDate = Date.parse(new Date());
+        var inputMsec = Date.parse(value);
+        if(inputMsec > msecCurrentDate){
+            dateError = "Date Not Valid";
+        }
+        return dateError;
+    }
 
 }

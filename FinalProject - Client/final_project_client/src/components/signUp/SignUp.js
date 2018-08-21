@@ -5,7 +5,7 @@ import UserService from '../../services/apis/UserService';
 
 const initialState = {};
 
-class BusinessSignUp extends Component {
+class SignUp extends Component {
     userService;
 
     constructor(props) {
@@ -36,4 +36,4 @@ class BusinessSignUp extends Component {
     }
 }
 
-export default BusinessSignUp;
+export default SignUp;

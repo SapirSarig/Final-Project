@@ -6,3 +6,8 @@
 .disableElement{
     pointer-events: none;
 }
+.Container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}

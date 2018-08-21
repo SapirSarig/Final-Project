@@ -7,7 +7,7 @@ class HomePage extends Component {
         return (
             <div className="guestScreenWrapper">
                     <div className="siteHeader row align-items-center">
-                        <div class="col-sm"> It's A Deal !! </div>
+                        <div className="col-sm"> It's A Deal !! </div>
                     </div>
                     
                     <div className="row align-items-center">

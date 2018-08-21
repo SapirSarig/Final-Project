@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Interests from "./Interests";
+import RegisterService from '../../services/register/RegisterService';
 
 class BusinessRegister extends Component {
     constructor(props) {
@@ -9,11 +10,14 @@ class BusinessRegister extends Component {
         this.state = {
             CompanyName: "",
             src: require('../../images/AddAnImage.png'),
-            LinkToCompanySite: ""
+            LinkToCompanySite: "",
+            errors: {LinkToCompanySite:""}
         }
 
         this.handleInputChange = this.handleInputChange.bind(this);
         this.handleImgChange = this.handleImgChange.bind(this);
+        this.checkValidation = this.checkValidation.bind(this);
+
     }
 
     componentDidMount() {
@@ -28,9 +32,19 @@ class BusinessRegister extends Component {
         this.setState({
             [name]: value
         }, () => this.updateChooseTypeState(this.state));
+        this.checkValidation(name, value);
+    }
+    checkValidation(name, value) {
+        const { errors, LinksToProfiles } = this.state;
+        let errorMessage;
+        if (name.startsWith("LinkTo")) {
+            errorMessage = RegisterService.linkValidation(value);
+        }
 
-
-
+        errors[name] = errorMessage;
+        this.setState({
+            errors
+        });
     }
 
     handleImgChange(e) {
@@ -57,7 +71,7 @@ class BusinessRegister extends Component {
     }
 
     render() {
-        const { src } = this.state;
+        const { src, errors } = this.state;
         return (
             <div className="Container">
                 <span>Company's Name:</span>
@@ -68,8 +82,8 @@ class BusinessRegister extends Component {
                 <input type="file" name="myFile" onChange={this.handleImgChange} />
 
                 <span>Link To Company's Site:</span>
-
                 <input type="text" name="LinkToCompanySite" onChange={this.handleInputChange} />
+                <span className="errorInput">{errors["LinkToCompanySite"] && errors["LinkToCompanySite"]}</span>
 
 
             </div>

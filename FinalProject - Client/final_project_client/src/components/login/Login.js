@@ -144,7 +144,7 @@ class Login extends Component {
 
         return (
             loggedIn ? <Redirect to={{
-                pathname: '/businessSignUp',
+                pathname: '/SignUp',
                 state: { loggedUserInfo, externalLogin }
             }} /> :
                 (<div className="Container">
@@ -163,7 +163,6 @@ class Login extends Component {
                         fields="name,email,picture"
                         onClick={this.componentClicked}
                         callback={this.responseFacebook} />
-                    <input type="button" value="Login With Google" />
                     <div>
                         <input type="checkbox" checked={rememberMe} onChange={this.handleInputChange} name="rememberMe" />
                         <span>Remember me</span>

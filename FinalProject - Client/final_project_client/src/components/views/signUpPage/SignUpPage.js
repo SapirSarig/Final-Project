@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import StarSignUp from '../../starSignUp/StarSignUp';
+import SignUp from '../../signUp/SignUp';
 
-class StarSignUpPage extends Component {
+class SignUpPage extends Component {
 
     constructor(props) {
         super(props);
@@ -10,10 +10,10 @@ class StarSignUpPage extends Component {
     render() {
         return (
             <div>
-                <StarSignUp/>
+                <SignUp {...this.props}/>
             </div>
         );
     }
 }
 
-export default StarSignUpPage;
+export default SignUpPage;

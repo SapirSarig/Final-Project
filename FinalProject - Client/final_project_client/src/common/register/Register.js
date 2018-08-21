@@ -39,8 +39,6 @@ class Register extends Component {
                 this.setState({ email, name })
             }
         }
-
-
     }
 
     handleInputChange(event) {
@@ -56,13 +54,6 @@ class Register extends Component {
             this.setState({
                 interests
             })
-
-            //let arr = this.state.[name];
-
-            // arr.push(value);
-            // this.setState({
-            //     arr: arr 
-            //   });
         }
         else {
             this.setState({
@@ -75,7 +66,6 @@ class Register extends Component {
 
     updateChooseTypeStateObject(obj) {
         console.log(obj);
-
         this.setState({ chooseTypeState: obj });
     }
 
