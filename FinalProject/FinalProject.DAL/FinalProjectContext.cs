@@ -21,13 +21,13 @@ namespace FinalProject.DAL
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
-            modelBuilder.Conventions.Remove<OneToManyCascadeDeleteConvention>();
+            modelBuilder.Entity<InfluencerUser>().HasMany(iu => iu.Offers).WithRequired();
+            modelBuilder.Entity<AdvertiserUser>().HasMany(au => au.Auctions).WithRequired();
+
         }
 
-        public DbSet<InfluencerUser> InfluencerUsers { get; set; }
+        public DbSet<User> Users { get; set; }
         public DbSet<Offer> Offers { get; set; }
-        public DbSet<InfluencerUserOffers> InfluencerUserOffers { get; set; }
-        public DbSet<AdvertiserUser> AdvertiserUsers { get; set; }
         public DbSet<Auction> Auctions { get; set; }
         
     }

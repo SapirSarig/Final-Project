@@ -62,8 +62,7 @@ class InfluencerRegister extends Component {
 
         else if (name.startsWith("LinkTo")) {
             let obj = {
-                type: name,
-                linkToProfile: value
+                [name]: value
             };
             value && LinksToProfiles.push(obj);
             this.setState({

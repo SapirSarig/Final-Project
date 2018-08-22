@@ -11,7 +11,7 @@ namespace FinalProject.Entities
     public abstract class User
     {
         [Key]
-        public int Id { get; set; }
+        public int UserId { get; set; }
 
         [Required]
         //[RegularExpression(@.......)]

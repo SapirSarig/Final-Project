@@ -72,7 +72,6 @@
   <ItemGroup>
     <Compile Include="AdvertiserUser.cs" />
     <Compile Include="Auction.cs" />
-    <Compile Include="InfluencerUserOffers.cs" />
     <Compile Include="Interest.cs" />
     <Compile Include="OfferStatus.cs" />
     <Compile Include="OfferType.cs" />

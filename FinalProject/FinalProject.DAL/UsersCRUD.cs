@@ -15,11 +15,14 @@ namespace FinalProject.DAL
 
         public void AddUser(User user)
         {
-            //context.Users.Add(user);
+            context.Users.Add(user);
             context.SaveChanges();
         }
 
-
+        public User GetUser(int id)
+        {
+            return context.Users.FirstOrDefault(user => user.UserId == id);
+        }
         #region IDisposable - Do Using
 
         public void Dispose()

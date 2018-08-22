@@ -20,7 +20,7 @@ namespace FinalProject.Controllers
     public class UsersController : ApiController
     {
         private UsersBL usersBL = new UsersBL();
-
+        
         // GET api/<controller>
         [HttpGet]
         public IHttpActionResult GetUser(int id)
@@ -30,6 +30,21 @@ namespace FinalProject.Controllers
 
         [HttpPost]
         public IHttpActionResult CreateAdvertiserUser([FromBody]AdvertiserUser user)
+        {
+            
+            bool isCreated = usersBL.AddUser(user);
+            if (isCreated)
+            {
+                return Ok(user);
+            }
+            else
+            {
+                return BadRequest();
+            }
+        }
+
+        [HttpPost]
+        public IHttpActionResult CreateInfluencerUser([FromBody]InfluencerUser user)
         {
             bool isCreated = usersBL.AddUser(user);
             if (isCreated)

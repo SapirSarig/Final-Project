@@ -10,14 +10,14 @@ namespace FinalProject.BL
 {
     public class InfluencerUsersBL
     {
-        private InfluencerUsersCRUD influencerUsersCRUD;
+        private UsersCRUD usersCRUD;
 
         public InfluencerUsersBL()
         {
-            influencerUsersCRUD = new InfluencerUsersCRUD();
+            usersCRUD = new UsersCRUD();
         }
 
-        public bool AddUser(InfluencerUser user)
+        public bool AddUser(User user)
         {
             if (user == null)
             {
@@ -27,7 +27,7 @@ namespace FinalProject.BL
             {
                 try
                 {
-                    influencerUsersCRUD.AddUser(user);
+                    usersCRUD.AddUser(user);
                     return true;
                 }
                 catch (Exception e)
@@ -38,49 +38,49 @@ namespace FinalProject.BL
             }
         }
 
-        public bool UpdateUser(InfluencerUser user)
-        {
-            if (user == null)
-            {
-                return false;
-            }
-            else
-            {
-                try
-                {
-                    influencerUsersCRUD.UpdateUser(user);
-                    return true;
-                }
-                catch (Exception e)
-                {
-                    Console.WriteLine(e);
-                    return false;
-                }
-            }
-        }
+        //public bool UpdateUser(InfluencerUser user)
+        //{
+        //    if (user == null)
+        //    {
+        //        return false;
+        //    }
+        //    else
+        //    {
+        //        try
+        //        {
+        //            influencerUsersCRUD.UpdateUser(user);
+        //            return true;
+        //        }
+        //        catch (Exception e)
+        //        {
+        //            Console.WriteLine(e);
+        //            return false;
+        //        }
+        //    }
+        //}
 
-        public bool RemoveUser(int id)
-        {
-            if (id < 0)
-            {
-                return false;
-            }
-            else
-            {
-                try
-                {
-                    influencerUsersCRUD.RemoveUser(id);
-                    return true;
-                }
-                catch (Exception e)
-                {
-                    Console.WriteLine(e);
-                    return false;
-                }
-            }
-        }
+        //public bool RemoveUser(int id)
+        //{
+        //    if (id < 0)
+        //    {
+        //        return false;
+        //    }
+        //    else
+        //    {
+        //        try
+        //        {
+        //            influencerUsersCRUD.RemoveUser(id);
+        //            return true;
+        //        }
+        //        catch (Exception e)
+        //        {
+        //            Console.WriteLine(e);
+        //            return false;
+        //        }
+        //    }
+        //}
 
-        public InfluencerUser GetUser(int id)
+        public User GetUser(int id)
         {
             if (id < 0)
             {
@@ -90,7 +90,7 @@ namespace FinalProject.BL
             {
                 try
                 {
-                    return influencerUsersCRUD.GetUser(id);
+                    return usersCRUD.GetUser(id);
                 }
                 catch (Exception e)
                 {

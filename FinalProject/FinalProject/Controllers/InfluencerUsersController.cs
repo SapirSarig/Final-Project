@@ -19,11 +19,11 @@ namespace FinalProject.Controllers
     {
         private InfluencerUsersBL influencerUsersBL = new InfluencerUsersBL();
 
-        // GET api/<controller>
+        //GET api/<controller>
         [HttpGet]
         public IHttpActionResult GetUser(int id)
         {
-            InfluencerUser user = influencerUsersBL.GetUser(id);
+            User user = influencerUsersBL.GetUser(id);
             if (user != null)
             {
                 return Ok(user);
@@ -35,7 +35,7 @@ namespace FinalProject.Controllers
         }
 
         [HttpPost]
-        public IHttpActionResult CreateAdvertiserUser([FromBody]InfluencerUser user)
+        public IHttpActionResult CreateInfluenceUser([FromBody]InfluencerUser user)
         {
             bool isCreated = influencerUsersBL.AddUser(user);
             if (isCreated)

@@ -11,29 +11,29 @@ namespace FinalProject.DAL
     {
         private FinalProjectContext context = new FinalProjectContext();
 
-        public void AddUser(AdvertiserUser user)
-        {
-            context.AdvertiserUsers.Add(user);            
-            context.SaveChanges();
-        }
+        //public void AddUser(AdvertiserUser user)
+        //{
+        //    context.AdvertiserUsers.Add(user);
+        //    context.SaveChanges();
+        //}
 
-        public void UpdateUser(AdvertiserUser user)
-        {
-            context.AdvertiserUsers.Attach(user);
-            //maybe should replace the line above with a line that change state to Modified like - context.Entry(user).State = EntityState.Modified;             
-            context.SaveChanges();
-        }
+        //public void UpdateUser(AdvertiserUser user)
+        //{
+        //    context.AdvertiserUsers.Attach(user);
+        //    //maybe should replace the line above with a line that change state to Modified like - context.Entry(user).State = EntityState.Modified;             
+        //    context.SaveChanges();
+        //}
 
-        public void RemoveUser(int id)
-        {
-            context.AdvertiserUsers.Remove(GetUser(id));
-            context.SaveChanges();
-        }
+        //public void RemoveUser(int id)
+        //{
+        //    context.AdvertiserUsers.Remove(GetUser(id));
+        //    context.SaveChanges();
+        //}
 
-        public AdvertiserUser GetUser(int id)
-        {
-            return context.AdvertiserUsers.Find(id);
-        }
+        //public AdvertiserUser GetUser(int id)
+        //{
+        //    return context.AdvertiserUsers.Find(id);
+        //}
 
 
         #region IDisposable - Do Using

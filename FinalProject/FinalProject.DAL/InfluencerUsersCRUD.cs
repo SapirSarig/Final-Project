@@ -11,15 +11,15 @@ namespace FinalProject.DAL
     {
         private FinalProjectContext context = new FinalProjectContext();
 
-        public void AddUser(InfluencerUser user)
+        public void AddUser(User user)
         {
-            context.InfluencerUsers.Add(user);
+            context.Users.Add(user);
             context.SaveChanges();
         }
 
         public void UpdateUser(InfluencerUser user)
         {
-            context.InfluencerUsers.Attach(user);
+            context.Users.Attach(user);
             //maybe should replace the line above with a line that change state to Modified like - context.Entry(user).State = EntityState.Modified;             
             context.SaveChanges();
         }
@@ -27,13 +27,13 @@ namespace FinalProject.DAL
         public void RemoveUser(int id)
         {
 
-            context.InfluencerUsers.Remove(GetUser(id));
+            context.Users.Remove(GetUser(id));
             context.SaveChanges();
         }
 
-        public InfluencerUser GetUser(int id)
+        public User GetUser(int id)
         {
-            return context.InfluencerUsers.FirstOrDefault(inf => inf.Id == id);
+            return context.Users.FirstOrDefault(user => user.UserId == id);
         }
 
         #region IDisposable - Do Using
