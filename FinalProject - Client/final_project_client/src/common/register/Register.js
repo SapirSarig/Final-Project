@@ -24,7 +24,7 @@ class Register extends Component {
         super(props);
         this.state = initialState;
         this.handleInputChange = this.handleInputChange.bind(this);
-        this.onCreateUser = this.onCreateUser.bind(this);
+        this.createUserClicked = this.createUserClicked.bind(this);
         this.isAllValid = this.isAllValid.bind(this);
         this.updateChooseTypeStateObject = this.updateChooseTypeStateObject.bind(this);
         // this.isPasswordSet = this.isPasswordSet.bind(this);
@@ -95,11 +95,31 @@ class Register extends Component {
         });
     }
 
-    onCreateUser() {
-        const { name, email, password, confirmPassword, confirmMail } = this.state;
-        const { onCreateUser } = this.props;
+    createUserClicked() {
+        const { name, email, password, type, chooseTypeState, interests, description } = this.state;
+        const { CreateBusinessUser, CreateInfluencerUser } = this.props;
+        let user = {
+            "name": name,
+            "email": email,
+            "password": password,
+            "interests": interests,
+            "description": description
+        };
+        if (type === "Social Influencer") {
+            user["Image"] = chooseTypeState.src;
+            user["dateOfBirth"] = chooseTypeState.dateOfBirth;
+            user["socialNetworks"] = chooseTypeState.socialNetworks;
+            user["linksToProfiles"] = chooseTypeState.LinksToProfiles;
+            CreateInfluencerUser(user);
+        }
+        else {
+            user["companyLogo"] =chooseTypeState.src;
+            user["companyName"] = chooseTypeState.CompanyName;
+            user["linkToCompanySite"] = chooseTypeState.LinkToCompanySite;
+            CreateBusinessUser(user);
+        }
         //if there are no validtion errors
-        onCreateUser({ name, email, password, confirmPassword, confirmMail });
+        
     }
 
     isAllValid() {
@@ -161,7 +181,7 @@ class Register extends Component {
                 <span>Description:</span>
                 <input type="text" name="description" onChange={this.handleInputChange} />
 
-                <input type="button" className={`${this.isAllValid() ? "" : "disableElement"}`} onClick={this.onCreateUser} value="Sign up!" />
+                <input type="button" className={`${this.isAllValid() ? "" : "disableElement"}`} onClick={this.createUserClicked} value="Sign up!" />
             </div>
         );
     }

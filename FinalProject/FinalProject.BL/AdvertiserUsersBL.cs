@@ -76,7 +76,27 @@ namespace FinalProject.BL
         //        }
         //    }
 
-        public User GetUser(int id)
+        public User GetUserByEmail(string email)
+        {
+            if (string.IsNullOrEmpty(email))
+            {
+                return null;
+            }
+            else
+            {
+                try
+                {
+                    return usersCRUD.GetUserByEmail(email);
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e);
+                    return null;
+                }
+            }
+        }
+
+        public User GetUserById(int id)
         {
             if (id < 0)
             {
@@ -86,7 +106,7 @@ namespace FinalProject.BL
             {
                 try
                 {
-                    return usersCRUD.GetUser(id);
+                    return usersCRUD.GetUserById(id);
                 }
                 catch (Exception e)
                 {

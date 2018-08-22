@@ -17,9 +17,6 @@ namespace FinalProject.Entities
             Offers = new HashSet<Offer>();
         }
 
-        [Required, MaxLength(20)]
-        public string Name { get; set; }
-
         public ICollection<Offer> Offers { get; set; }
 
 
@@ -27,7 +24,7 @@ namespace FinalProject.Entities
         //public string LastName { get; set; }
 
         //[Required]
-        //public DateTime DateOfBirth { get; set; }
+        public DateTime DateOfBirth { get; set; }
 
         //[Required]
         //public ICollection<SocialNetwork> SocialNetworks { get; set; }

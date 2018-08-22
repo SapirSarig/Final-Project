@@ -18,16 +18,13 @@ namespace FinalProject.Entities
             Auctions = new HashSet<Auction>();
         }
 
-        [Required, MaxLength(20)]
-        public string Name { get; set; }
-
         public ICollection<Auction> Auctions { get; set; }
 
         //[Required, MaxLength(40)]
-        //public string CompanyName { get; set; }
+        public string CompanyName { get; set; }
 
         //[Required]
         ////[RegularExpression(@.......)]
-        //public string WebsiteLink { get; set; }
+        public string WebsiteLink { get; set; }
     }
 }

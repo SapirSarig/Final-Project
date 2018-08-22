@@ -9,8 +9,9 @@ namespace FinalProject.Entities
     public enum Interest
     {
         Sport,
-        Beauty,
+        Clothing,
+        Food,
+        Music
         /////Add more...
-        Etc
     }
 }

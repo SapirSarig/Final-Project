@@ -78,9 +78,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AdvertiserUsersCRUD.cs" />
     <Compile Include="AuctionsCRUD.cs" />
-    <Compile Include="InfluencerUsersCRUD.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="FinalProjectContext.cs" />
     <Compile Include="UsersCRUD.cs" />

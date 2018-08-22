@@ -12,25 +12,38 @@ class SignUp extends Component {
         super(props);
 
         this.state = initialState;
-        this.onCreateUser = this.onCreateUser.bind(this);
+        this.CreateInfluencerUser = this.CreateInfluencerUser.bind(this);
+        this.CreateBusinessUser = this.CreateBusinessUser.bind(this);
         this.userService = new UserService();
     }
 
-    onCreateUser(registerObj) {
+    CreateInfluencerUser(registerObj) {
         const userInfo = Object.assign({}, registerObj, this.state);
-        console.log(userInfo);
+        console.log('#########', userInfo);
 
-        this.userService.createUser(userInfo).then(req => {
+        this.userService.createInfluencerUser(userInfo).then(req => {
             console.log(req);
             //this.clearForm();
             //this.props.history.push("/login")
         });
     }
 
+    CreateBusinessUser(registerObj) {
+        const userInfo = Object.assign({}, registerObj, this.state);
+        console.log('#########', userInfo);
+
+        this.userService.createBusinessUser(userInfo).then(req => {
+            console.log(req);
+            //this.clearForm();
+            //this.props.history.push("/login")
+        });
+    }
+
+
     render() {
         return (
             <div>
-                <Register {...this.props} onCreateUser={this.onCreateUser}/>
+                <Register {...this.props} CreateInfluencerUser={this.CreateInfluencerUser} CreateBusinessUser = {this.CreateBusinessUser}/>
             </div>
         );
     }

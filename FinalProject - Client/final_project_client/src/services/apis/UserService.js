@@ -15,11 +15,32 @@ export default class UserService {
         console.log(res.json());
       })
   }
-  createUser(user) {
+  createBusinessUser(user) {
     //var data = new FormData();
     //data.append("json", JSON.stringify(user));
     var data = JSON.stringify(user);
-    return fetch(`${this.host}/api/Users`, {
+    return fetch(`${this.host}/api/AdvertiserUsers`, {
+      method: "POST",
+      body: data,
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json"
+      }
+    })
+      .then((res) => {
+        return res.json();
+      })
+      .catch((err) => {
+        console.log(err);
+      })
+  }
+
+  createInfluencerUser(user) {
+    //var data = new FormData();
+    //data.append("json", JSON.stringify(user));
+    var data = JSON.stringify(user);
+    return fetch(`${this.host}/api/InfluencerUsers
+    `, {
       method: "POST",
       body: data,
       headers: {

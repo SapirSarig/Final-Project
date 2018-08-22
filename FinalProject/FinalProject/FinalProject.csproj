@@ -149,7 +149,6 @@
     <Compile Include="Controllers\AdvertiserUsersController.cs" />
     <Compile Include="Controllers\InfluencerUsersController.cs" />
     <Compile Include="Controllers\TestController.cs" />
-    <Compile Include="Controllers\UsersController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>

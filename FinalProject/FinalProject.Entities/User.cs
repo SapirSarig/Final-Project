@@ -14,10 +14,13 @@ namespace FinalProject.Entities
         public int UserId { get; set; }
 
         [Required]
+        public string Name { get; set; }
+
+        [Required]
         //[RegularExpression(@.......)]
         public string Email { get; set; }
 
-        [Required, MinLength(6), MaxLength(12)]
+        [Required, MinLength(6)]
         //[RegularExpression(@.......)]
         public string Password { get; set; }
 

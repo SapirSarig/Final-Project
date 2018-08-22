@@ -18,9 +18,23 @@ namespace FinalProject.Controllers
 
         // GET api/<controller>
         [HttpGet]
-        public IHttpActionResult GetUser(int id)
+        public IHttpActionResult GetUserById(int id)
         {
-            User user = advertiserUsersBL.GetUser(id);
+            User user = advertiserUsersBL.GetUserById(id);
+            if (user != null)
+            {
+                return Ok(user);
+            }
+            else
+            {
+                return BadRequest();
+            }
+        }
+
+        [HttpGet]
+        public IHttpActionResult GetUserByEmail(string email)
+        {
+            User user = advertiserUsersBL.GetUserByEmail(email);
             if (user != null)
             {
                 return Ok(user);

@@ -19,9 +19,14 @@ namespace FinalProject.DAL
             context.SaveChanges();
         }
 
-        public User GetUser(int id)
+        public User GetUserById(int id)
         {
             return context.Users.FirstOrDefault(user => user.UserId == id);
+        }
+
+        public User GetUserByEmail(string email)
+        {
+            return context.Users.FirstOrDefault(user => user.Email == email);
         }
         #region IDisposable - Do Using
 
