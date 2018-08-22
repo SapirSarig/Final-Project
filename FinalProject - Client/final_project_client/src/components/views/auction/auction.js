@@ -33,7 +33,7 @@ class Auction extends Component {
             this.setState({
                 [name]: event.target.value,
                 [nameOfProduct]: event.target.value,
-                [payment]: event.target.value
+                [payment]: event.target.value,
             });
         };
     }
@@ -140,6 +140,31 @@ class Auction extends Component {
                         onChange={this.handleChange('payment')}
                         margin="normal"
                     />
+                    <div className="dueDate">
+                        <TextField
+                            id="startDate"
+                            label="Start date"
+                            type="date"
+                            className={classes.textField}
+                            InputLabelProps={{
+                            shrink: true,
+                            }}
+                        />
+                        <TextField
+                            id="endDate"
+                            label="End date"
+                            type="date"
+                            className={classes.textField}
+                            InputLabelProps={{
+                            shrink: true,
+                            }}
+                        />
+                    </div>
+                    <div className="submitContainer">
+                        <div className="submitAuctionBtn designBtn">
+                            Submit auction 
+                        </div>
+                    </div>
                 </form>
             </div>
         );
