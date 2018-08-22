@@ -60,6 +60,11 @@ class Auction extends Component {
                             Edit auction
                         </div>
                     </div>
+                    <div className="businessNameContainer">
+                        <div className="businessWrapper">
+                            Name of the business
+                        </div>
+                    </div>
                     <TextField
                         id="name"
                         label="Auction title"
