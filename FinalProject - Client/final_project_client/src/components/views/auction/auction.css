@@ -135,7 +135,7 @@
 .dueDate{
     display: flex;
     flex-direction: row;
-    margin-bottom: 2%;
+    margin: 2% 0;
 }
 
 .submitContainer, .businessNameContainer{
