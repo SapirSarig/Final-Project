@@ -8,11 +8,12 @@
     display: flex;
     position: relative;
     border: 1px solid white;
-    min-width: 20vw;
-    min-height: 20vh;
-    max-width: 23vw;
-    margin-bottom: 1em;
+    min-width: 15vw;
+    min-height: 21vh;
+    max-width: 18vw;
+    margin-bottom: 0.5em;
     border-radius: 5px;
+    justify-content: center;
 }
 
 .imgContainer{
@@ -47,9 +48,10 @@ img{
 
 .editPicInput + label{
     display: inline-block;
-    padding:0.5em 1em;
-    border:0.16em solid #FFFFFF;
-    /*margin:0 0.3em 0.3em 0;*/
+    font-size: 0.7rem;
+    padding:0.5em 0.5em;
+    border:0.1em solid #FFFFFF;
+    margin:0 0.3em 0.3em 0;
     box-sizing: border-box;
     text-decoration:none;
     text-transform:uppercase;
@@ -58,7 +60,6 @@ img{
     color:#FFFFFF;
     text-align:center;
     transition: all 0.15s;
-    height: 50px;
     cursor: pointer;
     border-radius: 5px;
 }

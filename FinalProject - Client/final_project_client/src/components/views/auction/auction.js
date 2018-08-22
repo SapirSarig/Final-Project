@@ -21,17 +21,19 @@ const styles = theme => ({
 
 class Auction extends Component {
     constructor(props){
-        super(props);//
+        super(props);
 
         this.state = {
             name: '',
-            nameOfProduct: ''
+            nameOfProduct: '',
+            payment: ''
           };
         
-        this.handleChange = (name, nameOfProduct) => event => {
+        this.handleChange = (name, nameOfProduct, payment) => event => {
             this.setState({
                 [name]: event.target.value,
-                [nameOfProduct]: event.target.value
+                [nameOfProduct]: event.target.value,
+                [payment]: event.target.value
             });
         };
     }
@@ -87,6 +89,56 @@ class Auction extends Component {
                         className={classes.textField + " descTextField"}
                         margin="normal"
                         style = {{width: '80%'}}
+                    />
+                    <div className="interestsContainer">
+                        <div>Interests</div>
+                        <div className="partOfInterests">
+                            <div className="foodInterest interestWrapper">
+                                <div className="checkboxforInterest">
+                                    <input type="checkbox" value="1" id="checkboxFoodInput" name="" />
+                                    <label for="checkboxFoodInput"></label>
+                                </div>
+                                <div className="descTitle">Food</div>
+                            </div>
+                            <div className="sportInterest interestWrapper">
+                                <div className="checkboxforInterest">
+                                    <input type="checkbox" value="2" id="checkboxFSportInput" name="" />
+                                    <label for="checkboxFSportInput"></label>
+                                </div>
+                                <div className="descTitle">Sport</div>
+                            </div>
+                            <div className="clothesInterest interestWrapper">
+                                <div className="checkboxforInterest">
+                                    <input type="checkbox" value="3" id="checkboxClothesInput" name="" />
+                                    <label for="checkboxClothesInput"></label>
+                                </div>
+                                <div className="descTitle">Clothes</div>
+                            </div>
+                            <div className="otherInterest interestWrapper">
+                                <div className="descOfInterest">Other</div>
+                                <input type="text" className="otherInput"/>
+                            </div>
+                        </div>
+                    </div>
+                    <TextField
+                        id="number"
+                        label="Number of minimum followers"
+                        value={this.state.age}
+                        onChange={this.handleChange('age')}
+                        type="number"
+                        className={classes.textField}
+                        InputLabelProps={{
+                            shrink: true,
+                        }}
+                        margin="normal"
+                    />
+                    <TextField
+                        id="pament"
+                        label="Payment"
+                        className={classes.textField}
+                        value={this.state.payment}
+                        onChange={this.handleChange('payment')}
+                        margin="normal"
                     />
                 </form>
             </div>
