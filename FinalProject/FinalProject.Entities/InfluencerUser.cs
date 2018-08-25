@@ -27,7 +27,10 @@ namespace FinalProject.Entities
         public DateTime DateOfBirth { get; set; }
 
         //[Required]
-        //public ICollection<SocialNetwork> SocialNetworks { get; set; }
+        public List<string> SocialNetworks { get; set; }
+
+        public List<string> LinksToProfiles { get; set; }
+
 
         //[Required]
         //public ICollection<Interest> Interests { get; set; }

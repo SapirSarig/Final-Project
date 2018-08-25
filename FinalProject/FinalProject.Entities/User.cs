@@ -10,6 +10,11 @@ namespace FinalProject.Entities
     //Base class for InfluencerUser and AdvertiserUser
     public abstract class User
     {
+        public User()
+        {
+            Interests = new HashSet<string>();
+        }
+
         [Key]
         public int UserId { get; set; }
 
@@ -27,5 +32,7 @@ namespace FinalProject.Entities
         public string Picture { get; set; }
 
         public string Description { get; set; }
+
+        public virtual ICollection<string> Interests { get; set; }
     }
 }
