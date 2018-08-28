@@ -49,3 +49,22 @@ C:\Users\Avi-Laptop\Documents\GitHub\Final-Project\FinalProject\FinalProject.Ent
 C:\Users\Avi-Laptop\Documents\GitHub\Final-Project\FinalProject\FinalProject.Entities\obj\Debug\FinalProject.Entities.csprojResolveAssemblyReference.cache
 C:\Users\Avi-Laptop\Documents\GitHub\Final-Project\FinalProject\FinalProject.Entities\obj\Debug\FinalProject.Entities.dll
 C:\Users\Avi-Laptop\Documents\GitHub\Final-Project\FinalProject\FinalProject.Entities\obj\Debug\FinalProject.Entities.pdb
+C:\Users\Meital\Desktop\Meital\סדנא\last update - git\Final-Project\FinalProject\FinalProject.Entities\bin\Debug\FinalProject.Entities.dll.config
+C:\Users\Meital\Desktop\Meital\סדנא\last update - git\Final-Project\FinalProject\FinalProject.Entities\bin\Debug\FinalProject.Entities.dll
+C:\Users\Meital\Desktop\Meital\סדנא\last update - git\Final-Project\FinalProject\FinalProject.Entities\bin\Debug\FinalProject.Entities.pdb
+C:\Users\Meital\Desktop\Meital\סדנא\last update - git\Final-Project\FinalProject\FinalProject.Entities\bin\Debug\Microsoft.Web.Infrastructure.dll
+C:\Users\Meital\Desktop\Meital\סדנא\last update - git\Final-Project\FinalProject\FinalProject.Entities\bin\Debug\Newtonsoft.Json.dll
+C:\Users\Meital\Desktop\Meital\סדנא\last update - git\Final-Project\FinalProject\FinalProject.Entities\bin\Debug\Swashbuckle.Core.dll
+C:\Users\Meital\Desktop\Meital\סדנא\last update - git\Final-Project\FinalProject\FinalProject.Entities\bin\Debug\System.Net.Http.Formatting.dll
+C:\Users\Meital\Desktop\Meital\סדנא\last update - git\Final-Project\FinalProject\FinalProject.Entities\bin\Debug\System.Web.Http.dll
+C:\Users\Meital\Desktop\Meital\סדנא\last update - git\Final-Project\FinalProject\FinalProject.Entities\bin\Debug\System.Web.Http.WebHost.dll
+C:\Users\Meital\Desktop\Meital\סדנא\last update - git\Final-Project\FinalProject\FinalProject.Entities\bin\Debug\WebActivatorEx.dll
+C:\Users\Meital\Desktop\Meital\סדנא\last update - git\Final-Project\FinalProject\FinalProject.Entities\bin\Debug\Newtonsoft.Json.xml
+C:\Users\Meital\Desktop\Meital\סדנא\last update - git\Final-Project\FinalProject\FinalProject.Entities\bin\Debug\System.Net.Http.Formatting.xml
+C:\Users\Meital\Desktop\Meital\סדנא\last update - git\Final-Project\FinalProject\FinalProject.Entities\bin\Debug\System.Web.Http.xml
+C:\Users\Meital\Desktop\Meital\סדנא\last update - git\Final-Project\FinalProject\FinalProject.Entities\bin\Debug\System.Web.Http.WebHost.xml
+C:\Users\Meital\Desktop\Meital\סדנא\last update - git\Final-Project\FinalProject\FinalProject.Entities\obj\Debug\FinalProject.Entities.csprojResolveAssemblyReference.cache
+C:\Users\Meital\Desktop\Meital\סדנא\last update - git\Final-Project\FinalProject\FinalProject.Entities\obj\Debug\FinalProject.Entities.csproj.CoreCompileInputs.cache
+C:\Users\Meital\Desktop\Meital\סדנא\last update - git\Final-Project\FinalProject\FinalProject.Entities\obj\Debug\FinalProject.Entities.csproj.CopyComplete
+C:\Users\Meital\Desktop\Meital\סדנא\last update - git\Final-Project\FinalProject\FinalProject.Entities\obj\Debug\FinalProject.Entities.dll
+C:\Users\Meital\Desktop\Meital\סדנא\last update - git\Final-Project\FinalProject\FinalProject.Entities\obj\Debug\FinalProject.Entities.pdb

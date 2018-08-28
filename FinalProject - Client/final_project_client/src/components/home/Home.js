@@ -28,6 +28,12 @@ class Home extends Component {
                         auction
                     </button>
                     </Link>
+                
+                    <Link className="influencerHomePage" to="/influencerHomePage">
+                    <button className="influencerHomePageBtn">
+                        influencerHomePage
+                    </button>
+                    </Link>
                 </div>
             </div>
                 

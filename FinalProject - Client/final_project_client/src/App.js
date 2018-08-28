@@ -3,6 +3,7 @@ import HomePage from './components/views/homePage/HomePage';
 import LoginPage from './components/views/loginPage/LoginPage';
 import Auction from './components/views/auction/auction';
 import SignUpPage from './components/views/signUpPage/SignUpPage';
+import InfluencerHomePage from './components/userHomePage/InfluencerHomePage';
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import './App.css';
 
@@ -19,6 +20,7 @@ class App extends Component {
             <Route path="/login" component={LoginPage} />
             <Route path="/SignUp" component={SignUpPage} />
             <Route path="/auction" component={Auction} />
+            <Route path = "/InfluencerHomePage" component ={InfluencerHomePage}/>
           </div>
         </Router>
       </div>
