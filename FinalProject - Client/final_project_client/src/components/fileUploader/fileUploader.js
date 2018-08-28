@@ -56,13 +56,13 @@ class FileUploader extends Component {
             <div className="editProdPicWrapper">
                 <div className="productImgContainer">
                     <div className="imgContainer">
-                        <img src={state.imageSrc} className={state.loaded && 'loaded'}/>
+                        <img src={state.imageSrc} className={state.loaded ? 'loaded': undefined}/>
                     </div>
                 </div>
-                <input type="file" id="file" ref="fileUploader" accept="image/*" 
+                <input type="file" id="chooseFile" ref="fileUploader" accept="image/*" 
                     onChange={this.onFileChange} className="editPicInput" 
                     onClick={this.uploadHandler}/>
-                <label for="file" className={labelClass}>Choose a file</label>
+                <label for="chooseFile" className={labelClass}>Choose a file</label>
             </div>
         );
     }

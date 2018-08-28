@@ -28,14 +28,16 @@ class Auction extends Component {
 
         this.state = {
             name: '',
-            nameOfProduct: ''
+            nameOfProduct: '',
+            payment: ''
           };
         this.auctionService = new AuctionService();
-
-        this.handleChange = (name, nameOfProduct) => event => {
+        
+        this.handleChange = (name, nameOfProduct, payment) => event => {
             this.setState({
                 [name]: event.target.value,
-                [nameOfProduct]: event.target.value
+                [nameOfProduct]: event.target.value,
+                [payment]: event.target.value,
             });
         };
         this.AddAuction = this.AddAuction.bind(this);
@@ -75,6 +77,11 @@ class Auction extends Component {
                             Edit auction
                         </div>
                     </div>
+                    <div className="businessNameContainer">
+                        <div className="businessWrapper">
+                            Name of the business
+                        </div>
+                    </div>
                     <TextField
                         id="name"
                         label="Auction title"
@@ -105,8 +112,81 @@ class Auction extends Component {
                         margin="normal"
                         style = {{width: '80%'}}
                     />
-
-                    <button onClick={this.AddAuction}> Add Auction </button>
+                    <div className="interestsContainer">
+                        <div>Interests</div>
+                        <div className="partOfInterests">
+                            <div className="foodInterest interestWrapper">
+                                <div className="checkboxforInterest">
+                                    <input type="checkbox" value="1" id="checkboxFoodInput" name="" />
+                                    <label for="checkboxFoodInput"></label>
+                                </div>
+                                <div className="descTitle">Food</div>
+                            </div>
+                            <div className="sportInterest interestWrapper">
+                                <div className="checkboxforInterest">
+                                    <input type="checkbox" value="2" id="checkboxFSportInput" name="" />
+                                    <label for="checkboxFSportInput"></label>
+                                </div>
+                                <div className="descTitle">Sport</div>
+                            </div>
+                            <div className="clothesInterest interestWrapper">
+                                <div className="checkboxforInterest">
+                                    <input type="checkbox" value="3" id="checkboxClothesInput" name="" />
+                                    <label for="checkboxClothesInput"></label>
+                                </div>
+                                <div className="descTitle">Clothes</div>
+                            </div>
+                            <div className="otherInterest interestWrapper">
+                                <div className="descOfInterest">Other</div>
+                                <input type="text" className="otherInput"/>
+                            </div>
+                        </div>
+                    </div>
+                    <TextField
+                        id="number"
+                        label="Number of minimum followers"
+                        value={this.state.age}
+                        onChange={this.handleChange('age')}
+                        type="number"
+                        className={classes.textField}
+                        InputLabelProps={{
+                            shrink: true,
+                        }}
+                        margin="normal"
+                    />
+                    <TextField
+                        id="pament"
+                        label="Payment"
+                        className={classes.textField}
+                        value={this.state.payment}
+                        onChange={this.handleChange('payment')}
+                        margin="normal"
+                    />
+                    <div className="dueDate">
+                        <TextField
+                            id="startDate"
+                            label="Start date"
+                            type="date"
+                            className={classes.textField}
+                            InputLabelProps={{
+                            shrink: true,
+                            }}
+                        />
+                        <TextField
+                            id="endDate"
+                            label="End date"
+                            type="date"
+                            className={classes.textField}
+                            InputLabelProps={{
+                            shrink: true,
+                            }}
+                        />
+                    </div>
+                    <div className="submitContainer">
+                        <div className="submitAuctionBtn designBtn">
+                            Submit auction 
+                        </div>
+                    </div>
                 </form>
             </div>
         );
