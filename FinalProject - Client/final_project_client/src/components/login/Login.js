@@ -7,13 +7,13 @@ import FacebookLogin from 'react-facebook-login';
 import { Route, Redirect } from 'react-router';
 
 const initialState = {
-    name: "",
+    email: "",
     password: "",
-    errors: { name: "", password: "" },
+    errors: { email: "", password: "" },
     rememberMe: false,
     loggedIn: false,
-    externalLogin: false,
-    loggedUserInfo: {}
+    loggedUser: {},
+    externalLogin: false
 };
 
 class Login extends Component {
@@ -22,13 +22,13 @@ class Login extends Component {
     constructor(props) {
         super(props);
         const userLogin = JSON.parse(localStorage.getItem('userLogin'));
-        if (userLogin && userLogin.name && userLogin.password) {
-            initialState.name = userLogin.name;
-            initialState.password = userLogin.password;
-            initialState.rememberMe = true;
-        }
+        // if (userLogin && userLogin.name && userLogin.password) {
+        //     initialState.name = userLogin.name;
+        //     initialState.password = userLogin.password;
+        //     initialState.rememberMe = true;
+        // }
 
-        initialState.errors = { name: "", password: "" };
+        initialState.errors = { email: "", password: "" };
         this.state = initialState;
         this.handleInputChange = this.handleInputChange.bind(this);
         this.loginUser = this.loginUser.bind(this);
@@ -60,9 +60,9 @@ class Login extends Component {
     }
 
     saveDataOnLocalStorage() {
-        const { password, name } = this.state;
+        const { password, email } = this.state;
         if (typeof (Storage) !== "undefined") { //don't save the password here!!
-            localStorage.setItem("userLogin", JSON.stringify({ name, password }));
+            localStorage.setItem("userLogin", JSON.stringify({ email, password }));
         } else {
             alert("No Web Storage support");
         }
@@ -88,12 +88,12 @@ class Login extends Component {
     }
 
     checkValidation(fieldName, value) {
-        const { errors, password, name } = this.state;
+        const { errors, password, email } = this.state;
         this.deleteDataFromLocalStorage();
 
         let errorMessage;
-        if (fieldName === "name") {
-            errorMessage = RegisterService.nameValidation(value);
+        if (fieldName === "email") {
+            errorMessage = RegisterService.emailValidation(value);
         }
         else if (fieldName === "password") {
             errorMessage = RegisterService.passwordValidation(value);
@@ -106,9 +106,9 @@ class Login extends Component {
     }
 
     isAllValid() {
-        const { errors, name, password } = this.state;
+        const { errors, email, password } = this.state;
         let isValidInputs;
-        isValidInputs = (StringUtil.isEmptyString(RegisterService.nameValidation(name)))
+        isValidInputs = (StringUtil.isEmptyString(RegisterService.emailValidation(email)))
             && (StringUtil.isEmptyString(RegisterService.passwordValidation(password))); //init, check all fields
 
         return isValidInputs;
@@ -117,21 +117,32 @@ class Login extends Component {
     loginUser(event) {
         this.userService.loginUser(this.state).then(req => {
             if (req) {
-                this.setState(initialState);
                 //routing
-                alert(`Hello ${req.name}`);
+                alert(`Hello ${req.Name}`);
+                this.setState({
+                    loggedIn: true,
+                    loggedUser: req
+                });
+            } else {
+                alert("Validation Error");
             }
-        });
+        })
     }
 
     responseFacebook(response) {
-        let isLogged = this.saveLoginTokenLocalStorage(response);
-        //if(isLogged && this.checkIfUserSignUp(response.email))
-        //false 
-        if (isLogged) {
-            this.setState({ loggedIn: true, externalLogin: true, loggedUserInfo: response })
-
-            console.log("logged");
+        if (response.status !== "unknown" && response.messae !== "response is not defined") {
+            let isLogged = this.saveLoginTokenLocalStorage(response);
+            //if(isLogged && this.checkIfUserSignUp(response.email))
+            //false 
+            if (isLogged) {
+                this.userService.loginExternalUser(response).then(req => {
+                    if (req) {
+                        this.setState({ loggedIn: true, loggedUser: req })
+                    } else {
+                        this.setState({ externalLogin: true, loggedUser: response })
+                    }
+                });
+            }
         }
     }
 
@@ -140,35 +151,45 @@ class Login extends Component {
     }
 
     render() {
-        const { name, password, rememberMe, errors, loggedIn, loggedUserInfo, externalLogin } = this.state;
-
+        const { email, password, rememberMe, errors, loggedIn, loggedUserInfo, externalLogin, loggedUser } = this.state;
+        console.log(loggedUser);
         return (
-            loggedIn ? <Redirect to={{
-                pathname: '/SignUp',
-                state: { loggedUserInfo, externalLogin }
-            }} /> :
-                (<div className="Container">
-                    <span> Name </span>
-                    <input type="text" name="name" value={name} onChange={this.handleInputChange} />
-                    {<span className="errorInput">{errors["name"] && errors["name"]}</span>}
+            externalLogin ?
+                <Redirect to={{
+                    pathname: '/SignUp',
+                    state: { loggedUser, externalLogin }
+                }} /> :
+                loggedIn ? (loggedUser.type === 0) ?
+                    <Redirect to={{
+                        pathname: '/starHomePage',
+                        state: { loggedUser }
+                    }} /> :
+                    <Redirect to={{
+                        pathname: '/businessHomePage',
+                        state: { loggedUser }
+                    }} /> :
+                    (<div className="Container">
+                        <span> email </span>
+                        <input type="text" name="email" value={email} onChange={this.handleInputChange} />
+                        {<span className="errorInput">{errors["email"] && errors["email"]}</span>}
 
-                    <span> Password </span>
-                    <input type="password" name="password" value={password} onChange={this.handleInputChange} />
-                    {<span className="errorInput">{errors["password"] && errors["password"]}</span>}
+                        <span> Password </span>
+                        <input type="password" name="password" value={password} onChange={this.handleInputChange} />
+                        {<span className="errorInput">{errors["password"] && errors["password"]}</span>}
 
-                    <input type="button" value="Login" className={`${this.isAllValid() ? "" : "disableElement"}`} onClick={this.loginUser} />
-                    <FacebookLogin
-                        appId="271386353659285"
-                        autoLoad={true}
-                        fields="name,email,picture"
-                        onClick={this.componentClicked}
-                        callback={this.responseFacebook} />
-                    <div>
-                        <input type="checkbox" checked={rememberMe} onChange={this.handleInputChange} name="rememberMe" />
-                        <span>Remember me</span>
-                    </div>
-                    <span>Forgot my username/ password </span>
-                </div>)
+                        <input type="button" value="Login" className={`${this.isAllValid() ? "" : "disableElement"}`} onClick={this.loginUser} />
+                        <FacebookLogin
+                            appId="271386353659285"
+                            autoLoad={true}
+                            fields="name,email,picture"
+                            onClick={this.componentClicked}
+                            callback={this.responseFacebook} />
+                        <div>
+                            <input type="checkbox" checked={rememberMe} onChange={this.handleInputChange} name="rememberMe" />
+                            <span>Remember me</span>
+                        </div>
+                        <span>Forgot my username/ password </span>
+                    </div>)
         );
     }
 

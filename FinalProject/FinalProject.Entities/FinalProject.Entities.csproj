@@ -72,7 +72,9 @@
   <ItemGroup>
     <Compile Include="AdvertiserUser.cs" />
     <Compile Include="Auction.cs" />
-    <Compile Include="Interest.cs" />
+    <Compile Include="Enums\UserTypes.cs" />
+    <Compile Include="Enums\Interest.cs" />
+    <Compile Include="Modals\LoginModal.cs" />
     <Compile Include="OfferStatus.cs" />
     <Compile Include="OfferType.cs" />
     <Compile Include="Youtube.cs" />
@@ -81,7 +83,7 @@
     <Compile Include="Negotiation.cs" />
     <Compile Include="Offer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SocialNetwork.cs" />
+    <Compile Include="Enums\SocialNetwork.cs" />
     <Compile Include="User.cs" />
   </ItemGroup>
   <ItemGroup>

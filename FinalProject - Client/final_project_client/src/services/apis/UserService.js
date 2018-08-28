@@ -4,7 +4,7 @@ export default class UserService {
   getUser() {
     //var data = new FormData();
     //data.append("json", JSON.stringify(user));
-    return fetch(`${this.host}/api/Users/0`, {
+    return fetch(`${this.host}/api/InfluencerUsers/3`, {
       method: "GET",
       headers: {
         Accept: "application/json",
@@ -12,7 +12,7 @@ export default class UserService {
       }
     })
       .then((res) => {
-        console.log(res.json());
+        return res.json();
       })
   }
   createBusinessUser(user) {
@@ -56,13 +56,30 @@ export default class UserService {
       })
   }
 
-  loginUser(loginUser) {
+  loginUser({email, password}) {
     //var data = new FormData();
     //data.append("json", JSON.stringify(user));
-    var data = JSON.stringify(loginUser);
-    return fetch(`${this.host}/api/Users/Login`, {
+    var data = JSON.stringify({email, password});
+    return fetch(`${this.host}/api/Authentication`, {
       method: "POST",
       body: data,
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json"
+      }
+    })
+      .then((res) => {
+        return res.json();
+      }).catch((err)=> {
+        console.log(err);
+      })
+  }
+
+  loginExternalUser({email}) {
+    //var data = new FormData();
+    //data.append("json", JSON.stringify(user));
+    return fetch(`${this.host}/api/Authentication?email=${email}`, {
+      method: "GET",
       headers: {
         Accept: "application/json",
         "Content-Type": "application/json"

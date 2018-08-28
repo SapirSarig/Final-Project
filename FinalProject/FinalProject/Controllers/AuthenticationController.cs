@@ -4,23 +4,23 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using System.Web.Http.Cors;
 using FinalProject.BL;
 using FinalProject.Entities;
-using System.Web.Http.Cors;
+using FinalProject.Entities.Modals;
 
 namespace FinalProject.Controllers
 {
-    [RoutePrefix("api/AdvertiserUsers")]
+    [RoutePrefix("api/Authentication")]
     [EnableCors(origins: "*", headers: "*", methods: "*")]
-    public class AdvertiserUsersController : ApiController
+    public class AuthenticationController : ApiController
     {
-        private AdvertiserUsersBL advertiserUsersBL = new AdvertiserUsersBL();
+        private AuthenticationBL authenticationBL = new AuthenticationBL();
 
-        // GET api/<controller>
-        [HttpGet]
-        public IHttpActionResult GetUserById(int id)
+        [HttpPost]
+        public IHttpActionResult Login([FromBody]LoginModal loginModal)
         {
-            User user = advertiserUsersBL.GetUserById(id);
+            User user = authenticationBL.Login(loginModal);
             if (user != null)
             {
                 return Ok(user);
@@ -31,11 +31,11 @@ namespace FinalProject.Controllers
             }
         }
 
-        [HttpPost]
-        public IHttpActionResult CreateAdvertiserUser([FromBody]AdvertiserUser user)
+        [HttpGet]
+        public IHttpActionResult ExternalLogin(string email)
         {
-            bool isCreated = advertiserUsersBL.AddUser(user);
-            if (isCreated)
+            User user = authenticationBL.ExternalLogin(email);
+            if (user != null)
             {
                 return Ok(user);
             }
@@ -44,5 +44,6 @@ namespace FinalProject.Controllers
                 return BadRequest();
             }
         }
+
     }
 }

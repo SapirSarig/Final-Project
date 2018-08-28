@@ -79,6 +79,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AdvertiserUsersBL.cs" />
+    <Compile Include="AuctionsBL.cs" />
+    <Compile Include="AuthenticationBL.cs" />
     <Compile Include="InfluencerUsersBL.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

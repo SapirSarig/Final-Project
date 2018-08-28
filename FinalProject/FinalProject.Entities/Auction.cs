@@ -12,7 +12,9 @@ namespace FinalProject.Entities
         [Key]
         public int Id { get; set; }
 
-        public virtual int UserId { get; set; }
+        //public virtual int UserId { get; set; }
+
+
         //Auction()
         //{
         //    Offers = new HashSet<Offer>();
@@ -28,7 +30,7 @@ namespace FinalProject.Entities
         //public ICollection<Offer> Offers { get; set; }
 
         //[Required, MaxLength(40)]
-        //public string Name { get; set; }
+        public string Name { get; set; }
 
         //[Required, MaxLength(1000)]
         //public string Description { get; set; }

@@ -12,7 +12,7 @@ class InfluencerRegister extends Component {
 
         this.state = {
             src: require('../../images/AddAnImage.png'),
-            dateOfBirth: "",
+            dateOfBirth: undefined,
             socialNetworks: [],
             LinksToProfiles: [],
             errors: {

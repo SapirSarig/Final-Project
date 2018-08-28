@@ -28,6 +28,12 @@ class Home extends Component {
                         auction
                     </button>
                     </Link>
+
+                    <Link className="profile" to="/profile">
+                    <button className="btn">
+                        Profile
+                    </button>
+                    </Link>
                 </div>
             </div>
                 

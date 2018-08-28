@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.ComponentModel.DataAnnotations;
+using FinalProject.Entities.Enums;
 
 namespace FinalProject.Entities
 {
@@ -12,7 +13,7 @@ namespace FinalProject.Entities
     {
         public User()
         {
-            Interests = new HashSet<string>();
+            //Interests = new HashSet<string>();
         }
 
         [Key]
@@ -33,6 +34,9 @@ namespace FinalProject.Entities
 
         public string Description { get; set; }
 
-        public virtual ICollection<string> Interests { get; set; }
+        public virtual ICollection<Interest> Interests { get; set; }
+
+        public UserTypes type { get; set; } 
+
     }
 }

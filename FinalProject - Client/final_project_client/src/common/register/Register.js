@@ -16,6 +16,8 @@ const initialState = {
     chooseTypeState: {},
     interests: [],
     description: "",
+    isAllValid: false,
+    externalLogin: false,
     errors: { name: "", email: "", password: "", confirmPassword: "", confirmMail: "" }
 };
 
@@ -33,13 +35,13 @@ class Register extends Component {
     componentDidMount() {
         const { location } = this.props;
         if (location && location.state) {
-            const { loggedUserInfo } = location.state;
-            if (loggedUserInfo) {
-                const { email, name } = loggedUserInfo;
-                this.setState({ email, name })
+            const { loggedUser, externalLogin } = location.state;
+            if (loggedUser && externalLogin) {
+                const { email, name } = loggedUser;
+                this.setState({ email, name, externalLogin, confirmMail: email });
             }
+        } 
         }
-    }
 
     handleInputChange(event) {
 
@@ -87,7 +89,7 @@ class Register extends Component {
         }
         else if (fieldName === "confirmMail") {
             errorMessage = RegisterService.confirmValidation(value, email);
-        }
+        }   
 
         errors[fieldName] = errorMessage;
         this.setState({
@@ -103,7 +105,8 @@ class Register extends Component {
             "email": email,
             "password": password,
             "interests": interests,
-            "description": description
+            "description": description,
+            "type": type
         };
         if (type === "Social Influencer") {
             user["Image"] = chooseTypeState.src;
@@ -113,21 +116,22 @@ class Register extends Component {
             CreateInfluencerUser(user);
         }
         else {
-            user["companyLogo"] =chooseTypeState.src;
+            user["companyLogo"] = chooseTypeState.src;
             user["companyName"] = chooseTypeState.CompanyName;
             user["linkToCompanySite"] = chooseTypeState.LinkToCompanySite;
             CreateBusinessUser(user);
         }
         //if there are no validtion errors
-        
+
     }
 
     isAllValid() {
         const { isAllValidCustome } = this.props;
-        const { errors, email, name, password, confirmPassword, confirmMail } = this.state;
+        const { errors, email, name, password, confirmPassword, confirmMail,chooseTypeState, type } = this.state;
         let isValidInputs = isAllValidCustome ? isAllValidCustome() : true;
 
-        isValidInputs = (StringUtil.isEmptyString(RegisterService.nameValidation(name)))
+        isValidInputs = ( chooseTypeState && chooseTypeState.errors && (type === "Social Influencer") && (typeof(chooseTypeState.errors.dateOfBirth) === "undefined") && (typeof(chooseTypeState.dateOfBirth) !== "undefined"))
+            && (StringUtil.isEmptyString(RegisterService.nameValidation(name)))
             && (StringUtil.isEmptyString(RegisterService.emailValidation(email)))
             && (StringUtil.isEmptyString(RegisterService.passwordValidation(password)))
             && (StringUtil.isEmptyString(RegisterService.confirmValidation(confirmPassword, password)))
@@ -143,22 +147,22 @@ class Register extends Component {
     render() {
         const { children } = this.props;
         const { name, email, confirmMail, password, confirmPassword, type,
-            dateOfBirth, socialNetworks, logo, description, imgUrl, errors } = this.state;
+            dateOfBirth, socialNetworks, logo, description, imgUrl, errors, externalLogin, isAllValid } = this.state;
         return (
             <div className="Container">
                 <span> Name </span>
-                <input type="text" name="name" value={name} onChange={this.handleInputChange} />
+                <input type="text" name="name" disabled={externalLogin} value={name} onChange={this.handleInputChange} />
                 <span className="errorInput">{errors["name"] && errors["name"]}</span>
 
                 <span> Email </span>
-                <input type="email" name="email" value={email} onChange={this.handleInputChange} />
+                <input type="email" name="email" disabled={externalLogin} value={email} onChange={this.handleInputChange} />
                 <span className="errorInput">{errors["email"] && errors["email"]}</span>
 
                 <span> Confirm Email </span>
-                <input type="email" name="confirmMail" value={confirmMail} onChange={this.handleInputChange} />
+                <input type="email" name="confirmMail" disabled={externalLogin} value={confirmMail} onChange={this.handleInputChange} />
                 <span className="errorInput">{errors["confirmMail"] && errors["confirmMail"]}</span>
 
-                <span> Password </span>
+                <span> Password {externalLogin && (<span>for the website</span>)}</span>
                 <input type="password" name="password" value={password} onChange={this.handleInputChange} />
                 <span className="errorInput">{errors["password"] && errors["password"]}</span>
 

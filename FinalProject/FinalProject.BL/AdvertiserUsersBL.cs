@@ -23,8 +23,16 @@ namespace FinalProject.BL
             {
                 try
                 {
-                    usersCRUD.AddUser(user);
-                    return true;
+
+                    if (!usersCRUD.IsEmailExist((user.Email)))
+                    {
+                        usersCRUD.AddUser(user);
+                        return true;
+                    }
+                    else
+                    {
+                        return false;
+                    }
                 }
                 catch (Exception e)
                 {
@@ -86,7 +94,7 @@ namespace FinalProject.BL
             {
                 try
                 {
-                    return usersCRUD.GetUserByEmail(email);
+                    return usersCRUD.ExternalLogin(email);
                 }
                 catch (Exception e)
                 {

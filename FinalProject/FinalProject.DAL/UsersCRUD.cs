@@ -1,4 +1,5 @@
 ﻿using FinalProject.Entities;
+using FinalProject.Entities.Modals;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,9 +25,22 @@ namespace FinalProject.DAL
             return context.Users.FirstOrDefault(user => user.UserId == id);
         }
 
-        public User GetUserByEmail(string email)
+        public User Login(LoginModal loginModal)
+        {
+            return context.Users.FirstOrDefault(user => user.Email == loginModal.email && user.Password == loginModal.password);
+        }
+
+        public User ExternalLogin(string email)
         {
             return context.Users.FirstOrDefault(user => user.Email == email);
+        }
+
+        public bool IsEmailExist(string email)
+        {
+            User res = context.Users.FirstOrDefault(user => user.Email == email);
+            if (res != null)
+                return true;
+            return false;
         }
         #region IDisposable - Do Using
 

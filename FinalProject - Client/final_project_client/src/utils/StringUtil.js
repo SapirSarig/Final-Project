@@ -4,7 +4,7 @@ export default class StringUtil {
     }
 
     static isString(value) {
-        return typeof value.trim() === 'string' || value.trim() instanceof String;
+        return value && typeof value.trim() === 'string' || value.trim() instanceof String;
     }
     
     static hasNumber(value) {

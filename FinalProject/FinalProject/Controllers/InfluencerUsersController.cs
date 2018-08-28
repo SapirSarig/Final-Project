@@ -34,19 +34,7 @@ namespace FinalProject.Controllers
             }
         }
 
-        [HttpGet]
-        public IHttpActionResult GetUserByEmail(string email)
-        {
-            User user = influencerUsersBL.GetUserByEmail(email);
-            if (user != null)
-            {
-                return Ok(user);
-            }
-            else
-            {
-                return BadRequest();
-            }
-        }
+        
 
         [HttpPost]
         public IHttpActionResult CreateInfluenceUser([FromBody]InfluencerUser user)

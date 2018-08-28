@@ -26,5 +26,7 @@ namespace FinalProject.Entities
         //[Required]
         ////[RegularExpression(@.......)]
         public string WebsiteLink { get; set; }
+
+        public ICollection<SocialNetwork> SocialNetworks { get; set; }
     }
 }

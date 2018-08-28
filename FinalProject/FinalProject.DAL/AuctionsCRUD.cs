@@ -7,38 +7,38 @@ using System.Threading.Tasks;
 
 namespace FinalProject.DAL
 {
-    //public class AuctionsCRUD : IDisposable
-    //{
-        //private FinalProjectContext context = new FinalProjectContext();
+    public class AuctionsCRUD : IDisposable
+    {
+        private FinalProjectContext context = new FinalProjectContext();
 
-        //public void AddUser(Auction auction)
-        //{
-        //    context.Auctions.Add(auction);
-        //    context.SaveChanges();
-        //}
+        public void AddAuction(Auction auction)
+        {
+            context.Auctions.Add(auction);
+            context.SaveChanges();
+        }
 
-        //#region IDisposable - Do Using
+        #region IDisposable - Do Using
 
-        //public void Dispose()
-        //{
-        //    _dispose(true);
-        //}
+        public void Dispose()
+        {
+            _dispose(true);
+        }
 
-        //~AuctionsCRUD()
-        //{
-        //    _dispose(false);
-        //}
+        ~AuctionsCRUD()
+        {
+            _dispose(false);
+        }
 
-        //private void _dispose(bool disposing)
-        //{
-        //    // close context
-        //    context.Dispose();
-        //    if (disposing)
-        //    {
-        //        GC.SuppressFinalize(this);
-        //    }
-        //}
+        private void _dispose(bool disposing)
+        {
+            // close context
+            context.Dispose();
+            if (disposing)
+            {
+                GC.SuppressFinalize(this);
+            }
+        }
 
-        //#endregion
-    //}
+        #endregion
+    }
 }

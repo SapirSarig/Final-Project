@@ -1,9 +1,12 @@
 import React, { Component } from 'react';
 import Register from '../../common/register/Register';
 import UserService from '../../services/apis/UserService';
+import { Route, Redirect } from 'react-router';
 
-
-const initialState = {};
+const initialState = {
+    signUpOk: false,
+    userInfo: {}
+};
 
 class SignUp extends Component {
     userService;
@@ -17,23 +20,35 @@ class SignUp extends Component {
         this.userService = new UserService();
     }
 
-    CreateInfluencerUser(registerObj) {
-        const userInfo = Object.assign({}, registerObj, this.state);
-        console.log('#########', userInfo);
-
+    CreateInfluencerUser(userInfo) {
+        //const userInfo = Object.assign({}, registerObj, this.state);
+        //console.log('#########', userInfo);
+        this.setState({ userInfo });
         this.userService.createInfluencerUser(userInfo).then(req => {
-            console.log(req);
-            //this.clearForm();
-            //this.props.history.push("/login")
+            //console.log(req);
+            if (req) {
+                this.setState({ signUpOk: true });
+            }
+            else {
+                alert("User already exists!");
+            }
         });
     }
 
-    CreateBusinessUser(registerObj) {
-        const userInfo = Object.assign({}, registerObj, this.state);
-        console.log('#########', userInfo);
-
+    CreateBusinessUser(userInfo) {
+        //const userInfo = Object.assign({}, registerObj, this.state);
+        //console.log('#########', userInfo);
+        this.setState({ userInfo });
         this.userService.createBusinessUser(userInfo).then(req => {
-            console.log(req);
+            //console.log(req);
+            if (req) {
+                this.setState({ signUpOk: true });
+
+            }
+            else {
+                alert("User already exists!");
+            }
+
             //this.clearForm();
             //this.props.history.push("/login")
         });
@@ -41,9 +56,20 @@ class SignUp extends Component {
 
 
     render() {
+        const { signUpOk, userInfo } = this.state;
         return (
             <div>
-                <Register {...this.props} CreateInfluencerUser={this.CreateInfluencerUser} CreateBusinessUser = {this.CreateBusinessUser}/>
+                {signUpOk ?
+                    (userInfo.type === "Social Influencer") ?
+                        <Redirect to={{
+                            pathname: '/starHomePage',
+                            props: { userInfo }
+                        }} /> :
+                        <Redirect to={{
+                            pathname: '/businessHomePage',
+                            props: { userInfo }
+                        }} />
+                    : <Register {...this.props} CreateInfluencerUser={this.CreateInfluencerUser} CreateBusinessUser={this.CreateBusinessUser} />}
             </div>
         );
     }

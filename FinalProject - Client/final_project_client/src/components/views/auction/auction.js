@@ -4,6 +4,7 @@ import TextField from '@material-ui/core/TextField';
 import { withStyles } from '@material-ui/core/styles';
 import FileUploader from '../../fileUploader/fileUploader';
 import './auction.css';
+import AuctionService from '../../../services/apis/AuctionService';
 
 const styles = theme => ({
     container: {
@@ -20,6 +21,8 @@ const styles = theme => ({
 });
 
 class Auction extends Component {
+    auctionService;
+
     constructor(props){
         super(props);
 
@@ -27,13 +30,27 @@ class Auction extends Component {
             name: '',
             nameOfProduct: ''
           };
-        
+        this.auctionService = new AuctionService();
+
         this.handleChange = (name, nameOfProduct) => event => {
             this.setState({
                 [name]: event.target.value,
                 [nameOfProduct]: event.target.value
             });
         };
+        this.AddAuction = this.AddAuction.bind(this);
+    }
+
+    AddAuction(){
+        const {name} = this.state;
+        let auction ={
+            "name":name
+        }
+        this.auctionService.createAuction(auction).then(req => {
+            console.log(req);
+            
+        });
+
     }
 
     render() {
@@ -88,6 +105,8 @@ class Auction extends Component {
                         margin="normal"
                         style = {{width: '80%'}}
                     />
+
+                    <button onClick={this.AddAuction}> Add Auction </button>
                 </form>
             </div>
         );
