@@ -3,6 +3,7 @@ import HomePage from './components/views/homePage/HomePage';
 import LoginPage from './components/views/loginPage/LoginPage';
 import Auction from './components/views/auction/auction';
 import SignUpPage from './components/views/signUpPage/SignUpPage';
+import InfluencerHomePage from './components/userHomePage/InfluencerHomePage';
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import './App.css';
 import StarHomePage from './components/homePages/StarHomePage';
@@ -26,7 +27,7 @@ class App extends Component {
             <Route path="/businessHomePage" component={BusinessHomePage} />
             <Route path="/starProfile" component={StarProfile} />
             <Route path="/profile" component={Profile} />
-
+            <Route path = "/InfluencerHomePage" component ={InfluencerHomePage}/>
           </div>
         </Router>
       </div>
