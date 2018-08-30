@@ -88,8 +88,24 @@
     margin-left: 40%;
 }
 
-.fab{
-    font-size: 4em
+.fa-facebook-square {
+    color: #3b5998;
+}
+
+.fa-twitter-square {
+    color: #1da1f2;  
+}
+
+.fa-youtube-square{
+    color: #bb0000;
+}
+
+.fa-instagram {
+     color: #833ab4; 
+} 
+
+.fab, .fa{
+    font-size: 4em;
 }
 
 [class ^= "checkboxfor"] {

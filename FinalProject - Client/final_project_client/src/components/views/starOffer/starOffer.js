@@ -124,7 +124,7 @@ class starOffer extends Component {
                                     <label for="checkboxfacebookInput"></label>
                                 </div>
                                 <div className="descTitleForSocialMedia">
-                                    <i className="fab fa-facebook-square"></i>
+                                    <i className="fab fa-facebook-square" aria-hidden="true"></i>
                                 </div>
                             </div>
                             <div className="instagram socialMediatWrapper">
@@ -133,7 +133,7 @@ class starOffer extends Component {
                                     <label for="checkboxFInstagramInput"></label>
                                 </div>
                                 <div className="descTitleForSocialMedia">
-                                    <i class="fab fa-instagram"></i>
+                                    <i class="fab fa-instagram" aria-hidden="true"></i>
                                 </div>
                             </div>
                             <div className="twitter socialMediatWrapper">
@@ -142,7 +142,7 @@ class starOffer extends Component {
                                     <label for="checkboxTwitterInput"></label>
                                 </div>
                                 <div className="descTitleForSocialMedia">
-                                    <i class="fab fa-twitter-square"></i>
+                                    <i class="fab fa-twitter-square" aria-hidden="true"></i>
                                 </div>
                             </div>
                             <div className="youtube socialMediatWrapper">
@@ -151,7 +151,7 @@ class starOffer extends Component {
                                     <label for="checkboxYoutubeInput"></label>
                                 </div>
                                 <div className="descTitleForSocialMedia">
-                                    <i class="fab fa-youtube-square"></i>
+                                    <i class="fab fa-youtube-square" aria-hidden="true"></i>
                                 </div>
                             </div>
                         </div>
