@@ -8,8 +8,8 @@
     display: flex;
     position: relative;
     border: 1px solid white;
-    min-width: 17;
-    min-height: 25;
+    min-width: 17vw;
+    min-height: 25vh;
     max-width: 23vw;
     margin-bottom: 0.5em;
     border-radius: 5px;

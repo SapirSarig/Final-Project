@@ -10,6 +10,7 @@ import StarHomePage from './components/homePages/StarHomePage';
 import BusinessHomePage from './components/homePages/BusinessHomePage';
 import StarProfile from './components/profiles/StarProfile';
 import Profile from './components/profiles/Profile';
+import starOffer from './components/views/starOffer/starOffer';
 
 class App extends Component {
 
@@ -23,6 +24,7 @@ class App extends Component {
             <Route path="/login" component={LoginPage} />
             <Route path="/SignUp" component={SignUpPage} />
             <Route path="/auction" component={Auction} />
+            <Route path="/starOffer" component={starOffer} />
             <Route path="/starHomePage" component={StarHomePage} />
             <Route path="/businessHomePage" component={BusinessHomePage} />
             <Route path="/starProfile" component={StarProfile} />

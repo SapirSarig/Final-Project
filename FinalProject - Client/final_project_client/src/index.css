@@ -23,9 +23,9 @@ body {
 
 html,
 body{
-  overflow-x: hidden;
   font-family: 'Nunito', sans-serif;
   font-family: 'Marcellus SC', serif;
+  overflow-x: hidden;
 }
 
 *{

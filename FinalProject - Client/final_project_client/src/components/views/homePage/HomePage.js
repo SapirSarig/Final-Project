@@ -11,7 +11,7 @@ class HomePage extends Component {
                     </div>
                     
                     <div className="explanationWrapper">
-                        <div class="explanation">
+                        <div className="explanation">
                             Are you a star on social networks like Facebook or Instagram?<br></br>
                             Do you own a business and looking for an opportunity to sell your products?<br></br>
                             Use our website to connect with each other!

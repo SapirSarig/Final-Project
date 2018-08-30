@@ -28,6 +28,12 @@ class Home extends Component {
                     </button>
                     </Link>
 
+                    <Link className="starOffer" to="/starOffer">
+                        <button className="starOfferBtn">
+                        starOffer
+                        </button>
+                    </Link>
+
                     <Link className="profile" to="/profile">
                         <button className="btn">
                             Profile
