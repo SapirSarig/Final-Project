@@ -36,8 +36,22 @@ namespace FinalProject.Controllers
 
         
 
+        //[HttpPost]
+        //public IHttpActionResult CreateInfluenceUser([FromBody]InfluencerUser user)
+        //{
+        //    bool isCreated = influencerUsersBL.AddUser(user);
+        //    if (isCreated)
+        //    {
+        //        return Ok(user);
+        //    }
+        //    else
+        //    {
+        //        return BadRequest();
+        //    }
+        //}
+
         [HttpPost]
-        public IHttpActionResult CreateInfluenceUser([FromBody]InfluencerUser user)
+        public IHttpActionResult CreateUser([FromBody]User user)
         {
             bool isCreated = influencerUsersBL.AddUser(user);
             if (isCreated)

@@ -13,7 +13,7 @@ namespace FinalProject.DAL
 
         public void AddAuction(Auction auction)
         {
-            context.Auctions.Add(auction);
+            //context.Auctions.Add(auction);
             context.SaveChanges();
         }
 

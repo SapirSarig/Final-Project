@@ -14,21 +14,17 @@ namespace FinalProject.DAL
         public FinalProjectContext()
             : base("name=FinalProjectConnection") { }
 
-        static FinalProjectContext()
-        {
-            Database.SetInitializer(new DropCreateDatabaseIfModelChanges<FinalProjectContext>());
-        }
-
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<InfluencerUser>().HasMany(iu => iu.Offers).WithRequired();
-            modelBuilder.Entity<AdvertiserUser>().HasMany(au => au.Auctions).WithRequired();
-
+            base.OnModelCreating(modelBuilder);
+            //modelBuilder.Entity<InfluencerUser>().HasMany(iu => iu.Offers).WithRequired().HasForeignKey<int>(o=>o.UserId);
+            //modelBuilder.Entity<AdvertiserUser>().HasMany(au => au.Auctions).WithRequired();
+            //modelBuilder.Entity<InfluencerUser>().HasMany(iu => iu.SocialNetworks).WithRequired();
         }
 
         public DbSet<User> Users { get; set; }
         public DbSet<Offer> Offers { get; set; }
-        public DbSet<Auction> Auctions { get; set; }
+        //public DbSet<Auction> Auctions { get; set; }
         
     }
 }

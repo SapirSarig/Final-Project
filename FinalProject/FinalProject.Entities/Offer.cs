@@ -14,7 +14,11 @@ namespace FinalProject.Entities
         [Key]
         public int Id { get; set; }
 
-        public virtual int UserId { get; set; }
+        public int UserId { get; set; }
+        [ForeignKey("UserId")]
+        public virtual User User { get; set; } 
+
+        public string Name { get; set; }
         //Offer()
         //{
         //    SocialNetworks = new HashSet<SocialNetwork>();

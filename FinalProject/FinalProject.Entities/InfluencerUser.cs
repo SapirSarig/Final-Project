@@ -12,24 +12,23 @@ namespace FinalProject.Entities
     {
         public InfluencerUser()
         {
-           // SocialNetworks = new HashSet<SocialNetwork>();
+            //SocialNetworks = new HashSet<SocialNetwork>();
             //Interests = new HashSet<Interest>();
-            Offers = new HashSet<Offer>();
+            //Offers = new HashSet<Offer>();
         }
 
-        public ICollection<Offer> Offers { get; set; }
+        //public virtual ICollection<Offer> Offers { get; set; }
 
 
         //[Required, MaxLength(40)]
         //public string LastName { get; set; }
 
         //[Required]
-        public DateTime DateOfBirth { get; set; }
+        //public DateTime DateOfBirth { get; set; }
 
         //[Required]
-        public List<string> SocialNetworks { get; set; }
+        //public ICollection<SocialNetwork> SocialNetworks { get; set; }
 
-        public List<string> LinksToProfiles { get; set; }
 
 
         //[Required]

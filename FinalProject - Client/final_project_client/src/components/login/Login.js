@@ -161,7 +161,7 @@ class Login extends Component {
                 }} /> :
                 loggedIn ? (loggedUser.type === 0) ?
                     <Redirect to={{
-                        pathname: '/starHomePage',
+                        pathname: '/InfluencerHomePage',
                         state: { loggedUser }
                     }} /> :
                     <Redirect to={{

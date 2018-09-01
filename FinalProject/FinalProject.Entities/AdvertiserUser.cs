@@ -18,6 +18,7 @@ namespace FinalProject.Entities
             Auctions = new HashSet<Auction>();
         }
 
+
         public ICollection<Auction> Auctions { get; set; }
 
         //[Required, MaxLength(40)]
@@ -27,6 +28,6 @@ namespace FinalProject.Entities
         ////[RegularExpression(@.......)]
         public string WebsiteLink { get; set; }
 
-        public ICollection<SocialNetwork> SocialNetworks { get; set; }
+        //public ICollection<SocialNetwork> SocialNetworks { get; set; }
     }
 }

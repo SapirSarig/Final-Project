@@ -22,7 +22,7 @@ namespace FinalProject.DAL
 
         public User GetUserById(int id)
         {
-            return context.Users.FirstOrDefault(user => user.UserId == id);
+            return context.Users.FirstOrDefault(user => user.Id == id);
         }
 
         public User Login(LoginModal loginModal)

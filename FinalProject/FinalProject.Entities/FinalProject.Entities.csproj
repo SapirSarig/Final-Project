@@ -77,13 +77,13 @@
     <Compile Include="Modals\LoginModal.cs" />
     <Compile Include="OfferStatus.cs" />
     <Compile Include="OfferType.cs" />
+    <Compile Include="SocialNetwork.cs" />
     <Compile Include="Youtube.cs" />
     <Compile Include="InfluencerUser.cs" />
     <Compile Include="Message.cs" />
     <Compile Include="Negotiation.cs" />
     <Compile Include="Offer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Enums\SocialNetwork.cs" />
     <Compile Include="User.cs" />
   </ItemGroup>
   <ItemGroup>

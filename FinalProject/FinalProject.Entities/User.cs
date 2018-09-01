@@ -9,15 +9,16 @@ using FinalProject.Entities.Enums;
 namespace FinalProject.Entities
 {
     //Base class for InfluencerUser and AdvertiserUser
-    public abstract class User
+    public class User
     {
         public User()
         {
             //Interests = new HashSet<string>();
+            Offers = new HashSet<Offer>();
         }
 
         [Key]
-        public int UserId { get; set; }
+        public int Id { get; set; }
 
         [Required]
         public string Name { get; set; }
@@ -34,9 +35,10 @@ namespace FinalProject.Entities
 
         public string Description { get; set; }
 
-        public virtual ICollection<Interest> Interests { get; set; }
+        public virtual ICollection<Offer> Offers { get; set; }
+        //public virtual ICollection<Interest> Interests { get; set; }
 
-        public UserTypes type { get; set; } 
+        //public UserTypes type { get; set; } 
 
     }
 }

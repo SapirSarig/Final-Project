@@ -150,6 +150,7 @@
     <Compile Include="Controllers\AuctionsController.cs" />
     <Compile Include="Controllers\AuthenticationController.cs" />
     <Compile Include="Controllers\InfluencerUsersController.cs" />
+    <Compile Include="Controllers\OffersController.cs" />
     <Compile Include="Controllers\TestController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
