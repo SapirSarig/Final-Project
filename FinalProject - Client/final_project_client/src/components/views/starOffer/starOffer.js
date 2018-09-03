@@ -25,14 +25,18 @@ class starOffer extends Component {
         this.state = {
             name: '',
             nameOfProduct: '',
-            payment: ''
+            payment: '',
+            offerAdvertising: '',
+            offerDescription: ''
           };
         
-        this.handleChange = (name, nameOfProduct, payment) => event => {
+        this.handleChange = (name, nameOfProduct, payment, offerAdvertising, offerDescription) => event => {
             this.setState({
                 [name]: event.target.value,
                 [nameOfProduct]: event.target.value,
                 [payment]: event.target.value,
+                [offerAdvertising]: event.target.value,
+                [offerDescription]: event.target.value,
             });
         };
     }
@@ -83,11 +87,12 @@ class starOffer extends Component {
                     />
                     <div className="separatorLine"></div>
                     <TextField
-                        id="multiline-flexible"
+                        id="offerAdvertising"
                         label="Offer advertising"
                         multiline
                         rowsMax="8"
-                        onChange={this.handleChange('multiline')}
+                        value={this.state.offerAdvertising}
+                        onChange={this.handleChange('offerAdvertising')}
                         className={classes.textField}
                         margin="normal"
                         style = {{width: '80%'}}
@@ -157,11 +162,12 @@ class starOffer extends Component {
                         </div>
                     </div>
                     <TextField
-                        id="multiline-flexible"
+                        id="offerDescription"
                         label="Offer's Description"
                         multiline
                         rowsMax="8"
-                        onChange={this.handleChange('multiline')}
+                        value={this.state.offerDescription}
+                        onChange={this.handleChange('offerDescription')}
                         className={classes.textField}
                         margin="normal"
                         style = {{width: '80%'}}

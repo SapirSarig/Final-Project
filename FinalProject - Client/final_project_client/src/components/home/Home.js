@@ -34,6 +34,12 @@ class Home extends Component {
                         </button>
                     </Link>
 
+                    <Link className="allOffers" to="/allOffers">
+                        <button className="allOffersBtn">
+                        allOffers
+                        </button>
+                    </Link>
+
                     <Link className="profile" to="/profile">
                         <button className="btn">
                             Profile
