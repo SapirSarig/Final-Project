@@ -62,11 +62,11 @@ class SignUp extends Component {
                     (userInfo.type === "Social Influencer") ?
                         <Redirect to={{
                             pathname: '/InfluencerHomePage',
-                            props: { userInfo }
+                            state: { userInfo }
                         }} /> :
                         <Redirect to={{
                             pathname: '/businessHomePage',
-                            props: { userInfo }
+                            state: { userInfo }
                         }} />
                     : <Register {...this.props} CreateInfluencerUser={this.CreateInfluencerUser} CreateBusinessUser={this.CreateBusinessUser} />}
             </div>

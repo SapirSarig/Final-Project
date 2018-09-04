@@ -5,22 +5,47 @@ import HomeHeader from './HomeHeader.js';
 import HotAuctions from '../userHomePage/hotAuctions.js';
 import OffersStatus from '../offers/offersStatus.js';
 import '../userHomePage/homePages.css';
+const initialState = {
+    userInfo: {}
+};
 
 class BusinessHomePage extends Component {
+    constructor(props) {
+        super(props);
+        this.state = initialState;
+    }
+
+    componentDidMount() {
+        const { location } = this.props;
+        if (location && location.state) {
+            const { userInfo } = location.state;
+            this.setState({ userInfo });
+        }
+    }
 
     render() {
-        const name = "Coca Cola";
+        //const name = "Coca Cola";
+        const { userInfo } = this.state;
         return (
             <div className="businessHomePage">
                 <div className="TopPage">
-                    <HomeHeader name={name} />
+                    <HomeHeader name={userInfo.name} />
                 </div>
                 <div className="LeftPage">
-                    <HotAuctions />
+                    {/* We need to add "auctions" when user is created */}
+                    <HotAuctions auctions={userInfo.auctions} />
+                    <button> All Auctions </button>
                 </div>
                 <div className="RightPage">
-                    <OffersStatus />
+                    {/* We need to add "offers" when user is created */}
+                    <OffersStatus offers={userInfo.Offers} />
+                    <button> All Offers </button>
                 </div>
+                <br/>
+                <button> Add a New Auction </button>
+                <br/>
+                <button> All Influencers </button>
+
             </div>
         );
     }

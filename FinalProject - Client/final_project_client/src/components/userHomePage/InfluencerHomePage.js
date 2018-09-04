@@ -6,21 +6,45 @@ import HotAuctions from '../userHomePage/hotAuctions.js';
 import OffersStatus from '../offers/offersStatus.js';
 import '../userHomePage/homePages.css';
 
+const initialState = {
+    userInfo: {}
+};
+
 class InfluencerHomePage extends Component {
+    constructor(props) {
+        super(props);
+        this.state = initialState;
+    }
+
+    componentDidMount() {
+        const { location } = this.props;
+        if (location && location.state) {
+            const { userInfo } = location.state;
+            this.setState({ userInfo });
+        }
+    }
 
     render() {
-        const name = "influencer";
+        //const name = "influencer";
+        const { userInfo } = this.state;
         return (
             <div className="influencerHomePage">
+
                 <div className="TopPage">
-                    <HomeHeader name={name} />
+                    <HomeHeader name={userInfo.name} picture={userInfo.Picture} />
                 </div>
                 <div className="LeftPage">
-                    <HotAuctions />
+                    {/* We need to add "auctions" when user is created */}
+                    <HotAuctions auctions={userInfo.auctions} />
+                    <button> All Auctions </button>
                 </div>
                 <div className="RightPage">
-                    <OffersStatus />
+                    {/* We need to add "offers" when user is created */}
+                    <OffersStatus offers={userInfo.Offers} />
+                    <button> All Offers </button>
                 </div>
+                <br/>
+                <button> All Influencers </button>
             </div>
         );
     }

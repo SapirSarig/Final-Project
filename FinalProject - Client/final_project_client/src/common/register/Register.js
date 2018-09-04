@@ -113,11 +113,13 @@ class Register extends Component {
             user["dateOfBirth"] = chooseTypeState.dateOfBirth;
             user["socialNetworks"] = chooseTypeState.socialNetworks;
             user["linksToProfiles"] = chooseTypeState.LinksToProfiles;
+            user["Offers"] = [];
             CreateInfluencerUser(user);
         }
         else {
             user["companyName"] = chooseTypeState.CompanyName;
             user["WebsiteLink"] = chooseTypeState.LinkToCompanySite;
+            user["Auctions"] = [];
             CreateBusinessUser(user);
         }
         //if there are no validtion errors

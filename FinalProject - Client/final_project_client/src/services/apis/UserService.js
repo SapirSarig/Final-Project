@@ -1,10 +1,10 @@
 export default class UserService {
     host = "http://localhost:49923";
 
-  getUser() {
+  getUserById(id) {
     //var data = new FormData();
     //data.append("json", JSON.stringify(user));
-    return fetch(`${this.host}/api/InfluencerUsers/3`, {
+    return fetch(`${this.host}/api/Users/${id}`, {
       method: "GET",
       headers: {
         Accept: "application/json",

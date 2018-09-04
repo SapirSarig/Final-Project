@@ -22,6 +22,21 @@ export default class OfferService {
             })
     }
 
+    getOfferById(id){
+        return fetch(`${this.host}/api/Offers/${id}`, {
+          method: "GET",
+          headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json"
+          }
+        })
+          .then((res) => {
+            return res.json();
+          }).catch((err)=> {
+            console.log(err);
+          })
+      }
+
     getAllOffers(){
         return fetch(`${this.host}/api/Offers`, {
           method: "GET",

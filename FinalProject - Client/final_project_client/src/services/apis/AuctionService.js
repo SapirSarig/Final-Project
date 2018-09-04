@@ -22,6 +22,21 @@ export default class AuctionService {
             })
     }
 
+    getAuctionById(id){
+        return fetch(`${this.host}/api/Auctions/${id}`, {
+          method: "GET",
+          headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json"
+          }
+        })
+          .then((res) => {
+            return res.json();
+          }).catch((err)=> {
+            console.log(err);
+          })
+      }
+
     getAllAuctions(){
         return fetch(`${this.host}/api/Auctions`, {
           method: "GET",
