@@ -54,7 +54,6 @@ class SignUp extends Component {
         });
     }
 
-
     render() {
         const { signUpOk, userInfo } = this.state;
         return (

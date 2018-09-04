@@ -1,11 +1,11 @@
-export default class AuctionService {
+export default class OfferService {
     host = "http://localhost:49923";
 
-    createAuction(auction) {
+    createOffer(offer) {
         //var data = new FormData();
         //data.append("json", JSON.stringify(user));
-        var data = JSON.stringify(auction);
-        return fetch(`${this.host}/api/Auctions`, {
+        var data = JSON.stringify(offer);
+        return fetch(`${this.host}/api/Offers`, {
             method: "POST",
             body: data,
             headers: {
@@ -22,8 +22,8 @@ export default class AuctionService {
             })
     }
 
-    getAllAuctions(){
-        return fetch(`${this.host}/api/Auctions`, {
+    getAllOffers(){
+        return fetch(`${this.host}/api/Offers`, {
           method: "GET",
           headers: {
             Accept: "application/json",

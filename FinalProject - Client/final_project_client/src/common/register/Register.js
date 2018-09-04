@@ -106,19 +106,18 @@ class Register extends Component {
             "password": password,
             "interests": interests,
             "description": description,
-            "type": type
+            "type": type,
+            "Picture": chooseTypeState.src
         };
         if (type === "Social Influencer") {
-            user["Image"] = chooseTypeState.src;
             user["dateOfBirth"] = chooseTypeState.dateOfBirth;
             user["socialNetworks"] = chooseTypeState.socialNetworks;
             user["linksToProfiles"] = chooseTypeState.LinksToProfiles;
             CreateInfluencerUser(user);
         }
         else {
-            user["companyLogo"] = chooseTypeState.src;
             user["companyName"] = chooseTypeState.CompanyName;
-            user["linkToCompanySite"] = chooseTypeState.LinkToCompanySite;
+            user["WebsiteLink"] = chooseTypeState.LinkToCompanySite;
             CreateBusinessUser(user);
         }
         //if there are no validtion errors
