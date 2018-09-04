@@ -13,8 +13,8 @@ class offersStatus extends Component {
         return (
             <div className="offersStatus">
             Offers:
-                {offers && offers.map(offer =>
-                    (<div> offer's name: {offer.Description} <br/> Status: {offer.status} </div>))}
+                {offers? offers.map(offer =>
+                    (<div> offer's name: {offer.Description} <br/> Status: {offer.status} </div>)):<div>No Offers Yet!</div>}
             </div>
         );
     }

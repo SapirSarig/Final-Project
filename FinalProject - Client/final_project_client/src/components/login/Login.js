@@ -118,7 +118,7 @@ class Login extends Component {
         this.userService.loginUser(this.state).then(req => {
             if (req) {
                 //routing
-                alert(`Hello ${req.Name}`);
+                //alert(`Hello ${req.Name}`);
                 this.setState({
                     loggedIn: true,
                     loggedUser: req

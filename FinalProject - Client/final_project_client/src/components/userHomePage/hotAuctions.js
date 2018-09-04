@@ -14,9 +14,9 @@ class hotAuctions extends Component {
         return (
             <div className="hotAuctions">
                 Hot auctions:
-                {auctions && auctions.map((auction) =>
-                   <div>{auction.Description}</div>)
-                }
+                {auctions? auctions.map((auction) =>
+                   <div>{auction}</div>)
+                :<div>No Auctions Yet!</div>}
             </div>
         );
     }
