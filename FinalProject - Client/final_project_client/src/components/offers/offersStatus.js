@@ -10,12 +10,14 @@ class offersStatus extends Component {
         //     { name: "offer3", status: "cancled" }
         // ];
         let {offers} = this.props;
+        console.log('offers', offers)
         return (
-            <div className="offersStatus">
+            offers && offers.length > 0 ? <div className="offersStatus">
             Offers:
-                {offers? offers.map(offer =>
-                    (<div> offer's name: {offer.Description} <br/> Status: {offer.status} </div>)):<div>No Offers Yet!</div>}
-            </div>
+                {offers.map(offer =>
+                    (<div> offer's name: {offer.Description} <br/> Status: {offer.status} </div>))}
+            </div> :
+            <div>No Offers Yet!</div>
         );
     }
 }

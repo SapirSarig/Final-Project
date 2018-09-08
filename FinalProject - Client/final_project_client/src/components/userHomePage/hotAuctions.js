@@ -12,12 +12,12 @@ class hotAuctions extends Component {
         const {auctions} = this.props;
 
         return (
-            <div className="hotAuctions">
+            auctions && auctions.length > 0 ?  <div className="hotAuctions">
                 Hot auctions:
-                {auctions? auctions.map((auction) =>
+                {auctions.map((auction) =>
                    <div>{auction}</div>)
-                :<div>No Auctions Yet!</div>}
-            </div>
+              }
+            </div> :<div>No Auctions Yet!</div>
         );
     }
 } 

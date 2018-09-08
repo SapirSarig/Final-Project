@@ -21,8 +21,6 @@ namespace FinalProject.Entities
         //we need to connect it to a specific auction
         //public Auction auction { get; set; }
 
-        //public string StarName { get; set; }
-
         public ICollection<AdvertisingForm> AdvertisingForms { get; set; }
 
         //public ICollection<SocialNetwork> SocialNetworks { get; set; }
