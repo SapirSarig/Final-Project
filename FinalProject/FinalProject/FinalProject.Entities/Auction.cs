@@ -11,10 +11,14 @@ namespace FinalProject.Entities
 {
     public class Auction
     {
+        public Auction()
+        {
+            Offers = new HashSet<Offer>();
+            ProductScopes = new HashSet<ProductScope>();
+        }
+
         [Key]
         public int Id { get; set; }
-
-        //public string Name { get; set; }
 
         public int UserId { get; set; }
         [ForeignKey("UserId")]
@@ -28,9 +32,6 @@ namespace FinalProject.Entities
 
         public string Picture { get; set; }
 
-        //do we need a new hashset here??
-        //public ICollection<Interest> Interests { get; set; }
-
         public int NumOfMinFollowers { get; set; }
 
         public double Payment { get; set; }
@@ -39,5 +40,8 @@ namespace FinalProject.Entities
 
         public DateTime EndDate { get; set; }
 
+        public virtual ICollection<Offer> Offers { get; set; }
+
+        public virtual ICollection<ProductScope> ProductScopes{ get; set; }
     }
 }

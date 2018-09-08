@@ -12,15 +12,13 @@ namespace FinalProject.Entities
         public InfluencerUser()
         {
             Offers = new HashSet<Offer>();
+            SocialNetworks = new HashSet<SocialNetwork>();
         }
 
         public DateTime DateOfBirth { get; set; }
 
         public virtual ICollection<Offer> Offers { get; set; }
 
-
-        //do we need a new hashset here??
-
-       //public ICollection<SocialNetwork> SocialNetworks { get; set; }
+       public ICollection<SocialNetwork> SocialNetworks { get; set; }
     }
 }

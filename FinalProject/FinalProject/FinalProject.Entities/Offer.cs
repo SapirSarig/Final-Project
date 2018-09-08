@@ -11,21 +11,27 @@ namespace FinalProject.Entities
 {
     public class Offer
     {
+        public Offer()
+        {
+            PublishSocialNetworks = new HashSet<PublishSocialNetwork>();
+            AdvertisingForms = new HashSet<AdvertisingForm>();
+        }
         [Key]
         public int Id { get; set; }
+
+        public ICollection<PublishSocialNetwork> PublishSocialNetworks { get; set; }
+
+        public string Description { get; set; }
+
+        public ICollection<AdvertisingForm> AdvertisingForms { get; set; }
+
+        public int? AuctionId { get; set; }
+        [ForeignKey("AuctionId")]
+        public virtual Auction Auction { get; set; }
 
         public int UserId { get; set; }
         [ForeignKey("UserId")]
         public virtual InfluencerUser InfluencerUser { get; set; }
-
-        //we need to connect it to a specific auction
-        //public Auction auction { get; set; }
-
-        public ICollection<AdvertisingForm> AdvertisingForms { get; set; }
-
-        //public ICollection<SocialNetwork> SocialNetworks { get; set; }
-
-        public string Description { get; set; }
 
     }
 }
