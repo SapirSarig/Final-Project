@@ -29,15 +29,23 @@ class Auction extends Component {
         this.state = {
             name: '',
             nameOfProduct: '',
-            payment: ''
+            payment: '',
+            description: '',
+            numberFollowers: '',
+            startDate: '',
+            endtDate: ''
           };
         this.auctionService = new AuctionService();
         
-        this.handleChange = (name, nameOfProduct, payment) => event => {
+        this.handleChange = (name, nameOfProduct, payment, description, numberFollowers, startDate, endtDate) => event => {
             this.setState({
                 [name]: event.target.value,
                 [nameOfProduct]: event.target.value,
                 [payment]: event.target.value,
+                [description]: event.target.value,
+                [numberFollowers]:event.target.value,
+                [startDate]: event.target.value,
+                [endtDate]: event.target.value,
             });
         };
         this.AddAuction = this.AddAuction.bind(this);
@@ -103,11 +111,11 @@ class Auction extends Component {
                         <FileUploader />
                     </div>
                     <TextField
-                        id="multiline-flexible"
+                        id="description"
                         label="Description"
                         multiline
                         rowsMax="8"
-                        onChange={this.handleChange('multiline')}
+                        onChange={this.handleChange('description')}
                         className={classes.textField + " descTextField"}
                         margin="normal"
                         style = {{width: '80%'}}
@@ -143,10 +151,10 @@ class Auction extends Component {
                         </div>
                     </div>
                     <TextField
-                        id="number"
+                        id="numberFollowers"
                         label="Number of minimum followers"
-                        value={this.state.age}
-                        onChange={this.handleChange('age')}
+                        value={this.state.numberFollowers}
+                        onChange={this.handleChange('numberFollowers')}
                         type="number"
                         className={classes.textField}
                         InputLabelProps={{
@@ -168,6 +176,8 @@ class Auction extends Component {
                             label="Start date"
                             type="date"
                             className={classes.textField}
+                            value={this.state.startDate}
+                            onChange={this.handleChange('startDate')}
                             InputLabelProps={{
                             shrink: true,
                             }}
@@ -177,6 +187,8 @@ class Auction extends Component {
                             label="End date"
                             type="date"
                             className={classes.textField}
+                            value={this.state.endtDate}
+                            onChange={this.handleChange('endtDate')}
                             InputLabelProps={{
                             shrink: true,
                             }}

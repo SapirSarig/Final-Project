@@ -10,6 +10,9 @@ import BusinessHomePage from './components/userHomePage/BusinessHomePage';
 import InfluencerHomePage from './components/userHomePage/InfluencerHomePage';
 import StarProfile from './components/profiles/StarProfile';
 import Profile from './components/profiles/Profile';
+import starOffer from './components/views/starOffer/starOffer';
+import allOffers from './components/views/allOffers/allOffers';
+import myAuctions from './components/views/myAuctions/myAuctions';
 
 class App extends Component {
 

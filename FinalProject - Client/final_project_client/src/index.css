@@ -2,6 +2,7 @@ body {
   margin: 0;
   padding: 0;
   font-family: sans-serif;
+  font-size: 10em;
   width: 100vw;
   height: 100vh;
 
@@ -22,10 +23,12 @@ body {
 
 html,
 body{
+  font-family: 'Nunito', sans-serif;
+  font-family: 'Marcellus SC', serif;
   overflow-x: hidden;
 }
 
 *{
-  transition: 0.5s linear;
+  transition: 0.1s linear;
 }
 
