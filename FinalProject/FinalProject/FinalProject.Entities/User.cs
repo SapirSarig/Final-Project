@@ -9,6 +9,10 @@ namespace FinalProject.Entities
 {
     public abstract class User
     {
+        public User()
+        {
+            //Interests = new HashSet<Interest>();
+        }
         [Key]
         public int Id { get; set; }
 
@@ -24,7 +28,6 @@ namespace FinalProject.Entities
 
         public string Description { get; set; }
 
-        //do we need a new hashset here??
         //public ICollection<Interest> Interests { get; set; }
 
     }

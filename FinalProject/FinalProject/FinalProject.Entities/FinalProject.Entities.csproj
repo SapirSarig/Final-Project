@@ -45,8 +45,9 @@
     <Compile Include="Auction.cs" />
     <Compile Include="BusinessUser.cs" />
     <Compile Include="Enums\AdvertisingForm.cs" />
-    <Compile Include="Enums\Interest.cs" />
+    <Compile Include="Enums\InterestType.cs" />
     <Compile Include="InfluencerUser.cs" />
+    <Compile Include="Interest.cs" />
     <Compile Include="Modals\LoginModal.cs" />
     <Compile Include="Offer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

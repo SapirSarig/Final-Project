@@ -11,6 +11,11 @@ namespace FinalProject.Entities
 {
     public class Auction
     {
+        public Auction()
+        {
+            //Offers = new HashSet<Offer>();
+        }
+
         [Key]
         public int Id { get; set; }
 
@@ -38,6 +43,8 @@ namespace FinalProject.Entities
         public DateTime StartDate { get; set; }
 
         public DateTime EndDate { get; set; }
+
+        //public ICollection<Offer> Offers { get; set; }
 
     }
 }
