@@ -26,6 +26,9 @@ class App extends Component {
             <Route path="/login" component={LoginPage} />
             <Route path="/SignUp" component={SignUpPage} />
             <Route path="/auction" component={Auction} />
+            <Route path="/allOffers" component={allOffers} />
+            <Route path="/starOffer" component={starOffer} />
+            <Route path="/myAuctions" component={myAuctions} />
             <Route path="/starProfile" component={StarProfile} />
             <Route path="/profile" component={Profile} />
             <Route path = "/InfluencerHomePage" component ={InfluencerHomePage}/>
