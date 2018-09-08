@@ -11,7 +11,7 @@ namespace FinalProject.Entities
     {
         public User()
         {
-            //Interests = new HashSet<Interest>();
+            Interests = new HashSet<Interest>();
         }
         [Key]
         public int Id { get; set; }
@@ -28,7 +28,7 @@ namespace FinalProject.Entities
 
         public string Description { get; set; }
 
-        //public ICollection<Interest> Interests { get; set; }
+        public virtual ICollection<Interest> Interests { get; set; }
 
     }
 }

@@ -42,15 +42,19 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AdvertisingForm.cs" />
     <Compile Include="Auction.cs" />
     <Compile Include="BusinessUser.cs" />
-    <Compile Include="Enums\AdvertisingForm.cs" />
+    <Compile Include="Enums\AdvertisingFormType.cs" />
     <Compile Include="Enums\InterestType.cs" />
+    <Compile Include="Enums\SocialNetworkType.cs" />
     <Compile Include="InfluencerUser.cs" />
     <Compile Include="Interest.cs" />
     <Compile Include="Modals\LoginModal.cs" />
     <Compile Include="Offer.cs" />
+    <Compile Include="ProductScope.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="PublishSocialNetwork.cs" />
     <Compile Include="SocialNetwork.cs" />
     <Compile Include="User.cs" />
   </ItemGroup>

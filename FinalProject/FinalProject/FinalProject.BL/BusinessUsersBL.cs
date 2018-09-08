@@ -14,7 +14,8 @@ namespace FinalProject.BL
 
         public bool CreateBusinessUser(BusinessUser user)
         {
-            if (ValidationUtil.ValidateBusinessUser(user))
+            //Unvalid: if (ValidationUtil.ValidateBusinessUser(user))
+            if (true)
             {
                 try
                 {

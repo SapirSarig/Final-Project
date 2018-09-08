@@ -1,4 +1,5 @@
-﻿using System;
+﻿using FinalProject.Entities.Enums;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -14,7 +15,7 @@ namespace FinalProject.Entities
         [Key]
         public int Id { get; set; }
 
-        public string Name { get; set; }
+        public SocialNetworkType value { get; set; }
 
         public string LinkToProfile { get; set; }
 
