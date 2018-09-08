@@ -10,7 +10,6 @@ class offersStatus extends Component {
         //     { name: "offer3", status: "cancled" }
         // ];
         let {offers} = this.props;
-        console.log('offers', offers)
         return (
             offers && offers.length > 0 ? <div className="offersStatus">
             Offers:
