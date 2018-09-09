@@ -42,7 +42,46 @@ namespace FinalProject.DAL
         {
             return context.Users.FirstOrDefault(u => u.Email == email);
         }
-    }
-    
 
+        public bool AddReview(int userId, Review review)
+        {
+            User user = context.Users.FirstOrDefault(u => u.Id == userId);
+            if (user == null)
+            {
+                return false;
+            }
+            else
+            {
+                user.Reviews.Add(review);
+                context.SaveChanges();
+                return true;
+            }
+        }
+
+        public IEnumerable<Offer> GetAllOffers(int userId)
+        {
+            User user = context.Users.FirstOrDefault(u => u.Id == userId);
+            if (user == null)
+            {
+                return null;
+            }
+            else
+            {
+                return (user as InfluencerUser).Offers;
+            }
+        }
+
+        public IEnumerable<Auction> GetAllAuctions(int userId)
+        {
+            User user = context.Users.FirstOrDefault(u => u.Id == userId);
+            if (user == null)
+            {
+                return null;
+            }
+            else
+            {
+                return (user as BusinessUser).Auctions;
+            }
+        }
+    }
 }

@@ -44,5 +44,10 @@ namespace FinalProject.BL
         {
             return auctionsCRUD.GetAuctions();
         }
+
+        public IEnumerable<Offer> GetAllOffers(int auctionId)
+        {
+            return auctionsCRUD.GetAllOffers(auctionId);
+        }
     }
 }

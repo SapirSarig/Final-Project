@@ -42,11 +42,24 @@ namespace FinalProject.WebApi.Controllers
             return usersBL.GetUsers();
         }
 
-        //[HttpGet]
-        //public IHttpActionResult GetUserByEmail(string email)
-        //{
-        //    User user = usersBL.GetUserByEmail(email);
-        //    return Ok(user);
-        //}
+        [Route("GetUserByEmail")]
+        public IHttpActionResult GetUserByEmail(string email)
+        {
+            User user = usersBL.GetUserByEmail(email);
+            return Ok(user);
+        }
+
+        [Route("AddReview")]
+        public IHttpActionResult AddReview(int userId, Review review)
+        {
+            bool isAdded = usersBL.AddReview(userId, review);
+            if (isAdded)
+            {
+                return Ok(userId);
+            }
+            return NotFound();
+        }
+
+
     }
 }

@@ -42,5 +42,18 @@ namespace FinalProject.BL
                 throw;
             }
         }
+
+        public bool AddReview(int userId, Review review)
+        {
+            try
+            {
+                return userCRUD.AddReview(userId, review);
+            }
+            catch (Exception e)
+            {
+                return false;
+                throw;
+            }
+        }
     }
 }

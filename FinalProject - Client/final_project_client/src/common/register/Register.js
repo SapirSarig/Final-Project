@@ -51,7 +51,8 @@ class Register extends Component {
         let { interests } = this.state;
 
         if (name === "Interests") {
-            value && interests.push(value);
+            let obj={"value":value};
+            value && interests.push(obj);
 
             this.setState({
                 interests
@@ -107,12 +108,12 @@ class Register extends Component {
             "interests": interests,
             "description": description,
             "type": type,
-            "Picture": chooseTypeState.src
+            "Picture": chooseTypeState.src,
+            "Reviews" :[]
         };
         if (type === "Social Influencer") {
             user["dateOfBirth"] = chooseTypeState.dateOfBirth;
             user["socialNetworks"] = chooseTypeState.socialNetworks;
-            user["linksToProfiles"] = chooseTypeState.LinksToProfiles;
             user["Offers"] = [];
             CreateInfluencerUser(user);
         }

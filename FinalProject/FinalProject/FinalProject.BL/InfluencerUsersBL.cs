@@ -34,5 +34,10 @@ namespace FinalProject.BL
            
 
         }
+
+        public IEnumerable<Offer> GetAllOffers(int userId)
+        {
+            return userCRUD.GetAllOffers(userId);
+        }
     }
 }

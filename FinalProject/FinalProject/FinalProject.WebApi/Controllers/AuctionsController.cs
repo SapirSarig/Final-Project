@@ -46,12 +46,18 @@ namespace FinalProject.WebApi.Controllers
             return Ok();
         }
 
-
         [HttpGet]
         public IEnumerable<Auction> GetAllAuctions()
         {
             return auctionsBL.GetAuctions();
         }
+
+        [Route("GetAllOffers")]
+        public IEnumerable<Offer> GetAllOffers(int AuctionId)
+        {
+            return auctionsBL.GetAllOffers(AuctionId);
+        }
+
     }
 }
 

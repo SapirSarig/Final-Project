@@ -34,5 +34,10 @@ namespace FinalProject.BL
             }
 
         }
+
+        public IEnumerable<Auction> GetAllAuctions(int userId)
+        {
+            return userCRUD.GetAllAuctions(userId);
+        }
     }
 }
