@@ -1,5 +1,6 @@
 ﻿using FinalProject.BL;
 using FinalProject.Entities;
+using System.Collections.Generic;
 using System.Web.Http;
 using System.Web.Http.Cors;
 
@@ -20,6 +21,13 @@ namespace FinalProject.WebApi.Controllers
                 return Ok(message);
             }
             return NotFound();
+        }
+
+        [HttpGet]
+        public IHttpActionResult GetMessagesByOfferId(int chatId)
+        {
+            IEnumerable<Message> messages = messagesBL.GetMessagesByOfferId(chatId);
+            return Ok(messages);
         }
     }
 }

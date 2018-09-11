@@ -25,5 +25,10 @@ namespace FinalProject.BL
                 throw;
             }
         }
+
+        public IEnumerable<Message> GetMessagesByOfferId(int chatId)
+        {
+            return messagesCRUD.GetMessagesByOfferId(chatId);
+        }
     }
 }
