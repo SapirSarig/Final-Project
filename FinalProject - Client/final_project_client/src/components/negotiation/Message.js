@@ -12,11 +12,21 @@ class Message extends Component {
     render() {
         const { message } = this.props;
         return (
-            <div className="messageFromHistory">
-                <div> From: {message.from}</div>
-                <div> At: {message.dateAndTime} </div>
-                <div> Message: {message.message} </div>
-                <br/>
+            <div>
+                <div className="messageFromHistory">
+                    <div> <span className="messageTitles"> From: </span> {message.from}</div>
+                    <div> <span className="messageTitles"> At: </span> {message.dateAndTime} </div>
+                    <div className="messageTitles"> Message: </div>
+                    {message.message.split("\n").map(function (item) {
+                        return (
+                            <span>
+                                {item}
+                                <br />
+                            </span>
+                        )
+                    })}
+                </div>
+                <br />
             </div>
         );
     }

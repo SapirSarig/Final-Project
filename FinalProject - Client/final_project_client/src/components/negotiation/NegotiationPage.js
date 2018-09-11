@@ -5,6 +5,7 @@ import NegotiationService from '../../services/apis/NegotiationService';
 import History from './History';
 import NewMessageArea from './NewMessageArea';
 import './Negotiation.css';
+import Status from './Status';
 
 class NegotiationPage extends Component {
     NegotiationService;
@@ -34,6 +35,7 @@ class NegotiationPage extends Component {
         const {messages} = this.state;
         return (
             <div>
+                <Status/>
                 <NewMessageArea addNewMessageToList = {this.addNewMessageToList}/>
                 <br/>
                 <History messages={messages} />

@@ -14,7 +14,7 @@ class History extends Component {
         const { messages } = this.props;
         return (
             <div>
-                <div>History: </div>
+                <div className="historyTitle">History: </div>
                 <br />
                 {messages.map((message, index) =>
                     <Message key={index} message={message} />

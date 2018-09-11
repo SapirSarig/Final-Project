@@ -28,7 +28,7 @@ class NewMessageArea extends Component {
         return (
             <div className="newMessageArea" onSubmit={this.handleSubmit}>
                 <div className="newMessageLabel">
-                    New message:
+                    Write message:
                 </div>
                 <div>
                     <textarea className="messageTextArea" value={this.state.message} onChange={this.handleChange} />
