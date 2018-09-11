@@ -41,7 +41,11 @@ class InfluencerHomePage extends Component {
                 <div className="RightPage">
                     {/* We need to add "offers" when user is created */}
                     <OffersStatus offers={userInfo.Offers} />
-                    <button> All Offers </button>
+                    <Link className="allOffers" to="/allOffers">
+                        <button className="allOffersBtn">
+                        allOffers
+                        </button>
+                    </Link>
                 </div>
                 <br/>
                 <button> All Influencers </button>

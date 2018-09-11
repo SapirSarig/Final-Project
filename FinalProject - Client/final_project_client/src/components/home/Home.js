@@ -32,6 +32,7 @@ class Home extends Component {
                         <button className="starOfferBtn">
                             starOffer
                         </button>
+<<<<<<< HEAD
                     </Link>
 
                     <Link className="allOffers" to="/allOffers">
@@ -45,12 +46,16 @@ class Home extends Component {
                             myAuctions
                         </button>
                     </Link>
+=======
+                    </Link>                    
+>>>>>>> 1262a62c14cf5ac21131dd363574f70e1d27707a
 
                     <Link className="profile" to="/profile">
                         <button className="btn">
                             Profile
                         </button>
                     </Link>
+<<<<<<< HEAD
 
                     <Link className="influencerHomePage" to="/influencerHomePage">
                         <button className="influencerHomePageBtn">
@@ -64,6 +69,8 @@ class Home extends Component {
                         </button>
                     </Link>
 
+=======
+>>>>>>> 1262a62c14cf5ac21131dd363574f70e1d27707a
                 </div>
             </div>
 
