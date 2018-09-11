@@ -51,4 +51,20 @@ export default class AuctionService {
             console.log(err);
           })
       }
+      getAllOffersOfAuction(auctionId){
+        return fetch(`${this.host}/api/Auctions/GetAllOffers?AuctionId=${auctionId}`, {
+          method: "GET",
+          headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json"
+          }
+        })
+          .then((res) => {
+            return res.json();
+          }).catch((err)=> {
+            console.log(err);
+          })
+      }
+
+      //delete?
 }

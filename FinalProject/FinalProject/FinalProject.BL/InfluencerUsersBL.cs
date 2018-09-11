@@ -14,7 +14,8 @@ namespace FinalProject.BL
 
         public bool CreateInfluencerUser(InfluencerUser user)
         {
-            if(ValidationUtil.ValidateInfluenceUser(user))
+            //Unvalid - if(ValidationUtil.ValidateInfluenceUser(user))
+            if (true)
             {
                 try
                 {
@@ -33,6 +34,11 @@ namespace FinalProject.BL
             }
            
 
+        }
+
+        public IEnumerable<Offer> GetAllOffers(int userId)
+        {
+            return userCRUD.GetAllOffers(userId);
         }
     }
 }

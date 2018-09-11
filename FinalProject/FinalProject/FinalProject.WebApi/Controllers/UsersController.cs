@@ -23,17 +23,31 @@ namespace FinalProject.WebApi.Controllers
             return Ok(user);
         }
 
-        [HttpPatch]
-        public IHttpActionResult UpdateUser(User user)
-        {
-            return Ok();
-        }
+        ////???
+        //[HttpPatch]
+        //public IHttpActionResult UpdateUser(User user)
+        //{
+        //    User UpdatedUser = usersBL.UpdateUser(user);
+        //    return Ok(user);
+        //}
+
+        //[HttpPost]
+        //public IHttpActionResult UpdateUser([FromBody]User user)
+        //{
+        //    User UpdatedUser = usersBL.UpdateUser(user);
+        //    return Ok(user);
+        //}
 
         //how to delete from db??
         [HttpDelete]
         public IHttpActionResult DeleteUser(int id)
         {
-            return Ok();
+            bool isDeleted = usersBL.DeleteUser(id);
+            if (isDeleted)
+            {
+                return Ok();
+            }
+            return NotFound();
         }
 
         [HttpGet]
@@ -42,11 +56,24 @@ namespace FinalProject.WebApi.Controllers
             return usersBL.GetUsers();
         }
 
-        //[HttpGet]
-        //public IHttpActionResult GetUserByEmail(string email)
-        //{
-        //    User user = usersBL.GetUserByEmail(email);
-        //    return Ok(user);
-        //}
+        [Route("GetUserByEmail")]
+        public IHttpActionResult GetUserByEmail(string email)
+        {
+            User user = usersBL.GetUserByEmail(email);
+            return Ok(user);
+        }
+
+        [Route("AddReview")]
+        public IHttpActionResult AddReview(int userId, Review review)
+        {
+            bool isAdded = usersBL.AddReview(userId, review);
+            if (isAdded)
+            {
+                return Ok(userId);
+            }
+            return NotFound();
+        }
+
+
     }
 }
