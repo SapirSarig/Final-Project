@@ -16,5 +16,10 @@ namespace FinalProject.DAL
             context.Messages.Add(message);
             context.SaveChanges();
         }
+
+        public IEnumerable<Message> GetAllMessages()
+        {
+            return context.Messages.ToList();
+        }
     }
 }

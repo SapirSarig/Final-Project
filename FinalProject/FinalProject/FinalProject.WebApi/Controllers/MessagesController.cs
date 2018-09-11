@@ -1,5 +1,6 @@
 ﻿using FinalProject.BL;
 using FinalProject.Entities;
+using System.Collections.Generic;
 using System.Web.Http;
 using System.Web.Http.Cors;
 
@@ -20,6 +21,12 @@ namespace FinalProject.WebApi.Controllers
                 return Ok(message);
             }
             return NotFound();
+        }
+
+        [HttpGet]
+        public IEnumerable<Message> GetAllMessages()
+        {
+            return messagesBL.GetAllMessages();
         }
     }
 }

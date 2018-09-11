@@ -25,5 +25,10 @@ namespace FinalProject.BL
                 throw;
             }
         }
+
+        public IEnumerable<Message> GetAllMessages()
+        {
+            return messagesCRUD.GetAllMessages();
+        }
     }
 }
