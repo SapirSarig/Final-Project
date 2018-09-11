@@ -1,0 +1,63 @@
+.messageTextArea{
+    height: 150px;
+    width: 700px;
+    font-size: 20px;
+
+}
+
+.historyTitle, .newMessageLabel{
+    font-size: 25px;
+}
+
+.messageFromHistory{
+    border: 1px solid black;
+    border-radius: 5px;
+    padding: 10px 20px;
+    font-size: 20px;
+}
+
+.messageTitles{
+    font-size: 20px;
+    text-decoration: underline;
+    font-weight: bold;
+
+}
+
+.sendBtn{
+    border: 0.1em solid #FFFFFF;
+    -webkit-box-sizing: content-box;
+    box-sizing: content-box;
+    text-decoration: none;
+    text-transform: uppercase;
+    font-family: 'Roboto',sans-serif;
+    font-weight: 400;
+    color: #FFFFFF;
+    text-align: center;
+    -webkit-transition: all 0.15s;
+    -o-transition: all 0.15s;
+    transition: all 0.15s;
+    cursor: pointer;
+    border-radius: 5px;
+    padding: 0 20px;
+    background-color: Transparent;
+    background-repeat:no-repeat;
+    overflow: hidden;
+    outline:none;
+    height: 40px;
+    width: 100px;
+}
+
+.CheckBox{
+    width: 20px;
+    height: 20px;
+}
+
+.title{
+    font-size: 20px;
+}
+
+.sepratorLine{
+    padding-top: 20px;
+    margin-bottom: 20px;
+    border-bottom: 1px solid white;
+}
