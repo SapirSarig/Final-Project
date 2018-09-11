@@ -19,5 +19,6 @@ namespace FinalProject.Entities
         public string WebsiteLink { get; set; }
 
         public virtual ICollection<Auction> Auctions { get; set; }
+
     }
 }

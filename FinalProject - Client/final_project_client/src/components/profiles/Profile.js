@@ -11,15 +11,23 @@ class Profile extends Component {
         this.handleButtonOkClicked = this.handleButtonOkClicked.bind(this);
         this.userService = new UserService();
         this.state = {
-            name: "",
-            interests: [],
-            description: "",
-            dateOfBirth: "",
-            socialNetworks: [],
-            reviews: [],
-            review: "",
-            type: "Social Influencer"
+            user:{}
+            // name: "",
+            // interests: [],
+            // description: "",
+            // dateOfBirth: "",
+            // socialNetworks: [],
+            // reviews: [],
+            // type: "Social Influencer"
         }
+    }
+
+    componentDidMount() {
+        const {user} = this.props;
+
+        this.setState({
+            user
+        })
     }
 
     handleInputChange(event) {
@@ -33,60 +41,50 @@ class Profile extends Component {
         });
     }
 
-    componentDidMount() {
-        // this.userService.getUser().then(req => {
-        //     console.log(req);
-        //     if (req) {
-        //         this.setState({
-        //             name: req.Name,
-        //             interests: req.Interests,
-        //             description: req.Description,
-        //             dateOfBirth: req.DateOfBirth,
-        //             socialNetworks: req.SocialNetworks
-        //         });
-        //     }
-        // });
-    }
     handleButtonOkClicked(event) {
-        let { reviews } = this.state;
+        const {user} = this.state;
         const target = event.target;
         const value = target.value;
         const name = target.name;
-
-        value && reviews.push(value);
+        user.Reviews.push(value)
+        //change to email
+        //this.userService.AddReviewToUser(id, value);
         this.setState({
-            reviews
+            user
         });
+
     }
 
     render() {
-        const { review, type, name, interests, description, reviews, dateOfBirth, socialNetworks } = this.state;
+        //const { review, type, name, interests, description, reviews, dateOfBirth, socialNetworks } = this.state;
+        const {user} = this.state;
         return (
-            <div className="Container">
+            <div>
+                {user && (<div className="Container">
                 <span> Image: </span>
                 <img src={require('../../images/AddAnImage.png')} className="logo" />
 
                 <span > Name </span>
-                <span> {name} </span>
+                <span> {user.name} </span>
 
                 <span> Interests </span>
-                <span> {interests} </span>
+                <span> {user.interests} </span>
 
                 <span> Description </span>
-                <span> {description} </span>
+                <span> {user.description} </span>
 
-                {type === "Social Influencer" ?
-                    <StarProfile dateOfBirth={dateOfBirth} socialNetworks={socialNetworks} /> : null}
+                {user.type === "Social Influencer" ?
+                    <StarProfile dateOfBirth={user.dateOfBirth} socialNetworks={user.socialNetworks} /> : null}
 
                 <span> Reviews </span>
-                <span> {reviews.map(function (name, index) {
+                <span> {user.Reviews && user.Reviews.map((name, index) => {
                     return <span key={index}>{name} <br /> </span>;
                 })} </span>
 
                 <span> Write A Review </span>
-                <input id="review" type="text" name="review" value={review} onChange={this.handleInputChange} />
+                <input id="review" type="text" name="review"/>
                 <button onClick={this.handleButtonOkClicked} value={!!document.getElementById("review")? document.getElementById("review").value : null  }> OK </button>
-
+                </div>)}
             </div>
         );
     }

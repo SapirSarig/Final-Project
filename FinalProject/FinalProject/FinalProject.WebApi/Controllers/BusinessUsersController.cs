@@ -32,5 +32,13 @@ namespace FinalProject.WebApi.Controllers
         {
             return Ok();
         }
+
+        //Is the CRUD ok??
+        [Route("GetAllAuctions")]
+        public IEnumerable<Auction> GetAllAuctions(int userId)
+        {
+            return businessUsersBL.GetAllAuctions(userId);
+        }
     }
 }
+

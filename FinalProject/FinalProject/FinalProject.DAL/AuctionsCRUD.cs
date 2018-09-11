@@ -25,7 +25,26 @@ namespace FinalProject.DAL
         public IEnumerable<Auction> GetAuctions()
         {
             return context.Auctions.ToList();
-            
+        }
+
+        public IEnumerable<Offer> GetAllOffers(int auctionId)
+        {
+            Auction auction = context.Auctions.FirstOrDefault(a => a.Id == auctionId);
+            if (auction == null)
+            {
+                return null;
+            }
+            else
+            {
+                return auction.Offers;               
+            }
+        }
+
+        public void DeleteAuction(int id)
+        {
+            Auction auction = context.Auctions.FirstOrDefault(a => a.Id == id);
+            context.Auctions.Remove(auction);
+            context.SaveChanges();
         }
     }
 }

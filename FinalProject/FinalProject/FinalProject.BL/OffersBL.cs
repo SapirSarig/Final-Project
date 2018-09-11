@@ -44,5 +44,19 @@ namespace FinalProject.BL
         {
             return offersCRUD.GetOffers();
         }
+
+        public bool DeleteOffer(int id)
+        {
+            try
+            {
+                offersCRUD.DeleteOffer(id);
+                return true;
+            }
+            catch (Exception e)
+            {
+                return false;
+                throw;
+            }
+        }
     }
 }
