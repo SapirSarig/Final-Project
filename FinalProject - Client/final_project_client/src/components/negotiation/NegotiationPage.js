@@ -14,30 +14,46 @@ class NegotiationPage extends Component {
         super(props);
         this.NegotiationService = new NegotiationService();
         this.addNewMessageToList = this.addNewMessageToList.bind(this);
-
+        this.getNegotiationContent = this.getNegotiationContent.bind(this);
         this.state = {
-            messages:[]
+            messages: []
         }
     }
+    componentDidMount() {
+        this.getNegotiationContent();
+        setInterval(this.getNegotiationContent, 10000);
+    }
 
-    addNewMessageToList(message) {
+    getNegotiationContent() {
+        //const { chatId } = this.props;
+        const chatId = 1;
+        this.NegotiationService.getMessagesByOfferId(chatId).then(messages => {
+            this.setState({ messages });
+        })
+    }
+
+    addNewMessageToList(Text) {
         const newList = this.state.messages;
-        const from = "Any user";
-        const dateAndTime = new Date().toLocaleString();
+        //const From = this.props.user.Name;
+        const From = "golan"
+        const TimeSent = new Date().toLocaleString();
         const messageToAdd = {
-            from, dateAndTime , message
+            From,
+            TimeSent,
+            Text,
+            ChatId: 1
         }
-        newList.push(messageToAdd);
-        this.setState({ messages: newList });
+
+        this.NegotiationService.addMessage(messageToAdd);
     }
 
     render() {
-        const {messages} = this.state;
+        const { messages } = this.state;
         return (
             <div>
-                <Status/>
-                <NewMessageArea addNewMessageToList = {this.addNewMessageToList}/>
-                <br/>
+                <Status />
+                <NewMessageArea addNewMessageToList={this.addNewMessageToList} />
+                <br />
                 <History messages={messages} />
             </div>
         );

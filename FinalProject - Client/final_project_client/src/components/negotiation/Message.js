@@ -14,10 +14,10 @@ class Message extends Component {
         return (
             <div>
                 <div className="messageFromHistory">
-                    <div> <span className="messageTitles"> From: </span> {message.from}</div>
-                    <div> <span className="messageTitles"> At: </span> {message.dateAndTime} </div>
+                    <div> <span className="messageTitles"> From: </span> {message.From}</div>
+                    <div> <span className="messageTitles"> At: </span> {message.TimeSent} </div>
                     <div className="messageTitles"> Message: </div>
-                    {message.message.split("\n").map(function (item) {
+                    {message.Text.split("\n").map(function (item) {
                         return (
                             <span>
                                 {item}

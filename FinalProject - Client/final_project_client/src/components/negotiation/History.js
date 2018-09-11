@@ -16,7 +16,7 @@ class History extends Component {
             <div>
                 <div className="historyTitle">History: </div>
                 <br />
-                {messages.map((message, index) =>
+                {messages && messages.length>0 && messages.map((message, index) =>
                     <Message key={index} message={message} />
                 )}
             </div>

@@ -3,7 +3,7 @@ export default class NegotiationService {
 
     addMessage(message) {
         var msg = JSON.stringify(message);
-        return fetch(`${this.host}/api/Negotiations`, {
+        return fetch(`${this.host}/api/Messages`, {
           method: "POST",
           body: msg,
           headers: {
@@ -19,4 +19,18 @@ export default class NegotiationService {
           })
       }
 
+      getMessagesByOfferId(id){
+        return fetch(`${this.host}/api/Messages/?chatId=${id}`, {
+          method: "GET",
+          headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json"
+          }
+        })
+          .then((res) => {
+            return res.json();
+          }).catch((err)=> {
+            console.log(err);
+          })
+      }
 }
