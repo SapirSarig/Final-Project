@@ -47,8 +47,8 @@ class Profile extends Component {
         const value = target.value;
         const name = target.name;
         user.Reviews.push(value)
-        //change to email
-        //this.userService.AddReviewToUser(id, value);
+
+        //this.userService.AddReviewToUser(user.Id, value);
         this.setState({
             user
         });
