@@ -30,19 +30,19 @@ class Home extends Component {
 
                     <Link className="starOffer" to="/starOffer">
                         <button className="starOfferBtn">
-                        starOffer
+                            starOffer
                         </button>
                     </Link>
 
                     <Link className="allOffers" to="/allOffers">
                         <button className="allOffersBtn">
-                        allOffers
+                            allOffers
                         </button>
                     </Link>
 
                     <Link className="myAuctions" to="/myAuctions">
                         <button className="myAuctions">
-                        myAuctions
+                            myAuctions
                         </button>
                     </Link>
 
@@ -57,6 +57,13 @@ class Home extends Component {
                             influencerHomePage
                     </button>
                     </Link>
+
+                    <Link className="negotiationPage" to="/NegotiationPage">
+                        <button>
+                            NegotiationPage
+                        </button>
+                    </Link>
+
                 </div>
             </div>
 
