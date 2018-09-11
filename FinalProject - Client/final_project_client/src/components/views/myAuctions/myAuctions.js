@@ -24,19 +24,20 @@ class myAuctions extends Component {
     constructor(props){
         super(props);
 
-        this.auctions = [{
-            nameOfAuction: 'Tal',
-        }, {
-            nameOfAuction: 'Tal2',
-        },{
-            nameOfAuction: 'Tal3',
-        },{
-            nameOfAuction: 'Tal4',
-        }];
+        // this.auctions = [{
+        //     nameOfAuction: 'Tal',
+        // }, {
+        //     nameOfAuction: 'Tal2',
+        // },{
+        //     nameOfAuction: 'Tal3',
+        // },{
+        //     nameOfAuction: 'Tal4',
+        // }];
     }
 
     render() {
-        const { classes } = this.props;
+        const { classes, location, auctions } = this.props;
+        const theAuctions  = (location && location.state.auctions) || auctions;
 
         return (
             <form className={classes.container} noValidate autoComplete="off">
@@ -46,7 +47,7 @@ class myAuctions extends Component {
                     </div>
                 </div>
                 <div className="auctionsWrapper">
-                    {this.auctions.map((auction) =>
+                    {theAuctions && theAuctions.map((auction) =>
                         <div className="myAuctionWrapper">
                             <TextField
                                 id="nameAuction"

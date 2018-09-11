@@ -26,6 +26,14 @@ class BusinessHomePage extends Component {
     render() {
         //const name = "Coca Cola";
         const { userInfo } = this.state;
+        const theAuctions = [{
+            nameOfAuction: 'Tal1'
+        }, {
+            nameOfAuction: 'Tal2'
+        }, {
+            nameOfAuction: 'Tal3'
+        }];
+
         return (
             <div className="businessHomePage">
                 <div className="TopPage">
@@ -34,9 +42,9 @@ class BusinessHomePage extends Component {
                 <div className="LeftPage">
                     {/* We need to add "auctions" when user is created */}
                     <HotAuctions auctions={userInfo.auctions} />
-                    <Link className="myAuctions" to="/myAuctions">
+                    <Link className="myAuctions" to={{pathname:"/myAuctions", state:{auctions: theAuctions}}}>
                         <button className="myAuctions">
-                        myAuctions
+                            myAuctions
                         </button>
                     </Link>
                 </div>
