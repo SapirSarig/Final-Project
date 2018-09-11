@@ -45,11 +45,13 @@
     <Compile Include="AdvertisingForm.cs" />
     <Compile Include="Auction.cs" />
     <Compile Include="BusinessUser.cs" />
+    <Compile Include="Chat.cs" />
     <Compile Include="Enums\AdvertisingFormType.cs" />
     <Compile Include="Enums\InterestType.cs" />
     <Compile Include="Enums\SocialNetworkType.cs" />
     <Compile Include="InfluencerUser.cs" />
     <Compile Include="Interest.cs" />
+    <Compile Include="Message.cs" />
     <Compile Include="Modals\LoginModal.cs" />
     <Compile Include="Offer.cs" />
     <Compile Include="ProductScope.cs" />
@@ -58,6 +60,7 @@
     <Compile Include="Review.cs" />
     <Compile Include="SocialNetwork.cs" />
     <Compile Include="User.cs" />
+    <Compile Include="UserChat.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

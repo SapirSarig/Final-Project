@@ -35,7 +35,7 @@ namespace FinalProject.WebApi.Controllers
         }
 
         [HttpPatch]
-        public IHttpActionResult UpdateOffer(Offer user)
+        public IHttpActionResult UpdateOffer(Offer offer)
         {
             return Ok();
         }
@@ -43,7 +43,12 @@ namespace FinalProject.WebApi.Controllers
         [HttpDelete]
         public IHttpActionResult DeleteOffer(int id)
         {
-            return Ok();
+            bool isDeleted = offersBL.DeleteOffer(id);
+            if (isDeleted)
+            {
+                return Ok();
+            }
+            return NotFound();
         }
 
         [HttpGet]

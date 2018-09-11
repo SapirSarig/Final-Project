@@ -20,5 +20,6 @@ namespace FinalProject.Entities
         public virtual ICollection<Offer> Offers { get; set; }
 
         public virtual ICollection<SocialNetwork> SocialNetworks { get; set; }
+
     }
 }

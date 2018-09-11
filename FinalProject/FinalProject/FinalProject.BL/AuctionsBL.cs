@@ -49,5 +49,19 @@ namespace FinalProject.BL
         {
             return auctionsCRUD.GetAllOffers(auctionId);
         }
+
+        public bool DeleteAuction(int id)
+        {
+            try
+            {
+                auctionsCRUD.DeleteAuction(id);
+                return true;
+            }
+            catch (Exception e)
+            {
+                return false;
+                throw;
+            }
+        }
     }
 }

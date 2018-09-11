@@ -43,7 +43,12 @@ namespace FinalProject.WebApi.Controllers
         [HttpDelete]
         public IHttpActionResult DeleteAuction(int id)
         {
-            return Ok();
+            bool isDeleted = auctionsBL.DeleteAuction(id);
+            if (isDeleted)
+            {
+                return Ok();
+            }
+            return NotFound();
         }
 
         [HttpGet]

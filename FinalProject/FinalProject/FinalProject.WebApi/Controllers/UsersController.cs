@@ -23,17 +23,31 @@ namespace FinalProject.WebApi.Controllers
             return Ok(user);
         }
 
-        [HttpPatch]
-        public IHttpActionResult UpdateUser(User user)
-        {
-            return Ok();
-        }
+        ////???
+        //[HttpPatch]
+        //public IHttpActionResult UpdateUser(User user)
+        //{
+        //    User UpdatedUser = usersBL.UpdateUser(user);
+        //    return Ok(user);
+        //}
+
+        //[HttpPost]
+        //public IHttpActionResult UpdateUser([FromBody]User user)
+        //{
+        //    User UpdatedUser = usersBL.UpdateUser(user);
+        //    return Ok(user);
+        //}
 
         //how to delete from db??
         [HttpDelete]
         public IHttpActionResult DeleteUser(int id)
         {
-            return Ok();
+            bool isDeleted = usersBL.DeleteUser(id);
+            if (isDeleted)
+            {
+                return Ok();
+            }
+            return NotFound();
         }
 
         [HttpGet]

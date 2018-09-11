@@ -26,5 +26,12 @@ namespace FinalProject.DAL
         {
             return context.Offers.ToList();
         }
+
+        public void DeleteOffer(int id)
+        {
+            Offer offer = context.Offers.FirstOrDefault(o => o.Id == id);
+            context.Offers.Remove(offer);
+            context.SaveChanges();
+        }
     }
 }

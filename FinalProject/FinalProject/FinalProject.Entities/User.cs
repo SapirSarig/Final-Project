@@ -29,9 +29,13 @@ namespace FinalProject.Entities
 
         public string Description { get; set; }
 
+        public string Type { get; set; }
+
         public virtual ICollection<Interest> Interests { get; set; }
 
         public virtual ICollection<Review> Reviews { get; set; }
+
+        public virtual ICollection<UserChat> UsersChats { get; set; }
 
     }
 }

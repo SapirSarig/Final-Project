@@ -39,5 +39,12 @@ namespace FinalProject.DAL
                 return auction.Offers;               
             }
         }
+
+        public void DeleteAuction(int id)
+        {
+            Auction auction = context.Auctions.FirstOrDefault(a => a.Id == id);
+            context.Auctions.Remove(auction);
+            context.SaveChanges();
+        }
     }
 }

@@ -14,7 +14,8 @@ namespace FinalProject.BL
 
         public bool CreateInfluencerUser(InfluencerUser user)
         {
-            if(ValidationUtil.ValidateInfluenceUser(user))
+            //Unvalid - if(ValidationUtil.ValidateInfluenceUser(user))
+            if (true)
             {
                 try
                 {

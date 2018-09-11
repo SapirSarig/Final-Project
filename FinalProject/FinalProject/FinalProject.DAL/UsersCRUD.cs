@@ -83,5 +83,40 @@ namespace FinalProject.DAL
                 return (user as BusinessUser).Auctions;
             }
         }
+
+        public User UpdateUser(User user)
+        {
+            User CurrUser = context.Users.FirstOrDefault(u => u.Id == user.Id);
+            if (CurrUser == null)
+            {
+                return null;
+            }
+            else
+            {
+                //??
+                context.Users.Remove(CurrUser);
+                context.Users.Add(user);
+                context.SaveChanges();
+                return user;
+            }
+
+            // foreach (var airplaneIndex in context.Airplanes.ToList())
+            //{
+            //    if (airplaneIndex.Id == airplane.Id)
+            //    {
+            //        context.Airplanes.Remove(airplaneIndex);
+            //        context.Airplanes.Add(airplane);
+            //        context.SaveChanges();
+            //        break;
+            //    }
+            //}
+        }
+
+        public void DeleteUser(int id)
+        {
+            User user = context.Users.FirstOrDefault(u => u.Id == id);
+            context.Users.Remove(user);
+            context.SaveChanges();
+        }
     }
 }

@@ -109,7 +109,8 @@ class Register extends Component {
             "description": description,
             "type": type,
             "Picture": chooseTypeState.src,
-            "Reviews" :[]
+            "Reviews" :[],
+            "Chats" :[]
         };
         if (type === "Social Influencer") {
             user["dateOfBirth"] = chooseTypeState.dateOfBirth;
