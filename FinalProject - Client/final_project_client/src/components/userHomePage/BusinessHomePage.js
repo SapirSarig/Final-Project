@@ -34,7 +34,11 @@ class BusinessHomePage extends Component {
                 <div className="LeftPage">
                     {/* We need to add "auctions" when user is created */}
                     <HotAuctions auctions={userInfo.auctions} />
-                    <button> All Auctions </button>
+                    <Link className="myAuctions" to="/myAuctions">
+                        <button className="myAuctions">
+                        myAuctions
+                        </button>
+                    </Link>
                 </div>
                 <div className="RightPage">
                     {/* We need to add "offers" when user is created */}

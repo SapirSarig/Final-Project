@@ -110,7 +110,9 @@
     <Compile Include="Controllers\AuctionsController.cs" />
     <Compile Include="Controllers\AuthenticationController.cs" />
     <Compile Include="Controllers\BusinessUsersController.cs" />
+    <Compile Include="Controllers\ChatsController.cs" />
     <Compile Include="Controllers\InfluencerUsersController.cs" />
+    <Compile Include="Controllers\MessagesController.cs" />
     <Compile Include="Controllers\OffersController.cs" />
     <Compile Include="Controllers\UsersController.cs" />
     <Compile Include="Global.asax.cs">

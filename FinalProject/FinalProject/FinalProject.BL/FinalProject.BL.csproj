@@ -44,6 +44,8 @@
     <Compile Include="AuctionsBL.cs" />
     <Compile Include="AuthenticationBL.cs" />
     <Compile Include="BusinessUsersBL.cs" />
+    <Compile Include="ChatBL.cs" />
+    <Compile Include="MessagesBL.cs" />
     <Compile Include="OffersBL.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="InfluencerUsersBL.cs" />

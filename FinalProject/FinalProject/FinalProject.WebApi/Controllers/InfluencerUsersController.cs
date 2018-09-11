@@ -32,5 +32,13 @@ namespace FinalProject.WebApi.Controllers
         {
             return Ok();
         }
+
+
+        //Is the CRUD ok??
+        [Route("GetAllOffers")]
+        public IEnumerable<Offer> GetAllOffers(int userId)
+        {
+            return influencerUsersBL.GetAllOffers(userId);
+        }
     }
 }
