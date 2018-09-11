@@ -15,7 +15,7 @@ namespace FinalProject.Entities
 
         public string From { get; set; }
 
-        public string To { get; set; }
+        //public string To { get; set; }
 
         public DateTime TimeSent { get; set; }
 

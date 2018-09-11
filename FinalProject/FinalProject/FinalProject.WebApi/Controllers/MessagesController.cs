@@ -24,9 +24,10 @@ namespace FinalProject.WebApi.Controllers
         }
 
         [HttpGet]
-        public IEnumerable<Message> GetAllMessages()
+        public IHttpActionResult GetMessagesByOfferId(int chatId)
         {
-            return messagesBL.GetAllMessages();
+            IEnumerable<Message> messages = messagesBL.GetMessagesByOfferId(chatId);
+            return Ok(messages);
         }
     }
 }

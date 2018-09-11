@@ -16,7 +16,8 @@ class NewMessageArea extends Component {
 
     handleSubmit(event) {
         //const { ChatId, User } = this.props;
-        ChatId = 1;
+        const ChatId = 1;
+        //const { negotiationId, userId } = this.props;
         this.props.addNewMessageToList(this.state.message);
         this.setState({ message: '' });
     }

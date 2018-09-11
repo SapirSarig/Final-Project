@@ -26,9 +26,9 @@ namespace FinalProject.BL
             }
         }
 
-        public IEnumerable<Message> GetAllMessages()
+        public IEnumerable<Message> GetMessagesByOfferId(int chatId)
         {
-            return messagesCRUD.GetAllMessages();
+            return messagesCRUD.GetMessagesByOfferId(chatId);
         }
     }
 }
