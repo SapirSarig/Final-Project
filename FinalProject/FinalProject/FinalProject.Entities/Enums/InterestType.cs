@@ -9,9 +9,13 @@ namespace FinalProject.Entities.Enums
     public enum InterestType
     {
         Sport,
-        Clothing,
+        Style,
         Food,
-        Music
+        Music,
+        Technology,
+        Pets,
+        Travel,
+        Other
         /////Add more...
     }
 }
