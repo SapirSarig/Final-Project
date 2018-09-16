@@ -13,14 +13,11 @@ import Profile from './components/profiles/Profile';
 import starOffer from './components/views/starOffer/starOffer';
 import allOffers from './components/views/allOffers/allOffers';
 import myAuctions from './components/views/myAuctions/myAuctions';
-<<<<<<< HEAD
 import AllAuctions from './components/allAuctions/AllAuctions';
 import AllUsers from './components/allUsers/AllUsers';
 
 
-=======
 import NegotiationPage from './components/negotiation/NegotiationPage';
->>>>>>> ebc83428561f35963dc38f21a1811c7391ee54a1
 
 class App extends Component {
 
@@ -41,12 +38,9 @@ class App extends Component {
             <Route path="/profile" component={Profile} />
             <Route path = "/InfluencerHomePage" component ={InfluencerHomePage}/>
             <Route path="/businessHomePage" component={BusinessHomePage} />
-<<<<<<< HEAD
             <Route path="/allAuctions" component={AllAuctions} />            
             <Route path="/allUsers" component={AllUsers} />       
-=======
             <Route path = "/NegotiationPage" component = {NegotiationPage}/>
->>>>>>> ebc83428561f35963dc38f21a1811c7391ee54a1
 
           </div>
         </Router>
