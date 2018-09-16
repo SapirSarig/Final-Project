@@ -8,18 +8,7 @@ class offersPerAuctionPage extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            offers: [
-                // {
-                //     by: "eli",
-                //     status: "pandding",
-                //     Description: "no cola no buy"
-                // },
-                // {
-                //     by: "ron",
-                //     status: "accepted",
-                //     Description: "movie with cola"
-                // }
-            ]
+            offers: []
         }
         this.getOffersPerAuction = this.getOffersPerAuction.bind(this);
         this.OfferService = new OfferService();
@@ -54,4 +43,5 @@ class offersPerAuctionPage extends Component {
         );
     }
 }
+
 export default offersPerAuctionPage;
