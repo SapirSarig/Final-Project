@@ -4,7 +4,6 @@ import { Link } from 'react-router-dom';
 import './homePages.css';
 
 class HomeHeader extends Component {
-
     render() {
         const { name,picture } = this.props;
         return (

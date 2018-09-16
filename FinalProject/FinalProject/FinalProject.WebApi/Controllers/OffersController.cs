@@ -15,6 +15,7 @@ namespace FinalProject.WebApi.Controllers
     public class OffersController : ApiController
     {
         private OffersBL offersBL = new OffersBL();
+        private AuctionsBL auctionBl = new AuctionsBL();
 
         [HttpPost]
         public IHttpActionResult CreateOffer(Offer offer)
@@ -55,6 +56,12 @@ namespace FinalProject.WebApi.Controllers
         public IEnumerable<Offer> GetAllOffers()
         {
             return offersBL.GetOffers();
+        }
+
+        [Route("GetOffersByAuctionId")]
+        public IEnumerable<Offer> GetOffersByAuctionId(int auctionId)
+        {
+            return auctionBl.GetOffersByAuctionId(auctionId);
         }
     }
 }

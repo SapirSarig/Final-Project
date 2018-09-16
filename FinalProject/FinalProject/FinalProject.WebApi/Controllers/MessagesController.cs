@@ -1,5 +1,6 @@
 ﻿using FinalProject.BL;
 using FinalProject.Entities;
+using System;
 using System.Collections.Generic;
 using System.Web.Http;
 using System.Web.Http.Cors;
@@ -15,6 +16,8 @@ namespace FinalProject.WebApi.Controllers
         [HttpPost]
         public IHttpActionResult AddMessage([FromBody]Message message)
         {
+            message.TimeSent = DateTime.Now;
+
             bool isAdded = messagesBL.AddMessage(message);
             if (isAdded)
             {

@@ -18,6 +18,7 @@ import AllUsers from './components/allUsers/AllUsers';
 
 
 import NegotiationPage from './components/negotiation/NegotiationPage';
+import offersPerAuctionPage from './components/offers/offersPerAuctionPage';
 
 class App extends Component {
 
@@ -41,7 +42,7 @@ class App extends Component {
             <Route path="/allAuctions" component={AllAuctions} />            
             <Route path="/allUsers" component={AllUsers} />       
             <Route path = "/NegotiationPage" component = {NegotiationPage}/>
-
+            <Route path = "/offersPerAuctionPage" component = {offersPerAuctionPage}/>
           </div>
         </Router>
       </div>
