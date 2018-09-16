@@ -14,6 +14,7 @@ import starOffer from './components/views/starOffer/starOffer';
 import allOffers from './components/views/allOffers/allOffers';
 import myAuctions from './components/views/myAuctions/myAuctions';
 import NegotiationPage from './components/negotiation/NegotiationPage';
+import offersPerAuctionPage from './components/offers/offersPerAuctionPage';
 
 class App extends Component {
 
@@ -35,7 +36,7 @@ class App extends Component {
             <Route path = "/InfluencerHomePage" component ={InfluencerHomePage}/>
             <Route path="/businessHomePage" component={BusinessHomePage} />
             <Route path = "/NegotiationPage" component = {NegotiationPage}/>
-
+            <Route path = "/offersPerAuctionPage" component = {offersPerAuctionPage}/>
           </div>
         </Router>
       </div>

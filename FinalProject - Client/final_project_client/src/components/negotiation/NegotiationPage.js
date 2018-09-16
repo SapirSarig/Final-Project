@@ -36,7 +36,7 @@ class NegotiationPage extends Component {
         const newList = this.state.messages;
         //const From = this.props.user.Name;
         const From = "golan"
-        const TimeSent = new Date().toLocaleString();
+        const TimeSent = null;
         const messageToAdd = {
             From,
             TimeSent,

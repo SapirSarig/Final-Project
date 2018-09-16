@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import './offerInList.css';
 
 class offersInList extends Component {
     UserService
@@ -8,26 +9,28 @@ class offersInList extends Component {
         this.state = {
             from: ""
         }
-        this.UserService = new UserService();
+        //this.UserService = new UserService();
     }
 
     componentDidMount()
     {
         const { offer } = this.props;
-        getUserNameById(offer.UserId);
+        //getUserNameById(offer.UserId);
     }
 
-    getUserNameById(id)
-    {
-        this.UserService.getUserById(id).then(user => {
-            this.setState({ from = user.Name });
-        })
-    }
+    // getUserNameById(id)
+    // {
+    //     this.UserService.getUserById(id).then(user => {
+    //         this.setState({ from = user.Name });
+    //     })
+    // }
 
 
     render() {
         const { offer } = this.props;
-        const { from } = this.state;
+        //const { from } = this.state;
+        const from = offer.by;
+
         return (
             <div className="OffersContainer">
                 <div> <span className="OffersAuthor"> From: </span> {from}</div>

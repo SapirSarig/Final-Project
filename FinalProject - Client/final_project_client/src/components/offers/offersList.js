@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import offerInList from './offerInList';
+import OfferInList from './offerInList';
 
 class offersList extends Component {
     constructor(props) {
@@ -12,8 +12,8 @@ class offersList extends Component {
 
         return (
             offers && offers.length > 0 ? <div className="offersList">
-                {offers.map((offer) =>
-                    <offerInList offer={offer} />)
+                {offers.map((offer,index) =>
+                    <OfferInList key ={index} offer={offer} />)
                 }
             </div> : <div>No Offers Yet!</div>
         );
