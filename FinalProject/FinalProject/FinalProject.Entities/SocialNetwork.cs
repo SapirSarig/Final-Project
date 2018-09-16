@@ -15,7 +15,7 @@ namespace FinalProject.Entities
         [Key]
         public int Id { get; set; }
 
-        public SocialNetworkType value { get; set; }
+        public SocialNetworkType Value { get; set; }
 
         public string LinkToProfile { get; set; }
 

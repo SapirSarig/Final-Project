@@ -74,7 +74,7 @@ class InfluencerRegister extends Component {
                     }
                     else {
                         let obj = {
-                            "Name": socialNetworkName,
+                            "Value": socialNetworkName,
                             LinkToProfile: value
                         };
                         socialNetworks.push(obj);
@@ -94,7 +94,7 @@ class InfluencerRegister extends Component {
     }
 
     checkValidation(name, value) {
-        const { errors, LinksToProfiles } = this.state;
+        const { errors} = this.state;
         let errorMessage;
         if (name.startsWith("LinkTo")) {
             errorMessage = RegisterService.linkValidation(value);

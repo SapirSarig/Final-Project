@@ -49,7 +49,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AuctionsCRUD.cs" />
+    <Compile Include="ChatsCRUD.cs" />
     <Compile Include="FinalProjectContext.cs" />
+    <Compile Include="MessagesCRUD.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="OffersCRUD.cs" />
     <Compile Include="UsersCRUD.cs" />

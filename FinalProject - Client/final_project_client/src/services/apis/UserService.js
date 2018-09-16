@@ -15,6 +15,21 @@ export default class UserService {
         return res.json();
       })
   }
+  getUserByEmail(email) {
+    //var data = new FormData();
+    //data.append("json", JSON.stringify(user));
+    return fetch(`${this.host}/api/Users/GetUserByEmail?email=${email}`, {
+      method: "GET",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json"
+      }
+    })
+      .then((res) => {
+        return res.json();
+      })
+  }
+
   createBusinessUser(user) {
     //var data = new FormData();
     //data.append("json", JSON.stringify(user));
@@ -106,4 +121,27 @@ export default class UserService {
         console.log(err);
       })
   }
+
+  //check
+  AddReviewToUser(userId, review) {
+    //var data = new FormData();
+    //data.append("json", JSON.stringify(user));
+    var data = JSON.stringify(userId,review);
+    return fetch(`${this.host}api/Users/AddReview?userId=${userId}`, 
+    {
+      method: "POST",
+      body: data,
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json"
+      }
+    })
+      .then((res) => {
+        return res.json();
+      })
+      .catch((err) => {
+        console.log(err);
+      })
+  }
+  
 }
