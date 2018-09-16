@@ -27,11 +27,11 @@ class BusinessHomePage extends Component {
         //const name = "Coca Cola";
         const { userInfo } = this.state;
         const theAuctions = [{
-            nameOfAuction: 'Tal1'
+            Title: 'Tal0'
         }, {
-            nameOfAuction: 'Tal2'
+            Title: 'Tal1'
         }, {
-            nameOfAuction: 'Tal3'
+            Title: 'Tal2'
         }];
 
         return (

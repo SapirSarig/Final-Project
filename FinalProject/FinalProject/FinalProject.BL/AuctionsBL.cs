@@ -45,6 +45,15 @@ namespace FinalProject.BL
             return auctionsCRUD.GetAuctions();
         }
 
+        public IEnumerable<Auction> GetFilteredAuctions(string searchStr)
+        {
+            if (searchStr == null || searchStr == "")
+                return GetAuctions();            
+            else
+                return auctionsCRUD.GetFilteredAuctions(searchStr);
+        }
+        
+
         public IEnumerable<Offer> GetAllOffers(int auctionId)
         {
             return auctionsCRUD.GetAllOffers(auctionId);

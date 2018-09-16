@@ -27,6 +27,17 @@ namespace FinalProject.DAL
             return context.Auctions.ToList();
         }
 
+        public IEnumerable<Auction> GetFilteredAuctions(string searchStr)
+        {
+            // Query for all Auctions that their Title contains searchStr
+            IQueryable<Auction> filteredAuctions =  from auction in context.Auctions
+                                                    where auction.Title.Contains(searchStr)
+                                                    select auction;
+
+
+            return filteredAuctions.ToList();
+        }
+
         public IEnumerable<Offer> GetAllOffers(int auctionId)
         {
             Auction auction = context.Auctions.FirstOrDefault(a => a.Id == auctionId);

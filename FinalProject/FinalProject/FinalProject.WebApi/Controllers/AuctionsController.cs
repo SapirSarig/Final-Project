@@ -57,6 +57,12 @@ namespace FinalProject.WebApi.Controllers
             return auctionsBL.GetAuctions();
         }
 
+        [Route("FilteredAuctions")]
+        public IEnumerable<Auction> GetFilteredAuctions(string SearchStr)
+        {
+            return auctionsBL.GetFilteredAuctions(SearchStr);
+        }
+
         [Route("GetAllOffers")]
         public IEnumerable<Offer> GetAllOffers(int AuctionId)
         {

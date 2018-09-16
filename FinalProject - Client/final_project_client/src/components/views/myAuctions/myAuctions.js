@@ -52,13 +52,14 @@ class myAuctions extends Component {
                             <TextField
                                 id="nameAuction"
                                 label="Auction's name"
-                                defaultValue= {auction.nameOfAuction}
+                                defaultValue= {auction.Title}
                                 className={classes.textField}
                                 margin="normal"
                                 InputProps={{
                                     readOnly: true,
                                 }}
                             />
+                            {console.log("inside", auction)}
                             <div className="btnWrapper">
                                 <div className="detailsContainer ">
                                     <div className="detailsBtn designBtn">

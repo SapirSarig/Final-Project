@@ -40,3 +40,17 @@ C:\Users\Admin\Documents\GitHub\Final-Project\FinalProject\FinalProject\FinalPro
 C:\Users\Admin\Documents\GitHub\Final-Project\FinalProject\FinalProject\FinalProject.BL\obj\Debug\FinalProject.BL.csproj.CopyComplete
 C:\Users\Admin\Documents\GitHub\Final-Project\FinalProject\FinalProject\FinalProject.BL\obj\Debug\FinalProject.BL.dll
 C:\Users\Admin\Documents\GitHub\Final-Project\FinalProject\FinalProject\FinalProject.BL\obj\Debug\FinalProject.BL.pdb
+C:\Users\Avi-Laptop\Documents\GitHub\Final-Project\FinalProject\FinalProject\FinalProject.BL\bin\Debug\FinalProject.BL.dll
+C:\Users\Avi-Laptop\Documents\GitHub\Final-Project\FinalProject\FinalProject\FinalProject.BL\bin\Debug\FinalProject.BL.pdb
+C:\Users\Avi-Laptop\Documents\GitHub\Final-Project\FinalProject\FinalProject\FinalProject.BL\bin\Debug\FinalProject.DAL.dll
+C:\Users\Avi-Laptop\Documents\GitHub\Final-Project\FinalProject\FinalProject\FinalProject.BL\bin\Debug\FinalProject.Entities.dll
+C:\Users\Avi-Laptop\Documents\GitHub\Final-Project\FinalProject\FinalProject\FinalProject.BL\bin\Debug\EntityFramework.dll
+C:\Users\Avi-Laptop\Documents\GitHub\Final-Project\FinalProject\FinalProject\FinalProject.BL\bin\Debug\FinalProject.DAL.pdb
+C:\Users\Avi-Laptop\Documents\GitHub\Final-Project\FinalProject\FinalProject\FinalProject.BL\bin\Debug\FinalProject.DAL.dll.config
+C:\Users\Avi-Laptop\Documents\GitHub\Final-Project\FinalProject\FinalProject\FinalProject.BL\bin\Debug\FinalProject.Entities.pdb
+C:\Users\Avi-Laptop\Documents\GitHub\Final-Project\FinalProject\FinalProject\FinalProject.BL\bin\Debug\EntityFramework.xml
+C:\Users\Avi-Laptop\Documents\GitHub\Final-Project\FinalProject\FinalProject\FinalProject.BL\obj\Debug\FinalProject.BL.csprojAssemblyReference.cache
+C:\Users\Avi-Laptop\Documents\GitHub\Final-Project\FinalProject\FinalProject\FinalProject.BL\obj\Debug\FinalProject.BL.csproj.CoreCompileInputs.cache
+C:\Users\Avi-Laptop\Documents\GitHub\Final-Project\FinalProject\FinalProject\FinalProject.BL\obj\Debug\FinalProject.BL.csproj.CopyComplete
+C:\Users\Avi-Laptop\Documents\GitHub\Final-Project\FinalProject\FinalProject\FinalProject.BL\obj\Debug\FinalProject.BL.dll
+C:\Users\Avi-Laptop\Documents\GitHub\Final-Project\FinalProject\FinalProject\FinalProject.BL\obj\Debug\FinalProject.BL.pdb

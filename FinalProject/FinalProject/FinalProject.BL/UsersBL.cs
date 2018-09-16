@@ -43,6 +43,22 @@ namespace FinalProject.BL
             }
         }
 
+        public IEnumerable<User> GetFilteredUsersByName(string searchStr)
+        {
+            try
+            {
+                if (searchStr == null || searchStr == "")
+                    return GetUsers();
+                else
+                    return userCRUD.GetFilteredUsersByName(searchStr);
+            }
+            catch (Exception e)
+            {
+                return null;
+                throw;
+            }
+        }
+
         public bool AddReview(int userId, Review review)
         {
             try
