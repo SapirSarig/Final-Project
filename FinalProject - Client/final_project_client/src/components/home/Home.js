@@ -64,6 +64,13 @@ class Home extends Component {
                         </button>
                     </Link>
 
+                    <Link className="offersPerAuctionPage" to="/offersPerAuctionPage">
+                        <button>
+                        offers Per Auction Page
+                        </button>
+                    </Link>
+                    
+
                 </div>
             </div>
 
