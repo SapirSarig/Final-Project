@@ -315,4 +315,7 @@ C:\Users\Admin\Documents\GitHub\Final-Project\FinalProject\FinalProject\FinalPro
 C:\Users\Admin\Documents\GitHub\Final-Project\FinalProject\FinalProject\FinalProject.WebApi\bin\FinalProject.DAL.pdb
 C:\Users\Admin\Documents\GitHub\Final-Project\FinalProject\FinalProject\FinalProject.WebApi\obj\Debug\FinalProject.WebApi.dll
 C:\Users\Admin\Documents\GitHub\Final-Project\FinalProject\FinalProject\FinalProject.WebApi\obj\Debug\FinalProject.WebApi.pdb
-C:\Users\Admin\Documents\GitHub\Final-Project\FinalProject\FinalProject\FinalProject.WebApi\obj\Debug\FinalProject.WebApi.csprojResolveAssemblyReference.cache
+C:\Users\Admin\Documents\GitHub\Final-Project\FinalProject\FinalProject\FinalProject.WebApi\bin\FinalProject.DAL.dll.config
+C:\Users\Admin\Documents\GitHub\Final-Project\FinalProject\FinalProject\FinalProject.WebApi\obj\Debug\FinalProject.WebApi.csprojAssemblyReference.cache
+C:\Users\Admin\Documents\GitHub\Final-Project\FinalProject\FinalProject\FinalProject.WebApi\obj\Debug\FinalProject.WebApi.csproj.CoreCompileInputs.cache
+C:\Users\Admin\Documents\GitHub\Final-Project\FinalProject\FinalProject\FinalProject.WebApi\obj\Debug\FinalProject.WebApi.csproj.CopyComplete
