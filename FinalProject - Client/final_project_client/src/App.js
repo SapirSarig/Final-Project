@@ -13,6 +13,10 @@ import Profile from './components/profiles/Profile';
 import starOffer from './components/views/starOffer/starOffer';
 import allOffers from './components/views/allOffers/allOffers';
 import myAuctions from './components/views/myAuctions/myAuctions';
+import AllAuctions from './components/allAuctions/AllAuctions';
+import AllUsers from './components/allUsers/AllUsers';
+
+
 import NegotiationPage from './components/negotiation/NegotiationPage';
 import offersPerAuctionPage from './components/offers/offersPerAuctionPage';
 
@@ -21,7 +25,7 @@ class App extends Component {
 
   render() {
     return (
-      <div className="container">
+      <div>
         <Router>
           <div className="routeContainer">
             <Route exact path="/" component={HomePage} />
@@ -35,6 +39,8 @@ class App extends Component {
             <Route path="/profile" component={Profile} />
             <Route path = "/InfluencerHomePage" component ={InfluencerHomePage}/>
             <Route path="/businessHomePage" component={BusinessHomePage} />
+            <Route path="/allAuctions" component={AllAuctions} />            
+            <Route path="/allUsers" component={AllUsers} />       
             <Route path = "/NegotiationPage" component = {NegotiationPage}/>
             <Route path = "/offersPerAuctionPage" component = {offersPerAuctionPage}/>
           </div>

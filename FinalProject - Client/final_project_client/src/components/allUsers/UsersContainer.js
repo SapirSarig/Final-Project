@@ -1,8 +1,9 @@
+
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import TextField from '@material-ui/core/TextField';
 import { withStyles } from '@material-ui/core/styles';
-import './myAuctions.css';
+import './UsersContainer.css';
 
 const styles = theme => ({
     container: {
@@ -19,47 +20,38 @@ const styles = theme => ({
     }
 });
 
-class myAuctions extends Component {
+class UsersContainer extends Component {
 
     constructor(props){
         super(props);
-
-        // this.auctions = [{
-        //     nameOfAuction: 'Tal',
-        // }, {
-        //     nameOfAuction: 'Tal2',
-        // },{
-        //     nameOfAuction: 'Tal3',
-        // },{
-        //     nameOfAuction: 'Tal4',
-        // }];
     }
 
     render() {
-        const { classes, location, auctions } = this.props;
-        const theAuctions  = (location && location.state.auctions) || auctions;
+        const { classes, location, users } = this.props;
+        const theUsers  = (location && location.state.users) || users;
 
         return (
             <form className={classes.container} noValidate autoComplete="off">
-                <div className="myAuctionsTitleContainer">
+                {/* <div className="myAuctionsTitleContainer">
                     <div className="myAuctionsTitle">
                         My Auctions
                     </div>
-                </div>
+                </div> */}
+                {console.log(theUsers)}
                 <div className="auctionsWrapper">
-                    {theAuctions && theAuctions.map((auction) =>
+                    {theUsers && theUsers.map((user) =>
                         <div className="myAuctionWrapper">
                             <TextField
                                 id="nameAuction"
                                 label="Auction's name"
-                                defaultValue= {auction.Title}
+                                defaultValue= {user.Name}
                                 className={classes.textField}
                                 margin="normal"
                                 InputProps={{
                                     readOnly: true,
                                 }}
                             />
-                            {console.log("inside", auction)}
+                            {console.log("inside", user)}
                             <div className="btnWrapper">
                                 <div className="detailsContainer ">
                                     <div className="detailsBtn designBtn">
@@ -68,7 +60,7 @@ class myAuctions extends Component {
                                 </div>
                                 <div className="offersContainer">
                                     <div className="OffersBtn designBtn">
-                                        Offers 
+                                        -Pic Here- 
                                     </div>
                                 </div>
                             </div>
@@ -80,8 +72,8 @@ class myAuctions extends Component {
     }
 }
 
-myAuctions.propTypes = {
+UsersContainer.propTypes = {
     classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles)(myAuctions);
+export default withStyles(styles)(UsersContainer);

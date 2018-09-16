@@ -43,6 +43,19 @@ namespace FinalProject.DAL
             return context.Users.FirstOrDefault(u => u.Email == email);
         }
 
+        public IEnumerable<User> GetFilteredUsersByName(string searchStr)
+        {
+            //return context.Users.FirstOrDefault(u => u.Email == email);
+
+            // Query for all Users that their name contains searchStr
+            IQueryable<User> filteredUsers = from user in context.Users
+                                             where user.Name.Contains(searchStr)
+                                             select user;
+
+
+            return filteredUsers.ToList();
+        }
+
         public bool AddReview(int userId, Review review)
         {
             User user = context.Users.FirstOrDefault(u => u.Id == userId);
