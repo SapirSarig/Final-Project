@@ -89,16 +89,17 @@ class Register extends Component {
                     interests.splice(index, index + 1);
                 }
             }
-            else {
-                this.setState({
-                    [name]: value
-                });
-                this.checkValidation(name, value);
-            }
-
-            console.log("******", this.state);
         }
+        else {
+            this.setState({
+                [name]: value
+            });
+            this.checkValidation(name, value);
+        }
+
+        console.log("******", this.state);
     }
+
 
     updateChooseTypeStateObject(obj) {
         console.log(obj);
@@ -207,11 +208,9 @@ class Register extends Component {
     // }
 
     render() {
+        const { children } = this.props;
         const {
-                children
-            } = this.props;
-        const {
-                name,
+            name,
             email,
             confirmMail,
             password,
@@ -226,102 +225,46 @@ class Register extends Component {
             externalLogin,
             isAllValid
             } = this.state;
-        return (<div className="Container" >
-            <span > Name * </span>
+        return (
+            <div className="Container">
+                <span > Name * </span>
 
-            <input type="text" name="name" disabled={externalLogin} value={name} onChange={this.handleInputChange} />
-            <span className="errorInput" > {
-                errors["name"] && errors["name"]
-            } </span>
+                <input type="text" name="name" disabled={externalLogin} value={name} onChange={this.handleInputChange} />
+                <span className="errorInput" > {errors["name"] && errors["name"]} </span>
 
-            <span > Email * </span> < input type="email" name="email" disabled={externalLogin} value={email} onChange={this.handleInputChange} />
-            <span className="errorInput" > {
-                errors["email"] && errors["email"]
-            } </span>
+                <span > Email * </span> < input type="email" name="email" disabled={externalLogin} value={email} onChange={this.handleInputChange} />
+                <span className="errorInput" > {errors["email"] && errors["email"]} </span>
 
-            < span > Confirm Email * </span> < input type="email" name="confirmMail" disabled={externalLogin} value={confirmMail} onChange={this.handleInputChange} />
-            < span className="errorInput" > {
-                errors["confirmMail"] && errors["confirmMail"]
-            } </span>
+                <span > Confirm Email * </span> < input type="email" name="confirmMail" disabled={externalLogin} value={confirmMail} onChange={this.handleInputChange} />
+                <span className="errorInput" > {errors["confirmMail"] && errors["confirmMail"]} </span>
 
-            < span > Password {
-                externalLogin && (< span >
-                    for the website </span>)} *</span >
-            <
-                input type="password"
-                placeholder="Min 6 chars, at least one number and one lower case English letter"
-                name="password"
-                value={
-                    password
-                }
-                onChange={
-                    this.handleInputChange
-                }
-            /> <span className="errorInput" > {
-                errors["password"] && errors["password"]
-            } </span>
+                <span > Password {externalLogin && (<span>for the website </span>)} *</span>
 
-            <span > Confirm Password * </span> <
-                input type="password"
-                name="confirmPassword"
-                value={
-                    confirmPassword
-                }
-                onChange={
-                    this.handleInputChange
-                }
-            />
-            <span className="errorInput" > {
-                errors["confirmPassword"] && errors["confirmPassword"]
-            } </span>
+                <input type="password" placeholder="Min 6 chars, at least one number and one lower case English letter" name="password" value={password} onChange={this.handleInputChange} />
+                <span className="errorInput" > {errors["password"] && errors["password"]} </span>
+
+                <span > Confirm Password * </span>
+                <input type="password" name="confirmPassword" value={confirmPassword} onChange={this.handleInputChange} />
+                <span className="errorInput" > {errors["confirmPassword"] && errors["confirmPassword"]} </span>
 
 
-            <span > I 'm a: </span>
-            <select name="type"
-                onChange={
-                    this.handleInputChange
-                } >
+                <span > I 'm a: </span>
+                <select name="type" onChange={this.handleInputChange} >
+                    <option value="Social Influencer" > Social Influencer </option>
+                    <option value="Business Owner" > Business Owner </option>
+                </select>
 
-                <option value="Social Influencer" > Social Influencer </option>
-                <option value="Business Owner" > Business Owner </option>
-            </select>
+                <Interests handleInputChange={this.handleInputChange} />
 
-            <
-                Interests handleInputChange={
-                    this.handleInputChange
-                }
-            />
+                {type === "Social Influencer" ? < InfluencerRegister errors={errors} updateChooseTypeStateObject={this.updateChooseTypeStateObject} />
+                    : < BusinessRegister updateChooseTypeStateObject={this.updateChooseTypeStateObject} />}
 
-            {
-                type === "Social Influencer" ? < InfluencerRegister errors={
-                    errors
-                }
-                    updateChooseTypeStateObject={
-                        this.updateChooseTypeStateObject
-                    }
-                /> : < BusinessRegister updateChooseTypeStateObject={
-                    this.updateChooseTypeStateObject
-                }
-                    />}
-
-            < span > Description: </span> <
-                input type="text"
-                name="description"
-                onChange={
-                    this.handleInputChange
-                }
-            />
+                <span> Description: </span>
+                <input type="text" name="description" onChange={this.handleInputChange} />
 
 
-            <input type="button"
-                className={
-                    `${this.isAllValid() ? "" : "disableElement"}`
-                }
-                onClick={
-                    this.createUserClicked
-                }
-                value="Sign up!" />
-        </div>
+                <input type="button" className={`${this.isAllValid() ? "" : "disableElement"}`} onClick={this.createUserClicked} value="Sign up!" />
+            </div>
         );
     }
 }
