@@ -17,19 +17,18 @@ class Message extends Component {
                     <div> <span className="messageTitles"> From: </span> {message.From}</div>
                     <div> <span className="messageTitles"> At: </span> {message.TimeSent} </div>
                     <div className="messageTitles"> Message: </div>
-                    {message.Text.split("\n").map(function (item) {
-                        return (
-                            <span>
-                                {item}
-                                <br />
-                            </span>
+                    {message.Text.split("\n").map((item, index) =>
+                        <span key={index}>
+                            {item}
+                            <br />
+                        </span>
                         )
-                    })}
+                    }
                 </div>
-                <br />
+                        <br />
             </div>
-        );
-    }
-}
-
+                );
+            }
+        }
+        
 export default Message;
