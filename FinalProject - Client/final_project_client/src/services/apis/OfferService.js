@@ -53,7 +53,7 @@ export default class OfferService {
       }
 
     getOffersByAuctionId(id){
-      return fetch(`${this.host}/api/Offers/?auctionId=${id}`, {
+      return fetch(`${this.host}/api/Offers/GetOffersByAuctionId?auctionId=${id}`, {
         method: "GET",
         headers: {
           Accept: "application/json",

@@ -9,16 +9,16 @@ class offersPerAuctionPage extends Component {
         super(props);
         this.state = {
             offers: [
-                {
-                    by: "eli",
-                    status: "pandding",
-                    Description: "no cola no buy"
-                },
-                {
-                    by: "ron",
-                    status: "accepted",
-                    Description: "movie with cola"
-                }
+                // {
+                //     by: "eli",
+                //     status: "pandding",
+                //     Description: "no cola no buy"
+                // },
+                // {
+                //     by: "ron",
+                //     status: "accepted",
+                //     Description: "movie with cola"
+                // }
             ]
         }
         this.getOffersPerAuction = this.getOffersPerAuction.bind(this);
@@ -26,22 +26,23 @@ class offersPerAuctionPage extends Component {
     }
 
     componentDidMount() {
-        //this.getOffersPerAuction();
-        //setInterval(this.getOffersPerAuction, 10000);
+        this.getOffersPerAuction();
+        setInterval(this.getOffersPerAuction, 10000);
     }
 
     getOffersPerAuction() {
-        const { auction } = this.props;
+        //const { auction } = this.props;
+        const auction = { id: 1 }
         this.OfferService.getOffersByAuctionId(auction.id).then(offers => {
             this.setState({ offers });
         })
     }
 
     render() {
+        //const { auction } = this.props;
         const Auction = { id: 1, Title: "cola" };
-        const {offers} = this.state;
+        const { offers } = this.state;
         return (
-            //const { auction } = this.props;
             <div className="offersPerAuctionContainer" >
                 <div className="offersPerAuctionHeader">
                     <div>Auction No. : {Auction.id}</div>

@@ -46,5 +46,22 @@ namespace FinalProject.DAL
             context.Auctions.Remove(auction);
             context.SaveChanges();
         }
+
+        public IEnumerable<Offer> GetOffersByAuctionId(int auctionId)
+        {
+            IEnumerable<Auction> allAuctios = context.Auctions.ToList();
+            List<Offer> auctionsOffers = new List<Offer>();
+
+            foreach (Auction auction in allAuctios)
+            {
+                if (auction.Id == auctionId)
+                {
+                    auctionsOffers = auction.Offers.ToList();
+                    break;
+                }
+            }
+            return (IEnumerable<Offer>)auctionsOffers;
+        }
     }
+
 }

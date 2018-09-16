@@ -63,5 +63,10 @@ namespace FinalProject.BL
                 throw;
             }
         }
+
+        public IEnumerable<Offer> GetOffersByAuctionId(int auctionId)
+        {
+            return auctionsCRUD.GetOffersByAuctionId(auctionId);
+        }
     }
 }
