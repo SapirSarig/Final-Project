@@ -1,9 +1,97 @@
 .guestScreenWrapper{
     display: flex;
-    flex-direction: column;
-    height: 100vh;
     justify-content: center;
+    align-items: center;
+
+    height: 100vh;
+    max-width: 90vw;
     font-size: 1rem;
+    overflow: hidden;
+    margin: auto;
+}
+
+.emptyDiv {
+    background-image: url('../../../images/cover.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    opacity: 0.5;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    position: absolute;
+    z-index: -1; 
+}
+
+.siteName{
+    font-size: 3rem;
+    letter-spacing: -3px;
+    padding-bottom: 30px;
+    text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+}
+
+.loginButtons{
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    width: 100%;
+    flex-direction: column;
+}
+
+.preLine{
+    margin: 10px 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+.preLineText{
+    padding: 0 5px;
+    text-align: center;
+}
+
+.preLine .line{
+    border-bottom: 1px solid black;
+    width: 4%;
+}
+
+.separeteLine{
+    border-left: 2px solid white;
+    height: 50%;
+    margin: 40px;
+}
+
+.playIcon {
+    display: inline-block;
+    stroke-width: 0;
+    stroke: currentColor;
+    fill: currentColor;
+    margin: 0 0.4rem;
+    cursor: pointer;
+    color: linen;
+}
+
+.playIcon:hover{
+    color: rgb(198, 137, 255);
+}
+
+.rightContainer, .leftContainer{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.leftContainer{
+    flex: 1;
+}
+
+.rightContainer{
+    flex: 2;
 }
 
 .siteHeaderWrapper{
@@ -12,8 +100,27 @@
 }
 
 .explanation {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between center;
-    flex-wrap: wrap;
+    font-size: 2em;
+    text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+    margin-bottom: 29px;
+    color: linen;
+}
+
+.explanation div:first-child{
+    width: 70%;
+    font-size: 1.2em;
+}
+
+.explanation div:nth-child(2){
+    width: 70%;
+    font-size: 1em;
+    margin: 20px 0 0 140px;
+    text-align: right;
+}
+
+.explanation div:last-child{
+    margin-top: 20px;
+    font-size: 0.8em;
+    text-shadow: -2px 0 mediumorchid, 0 1px mediumorchid, 1px 0 mediumorchid, 0 -1px mediumorchid;
+    text-align: center;
 }
