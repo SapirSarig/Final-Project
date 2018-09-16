@@ -1,30 +1,33 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import OfferService from '../../services/apis/OfferService';
+import offersList from './offersList';
 
 class offersPerAuctionPage extends Component {
+    OfferService
     constructor(props) {
         super(props);
         this.state = {
             offers =[]
         }
         this.getOffersPerAuction = this.getOffersPerAuction.bind(this);
-
+        this.OfferService = new OfferService();
     }
 
     componentDidMount() {
         this.getOffersPerAuction();
-        setInterval(this.getNegotiationContent, 10000);
+        setInterval(this.getOffersPerAuction, 10000);
     }
 
     getOffersPerAuction() {
-        const { Auction } = this.props;
-        this.NegotiationService.getMessagesByOfferId(Auction.id).then(messages => {
-            this.setState({ messages });
+        const { auction } = this.props;
+        this.OfferService.getOffersByAuctionId(auction.id).then(offers => {
+            this.setState({ offers });
         })
     }
 
     render() {
-        const { Auction } = this.props;
+        const { auction } = this.props;
 
         <div className="offersPerAuctionContainer">
             <div className="offersPerAuctionHeader">
@@ -32,9 +35,7 @@ class offersPerAuctionPage extends Component {
                 <div>Auction Name : {Auction.Title}</div>
                 <br />
             </div>
-            <div>Auctions: {Auction.Title}</div>
-
-
+            <offersList offers={offers} />
         </div>
     }
 }
