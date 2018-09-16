@@ -20,10 +20,17 @@ class InfluencerRegister extends Component {
                 LinkToInstagramProfile: "",
                 LinkToYouTubeProfile: "",
                 dateOfBirth: ""
+            },
+            disabled:{
+                LinkToTwitterProfile: true,
+                LinkToFacebookProfile: true,
+                LinkToInstagramProfile: true,
+                LinkToYouTubeProfile: true
             }
         }
 
         this.handleInputChange = this.handleInputChange.bind(this);
+        this.focusElement = this.focusElement.bind(this);
     }
 
     componentDidMount() {
@@ -90,7 +97,7 @@ class InfluencerRegister extends Component {
                 }, () => this.updateChooseTypeState(this.state));
             }
         }
-
+        console.log("$$$$$", this.state);
     }
 
     checkValidation(name, value) {
@@ -123,15 +130,31 @@ class InfluencerRegister extends Component {
         const target = event.target;
         const value = target.type === "checkbox" ? target.checked : target.value;
         const name = target.name;
-
-        if (target.checked) {
-            let element = document.getElementById(`LinkTo${name}Profile`);
+        const {errors, socialNetworks, disabled} = this.state;
+        const elementId = `LinkTo${name}Profile`;
+        let element = document.getElementById(elementId);
+        if (target.checked){
+            disabled &&(disabled[elementId] = false);
             element && element.focus();
         }
+        else {
+            element && (element.value = "");
+            if(errors && errors[elementId])
+            {
+                errors[elementId] = "";
+               
+            }
+            disabled &&(disabled[elementId] = true);
+            const index = socialNetworks.findIndex(socialNetwork=>socialNetwork.Value === name);
+            if (index!== -1)
+                socialNetworks.splice(index, index + 1);
+        }
+                    this.setState({errors, socialNetworks, disabled});
+        console.log("@@@@@" , this.state);
     }
 
     render() {
-        const { src, dateOfBirth, socialNetworks, errors } = this.state;
+        const { src, dateOfBirth, socialNetworks, errors, disabled } = this.state;
         return (
             <div className="Container">
                 <span> Image: </span>
@@ -147,7 +170,7 @@ class InfluencerRegister extends Component {
                     <input type="checkbox" name="Twitter" onChange={this.focusElement} />
                     <img src={require("../../images/Twitter.jpg")} className="logo" />
                     <span>Link To Profile:</span>
-                    <input id="LinkToTwitterProfile" type="text" name="LinkToTwitterProfile" onChange={this.handleInputChange} />
+                    <input id="LinkToTwitterProfile" disabled={disabled["LinkToTwitterProfile"]} type="text" name="LinkToTwitterProfile" onChange={this.handleInputChange} />
                     <span className="errorInput">{errors["LinkToTwitterProfile"] && errors["LinkToTwitterProfile"]}</span>
 
                     <br />
@@ -155,21 +178,21 @@ class InfluencerRegister extends Component {
                     <input type="checkbox" name="Facebook" onChange={this.focusElement} />
                     <img src={require("../../images/Facebook.png")} className="logo" />
                     <span>Link To Profile:</span>
-                    <input id="LinkToFacebookProfile" type="text" name="LinkToFacebookProfile" onChange={this.handleInputChange} />
+                    <input id="LinkToFacebookProfile" disabled={disabled["LinkToFacebookProfile"]} type="text" name="LinkToFacebookProfile" onChange={this.handleInputChange} />
                     <span className="errorInput">{errors["LinkToFacebookProfile"] && errors["LinkToFacebookProfile"]}</span>
                     <br />
 
                     <input type="checkbox" name="Instagram" onChange={this.focusElement} />
                     <img src={require("../../images/Instagram.png")} className="logo" />
                     <span>Link To Profile:</span>
-                    <input id="LinkToInstagramProfile" type="text" name="LinkToInstagramProfile" onChange={this.handleInputChange} />
+                    <input id="LinkToInstagramProfile" disabled={disabled["LinkToInstagramProfile"]} type="text" name="LinkToInstagramProfile" onChange={this.handleInputChange} />
                     <span className="errorInput">{errors["LinkToInstagramProfile"] && errors["LinkToInstagramProfile"]}</span>
 
                     <br />
                     <input type="checkbox" name="YouTube" onChange={this.focusElement} />
                     <img src={require("../../images/YouTube.png")} className="logo" />
                     <span>Link To Profile:</span>
-                    <input id="LinkToYouTubeProfile" type="text" name="LinkToYouTubeProfile" onChange={this.handleInputChange} />
+                    <input id="LinkToYouTubeProfile" disabled={disabled["LinkToYouTubeProfile"]} type="text" name="LinkToYouTubeProfile" onChange={this.handleInputChange} />
                     <span className="errorInput">{errors["LinkToYouTubeProfile"] && errors["LinkToYouTubeProfile"]}</span>
 
                 </div>
