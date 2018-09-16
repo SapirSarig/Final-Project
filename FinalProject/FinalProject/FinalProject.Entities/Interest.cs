@@ -11,7 +11,7 @@ namespace FinalProject.Entities
     public class Interest
     {
         public int Id { get; set; }
-        public InterestType Value { get; set; }
+        public string Value { get; set; }
 
         public int UserId { get; set; }
         [ForeignKey("UserId")]

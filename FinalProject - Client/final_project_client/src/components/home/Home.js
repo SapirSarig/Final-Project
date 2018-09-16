@@ -30,15 +30,40 @@ class Home extends Component {
 
                     <Link className="starOffer" to="/starOffer">
                         <button className="starOfferBtn">
-                        starOffer
+                            starOffer
                         </button>
-                    </Link>                    
+                    </Link>
+
+                    <Link className="allOffers" to="/allOffers">
+                        <button className="allOffersBtn">
+                            allOffers
+                        </button>
+                    </Link>
+
+                    <Link className="myAuctions" to="/myAuctions">
+                        <button className="myAuctions">
+                            myAuctions
+                        </button>
+                    </Link>
 
                     <Link className="profile" to="/profile">
                         <button className="btn">
                             Profile
                         </button>
                     </Link>
+
+                    <Link className="influencerHomePage" to="/influencerHomePage">
+                        <button className="influencerHomePageBtn">
+                            influencerHomePage
+                        </button>
+                    </Link>
+
+                    <Link className="negotiationPage" to="/NegotiationPage">
+                        <button>
+                            NegotiationPage
+                        </button>
+                    </Link>
+
                 </div>
             </div>
 
