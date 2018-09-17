@@ -19,8 +19,15 @@ namespace FinalProject.BL
             {
                 try
                 {
-                    userCRUD.AddUser(user);
-                    return true;
+                    if(!userCRUD.IsEmailExist((user.Email)))
+                    {
+                        userCRUD.AddUser(user);
+                        return true;
+                    }
+                    else
+                    {
+                        return false;
+                    }
                 }
                 catch (Exception e)
                 {

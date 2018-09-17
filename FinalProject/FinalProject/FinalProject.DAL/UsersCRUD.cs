@@ -131,5 +131,13 @@ namespace FinalProject.DAL
             context.Users.Remove(user);
             context.SaveChanges();
         }
+
+        public bool IsEmailExist(string email)
+        {
+            User res = context.Users.FirstOrDefault(user => user.Email == email);
+            if (res != null)
+                return true;
+            return false;
+        }
     }
 }
