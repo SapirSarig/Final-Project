@@ -148,6 +148,9 @@
 .submitAuctionBtn{
     width: 50%;
 }
+.disableElement{
+    pointer-events: none;
+}
 
 .businessWrapper{
     border: 1px solid black;

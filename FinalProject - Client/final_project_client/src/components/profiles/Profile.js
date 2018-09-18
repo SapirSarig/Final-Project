@@ -11,7 +11,39 @@ class Profile extends Component {
         this.handleButtonOkClicked = this.handleButtonOkClicked.bind(this);
         this.userService = new UserService();
         this.state = {
-            user:{}
+            user: {
+                id: 1,
+                name: "Sapir",
+                Picture: '../../images/AddAnImage.png',
+                interests: [
+                    {
+                        value: "Sport",
+                    },
+                    {
+                        value: "Music"
+                    }
+                ],
+                description: "the best",
+                dateOfBirth: "31/03/1993",
+                socialNetworks: [
+                    {
+                        Value: "Facebook",
+                        LinkToProfile: "https://www.facebook.com/sapir.sarig"
+                    },
+                    {
+                        Value: "Instagram",
+                        LinkToProfile: "https://www.instagram.com/sapu9/"
+                    }
+                ],
+                reviews: [
+                    {
+                        value: "You are great!"
+                    }
+                ],
+                type: "Social Influencer"
+            },
+            review: "",
+            okDisabled: true
             // name: "",
             // interests: [],
             // description: "",
@@ -23,11 +55,11 @@ class Profile extends Component {
     }
 
     componentDidMount() {
-        const {user} = this.props;
+        // const { user } = this.props;
 
-        this.setState({
-            user
-        })
+        // this.setState({
+        //     user
+        // })
     }
 
     handleInputChange(event) {
@@ -35,55 +67,79 @@ class Profile extends Component {
         const target = event.target;
         const value = target.value;
         const name = target.name;
+        let { okDisabled } = this.state;
 
         this.setState({
-            [name]: value
+            [name]: value,
+            okDisabled: false
         });
     }
 
     handleButtonOkClicked(event) {
-        const {user} = this.state;
+        const { user } = this.state;
         const target = event.target;
         const value = target.value;
         const name = target.name;
-        user.Reviews.push(value)
 
-        //this.userService.AddReviewToUser(user.Id, value);
-        this.setState({
-            user
+        let obj = {
+            "value": value
+        }
+        this.userService.AddReviewToUser(user.id, obj).then(req => {
+            //console.log(req);
+            if (req) {
+                user.reviews.push(obj);
+                this.setState({ user });
+            }
+            else {
+                alert("Server Error");
+            }
         });
+        let inputelem = document.getElementById("review");
+        inputelem.value = null;
+        inputelem.disabled = true;
+        let okButton = document.getElementById("okButton");
+        okButton.disabled = true;
 
+        console.log(this.state);
     }
 
     render() {
         //const { review, type, name, interests, description, reviews, dateOfBirth, socialNetworks } = this.state;
-        const {user} = this.state;
+        //const { user } = this.state;
+        const { user } = this.state;
+        let { okDisabled } = this.state;
         return (
             <div>
                 {user && (<div className="Container">
-                <span> Image: </span>
-                <img src={require('../../images/AddAnImage.png')} className="logo" />
+                    <span> Image: </span>
+                    <img src={user.Picture} className="logo" />
 
-                <span > Name </span>
-                <span> {user.name} </span>
+                    <span > Name </span>
+                    <span> {user.name} </span>
 
-                <span> Interests </span>
-                <span> {user.interests} </span>
+                    <span> Interests </span>
+                    {user.interests && user.interests.length > 0 ?
+                        <div className="interests">
+                            {user.interests.map(interest =>
+                                (<div> {interest.value} </div>))}
+                        </div> : <div>No Interests To Show!</div>}
 
-                <span> Description </span>
-                <span> {user.description} </span>
+                    <span> Description </span>
+                    <span> {user.description} </span>
 
-                {user.type === "Social Influencer" ?
-                    <StarProfile dateOfBirth={user.dateOfBirth} socialNetworks={user.socialNetworks} /> : null}
+                    {user.type === "Social Influencer" ?
+                        <StarProfile dateOfBirth={user.dateOfBirth} socialNetworks={user.socialNetworks} /> : null}
 
-                <span> Reviews </span>
-                <span> {user.Reviews && user.Reviews.map((name, index) => {
-                    return <span key={index}>{name} <br /> </span>;
-                })} </span>
+                    <span> Reviews </span>
+                    {user.reviews && user.reviews.length > 0 ?
+                        <div className="reviews">
+                            {user.reviews.map(review =>
+                                (<div> {review.value} </div>))}
+                        </div> : <div>No Reviews Yet!</div>}
 
-                <span> Write A Review </span>
-                <input id="review" type="text" name="review"/>
-                <button onClick={this.handleButtonOkClicked} value={!!document.getElementById("review")? document.getElementById("review").value : null  }> OK </button>
+                    <span> Write A Review </span>
+                    <input id="review" type="text" name="review" onChange={this.handleInputChange} />
+                    <button id="okButton" value={!!document.getElementById("review") ? document.getElementById("review").value : null} disabled={okDisabled} onClick={this.handleButtonOkClicked}> OK </button>
                 </div>)}
             </div>
         );

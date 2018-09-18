@@ -82,7 +82,7 @@ class InfluencerRegister extends Component {
                     else {
                         let obj = {
                             "Value": socialNetworkName,
-                            LinkToProfile: value
+                            "LinkToProfile": value
                         };
                         socialNetworks.push(obj);
                     }
@@ -168,7 +168,7 @@ class InfluencerRegister extends Component {
                 <span> Social Networks: </span>
                 <div className="SocialNetworksContainer">
                     <input type="checkbox" name="Twitter" onChange={this.focusElement} />
-                    <img src={require("../../images/Twitter.jpg")} className="logo" />
+                    <img src={require("../../images/Twitter.png")} className="logo" />
                     <span>Link To Profile:</span>
                     <input id="LinkToTwitterProfile" disabled={disabled["LinkToTwitterProfile"]} type="text" name="LinkToTwitterProfile" onChange={this.handleInputChange} />
                     <span className="errorInput">{errors["LinkToTwitterProfile"] && errors["LinkToTwitterProfile"]}</span>

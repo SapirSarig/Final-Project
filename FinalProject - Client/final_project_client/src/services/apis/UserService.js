@@ -141,8 +141,8 @@ export default class UserService {
   AddReviewToUser(userId, review) {
     //var data = new FormData();
     //data.append("json", JSON.stringify(user));
-    var data = JSON.stringify(userId,review);
-    return fetch(`${this.host}api/Users/AddReview?userId=${userId}`, 
+    var data = JSON.stringify(review);
+    return fetch(`${this.host}/api/Users/AddReview?userId=${userId}`, 
     {
       method: "POST",
       body: data,

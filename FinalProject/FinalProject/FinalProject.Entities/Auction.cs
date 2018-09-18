@@ -34,7 +34,7 @@ namespace FinalProject.Entities
 
         public int NumOfMinFollowers { get; set; }
 
-        public double Payment { get; set; }
+        //public double Payment { get; set; }
 
         public DateTime StartDate { get; set; }
 

@@ -15,7 +15,7 @@ export default class AuctionService {
         })
             .then((res) => {
                 console.log(res);
-                //return res.json();
+                return res.json();
             })
             .catch((err) => {
                 console.log(err);

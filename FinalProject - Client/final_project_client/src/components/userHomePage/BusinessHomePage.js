@@ -42,7 +42,7 @@ class BusinessHomePage extends Component {
                 <div className="LeftPage">
                     {/* We need to add "auctions" when user is created */}
                     <HotAuctions auctions={userInfo.auctions} />
-                    <Link className="myAuctions" to={{pathname:"/myAuctions", state:{auctions: theAuctions}}}>
+                    <Link className="myAuctions" to={{ pathname: "/myAuctions", state: { auctions: theAuctions } }}>
                         <button className="myAuctions">
                             myAuctions
                         </button>
@@ -53,9 +53,13 @@ class BusinessHomePage extends Component {
                     <OffersStatus offers={userInfo.Offers} />
                     <button> All Offers </button>
                 </div>
-                <br/>
-                <button> Add a New Auction </button>
-                <br/>
+                <br />
+                <Link className="auction" to="/auction">
+                    <button className="auctionBtn">
+                        Add Auction
+                    </button>
+                </Link>
+                <br />
                 <button> All Influencers </button>
 
             </div>
