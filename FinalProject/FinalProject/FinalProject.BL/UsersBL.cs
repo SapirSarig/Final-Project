@@ -6,6 +6,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Net.Mail;
+using System.Net;
 
 namespace FinalProject.BL
 {
@@ -102,10 +104,36 @@ namespace FinalProject.BL
 
         public bool SendPassword(VerifyPasswordModal verifyPasswordObject)
         {
-            if(checkUserAnswers(verifyPasswordObject))
+            User user;
+            if(checkUserAnswers(verifyPasswordObject, out user))
             {
                 //send email
-                return true;
+                try
+                {
+                    string to = verifyPasswordObject.Email;
+                    string from = "itsadealteam@gmail.com";
+                    string subject = "Your Password";
+                    string body = String.Format(@"
+                                    Hello {0}! 
+                                    Your password is {1}
+                                    Please erase that email after you entered your account succefully.
+                                    Thanks!
+                                    Its a deal team",user.Name, user.Password);
+
+
+                    MailMessage mail = new MailMessage(from, to, subject, body);
+                    SmtpClient client = new SmtpClient("smtp.gmail.com");
+                    client.Credentials = new NetworkCredential("itsadealteam@gmail.com", "12345@Aa");
+                    client.Port = 25;
+                    client.EnableSsl = true;
+                    client.Send(mail);
+                    return true;
+                }
+                catch(Exception ex)
+                {
+                    Console.WriteLine(ex.Message);
+                    return false;
+                }
             }
             else
             {
@@ -113,9 +141,9 @@ namespace FinalProject.BL
             }
         }
 
-        private bool checkUserAnswers(VerifyPasswordModal verifyPasswordObject)
+        private bool checkUserAnswers(VerifyPasswordModal verifyPasswordObject, out User user)
         {
-            User user = userCRUD.GetUserByEmail(verifyPasswordObject.Email);
+            user = userCRUD.GetUserByEmail(verifyPasswordObject.Email);
             if(user.Question1 == verifyPasswordObject.Question1 && user.Question2 == verifyPasswordObject.Question2)
             {
                 return true;

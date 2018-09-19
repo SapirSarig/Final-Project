@@ -29,26 +29,28 @@ class InfluencerHomePage extends Component {
         const { userInfo } = this.state;
         return (
             <div className="influencerHomePage">
-
-                <div className="TopPage">
-                    <HomeHeader name={userInfo.name} picture={userInfo.Picture} />
-                </div>
-                <div className="LeftPage">
-                    {/* We need to add "auctions" when user is created */}
-                    <HotAuctions auctions={userInfo.auctions} />
-                    <button> All Auctions </button>
-                </div>
-                <div className="RightPage">
-                    {/* We need to add "offers" when user is created */}
-                    <OffersStatus offers={userInfo.Offers} />
-                    <Link className="allOffers" to="/allOffers">
-                        <button className="allOffersBtn">
-                        allOffers
+                {userInfo &&
+                    <div>
+                        <div className="TopPage">
+                            <HomeHeader name={userInfo.name} picture={userInfo.Picture} />
+                        </div>
+                        <div className="LeftPage">
+                            {/* We need to add "auctions" when user is created */}
+                            <HotAuctions auctions={userInfo.auctions} />
+                            <button> All Auctions </button>
+                        </div>
+                        <div className="RightPage">
+                            {/* We need to add "offers" when user is created */}
+                            <OffersStatus offers={userInfo.Offers} />
+                            <Link className="allOffers" to="/allOffers">
+                                <button className="allOffersBtn">
+                                    allOffers
                         </button>
-                    </Link>
-                </div>
-                <br/>
-                <button> All Influencers </button>
+                            </Link>
+                        </div>
+                        <br />
+                        <button> All Influencers </button>
+                    </div>}
             </div>
         );
     }

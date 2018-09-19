@@ -49,7 +49,7 @@ export default class ForgotPassword extends Component {
             //console.log(req);
             if (req) {
                 //this.setState({ signUpOk: true });
-                alert("Password sent");
+                alert("The password was succefully sent to your email!");
                 this.setState({
                     emailSent: true
                 });
