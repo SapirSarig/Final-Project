@@ -13,7 +13,7 @@ class HomePage extends Component {
                         <div className="siteName"> It's A Deal</div>
                     </div>
                     <div className="loginButtons">
-                        <Link className="signUp" to="/SignUp">
+                        <Link className="signUp" to="/signUp">
                             <LayoutButton text="Sign Up"/>
                         </Link>
                         <div className="preLine">

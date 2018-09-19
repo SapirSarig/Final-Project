@@ -157,12 +157,12 @@ class Login extends Component {
         return (
             externalLogin ?
                 <Redirect to={{
-                    pathname: '/SignUp',
+                    pathname: '/signUp',
                     state: { loggedUser, externalLogin }
                 }} /> :
                 loggedIn ? (loggedUser.type === 0) ?
                     <Redirect to={{
-                        pathname: '/InfluencerHomePage',
+                        pathname: '/influencerHomePage',
                         state: { loggedUser }
                     }} /> :
                     <Redirect to={{

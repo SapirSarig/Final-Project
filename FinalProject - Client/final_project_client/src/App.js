@@ -3,7 +3,6 @@ import HomePage from './components/views/homePage/HomePage';
 import LoginPage from './components/views/loginPage/LoginPage';
 import Auction from './components/views/auction/auction';
 import SignUpPage from './components/views/signUpPage/SignUpPage';
-
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import './App.css';
 import BusinessHomePage from './components/userHomePage/BusinessHomePage';
@@ -16,9 +15,10 @@ import myAuctions from './components/views/myAuctions/myAuctions';
 import AllAuctions from './components/allAuctions/AllAuctions';
 import AllUsers from './components/allUsers/AllUsers';
 import ForgotPassword from './components/login/ForgotPassword';
-
 import NegotiationPage from './components/negotiation/NegotiationPage';
 import offersPerAuctionPage from './components/offers/offersPerAuctionPage';
+import EditProfile from "./components/editProfile/EditProfile";
+
 
 class App extends Component {
 
@@ -30,20 +30,21 @@ class App extends Component {
           <div className="routeContainer">
             <Route exact path="/" component={HomePage} />
             <Route path="/login" component={LoginPage} />
-            <Route path="/SignUp" component={SignUpPage} />
+            <Route path="/signUp" component={SignUpPage} />
             <Route path="/auction" component={Auction} />
             <Route path="/allOffers" component={allOffers} />
             <Route path="/starOffer" component={starOffer} />
             <Route path="/myAuctions" component={myAuctions} />
             <Route path="/starProfile" component={StarProfile} />
             <Route path="/profile" component={Profile} />
-            <Route path = "/InfluencerHomePage" component ={InfluencerHomePage}/>
+            <Route path = "/influencerHomePage" component ={InfluencerHomePage}/>
             <Route path="/businessHomePage" component={BusinessHomePage} />
             <Route path="/allAuctions" component={AllAuctions} />            
             <Route path="/allUsers" component={AllUsers} />       
-            <Route path = "/NegotiationPage" component = {NegotiationPage}/>
+            <Route path = "/negotiationPage" component = {NegotiationPage}/>
             <Route path = "/offersPerAuctionPage" component = {offersPerAuctionPage}/>
             <Route path = "/forgotPassword" component = {ForgotPassword}/>
+            <Route path = "/editProfile" component = {EditProfile}/>
 
           </div>
         </Router>

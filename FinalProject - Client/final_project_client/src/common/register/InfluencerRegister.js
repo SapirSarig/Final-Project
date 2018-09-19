@@ -21,7 +21,7 @@ class InfluencerRegister extends Component {
                 LinkToYouTubeProfile: "",
                 dateOfBirth: ""
             },
-            disabled:{
+            disabled: {
                 LinkToTwitterProfile: true,
                 LinkToFacebookProfile: true,
                 LinkToInstagramProfile: true,
@@ -101,7 +101,7 @@ class InfluencerRegister extends Component {
     }
 
     checkValidation(name, value) {
-        const { errors} = this.state;
+        const { errors } = this.state;
         let errorMessage;
         if (name.startsWith("LinkTo")) {
             errorMessage = RegisterService.linkValidation(value);
@@ -130,40 +130,42 @@ class InfluencerRegister extends Component {
         const target = event.target;
         const value = target.type === "checkbox" ? target.checked : target.value;
         const name = target.name;
-        const {errors, socialNetworks, disabled} = this.state;
+        const { errors, socialNetworks, disabled } = this.state;
         const elementId = `LinkTo${name}Profile`;
         let element = document.getElementById(elementId);
-        if (target.checked){
-            disabled &&(disabled[elementId] = false);
+        if (target.checked) {
+            disabled && (disabled[elementId] = false);
             element && element.focus();
         }
         else {
             element && (element.value = "");
-            if(errors && errors[elementId])
-            {
+            if (errors && errors[elementId]) {
                 errors[elementId] = "";
-               
+
             }
-            disabled &&(disabled[elementId] = true);
-            const index = socialNetworks.findIndex(socialNetwork=>socialNetwork.Value === name);
-            if (index!== -1)
+            disabled && (disabled[elementId] = true);
+            const index = socialNetworks.findIndex(socialNetwork => socialNetwork.Value === name);
+            if (index !== -1)
                 socialNetworks.splice(index, index + 1);
         }
-                    this.setState({errors, socialNetworks, disabled});
-        console.log("@@@@@" , this.state);
+        this.setState({ errors, socialNetworks, disabled });
+        console.log("@@@@@", this.state);
     }
 
     render() {
         const { src, dateOfBirth, socialNetworks, errors, disabled } = this.state;
+        const { signUp,userInfo } = this.props;
         return (
             <div className="Container">
                 <span> Image: </span>
-                <img id="uploadPreview" src={src} className="logo" />
+                <img id="uploadPreview" src={userInfo? userInfo.Picture : src} className="logo" />
                 <input type="file" name="myFile" onChange={this.handleImgChange} />
 
-                <span> Date Of Birth *</span>
-                <input type="date" name="dateOfBirth" value={dateOfBirth} onChange={this.handleInputChange} />
-                <span className="errorInput">{errors["dateOfBirth"]}</span>
+                {signUp && <div className="dateOfBirthContainer">
+                    <span> Date Of Birth *</span>
+                    <input type="date" name="dateOfBirth" value={dateOfBirth} onChange={this.handleInputChange} />
+                    <span className="errorInput">{errors["dateOfBirth"]}</span>
+                </div>}
 
                 <span> Social Networks: </span>
                 <div className="SocialNetworksContainer">

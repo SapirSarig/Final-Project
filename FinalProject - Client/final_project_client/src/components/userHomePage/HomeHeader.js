@@ -2,20 +2,49 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import './homePages.css';
+import { Route, Redirect } from 'react-router';
 
 class HomeHeader extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            EditProfileClicked: false
+        }
+        this.EditProfileClicked = this.EditProfileClicked.bind(this);
+    }
+
+    EditProfileClicked() {
+        this.setState({ EditProfileClicked: true });
+    }
     render() {
-        const { name,picture } = this.props;
+        // const { userInfo } = this.props;
+        const userInfo =
+            {
+                Name: "rinat",
+                Email: "rinat@gmail.com",
+                ConfirmEmail : "rinat@gmail.com",
+                Picture: "string",
+                Description: "pop",
+                Type: "Business Owner",
+                CompanyName: "cola",
+                LinkToCompanySite: "www.walla.com"
+            };
+        const { EditProfileClicked } = this.state;
         return (
             <div className="HomeHeader">
-            <img src={picture} className="logo" />
-                <div className="helloAndLink">
-                    Hello
-                    <Link className="HomePage" to="/">
-                        {name}
-                    </Link>
-                </div>
-            <button> Edit Profile </button>    
+                {!EditProfileClicked ?
+                    <div>
+                        <img src={userInfo.Picture} className="logo" />
+                        <div className="helloAndLink">
+                            Hello {userInfo.Name} !
+                        </div>
+                        <button onClick={this.EditProfileClicked}> Edit Profile </button>
+                    </div>
+                    : <Redirect to={{
+                        pathname: '/editProfile',
+                        state: { userInfo }
+                    }} />
+                }
 
 
             </div>

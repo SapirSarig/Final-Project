@@ -39,7 +39,7 @@ class BusinessHomePage extends Component {
                 {userInfo &&
                     <div>
                         <div className="TopPage">
-                            <HomeHeader name={userInfo.name} />
+                            <HomeHeader userInfo={userInfo}/>
                         </div>
                         <div className="LeftPage">
                             {/* We need to add "auctions" when user is created */}

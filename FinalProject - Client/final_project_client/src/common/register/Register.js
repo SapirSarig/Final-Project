@@ -8,6 +8,7 @@ import InfluencerRegister from './InfluencerRegister';
 import BusinessRegister from './BusinessRegister';
 import Interests from "./Interests";
 import VerifyQuestions from "../../common/verifyQuestions/VerifyQuestions";
+import SignUp from '../../components/signUp/SignUp';
 
 const initialState = {
     name: "",
@@ -163,8 +164,8 @@ class Register extends Component {
             "Picture": chooseTypeState.src,
             "Reviews": [],
             "Chats": [],
-            "question1" : question1,
-            "question2" : question2
+            "question1": question1,
+            "question2": question2
         };
         if (type === "Social Influencer") {
             user["dateOfBirth"] = chooseTypeState.dateOfBirth;
@@ -203,8 +204,8 @@ class Register extends Component {
             (chooseTypeState && chooseTypeState.errors &&
                 ((type === "Business Owner" && typeof (chooseTypeState.errors.linkToCompanySite) === "undefined") ||
                     ((type === "Social Influencer") && (typeof (chooseTypeState.errors.dateOfBirth) === "undefined") && (typeof (chooseTypeState.dateOfBirth) !== "undefined")) &&
-                    (StringUtil.isEmptyString(RegisterService.nameValidation(question1)))&&
-                    (StringUtil.isEmptyString(RegisterService.nameValidation(question2)))&&
+                    (StringUtil.isEmptyString(RegisterService.nameValidation(question1))) &&
+                    (StringUtil.isEmptyString(RegisterService.nameValidation(question2))) &&
                     (StringUtil.isEmptyString(RegisterService.nameValidation(name))) &&
                     (StringUtil.isEmptyString(RegisterService.emailValidation(email))) &&
                     (StringUtil.isEmptyString(RegisterService.passwordValidation(password))) &&
@@ -219,7 +220,7 @@ class Register extends Component {
     // }
 
     render() {
-        const { children } = this.props;
+        const { children, signUp, userInfo } = this.props;
         const {
             name,
             email,
@@ -240,44 +241,57 @@ class Register extends Component {
             } = this.state;
         return (
             <div className="Container">
-                <span > Name * </span>
 
-                <input type="text" name="name" disabled={externalLogin} value={name} onChange={this.handleInputChange} />
+                <span > Name * </span>
+                <input type="text" name="name" disabled={externalLogin} value={userInfo? userInfo.Name : name} onChange={this.handleInputChange} />
                 <span className="errorInput" > {errors["name"] && errors["name"]} </span>
 
-                <span > Email * </span> < input type="email" name="email" disabled={externalLogin} value={email} onChange={this.handleInputChange} />
+                <span > Email * </span>
+                < input type="email" name="email" disabled={externalLogin} value={userInfo? userInfo.Email : email} onChange={this.handleInputChange} />
                 <span className="errorInput" > {errors["email"] && errors["email"]} </span>
 
-                <span > Confirm Email * </span> < input type="email" name="confirmMail" disabled={externalLogin} value={confirmMail} onChange={this.handleInputChange} />
+                <span > Confirm Email * </span>
+                < input type="email" name="confirmMail" disabled={externalLogin} value={userInfo? userInfo.ConfirmEmail : confirmMail} onChange={this.handleInputChange} />
                 <span className="errorInput" > {errors["confirmMail"] && errors["confirmMail"]} </span>
 
-                <span > Password {externalLogin && (<span>for the website </span>)} *</span>
+                {signUp && <div className="passwordContainer">
+                    <span > Password {externalLogin && (<span>for the website </span>)} *</span>
+                    <input type="password" placeholder="Min 6 chars, at least one number and one lower case English letter" name="password" value={password} onChange={this.handleInputChange} />
+                    <span className="errorInput" > {errors["password"] && errors["password"]} </span>
+                </div>}
 
-                <input type="password" placeholder="Min 6 chars, at least one number and one lower case English letter" name="password" value={password} onChange={this.handleInputChange} />
-                <span className="errorInput" > {errors["password"] && errors["password"]} </span>
+                {signUp && <div className="confirmPasswordContainer">
+                    <span > Confirm Password * </span>
+                    <input type="password" name="confirmPassword" value={confirmPassword} onChange={this.handleInputChange} />
+                    <span className="errorInput" > {errors["confirmPassword"] && errors["confirmPassword"]} </span>
+                </div>}
 
-                <span > Confirm Password * </span>
-                <input type="password" name="confirmPassword" value={confirmPassword} onChange={this.handleInputChange} />
-                <span className="errorInput" > {errors["confirmPassword"] && errors["confirmPassword"]} </span>
-
-
-                <span > I 'm a: </span>
-                <select name="type" onChange={this.handleInputChange} >
-                    <option value="Social Influencer" > Social Influencer </option>
-                    <option value="Business Owner" > Business Owner </option>
-                </select>
+                {signUp && <div className="pickerContainer">
+                    <span > I 'm a: </span>
+                    <select name="type" onChange={this.handleInputChange} >
+                        <option value="Social Influencer" > Social Influencer </option>
+                        <option value="Business Owner" > Business Owner </option>
+                    </select>
+                </div>}
 
                 <Interests handleInputChange={this.handleInputChange} />
 
-                {type === "Social Influencer" ? < InfluencerRegister errors={errors} updateChooseTypeStateObject={this.updateChooseTypeStateObject} />
-                    : < BusinessRegister updateChooseTypeStateObject={this.updateChooseTypeStateObject} />}
+                {userInfo ? 
+                    (userInfo.Type === "Social Influencer" ?
+                        < InfluencerRegister errors={errors} updateChooseTypeStateObject={this.updateChooseTypeStateObject} signUp={signUp} userInfo={userInfo} />
+                        : < BusinessRegister updateChooseTypeStateObject={this.updateChooseTypeStateObject} userInfo={userInfo} />)
+
+                : type === "Social Influencer" ? < InfluencerRegister errors={errors} updateChooseTypeStateObject={this.updateChooseTypeStateObject} signUp={signUp} />
+                        : < BusinessRegister updateChooseTypeStateObject={this.updateChooseTypeStateObject}/>}
 
                 <span> Description: </span>
-                <input type="text" name="description" onChange={this.handleInputChange} />
+                <input type="text" name="description" value={userInfo?userInfo.Description : description} onChange={this.handleInputChange} />
 
-                <VerifyQuestions handleInputChange={this.handleInputChange} question1={question1} question2={question2}/>
+                <VerifyQuestions signUp={signUp} handleInputChange={this.handleInputChange} question1={question1} question2={question2} />
 
-                <input type="button" className={`${this.isAllValid() ? "" : "disableElement"}`} onClick={this.createUserClicked} value="Sign up!" />
+                {signUp && <input type="button" className={`${this.isAllValid() ? "" : "disableElement"}`} onClick={this.createUserClicked} value="Sign up!" />}
+                {!signUp && <input type="button" value="Submit" />}
+
             </div>
         );
     }

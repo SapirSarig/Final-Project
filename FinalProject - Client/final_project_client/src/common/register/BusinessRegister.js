@@ -71,18 +71,19 @@ class BusinessRegister extends Component {
     }
 
     render() {
-        const { src, errors } = this.state;
+        const { src, errors, CompanyName, LinkToCompanySite } = this.state;
+        const {userInfo} = this.props;
         return (
             <div className="Container">
                 <span>Company's Name *</span>
-                <input type="text" name="CompanyName" onChange={this.handleInputChange} />
+                <input type="text" value={userInfo? userInfo.CompanyName : CompanyName}name="CompanyName" onChange={this.handleInputChange} />
                 <br />
                 <span> Company's logo </span>
-                <img id="uploadPreview" src={src} className="logo" />
+                <img id="uploadPreview" src={userInfo? userInfo.Picture : src} className="logo" />
                 <input type="file" name="myFile" onChange={this.handleImgChange} />
 
                 <span>Link To Company's Site</span>
-                <input type="text" name="LinkToCompanySite" onChange={this.handleInputChange} />
+                <input type="text" value={userInfo? userInfo.LinkToCompanySite : LinkToCompanySite} name="LinkToCompanySite" onChange={this.handleInputChange} />
                 <span className="errorInput">{errors["LinkToCompanySite"] && errors["LinkToCompanySite"]}</span>
 
 
