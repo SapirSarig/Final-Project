@@ -1,5 +1,6 @@
 ﻿using FinalProject.DAL;
 using FinalProject.Entities;
+using FinalProject.Entities.Modals;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -97,6 +98,29 @@ namespace FinalProject.BL
                 return false;
                 throw;
             }
+        }
+
+        public bool SendPassword(VerifyPasswordModal verifyPasswordObject)
+        {
+            if(checkUserAnswers(verifyPasswordObject))
+            {
+                //send email
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        private bool checkUserAnswers(VerifyPasswordModal verifyPasswordObject)
+        {
+            User user = userCRUD.GetUserByEmail(verifyPasswordObject.Email);
+            if(user.Question1 == verifyPasswordObject.Question1 && user.Question2 == verifyPasswordObject.Question2)
+            {
+                return true;
+            }
+            return false;
         }
     }
 }

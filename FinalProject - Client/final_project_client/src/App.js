@@ -15,7 +15,7 @@ import allOffers from './components/views/allOffers/allOffers';
 import myAuctions from './components/views/myAuctions/myAuctions';
 import AllAuctions from './components/allAuctions/AllAuctions';
 import AllUsers from './components/allUsers/AllUsers';
-
+import ForgotPassword from './components/login/ForgotPassword';
 
 import NegotiationPage from './components/negotiation/NegotiationPage';
 import offersPerAuctionPage from './components/offers/offersPerAuctionPage';
@@ -43,6 +43,8 @@ class App extends Component {
             <Route path="/allUsers" component={AllUsers} />       
             <Route path = "/NegotiationPage" component = {NegotiationPage}/>
             <Route path = "/offersPerAuctionPage" component = {offersPerAuctionPage}/>
+            <Route path = "/forgotPassword" component = {ForgotPassword}/>
+
           </div>
         </Router>
       </div>

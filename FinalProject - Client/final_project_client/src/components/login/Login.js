@@ -5,6 +5,7 @@ import StringUtil from '../../utils/StringUtil';
 import './Login.css';
 import FacebookLogin from 'react-facebook-login';
 import { Route, Redirect } from 'react-router';
+import { Link } from 'react-router-dom';
 
 const initialState = {
     email: "",
@@ -188,7 +189,11 @@ class Login extends Component {
                             <input type="checkbox" checked={rememberMe} onChange={this.handleInputChange} name="rememberMe" />
                             <span>Remember me</span>
                         </div>
-                        <span>Forgot my username/ password </span>
+                        <Link className="forgotPassword" to="/forgotPassword">
+                            <button className="forgotPasswordBtn">
+                                Forgot My Password
+                            </button>
+                        </Link>
                     </div>)
         );
     }

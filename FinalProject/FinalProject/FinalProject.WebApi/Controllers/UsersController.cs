@@ -1,5 +1,6 @@
 ﻿using FinalProject.BL;
 using FinalProject.Entities;
+using FinalProject.Entities.Modals;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -77,6 +78,17 @@ namespace FinalProject.WebApi.Controllers
             if (isAdded)
             {
                 return Ok(userId);
+            }
+            return NotFound();
+        }
+
+        [Route("SendPassword")]
+        public IHttpActionResult SendPassword(VerifyPasswordModal verifyPasswordObject)
+        {
+            bool isSent = usersBL.SendPassword(verifyPasswordObject);
+            if (isSent)
+            {
+                return Ok(verifyPasswordObject);
             }
             return NotFound();
         }

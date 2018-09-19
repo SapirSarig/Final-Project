@@ -7,6 +7,7 @@ import StringUtil from '../../utils/StringUtil';
 import InfluencerRegister from './InfluencerRegister';
 import BusinessRegister from './BusinessRegister';
 import Interests from "./Interests";
+import VerifyQuestions from "../../common/verifyQuestions/VerifyQuestions";
 
 const initialState = {
     name: "",
@@ -20,6 +21,8 @@ const initialState = {
     description: "",
     isAllValid: false,
     externalLogin: false,
+    question1: "",
+    question2: "",
     errors: {
         name: "",
         email: "",
@@ -142,7 +145,9 @@ class Register extends Component {
             type,
             chooseTypeState,
             interests,
-            description
+            description,
+            question1,
+            question2
         } = this.state;
         const {
             CreateBusinessUser,
@@ -157,7 +162,9 @@ class Register extends Component {
             "type": type,
             "Picture": chooseTypeState.src,
             "Reviews": [],
-            "Chats": []
+            "Chats": [],
+            "question1" : question1,
+            "question2" : question2
         };
         if (type === "Social Influencer") {
             user["dateOfBirth"] = chooseTypeState.dateOfBirth;
@@ -186,7 +193,9 @@ class Register extends Component {
             confirmPassword,
             confirmMail,
             chooseTypeState,
-            type
+            type,
+            question1,
+            question2
         } = this.state;
         let isValidInputs = isAllValidCustome ? isAllValidCustome() : true;
 
@@ -194,6 +203,8 @@ class Register extends Component {
             (chooseTypeState && chooseTypeState.errors &&
                 ((type === "Business Owner" && typeof (chooseTypeState.errors.linkToCompanySite) === "undefined") ||
                     ((type === "Social Influencer") && (typeof (chooseTypeState.errors.dateOfBirth) === "undefined") && (typeof (chooseTypeState.dateOfBirth) !== "undefined")) &&
+                    (StringUtil.isEmptyString(RegisterService.nameValidation(question1)))&&
+                    (StringUtil.isEmptyString(RegisterService.nameValidation(question2)))&&
                     (StringUtil.isEmptyString(RegisterService.nameValidation(name))) &&
                     (StringUtil.isEmptyString(RegisterService.emailValidation(email))) &&
                     (StringUtil.isEmptyString(RegisterService.passwordValidation(password))) &&
@@ -223,7 +234,9 @@ class Register extends Component {
             imgUrl,
             errors,
             externalLogin,
-            isAllValid
+            isAllValid,
+            question1,
+            question2
             } = this.state;
         return (
             <div className="Container">
@@ -262,6 +275,7 @@ class Register extends Component {
                 <span> Description: </span>
                 <input type="text" name="description" onChange={this.handleInputChange} />
 
+                <VerifyQuestions handleInputChange={this.handleInputChange} question1={question1} question2={question2}/>
 
                 <input type="button" className={`${this.isAllValid() ? "" : "disableElement"}`} onClick={this.createUserClicked} value="Sign up!" />
             </div>

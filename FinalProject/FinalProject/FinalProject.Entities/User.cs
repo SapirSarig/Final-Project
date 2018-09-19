@@ -31,6 +31,10 @@ namespace FinalProject.Entities
 
         public string Type { get; set; }
 
+        public string Question1 { get; set; }
+
+        public string Question2 { get; set; }
+
         public virtual ICollection<Interest> Interests { get; set; }
 
         public virtual ICollection<Review> Reviews { get; set; }

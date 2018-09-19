@@ -1,5 +1,5 @@
 export default class UserService {
-    host = "http://localhost:49923";
+  host = "http://localhost:49923";
 
   getUserById(id) {
     //var data = new FormData();
@@ -30,7 +30,7 @@ export default class UserService {
       })
   }
 
-  getFilteredUsersByName(searchStr){
+  getFilteredUsersByName(searchStr) {
     return fetch(`${this.host}/api/Users/GetFilteredUsersByName?SearchStr=${searchStr}`, {
       method: "GET",
       headers: {
@@ -40,7 +40,7 @@ export default class UserService {
     })
       .then((res) => {
         return res.json();
-      }).catch((err)=> {
+      }).catch((err) => {
         console.log(err);
       })
   }
@@ -71,13 +71,13 @@ export default class UserService {
     var data = JSON.stringify(user);
     return fetch(`${this.host}/api/InfluencerUsers
     `, {
-      method: "POST",
-      body: data,
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json"
-      }
-    })
+        method: "POST",
+        body: data,
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json"
+        }
+      })
       .then((res) => {
         return res.json();
       })
@@ -86,10 +86,10 @@ export default class UserService {
       })
   }
 
-  loginUser({email, password}) {
+  loginUser({ email, password }) {
     //var data = new FormData();
     //data.append("json", JSON.stringify(user));
-    var data = JSON.stringify({email, password});
+    var data = JSON.stringify({ email, password });
     return fetch(`${this.host}/api/Authentication`, {
       method: "POST",
       body: data,
@@ -100,12 +100,12 @@ export default class UserService {
     })
       .then((res) => {
         return res.json();
-      }).catch((err)=> {
+      }).catch((err) => {
         console.log(err);
       })
   }
 
-  loginExternalUser({email}) {
+  loginExternalUser({ email }) {
     //var data = new FormData();
     //data.append("json", JSON.stringify(user));
     return fetch(`${this.host}/api/Authentication?email=${email}`, {
@@ -117,12 +117,12 @@ export default class UserService {
     })
       .then((res) => {
         return res.json();
-      }).catch((err)=> {
+      }).catch((err) => {
         console.log(err);
       })
   }
 
-  getAllUsers(){
+  getAllUsers() {
     return fetch(`${this.host}/api/Users`, {
       method: "GET",
       headers: {
@@ -132,7 +132,7 @@ export default class UserService {
     })
       .then((res) => {
         return res.json();
-      }).catch((err)=> {
+      }).catch((err) => {
         console.log(err);
       })
   }
@@ -142,8 +142,26 @@ export default class UserService {
     //var data = new FormData();
     //data.append("json", JSON.stringify(user));
     var data = JSON.stringify(review);
-    return fetch(`${this.host}/api/Users/AddReview?userId=${userId}`, 
-    {
+    return fetch(`${this.host}/api/Users/AddReview?userId=${userId}`,
+      {
+        method: "POST",
+        body: data,
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json"
+        }
+      })
+      .then((res) => {
+        return res.json();
+      })
+      .catch((err) => {
+        console.log(err);
+      })
+  }
+
+  sendPasswordToUser(obj) {
+    var data = JSON.stringify(obj);
+    return fetch(`${this.host}/api/Users/SendPassword`, {
       method: "POST",
       body: data,
       headers: {
@@ -155,8 +173,8 @@ export default class UserService {
         return res.json();
       })
       .catch((err) => {
-        console.log(err);
+        alert(err);
       })
   }
-  
+
 }
