@@ -1,5 +1,6 @@
 ﻿using FinalProject.BL;
 using FinalProject.Entities;
+using FinalProject.Entities.Modals;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -28,13 +29,16 @@ namespace FinalProject.WebApi.Controllers
         }
 
         [HttpPatch]
-        public IHttpActionResult UpdateUser(InfluencerUser user)
+        public IHttpActionResult UpdateInfluencerUser(UpdatedInfluencerUserModal userToUpdate)
         {
-            return Ok();
+            User updatedUser = influencerUsersBL.UpdateInfluencerUser(userToUpdate);
+            if (updatedUser!=null)
+            {
+                return Ok(updatedUser);
+            }
+            return NotFound();
         }
 
-
-        //Is the CRUD ok??
         [Route("GetAllOffers")]
         public IEnumerable<Offer> GetAllOffers(int userId)
         {

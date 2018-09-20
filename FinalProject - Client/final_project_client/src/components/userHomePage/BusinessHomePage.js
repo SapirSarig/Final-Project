@@ -6,7 +6,8 @@ import HotAuctions from '../userHomePage/hotAuctions.js';
 import OffersStatus from '../offers/offersStatus.js';
 import '../userHomePage/homePages.css';
 const initialState = {
-    userInfo: {}
+    userInfo: {},
+    updatedUser:{}
 };
 
 class BusinessHomePage extends Component {
@@ -19,13 +20,22 @@ class BusinessHomePage extends Component {
         const { location } = this.props;
         if (location && location.state) {
             const { userInfo } = location.state;
-            this.setState({ userInfo });
+            const {updatedUser } = location.state;
+            if(updatedUser)
+            {
+                this.setState({ updatedUser });
+
+            }
+            else{
+                this.setState({ userInfo });
+
+            }
         }
     }
 
     render() {
         //const name = "Coca Cola";
-        const { userInfo } = this.state;
+        const { userInfo, updatedUser } = this.state;
         const theAuctions = [{
             Title: 'Tal0'
         }, {
@@ -39,11 +49,11 @@ class BusinessHomePage extends Component {
                 {userInfo &&
                     <div>
                         <div className="TopPage">
-                            <HomeHeader userInfo={userInfo}/>
+                            <HomeHeader userInfo={updatedUser? updatedUser : userInfo}/>
                         </div>
                         <div className="LeftPage">
                             {/* We need to add "auctions" when user is created */}
-                            <HotAuctions auctions={userInfo.auctions} />
+                            <HotAuctions auctions={userInfo.Auctions} />
                             <Link className="myAuctions" to={{ pathname: "/myAuctions", state: { auctions: theAuctions } }}>
                                 <button className="myAuctions">
                                     myAuctions

@@ -1,5 +1,6 @@
 ﻿using FinalProject.DAL;
 using FinalProject.Entities;
+using FinalProject.Entities.Modals;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -45,6 +46,11 @@ namespace FinalProject.BL
         public IEnumerable<Auction> GetAllAuctions(int userId)
         {
             return userCRUD.GetAllAuctions(userId);
+        }
+
+        public User UpdateBusinessUser(UpdatedBusinessUserModal userToUpdate)
+        {
+            return userCRUD.UpdateBusinessUser(userToUpdate);
         }
     }
 }

@@ -75,19 +75,6 @@ namespace FinalProject.BL
             }
         }
 
-        public User UpdateUser(User user)
-        {
-            try
-            {
-                return userCRUD.UpdateUser(user);
-            }
-            catch (Exception e)
-            {
-                return null;
-                throw;
-            }
-        }
-
         public bool DeleteUser(int id)
         {
             try

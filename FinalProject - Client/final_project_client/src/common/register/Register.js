@@ -30,7 +30,8 @@ const initialState = {
         password: "",
         confirmPassword: "",
         confirmMail: ""
-    }
+    },
+    userInfo: {}
 };
 
 class Register extends Component {
@@ -41,8 +42,16 @@ class Register extends Component {
         this.createUserClicked = this.createUserClicked.bind(this);
         this.isAllValid = this.isAllValid.bind(this);
         this.updateChooseTypeStateObject = this.updateChooseTypeStateObject.bind(this);
+        this.handleSubmitClicked = this.handleSubmitClicked.bind(this);
         // this.isPasswordSet = this.isPasswordSet.bind(this);
     }
+
+    // componentWillMount(){
+    //     const {userInfo} = this.props;
+    //     if(userInfo){
+
+    //     }
+    // }
 
     componentDidMount() {
         const {
@@ -66,7 +75,15 @@ class Register extends Component {
                 });
             }
         }
+        let { userInfo } = this.props;
+        if (userInfo) {
+            this.setState({
+                userInfo
+            });
+        }
+
     }
+
 
     handleInputChange(event) {
 
@@ -92,6 +109,13 @@ class Register extends Component {
                     const index = interests.findIndex((interest) => interest.value === value);
                     interests.splice(index, index + 1);
                 }
+            }
+            else {
+                value && interests.push(obj);
+
+                this.setState({
+                    interests
+                });
             }
         }
         else {
@@ -155,27 +179,27 @@ class Register extends Component {
             CreateInfluencerUser
         } = this.props;
         let user = {
-            "name": name,
-            "email": email,
-            "password": password,
-            "interests": interests,
-            "description": description,
-            "type": type,
+            "Name": name,
+            "Email": email,
+            "Password": password,
+            "Interests": interests,
+            "Description": description,
+            "Type": type,
             "Picture": chooseTypeState.src,
             "Reviews": [],
             "Chats": [],
-            "question1": question1,
-            "question2": question2
+            "Question1": question1,
+            "Question2": question2
         };
         if (type === "Social Influencer") {
-            user["dateOfBirth"] = chooseTypeState.dateOfBirth;
-            user["socialNetworks"] = chooseTypeState.socialNetworks;
+            user["DateOfBirth"] = chooseTypeState.dateOfBirth;
+            user["SocialNetworks"] = chooseTypeState.socialNetworks;
             user["Offers"] = [];
             CreateInfluencerUser(user);
         } else {
-            user["companyName"] = chooseTypeState.CompanyName;
+            user["CompanyName"] = chooseTypeState.CompanyName;
             user["WebsiteLink"] = chooseTypeState.LinkToCompanySite;
-            user["Auctions"] = [];
+            user["auctions"] = [];
             CreateBusinessUser(user);
         }
         //if there are no validtion errors
@@ -214,9 +238,30 @@ class Register extends Component {
 
         return isValidInputs;
     }
-
+    handleSubmitClicked() {
+        const { userInfo } = this.props;
+        const { UpdateInfluencerUser, UpdateBusinessUser } = this.props;
+        let userToUpdate = {
+            "Name": "Sapir",
+            "Email": userInfo.Email,
+            "Interests": userInfo.Interests,
+            "Description": userInfo.Description,
+            "Picture": userInfo.Picture,
+        };
+        if (userInfo.Type === "Social Influencer") {
+            userToUpdate["SocialNetworks"] = userInfo.SocialNetworks;
+            UpdateInfluencerUser(userToUpdate);
+        } else {
+            userToUpdate["CompanyName"] = userInfo.CompanyName;
+            userToUpdate["WebsiteLink"] = userInfo.WebsiteLink;
+            UpdateBusinessUser(userToUpdate);
+        }
+    }
     // isPasswordSet(password){
     //     return StringUtil.isEmptyString(password);
+    // }
+    // updateUserInfo(userInfo){
+    //     this.setState({userInfo})
     // }
 
     render() {
@@ -241,18 +286,21 @@ class Register extends Component {
             } = this.state;
         return (
             <div className="Container">
-
                 <span > Name * </span>
-                <input type="text" name="name" disabled={externalLogin} value={userInfo? userInfo.Name : name} onChange={this.handleInputChange} />
+                <input type="text" name="name" disabled={externalLogin} value={userInfo ? userInfo.Name : name} onChange={this.handleInputChange} />
                 <span className="errorInput" > {errors["name"] && errors["name"]} </span>
 
-                <span > Email * </span>
-                < input type="email" name="email" disabled={externalLogin} value={userInfo? userInfo.Email : email} onChange={this.handleInputChange} />
-                <span className="errorInput" > {errors["email"] && errors["email"]} </span>
+                {signUp && <div className="emailContainer">
+                    <span > Email * </span>
+                    < input type="email" name="email" disabled={externalLogin} value={email} onChange={this.handleInputChange} />
+                    <span className="errorInput" > {errors["email"] && errors["email"]} </span>
+                </div>}
 
-                <span > Confirm Email * </span>
-                < input type="email" name="confirmMail" disabled={externalLogin} value={userInfo? userInfo.ConfirmEmail : confirmMail} onChange={this.handleInputChange} />
-                <span className="errorInput" > {errors["confirmMail"] && errors["confirmMail"]} </span>
+                {signUp && <div className="confirmEmailContainer">
+                    <span > Confirm Email * </span>
+                    <input type="email" name="confirmMail" disabled={externalLogin} value={confirmMail} onChange={this.handleInputChange} />
+                    <span className="errorInput" > {errors["confirmMail"] && errors["confirmMail"]} </span>
+                </div>}
 
                 {signUp && <div className="passwordContainer">
                     <span > Password {externalLogin && (<span>for the website </span>)} *</span>
@@ -274,23 +322,23 @@ class Register extends Component {
                     </select>
                 </div>}
 
-                <Interests handleInputChange={this.handleInputChange} />
+                <Interests handleInputChange={this.handleInputChange} interests={userInfo ? userInfo.Interests : null} />
 
-                {userInfo ? 
+                {userInfo ?
                     (userInfo.Type === "Social Influencer" ?
                         < InfluencerRegister errors={errors} updateChooseTypeStateObject={this.updateChooseTypeStateObject} signUp={signUp} userInfo={userInfo} />
                         : < BusinessRegister updateChooseTypeStateObject={this.updateChooseTypeStateObject} userInfo={userInfo} />)
 
-                : type === "Social Influencer" ? < InfluencerRegister errors={errors} updateChooseTypeStateObject={this.updateChooseTypeStateObject} signUp={signUp} />
-                        : < BusinessRegister updateChooseTypeStateObject={this.updateChooseTypeStateObject}/>}
+                    : type === "Social Influencer" ? < InfluencerRegister errors={errors} updateChooseTypeStateObject={this.updateChooseTypeStateObject} signUp={signUp} />
+                        : < BusinessRegister updateChooseTypeStateObject={this.updateChooseTypeStateObject} />}
 
                 <span> Description: </span>
-                <input type="text" name="description" value={userInfo?userInfo.Description : description} onChange={this.handleInputChange} />
+                <input type="text" name="description" value={userInfo ? userInfo.Description : description} onChange={this.handleInputChange} />
 
                 <VerifyQuestions signUp={signUp} handleInputChange={this.handleInputChange} question1={question1} question2={question2} />
 
                 {signUp && <input type="button" className={`${this.isAllValid() ? "" : "disableElement"}`} onClick={this.createUserClicked} value="Sign up!" />}
-                {!signUp && <input type="button" value="Submit" />}
+                {!signUp && <input type="button" value="Submit" onClick={this.handleSubmitClicked} />}
 
             </div>
         );

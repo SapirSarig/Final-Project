@@ -97,32 +97,45 @@ namespace FinalProject.DAL
             }
         }
 
-        public User UpdateUser(User user)
+        public User UpdateInfluencerUser(UpdatedInfluencerUserModal userToUpdate)
         {
-            User CurrUser = context.Users.FirstOrDefault(u => u.Id == user.Id);
+            //how can I look in the db if the mail can change??
+            //assume for now it's the same mail
+            User CurrUser = context.Users.FirstOrDefault(u => u.Email == userToUpdate.Email);
             if (CurrUser == null)
             {
                 return null;
             }
             else
             {
-                //??
-                context.Users.Remove(CurrUser);
-                context.Users.Add(user);
+                CurrUser.Name = userToUpdate.Name;
+                CurrUser.Interests = userToUpdate.Interests;
+                CurrUser.Picture = userToUpdate.Picture;
+                CurrUser.Description = userToUpdate.Description;
+                (CurrUser as InfluencerUser).SocialNetworks = userToUpdate.SocialNetworks;
                 context.SaveChanges();
-                return user;
+                return CurrUser;
             }
+        }
 
-            // foreach (var airplaneIndex in context.Airplanes.ToList())
-            //{
-            //    if (airplaneIndex.Id == airplane.Id)
-            //    {
-            //        context.Airplanes.Remove(airplaneIndex);
-            //        context.Airplanes.Add(airplane);
-            //        context.SaveChanges();
-            //        break;
-            //    }
-            //}
+        public User UpdateBusinessUser(UpdatedBusinessUserModal userToUpdate)
+        {
+            User CurrUser = context.Users.FirstOrDefault(u => u.Email == userToUpdate.Email);
+            if (CurrUser == null)
+            {
+                return null;
+            }
+            else
+            {
+                CurrUser.Name = userToUpdate.Name;
+                CurrUser.Interests = userToUpdate.Interests;
+                CurrUser.Picture = userToUpdate.Picture;
+                CurrUser.Description = userToUpdate.Description;
+                (CurrUser as BusinessUser).WebsiteLink = userToUpdate.WebsiteLink;
+                (CurrUser as BusinessUser).CompanyName = userToUpdate.CompanyName;
+                context.SaveChanges();
+                return CurrUser;
+            }
         }
 
         public void DeleteUser(int id)

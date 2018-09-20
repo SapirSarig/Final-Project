@@ -7,7 +7,8 @@ import OffersStatus from '../offers/offersStatus.js';
 import '../userHomePage/homePages.css';
 
 const initialState = {
-    userInfo: {}
+    userInfo: {},
+    updatedUser:{}
 };
 
 class InfluencerHomePage extends Component {
@@ -20,23 +21,58 @@ class InfluencerHomePage extends Component {
         const { location } = this.props;
         if (location && location.state) {
             const { userInfo } = location.state;
-            this.setState({ userInfo });
+            const {updatedUser } = location.state;
+            if(updatedUser)
+            {
+                this.setState({ updatedUser });
+
+            }
+            else{
+                this.setState({ userInfo });
+
+            }
         }
     }
 
     render() {
+        const userInfo =
+            {
+                Name: "rinat",
+                Email: "rinat@gmail.com",
+                ConfirmEmail: "rinat@gmail.com",
+                Picture: "string",
+                Description: "pop",
+                Type: "Social Influencer",
+                CompanyName: "cola",
+                LinkToCompanySite: "www.walla.com",
+                SocialNetworks: [
+                    {
+                        Value: "Facebook",
+                        LinkToProfile: "www.Facebook.com"
+                    }
+                ],
+                Interests: [
+                    {
+                        value: "Sport"
+                    },
+                    {
+                        value: "Music"
+                    }
+                ]
+
+            };
         //const name = "influencer";
-        const { userInfo } = this.state;
+        const {  updatedUser } = this.state;
         return (
             <div className="influencerHomePage">
                 {userInfo &&
                     <div>
                         <div className="TopPage">
-                            <HomeHeader userInfo={userInfo} />
+                            <HomeHeader userInfo={updatedUser? updatedUser: userInfo} />
                         </div>
                         <div className="LeftPage">
                             {/* We need to add "auctions" when user is created */}
-                            <HotAuctions auctions={userInfo.auctions} />
+                            <HotAuctions auctions={userInfo.Auctions} />
                             <button> All Auctions </button>
                         </div>
                         <div className="RightPage">

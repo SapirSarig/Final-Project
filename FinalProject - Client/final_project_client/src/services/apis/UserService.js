@@ -177,4 +177,41 @@ export default class UserService {
       })
   }
 
+  UpdateBusinessUser(userToUpdate) {
+    var data = JSON.stringify(userToUpdate);
+    return fetch(`${this.host}/api/BusinessUsers`, {
+        method: "PATCH",
+        body: data,
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json"
+        }
+      })
+      .then((res) => {
+        return res.json();
+      })
+      .catch((err) => {
+        console.log(err);
+      })
+  }
+
+  UpdateInfluencerUser(userToUpdate) {
+    var data = JSON.stringify(userToUpdate);
+    return fetch(`${this.host}/api/InfluencerUsers`, {
+        method: "PATCH",
+        body: data,
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json"
+        }
+      })
+      .then((res) => {
+        return res.json();
+      })
+      .catch((err) => {
+        console.log(err);
+      })
+
+  }
+
 }

@@ -17,18 +17,33 @@ class HomeHeader extends Component {
         this.setState({ EditProfileClicked: true });
     }
     render() {
-        // const { userInfo } = this.props;
-        const userInfo =
-            {
-                Name: "rinat",
-                Email: "rinat@gmail.com",
-                ConfirmEmail : "rinat@gmail.com",
-                Picture: "string",
-                Description: "pop",
-                Type: "Business Owner",
-                CompanyName: "cola",
-                LinkToCompanySite: "www.walla.com"
-            };
+         const { userInfo } = this.props;
+        // const userInfo =
+        //     {
+        //         Name: "rinat",
+        //         Email: "rinat@gmail.com",
+        //         ConfirmEmail: "rinat@gmail.com",
+        //         Picture: "string",
+        //         Description: "pop",
+        //         Type: "Social Influencer",
+        //         CompanyName: "cola",
+        //         LinkToCompanySite: "www.walla.com",
+        //         SocialNetworks: [
+        //             {
+        //                 Value: "Facebook",
+        //                 LinkToProfile: "www.Facebook.com"
+        //             }
+        //         ],
+        //         Interests: [
+        //             {
+        //                 value: "Sport"
+        //             },
+        //             {
+        //                 value: "Music"
+        //             }
+        //         ]
+
+        //     };
         const { EditProfileClicked } = this.state;
         return (
             <div className="HomeHeader">

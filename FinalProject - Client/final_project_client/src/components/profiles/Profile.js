@@ -12,20 +12,20 @@ class Profile extends Component {
         this.userService = new UserService();
         this.state = {
             user: {
-                id: 1,
-                name: "Sapir",
+                Id: 1,
+                Name: "Sapir",
                 Picture: '../../images/AddAnImage.png',
-                interests: [
+                Interests: [
                     {
-                        value: "Sport",
+                        Value: "Sport",
                     },
                     {
-                        value: "Music"
+                        Value: "Music"
                     }
                 ],
-                description: "the best",
-                dateOfBirth: "31/03/1993",
-                socialNetworks: [
+                Description: "the best",
+                DateOfBirth: "31/03/1993",
+                SocialNetworks: [
                     {
                         Value: "Facebook",
                         LinkToProfile: "https://www.facebook.com/sapir.sarig"
@@ -35,12 +35,12 @@ class Profile extends Component {
                         LinkToProfile: "https://www.instagram.com/sapu9/"
                     }
                 ],
-                reviews: [
+                Reviews: [
                     {
                         value: "You are great!"
                     }
                 ],
-                type: "Social Influencer"
+                Type: "Social Influencer"
             },
             review: "",
             okDisabled: true
@@ -82,12 +82,12 @@ class Profile extends Component {
         const name = target.name;
 
         let obj = {
-            "value": value
+            "Value": value
         }
-        this.userService.AddReviewToUser(user.id, obj).then(req => {
+        this.userService.AddReviewToUser(user.Id, obj).then(req => {
             //console.log(req);
             if (req) {
-                user.reviews.push(obj);
+                user.Reviews.push(obj);
                 this.setState({ user });
             }
             else {
@@ -115,25 +115,25 @@ class Profile extends Component {
                     <img src={user.Picture} className="logo" />
 
                     <span > Name </span>
-                    <span> {user.name} </span>
+                    <span> {user.Name} </span>
 
                     <span> Interests </span>
-                    {user.interests && user.interests.length > 0 ?
+                    {user.Interests && user.Interests.length > 0 ?
                         <div className="interests">
-                            {user.interests.map(interest =>
+                            {user.Interests.map(interest =>
                                 (<div> {interest.value} </div>))}
                         </div> : <div>No Interests To Show!</div>}
 
                     <span> Description </span>
-                    <span> {user.description} </span>
+                    <span> {user.Description} </span>
 
-                    {user.type === "Social Influencer" ?
-                        <StarProfile dateOfBirth={user.dateOfBirth} socialNetworks={user.socialNetworks} /> : null}
+                    {user.Type === "Social Influencer" ?
+                        <StarProfile dateOfBirth={user.DateOfBirth} socialNetworks={user.SocialNetworks} /> : null}
 
                     <span> Reviews </span>
-                    {user.reviews && user.reviews.length > 0 ?
+                    {user.Reviews && user.Reviews.length > 0 ?
                         <div className="reviews">
-                            {user.reviews.map(review =>
+                            {user.Reviews.map(review =>
                                 (<div> {review.value} </div>))}
                         </div> : <div>No Reviews Yet!</div>}
 

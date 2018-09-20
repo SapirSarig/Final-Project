@@ -1,5 +1,6 @@
 ﻿using FinalProject.DAL;
 using FinalProject.Entities;
+using FinalProject.Entities.Modals;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -46,6 +47,11 @@ namespace FinalProject.BL
         public IEnumerable<Offer> GetAllOffers(int userId)
         {
             return userCRUD.GetAllOffers(userId);
+        }
+
+        public User UpdateInfluencerUser(UpdatedInfluencerUserModal userToUpdate)
+        {
+            return userCRUD.UpdateInfluencerUser(userToUpdate);
         }
     }
 }

@@ -53,6 +53,9 @@
     <Compile Include="Interest.cs" />
     <Compile Include="Message.cs" />
     <Compile Include="Modals\LoginModal.cs" />
+    <Compile Include="Modals\UpdatedBusinessUserModal.cs" />
+    <Compile Include="Modals\UpdatedInfluencerUserModal.cs" />
+    <Compile Include="Modals\UpdatedUserModal.cs" />
     <Compile Include="Modals\VerifyPasswordModal.cs" />
     <Compile Include="Offer.cs" />
     <Compile Include="ProductScope.cs" />

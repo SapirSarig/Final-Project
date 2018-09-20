@@ -59,7 +59,7 @@ class SignUp extends Component {
         return (
             <div>
                 {signUpOk ?
-                    (userInfo.type === "Social Influencer") ?
+                    (userInfo.Type === "Social Influencer") ?
                         <Redirect to={{
                             pathname: '/influencerHomePage',
                             state: { userInfo }
