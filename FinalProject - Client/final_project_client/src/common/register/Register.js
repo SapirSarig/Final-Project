@@ -11,25 +11,28 @@ import VerifyQuestions from "../../common/verifyQuestions/VerifyQuestions";
 import SignUp from '../../components/signUp/SignUp';
 
 const initialState = {
-    name: "",
-    email: "",
-    password: "",
-    confirmPassword: "",
-    confirmMail: "",
-    type: "Social Influencer",
-    chooseTypeState: {},
-    interests: [],
-    description: "",
-    isAllValid: false,
-    externalLogin: false,
-    question1: "",
-    question2: "",
+    user: {
+        Name: "",
+        Email: "",
+        Password: "",
+        ConfirmPassword: "",
+        ConfirmMail: "",
+        Type: "Social Influencer",
+        ChooseTypeState: {},
+        Interests: [],
+        Description: "",
+        IsAllValid: false,
+        ExternalLogin: false,
+        Question1: "",
+        Question2: "",
+    },
+
     errors: {
-        name: "",
-        email: "",
-        password: "",
-        confirmPassword: "",
-        confirmMail: ""
+        Name: "",
+        Email: "",
+        Password: "",
+        ConfirmPassword: "",
+        ConfirmMail: ""
     },
     userInfo: {}
 };
@@ -54,33 +57,35 @@ class Register extends Component {
     // }
 
     componentDidMount() {
+        let { user } = this.state;
         const {
             location
         } = this.props;
         if (location && location.state) {
             const {
                 loggedUser,
-                externalLogin
+                externalLogin,
+                userInfo
             } = location.state;
             if (loggedUser && externalLogin) {
                 const {
                     email,
                     name
                 } = loggedUser;
+                user.Email = email;
+                user.Name = name;
+                user.ExternalLogin = externalLogin;
+                user.ConfirmMail = email;
                 this.setState({
-                    email,
-                    name,
-                    externalLogin,
-                    confirmMail: email
+                    user
+                });
+            } else if (userInfo) {
+                this.setState({
+                    userInfo
                 });
             }
         }
-        let { userInfo } = this.props;
-        if (userInfo) {
-            this.setState({
-                userInfo
-            });
-        }
+
 
     }
 
@@ -90,38 +95,71 @@ class Register extends Component {
         const target = event.target;
         const value = target.value;
         const name = target.name;
-        let { interests } = this.state;
+        let { user } = this.state;
+        let { userInfo } = this.state;
 
         if (name === "Interests") {
             let obj = {
-                "value": value
+                "Value": value
             };
             if (target.type === "checkbox") {
                 if (target.checked) {
 
-                    value && interests.push(obj);
 
+
+                    value && user.Interests.push(obj);
+
+                    if (Object.getOwnPropertyNames(userInfo).length > 0) {
+                        value && userInfo.Interests && userInfo.Interests.push(obj);
+                        this.setState({
+                            userInfo
+                        })
+                    }
                     this.setState({
-                        interests
+                        user
                     })
                 }
                 else {
-                    const index = interests.findIndex((interest) => interest.value === value);
-                    interests.splice(index, index + 1);
+                    const index = user.Interests.findIndex((interest) => interest.Value === value);
+                    user.Interests.splice(index, index + 1);
+                    this.setState({
+                        user
+                    });
+                    if (Object.getOwnPropertyNames(userInfo).length > 0) {
+                        const index = userInfo.Interests.findIndex((interest) => interest.Value === value);
+                        userInfo.Interests.splice(index, index + 1);
+                        this.setState({
+                            userInfo
+                        })
+                    }
                 }
             }
             else {
-                value && interests.push(obj);
+                value && user.Interests.push(obj);
 
                 this.setState({
-                    interests
+                    user
                 });
+                if (Object.getOwnPropertyNames(userInfo).length > 0) {
+                    value && userInfo.Interests.push(obj);
+                    this.setState({
+                        userInfo
+                    })
+                }
             }
         }
         else {
+            user[name] = value;
             this.setState({
-                [name]: value
+                user
             });
+            if (Object.getOwnPropertyNames(userInfo).length > 0) {
+                userInfo[name] = value;
+                this.setState({
+                    userInfo
+                });
+            }
+
             this.checkValidation(name, value);
         }
 
@@ -139,21 +177,20 @@ class Register extends Component {
     checkValidation(fieldName, value) {
         const {
             errors,
-            password,
-            email
+            user
         } = this.state;
 
         let errorMessage;
-        if (fieldName === "name") {
+        if (fieldName === "Name") {
             errorMessage = RegisterService.nameValidation(value);
-        } else if (fieldName === "email") {
+        } else if (fieldName === "Email") {
             errorMessage = RegisterService.emailValidation(value);
-        } else if (fieldName === "password") {
+        } else if (fieldName === "Password") {
             errorMessage = RegisterService.passwordValidation(value);
-        } else if (fieldName === "confirmPassword") {
-            errorMessage = RegisterService.confirmValidation(value, password);
-        } else if (fieldName === "confirmMail") {
-            errorMessage = RegisterService.confirmValidation(value, email);
+        } else if (fieldName === "ConfirmPassword") {
+            errorMessage = RegisterService.confirmValidation(value, user.Password);
+        } else if (fieldName === "ConfirmMail") {
+            errorMessage = RegisterService.confirmValidation(value, user.Email);
         }
 
         errors[fieldName] = errorMessage;
@@ -163,44 +200,34 @@ class Register extends Component {
     }
 
     createUserClicked() {
-        const {
-            name,
-            email,
-            password,
-            type,
-            chooseTypeState,
-            interests,
-            description,
-            question1,
-            question2
-        } = this.state;
+        const { user } = this.state;
         const {
             CreateBusinessUser,
             CreateInfluencerUser
         } = this.props;
-        let user = {
-            "Name": name,
-            "Email": email,
-            "Password": password,
-            "Interests": interests,
-            "Description": description,
-            "Type": type,
-            "Picture": chooseTypeState.src,
+        let userToCreate = {
+            "Name": user.Name,
+            "Email": user.Email,
+            "Password": user.Passwordpassword,
+            "Interests": user.Interests,
+            "Description": user.Description,
+            "Type": user.Typetype,
+            "Picture": user.ChooseTypeState.src,
             "Reviews": [],
             "Chats": [],
-            "Question1": question1,
-            "Question2": question2
+            "Question1": user.Question1,
+            "Question2": user.Question2
         };
-        if (type === "Social Influencer") {
-            user["DateOfBirth"] = chooseTypeState.dateOfBirth;
-            user["SocialNetworks"] = chooseTypeState.socialNetworks;
-            user["Offers"] = [];
-            CreateInfluencerUser(user);
+        if (user.Type === "Social Influencer") {
+            userToCreate["DateOfBirth"] = user.ChooseTypeState.dateOfBirth;
+            userToCreate["SocialNetworks"] = user.ChooseTypeState.socialNetworks;
+            userToCreate["Offers"] = [];
+            CreateInfluencerUser(userToCreate);
         } else {
-            user["CompanyName"] = chooseTypeState.CompanyName;
-            user["WebsiteLink"] = chooseTypeState.LinkToCompanySite;
-            user["auctions"] = [];
-            CreateBusinessUser(user);
+            userToCreate["CompanyName"] = user.ChooseTypeState.CompanyName;
+            userToCreate["WebsiteLink"] = user.ChooseTypeState.LinkToCompanySite;
+            userToCreate["auctions"] = [];
+            CreateBusinessUser(userToCreate);
         }
         //if there are no validtion errors
 
@@ -210,31 +237,20 @@ class Register extends Component {
         const {
             isAllValidCustome
         } = this.props;
-        const {
-            errors,
-            email,
-            name,
-            password,
-            confirmPassword,
-            confirmMail,
-            chooseTypeState,
-            type,
-            question1,
-            question2
-        } = this.state;
+        const { errors, user } = this.state;
         let isValidInputs = isAllValidCustome ? isAllValidCustome() : true;
 
         isValidInputs =
-            (chooseTypeState && chooseTypeState.errors &&
-                ((type === "Business Owner" && typeof (chooseTypeState.errors.linkToCompanySite) === "undefined") ||
-                    ((type === "Social Influencer") && (typeof (chooseTypeState.errors.dateOfBirth) === "undefined") && (typeof (chooseTypeState.dateOfBirth) !== "undefined")) &&
-                    (StringUtil.isEmptyString(RegisterService.nameValidation(question1))) &&
-                    (StringUtil.isEmptyString(RegisterService.nameValidation(question2))) &&
-                    (StringUtil.isEmptyString(RegisterService.nameValidation(name))) &&
-                    (StringUtil.isEmptyString(RegisterService.emailValidation(email))) &&
-                    (StringUtil.isEmptyString(RegisterService.passwordValidation(password))) &&
-                    (StringUtil.isEmptyString(RegisterService.confirmValidation(confirmPassword, password))) &&
-                    (StringUtil.isEmptyString(RegisterService.confirmValidation(confirmMail, email))))); //init, check all fields
+            (user.ChooseTypeState && user.ChooseTypeState.errors &&
+                ((user.Type === "Business Owner" && typeof (user.ChooseTypeState.errors.LinkToCompanySite) === "undefined") ||
+                    ((user.Type === "Social Influencer") && (typeof (user.ChooseTypeState.errors.DateOfBirth) === "undefined") && (typeof (user.ChooseTypeState.DateOfBirth) !== "undefined")) &&
+                    (StringUtil.isEmptyString(RegisterService.nameValidation(user.Question1))) &&
+                    (StringUtil.isEmptyString(RegisterService.nameValidation(user.Question2))) &&
+                    (StringUtil.isEmptyString(RegisterService.nameValidation(user.Name))) &&
+                    (StringUtil.isEmptyString(RegisterService.emailValidation(user.Email))) &&
+                    (StringUtil.isEmptyString(RegisterService.passwordValidation(user.Password))) &&
+                    (StringUtil.isEmptyString(RegisterService.confirmValidation(user.ConfirmPassword, user.Password))) &&
+                    (StringUtil.isEmptyString(RegisterService.confirmValidation(user.ConfirmMail, user.Email))))); //init, check all fields
 
         return isValidInputs;
     }
@@ -265,77 +281,60 @@ class Register extends Component {
     // }
 
     render() {
-        const { children, signUp, userInfo } = this.props;
-        const {
-            name,
-            email,
-            confirmMail,
-            password,
-            confirmPassword,
-            type,
-            dateOfBirth,
-            socialNetworks,
-            logo,
-            description,
-            imgUrl,
-            errors,
-            externalLogin,
-            isAllValid,
-            question1,
-            question2
-            } = this.state;
+        const { children, signUp } = this.props;
+        const { userInfo, user, errors } = this.state;
         return (
             <div className="Container">
                 <span > Name * </span>
-                <input type="text" name="name" disabled={externalLogin} value={userInfo ? userInfo.Name : name} onChange={this.handleInputChange} />
-                <span className="errorInput" > {errors["name"] && errors["name"]} </span>
+                <input type="text" name="Name" disabled={user.ExternalLogin} value={Object.getOwnPropertyNames(userInfo).length > 0 ? userInfo.Name : user.Name} onChange={this.handleInputChange} />
+                <span className="errorInput" > {errors["Name"] && errors["Name"]} </span>
 
                 {signUp && <div className="emailContainer">
                     <span > Email * </span>
-                    < input type="email" name="email" disabled={externalLogin} value={email} onChange={this.handleInputChange} />
-                    <span className="errorInput" > {errors["email"] && errors["email"]} </span>
+                    < input type="email" name="Email" disabled={user.ExternalLogin} value={user.Email} onChange={this.handleInputChange} />
+                    <span className="errorInput" > {errors["Email"] && errors["Email"]} </span>
                 </div>}
 
                 {signUp && <div className="confirmEmailContainer">
                     <span > Confirm Email * </span>
-                    <input type="email" name="confirmMail" disabled={externalLogin} value={confirmMail} onChange={this.handleInputChange} />
-                    <span className="errorInput" > {errors["confirmMail"] && errors["confirmMail"]} </span>
+                    <input type="email" name="ConfirmMail" disabled={user.ExternalLogin} value={user.ConfirmMail} onChange={this.handleInputChange} />
+                    <span className="errorInput" > {errors["ConfirmMail"] && errors["ConfirmMail"]} </span>
                 </div>}
 
                 {signUp && <div className="passwordContainer">
-                    <span > Password {externalLogin && (<span>for the website </span>)} *</span>
-                    <input type="password" placeholder="Min 6 chars, at least one number and one lower case English letter" name="password" value={password} onChange={this.handleInputChange} />
-                    <span className="errorInput" > {errors["password"] && errors["password"]} </span>
+                    <span > Password {user.ExternalLogin && (<span>for the website </span>)} *</span>
+                    <input type="password" placeholder="Min 6 chars, at least one number and one lower case English letter" name="Password" value={user.Password} onChange={this.handleInputChange} />
+                    <span className="errorInput" > {errors["Password"] && errors["Password"]} </span>
                 </div>}
 
                 {signUp && <div className="confirmPasswordContainer">
                     <span > Confirm Password * </span>
-                    <input type="password" name="confirmPassword" value={confirmPassword} onChange={this.handleInputChange} />
-                    <span className="errorInput" > {errors["confirmPassword"] && errors["confirmPassword"]} </span>
+                    <input type="password" name="ConfirmPassword" value={user.ConfirmPassword} onChange={this.handleInputChange} />
+                    <span className="errorInput" > {errors["ConfirmPassword"] && errors["ConfirmPassword"]} </span>
                 </div>}
 
                 {signUp && <div className="pickerContainer">
                     <span > I 'm a: </span>
-                    <select name="type" onChange={this.handleInputChange} >
+                    <select name="Type" onChange={this.handleInputChange} >
                         <option value="Social Influencer" > Social Influencer </option>
                         <option value="Business Owner" > Business Owner </option>
                     </select>
                 </div>}
 
-                <Interests handleInputChange={this.handleInputChange} interests={userInfo ? userInfo.Interests : null} />
+                <Interests handleInputChange={this.handleInputChange} interests={Object.getOwnPropertyNames(userInfo).length > 0 ? userInfo.Interests : undefined} signUp={signUp} />
 
-                {userInfo ?
+                {(Object.getOwnPropertyNames(userInfo).length > 0) ?
                     (userInfo.Type === "Social Influencer" ?
-                        < InfluencerRegister errors={errors} updateChooseTypeStateObject={this.updateChooseTypeStateObject} signUp={signUp} userInfo={userInfo} />
-                        : < BusinessRegister updateChooseTypeStateObject={this.updateChooseTypeStateObject} userInfo={userInfo} />)
+                        <InfluencerRegister errors={errors} updateChooseTypeStateObject={this.updateChooseTypeStateObject} signUp={signUp} userInfo={userInfo} />
+                        : <BusinessRegister updateChooseTypeStateObject={this.updateChooseTypeStateObject} userInfo={userInfo} />)
 
-                    : type === "Social Influencer" ? < InfluencerRegister errors={errors} updateChooseTypeStateObject={this.updateChooseTypeStateObject} signUp={signUp} />
-                        : < BusinessRegister updateChooseTypeStateObject={this.updateChooseTypeStateObject} />}
+                    : user.Type === "Social Influencer" ? <InfluencerRegister errors={errors} updateChooseTypeStateObject={this.updateChooseTypeStateObject} signUp={signUp} />
+                        : <BusinessRegister updateChooseTypeStateObject={this.updateChooseTypeStateObject} />}
 
                 <span> Description: </span>
-                <input type="text" name="description" value={userInfo ? userInfo.Description : description} onChange={this.handleInputChange} />
+                <input type="text" name="Description" value={userInfo ? userInfo.Description : user.Description} onChange={this.handleInputChange} />
 
-                <VerifyQuestions signUp={signUp} handleInputChange={this.handleInputChange} question1={question1} question2={question2} />
+                <VerifyQuestions signUp={signUp} handleInputChange={this.handleInputChange} question1={user.Question1} question2={user.Question2} />
 
                 {signUp && <input type="button" className={`${this.isAllValid() ? "" : "disableElement"}`} onClick={this.createUserClicked} value="Sign up!" />}
                 {!signUp && <input type="button" value="Submit" onClick={this.handleSubmitClicked} />}

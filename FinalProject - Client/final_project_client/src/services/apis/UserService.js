@@ -177,6 +177,24 @@ export default class UserService {
       })
   }
 
+  resetPasswordToUser(authUser, password) {
+    var data = JSON.stringify({AuthUser: authUser, Password: password});
+    return fetch(`${this.host}/api/Users/ResetPassword`, {
+      method: "POST",
+      body: data,
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json"
+      }
+    })
+      .then((res) => {
+        return res.json();
+      })
+      .catch((err) => {
+        alert(err);
+      })
+  }
+
   UpdateBusinessUser(userToUpdate) {
     var data = JSON.stringify(userToUpdate);
     return fetch(`${this.host}/api/BusinessUsers`, {

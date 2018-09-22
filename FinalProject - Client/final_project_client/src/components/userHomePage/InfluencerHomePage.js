@@ -8,7 +8,7 @@ import '../userHomePage/homePages.css';
 
 const initialState = {
     userInfo: {},
-    updatedUser:{}
+    updatedUser: {}
 };
 
 class InfluencerHomePage extends Component {
@@ -21,15 +21,12 @@ class InfluencerHomePage extends Component {
         const { location } = this.props;
         if (location && location.state) {
             const { userInfo } = location.state;
-            const {updatedUser } = location.state;
-            if(updatedUser)
-            {
+            const { updatedUser } = location.state;
+            if (updatedUser) {
                 this.setState({ updatedUser });
-
             }
-            else{
+            else {
                 this.setState({ userInfo });
-
             }
         }
     }
@@ -53,22 +50,22 @@ class InfluencerHomePage extends Component {
                 ],
                 Interests: [
                     {
-                        value: "Sport"
+                        Value: "Sport"
                     },
                     {
-                        value: "Music"
+                        Value: "Music"
                     }
                 ]
 
             };
         //const name = "influencer";
-        const {  updatedUser } = this.state;
+        const { updatedUser } = this.state;
         return (
             <div className="influencerHomePage">
                 {userInfo &&
                     <div>
                         <div className="TopPage">
-                            <HomeHeader userInfo={updatedUser? updatedUser: userInfo} />
+                            <HomeHeader userInfo={Object.getOwnPropertyNames(updatedUser).length > 0  ? updatedUser : userInfo} />
                         </div>
                         <div className="LeftPage">
                             {/* We need to add "auctions" when user is created */}
@@ -81,7 +78,7 @@ class InfluencerHomePage extends Component {
                             <Link className="allOffers" to="/allOffers">
                                 <button className="allOffersBtn">
                                     allOffers
-                        </button>
+                                </button>
                             </Link>
                         </div>
                         <br />

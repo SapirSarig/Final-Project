@@ -3,7 +3,7 @@ import HomePage from './components/views/homePage/HomePage';
 import LoginPage from './components/views/loginPage/LoginPage';
 import Auction from './components/views/auction/auction';
 import SignUpPage from './components/views/signUpPage/SignUpPage';
-import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+import { BrowserRouter as Router, Route, Link, Redirect } from "react-router-dom";
 import './App.css';
 import BusinessHomePage from './components/userHomePage/BusinessHomePage';
 import InfluencerHomePage from './components/userHomePage/InfluencerHomePage';
@@ -18,7 +18,25 @@ import ForgotPassword from './components/login/ForgotPassword';
 import NegotiationPage from './components/negotiation/NegotiationPage';
 import offersPerAuctionPage from './components/offers/offersPerAuctionPage';
 import EditProfile from "./components/editProfile/EditProfile";
+import ResetPassword from "./components/resetPassword/ResetPassword";
+import LocalStorageUtil from './utils/LocalStorageUtil';
+import SessionStorageUtil from './utils/SessionStorageUtil';
 
+const CheckIfUserAuthenticated = () => {
+  const user = LocalStorageUtil.GetLoggedUser() || SessionStorageUtil.GetLoggedUser();
+  if (user && user.Email) {
+    return true;
+  }
+  return false;
+}
+
+const PrivateRoute = ({ component: Component, ...rest }) => (
+  <Route {...rest} render={(props) => (
+    true //CheckIfUserAuthenticated() === true
+      ? <Component {...props} />
+      : <Redirect to='/login' />
+  )} />
+)
 
 class App extends Component {
 
@@ -31,21 +49,21 @@ class App extends Component {
             <Route exact path="/" component={HomePage} />
             <Route path="/login" component={LoginPage} />
             <Route path="/signUp" component={SignUpPage} />
-            <Route path="/auction" component={Auction} />
-            <Route path="/allOffers" component={allOffers} />
-            <Route path="/starOffer" component={starOffer} />
-            <Route path="/myAuctions" component={myAuctions} />
-            <Route path="/starProfile" component={StarProfile} />
-            <Route path="/profile" component={Profile} />
-            <Route path = "/influencerHomePage" component ={InfluencerHomePage}/>
-            <Route path="/businessHomePage" component={BusinessHomePage} />
-            <Route path="/allAuctions" component={AllAuctions} />            
-            <Route path="/allUsers" component={AllUsers} />       
-            <Route path = "/negotiationPage" component = {NegotiationPage}/>
-            <Route path = "/offersPerAuctionPage" component = {offersPerAuctionPage}/>
-            <Route path = "/forgotPassword" component = {ForgotPassword}/>
-            <Route path = "/editProfile" component = {EditProfile}/>
-
+            <PrivateRoute path="/auction" component={Auction} />
+            <PrivateRoute path="/allOffers" component={allOffers} />
+            <PrivateRoute path="/starOffer" component={starOffer} />
+            <PrivateRoute path="/myAuctions" component={myAuctions} />
+            <PrivateRoute path="/starProfile" component={StarProfile} />
+            <PrivateRoute path="/profile" component={Profile} />
+            <PrivateRoute path="/influencerHomePage" component={InfluencerHomePage} />
+            <PrivateRoute path="/businessHomePage" component={BusinessHomePage} />
+            <PrivateRoute path="/allAuctions" component={AllAuctions} />
+            <PrivateRoute path="/allUsers" component={AllUsers} />
+            <PrivateRoute path="/negotiationPage" component={NegotiationPage} />
+            <PrivateRoute path="/offersPerAuctionPage" component={offersPerAuctionPage} />
+            <PrivateRoute path="/forgotPassword" component={ForgotPassword} />
+            <PrivateRoute path="/editProfile" component={EditProfile} />
+            <PrivateRoute path="/resetPassword" component={ResetPassword} />
           </div>
         </Router>
       </div>

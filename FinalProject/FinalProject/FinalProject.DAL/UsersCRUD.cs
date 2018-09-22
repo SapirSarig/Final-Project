@@ -30,7 +30,7 @@ namespace FinalProject.DAL
 
         public User Login(LoginModal loginModal)
         {
-            return context.Users.FirstOrDefault(user => user.Email == loginModal.email && user.Password == loginModal.password);
+            return context.Users.FirstOrDefault(user => user.Email == loginModal.Email && user.Password == loginModal.Password);
         }
 
         public User ExternalLogin(string email)
@@ -142,6 +142,13 @@ namespace FinalProject.DAL
         {
             User user = context.Users.FirstOrDefault(u => u.Id == id);
             context.Users.Remove(user);
+            context.SaveChanges();
+        }
+
+        public void ResetPassword(User currUser, string newHashPassword)
+        {
+            User user = context.Users.FirstOrDefault(u => u.Id == currUser.Id);
+            user.Password = newHashPassword;
             context.SaveChanges();
         }
 

@@ -49,7 +49,7 @@ class BusinessHomePage extends Component {
                 {userInfo &&
                     <div>
                         <div className="TopPage">
-                            <HomeHeader userInfo={updatedUser? updatedUser : userInfo}/>
+                            <HomeHeader  userInfo={Object.getOwnPropertyNames(updatedUser).length > 0  ? updatedUser : userInfo}/>
                         </div>
                         <div className="LeftPage">
                             {/* We need to add "auctions" when user is created */}

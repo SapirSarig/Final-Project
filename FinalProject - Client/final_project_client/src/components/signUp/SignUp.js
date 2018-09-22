@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import Register from '../../common/register/Register';
 import UserService from '../../services/apis/UserService';
 import { Route, Redirect } from 'react-router';
+import LocalStorageUtil from '../../utils/LocalStorageUtil';
+import SessionStorageUtil from '../../utils/SessionStorageUtil';
 
 const initialState = {
     signUpOk: false,
@@ -28,6 +30,8 @@ class SignUp extends Component {
             //console.log(req);
             if (req) {
                 this.setState({ signUpOk: true });
+                LocalStorageUtil.RemoveLoggedUser();
+                SessionStorageUtil.SaveLoggedUser(req);
             }
             else {
                 alert("User already exists!");
@@ -43,7 +47,8 @@ class SignUp extends Component {
             //console.log(req);
             if (req) {
                 this.setState({ signUpOk: true });
-
+                LocalStorageUtil.RemoveLoggedUser();
+                SessionStorageUtil.SaveLoggedUser(req);
             }
             else {
                 alert("User already exists!");

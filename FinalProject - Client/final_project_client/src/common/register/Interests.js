@@ -6,39 +6,12 @@ class Interests extends Component {
         this.focusElement = this.focusElement.bind(this);
         this.state = {
             otherDisabled: true,
-            otherValue:"",
-            userInfo :
-            {
-                Name: "rinat",
-                Email: "rinat@gmail.com",
-                ConfirmEmail: "rinat@gmail.com",
-                Picture: "string",
-                Description: "pop",
-                Type: "Business Owner",
-                CompanyName: "cola",
-                LinkToCompanySite: "www.walla.com",
-                socialNetworks: [
-                    {
-                        Value: "Facebook",
-                        LinkToProfile: "www.Facebook.com"
-                    }
-                ],
-                Interests: [
-                    {
-                        value: "Sport"
-                    },
-                    {
-                        value: "Music"
-                    },
-                    {
-                        other:"Kaka"
-                    }
-                ]
-
-            }
+            otherValue: "",
+            userInfo: {}
         }
         this.checkIfChecked = this.checkIfChecked.bind(this);
         this.getOtherValue = this.getOtherValue.bind(this);
+        this.checkIfOtherChecked = this.checkIfOtherChecked.bind(this);
     }
 
 
@@ -47,48 +20,66 @@ class Interests extends Component {
         const target = event.target;
         //const value = target.type === "checkbox" ? target.checked : target.value;
         //const name = target.name;
-       // let element = document.getElementById("OtherDetails");
+        // let element = document.getElementById("OtherDetails");
         //if (!target.checked) {
-            //element && (element.value = "");
-            //handleInputChange({ target: element});
+        //element && (element.value = "");
+        //handleInputChange({ target: element});
         //}
         const { otherDisabled } = this.state;
         this.setState({ otherDisabled: !target.checked });
 
     }
 
-    checkIfChecked(value){
-        //const {interests} = this.props;
-        const {userInfo} = this.state;
-        const interests = userInfo.Interests;
-        if(interests){
-            for(var i=0; i<interests.length; i++){
-                if (interests[i].value === value){
+    checkIfChecked(value) {
+        const { interests } = this.props;
+        if (interests) {
+            for (var i = 0; i < interests.length; i++) {
+                if (interests[i].Value === value) {
+                    return true;
+                }
+            }
+
+            return false;
+
+
+        }
+
+    }
+
+    getOtherValue() {
+        const { interests } = this.props;
+        let { otherDisabled } = this.state;
+        if (interests) {
+            for (var i = 0; i < interests.length; i++) {
+                if (interests[i].Value !== "Sport" && interests[i].Value !== "Style"
+                    && interests[i].Value !== "Food" && interests[i].Value !== "Music"
+                    && interests[i].Value !== "Technology" && interests[i].Value !== "Pets"
+                    && interests[i].Value !== "Travel") {
+                    return interests[i].Value;               
+                }
+            }
+            return "";
+        }
+    }
+
+    checkIfOtherChecked() {
+        const { interests } = this.props;
+        if (interests) {
+            for (var i = 0; i < interests.length; i++) {
+                if (interests[i].Value !== "Sport" && interests[i].Value !== "Style"
+                    && interests[i].Value !== "Food" && interests[i].Value !== "Music"
+                    && interests[i].Value !== "Technology" && interests[i].Value !== "Pets"
+                    && interests[i].Value !== "Travel") {
                     return true;
                 }
             }
             return false;
         }
-        
-    }
-
-    getOtherValue(){
-        // const {userInfo} = this.state;
-        // const interests = userInfo.Interests;
-        // if (userInfo){
-        //     for(var i=0; i<interests.length; i++){
-        //         if ((Object.keys(interests[i]).includes("other"))){
-        //             return true;
-        //         }
-        //     }
-        //     return false;
-        // }
     }
 
     render() {
-        const { handleInputChange } = this.props;
+        const { handleInputChange, interests, signUp } = this.props;
         const { otherDisabled } = this.state;
-
 
         return (
             <div className="Container">
@@ -115,9 +106,9 @@ class Interests extends Component {
                 <input type="checkbox" checked={this.checkIfChecked("Travel")} name="Interests" value="Travel" onChange={handleInputChange} />
 
                 {/* how to save it in the server? */}
-                <span>Other</span>
-                <input type="checkbox" name="Other" onChange={this.focusElement} />
-                <input id="OtherDetails" value={this.getOtherValue} disabled={otherDisabled} type="text" name="Interests" onChange={handleInputChange} />
+                {/* <span>Other</span>
+                <input type="checkbox" checked={signUp? !otherDisabled: this.checkIfOtherChecked()} name="Other" onChange={this.focusElement} />
+                <input id="OtherDetails" value={this.getOtherValue()} disabled={signUp? otherDisabled : !this.checkIfOtherChecked()} type="text" name="Interests" onChange={handleInputChange} /> */}
             </div>
         )
     }

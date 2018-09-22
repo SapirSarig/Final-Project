@@ -68,7 +68,7 @@ class Auction extends Component {
 
         if (name === "Interests") {
             let obj = {
-                "value": value
+                "Value": value
             };
             if (target.type === "checkbox") {
                 if (target.checked) {

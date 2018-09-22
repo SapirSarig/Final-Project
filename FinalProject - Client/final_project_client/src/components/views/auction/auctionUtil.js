@@ -7,10 +7,9 @@ export default class auctionUtil {
         }
         else {
             let currDate = new Date();
+            currDate.setHours(0,0,0,0);
             let givenDate = new Date(value);
-            let m1 = givenDate.getTime();
-            let m2 = currDate.getTime();
-            if (m1 < m2) {
+            if (givenDate < currDate) {
                 dateError = "Date Not Valid";
             }
         }

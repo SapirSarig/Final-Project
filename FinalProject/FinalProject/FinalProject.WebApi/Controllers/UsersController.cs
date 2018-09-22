@@ -82,6 +82,7 @@ namespace FinalProject.WebApi.Controllers
             return NotFound();
         }
 
+        [HttpPost]
         [Route("SendPassword")]
         public IHttpActionResult SendPassword(VerifyPasswordModal verifyPasswordObject)
         {
@@ -89,6 +90,18 @@ namespace FinalProject.WebApi.Controllers
             if (isSent)
             {
                 return Ok(verifyPasswordObject);
+            }
+            return NotFound();
+        }
+
+        [HttpPost]
+        [Route("ResetPassword")]
+        public IHttpActionResult ResetPassword([FromBody]ResetPasswordModal ResetPasswordModal)
+        {
+            bool isSent = usersBL.ResetPassword(ResetPasswordModal.AuthUser, ResetPasswordModal.Password);
+            if (isSent)
+            {
+                return Ok("sdasda");
             }
             return NotFound();
         }

@@ -6,44 +6,54 @@ import './starOffer.css';
 
 const styles = theme => ({
     container: {
-      display: 'flex',
-      flexWrap: 'wrap',
-      flexDirection: 'column',
-      width: '100%'
+        display: 'flex',
+        flexWrap: 'wrap',
+        flexDirection: 'column',
+        width: '100%'
     },
     textField: {
-      marginLeft: theme.spacing.unit,
-      marginRight: theme.spacing.unit,
-      width: 300,
+        marginLeft: theme.spacing.unit,
+        marginRight: theme.spacing.unit,
+        width: 300,
     }
 });
 
 class starOffer extends Component {
-    constructor(props){
+    constructor(props) {
         super(props);
 
         this.state = {
-            name: '',
-            nameOfProduct: '',
-            payment: '',
-            offerAdvertising: '',
-            offerDescription: ''
-          };
-        
-        this.handleChange = (name, nameOfProduct, payment, offerAdvertising, offerDescription) => event => {
-            this.setState({
-                [name]: event.target.value,
-                [nameOfProduct]: event.target.value,
-                [payment]: event.target.value,
-                [offerAdvertising]: event.target.value,
-                [offerDescription]: event.target.value,
-            });
+            offer:{
+                AuctionName: '', //props
+                StarName:'', //props
+                AdvertisingForms:[],
+                Description: '',
+                PublishSocialNetworks:[],
+                Payment: ''
+                
+            }
+           
         };
+        this.handleChange = this.handleChange.bind(this);
+        
+    }
+
+    handleChange(event) {
+
+        const target = event.target;
+        const value = target.value;
+        const name = target.name;
+        let { offer } = this.state;
+        
+        offer[name] = value;
+        this.setState({
+            offer
+        });
     }
 
     render() {
         const { classes } = this.props;
-
+        let {offer} = this.state;
         return (
             <div className="offerWrapper">
                 <form className={classes.container} noValidate autoComplete="off">
@@ -57,7 +67,7 @@ class starOffer extends Component {
                             InputProps={{
                                 readOnly: true,
                             }}
-                            style = {{width: '30%'}}
+                            style={{ width: '30%' }}
                         />
                         <div className="editAuctionBtn designBtn">
                             Edit offer
@@ -66,37 +76,27 @@ class starOffer extends Component {
                     <TextField
                         id="read-only-input"
                         label="Auction name"
-                        defaultValue="Tal's Auction"
+                        defaultValue= {offer.AuctionName}
                         className={classes.textField}
                         margin="normal"
                         InputProps={{
                             readOnly: true,
                         }}
-                        style = {{width: '30%'}}
+                        style={{ width: '30%' }}
                     />
                     <TextField
                         id="read-only-input"
                         label="Star's name"
-                        defaultValue="Tal"
+                        defaultValue={offer.StarName}
                         className={classes.textField}
                         margin="normal"
                         InputProps={{
                             readOnly: true,
                         }}
-                        style = {{width: '30%'}}
+                        style={{ width: '30%' }}
                     />
                     <div className="separatorLine"></div>
-                    <TextField
-                        id="offerAdvertising"
-                        label="Offer advertising"
-                        multiline
-                        rowsMax="8"
-                        value={this.state.offerAdvertising}
-                        onChange={this.handleChange('offerAdvertising')}
-                        className={classes.textField}
-                        margin="normal"
-                        style = {{width: '80%'}}
-                    />
+                    <label>Form of Advertising:</label>
                     <div className="accessoriesContainer">
                         <div className="video accessoriestWrapper">
                             <div className="checkboxforaccessories">
@@ -120,6 +120,18 @@ class starOffer extends Component {
                             <div className="descTitle">Post</div>
                         </div>
                     </div>
+                    <TextField
+                        id="offerDescription"
+                        name="Description"
+                        label="Offer's Description"
+                        multiline
+                        rowsMax="8"
+                        value={offer.Description}
+                        onChange={this.handleChange}
+                        className={classes.textField}
+                        margin="normal"
+                        style={{ width: '80%' }}
+                    />
                     <div className="socialMediaContainer">
                         <div className="socialMediaTitle">Social Media</div>
                         <div className="socialMediaIcons">
@@ -159,25 +171,27 @@ class starOffer extends Component {
                                     <i class="fab fa-youtube-square" aria-hidden="true"></i>
                                 </div>
                             </div>
+                            
                         </div>
+                        <TextField
+                                id="payment"
+                                name="Payment"
+                                label="Payment ($)"
+                                value={offer.Payment}
+                                onChange={this.handleChange}
+                                type="number"
+                                className={classes.textField}
+                                margin="normal"
+                                style={{ width: '80%' }}
+                            />
                     </div>
-                    <TextField
-                        id="offerDescription"
-                        label="Offer's Description"
-                        multiline
-                        rowsMax="8"
-                        value={this.state.offerDescription}
-                        onChange={this.handleChange('offerDescription')}
-                        className={classes.textField}
-                        margin="normal"
-                        style = {{width: '80%'}}
-                    />
+
                     <div className="btnContainer">
                         <div className="send designBtn">
-                            Send Offer 
+                            Send Offer
                         </div>
                         <div className="send designBtn">
-                            Open negotiaition 
+                            Open negotiaition
                         </div>
                     </div>
                 </form>
