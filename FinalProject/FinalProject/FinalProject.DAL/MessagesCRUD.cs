@@ -17,7 +17,7 @@ namespace FinalProject.DAL
             context.SaveChanges();
         }
 
-        public IEnumerable<Message> GetMessagesByOfferId(int chatId)
+        public IEnumerable<Message> GetMessage(int chatId)
         {
             IEnumerable<Message> allMessages = context.Messages.ToList();
             List<Message> offersMessages = new List<Message>();
@@ -30,6 +30,11 @@ namespace FinalProject.DAL
                 }
             }
             return (IEnumerable<Message>)offersMessages;
+        }
+
+        public Message GetMessageById(int id)
+        {
+            return context.Messages.FirstOrDefault((message) => message.Id == id);
         }
     }
 }

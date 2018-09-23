@@ -4,6 +4,7 @@ using FinalProject.Entities.Modals;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
@@ -21,11 +22,16 @@ namespace FinalProject.BL
             pwHasher = new PasswordWithSaltHasher();
         }
 
-        public User Login(LoginModal loginModal)
+        public ErrorMessage Login(LoginModal loginModal)
         {
             if (string.IsNullOrEmpty(loginModal.Email) || string.IsNullOrEmpty(loginModal.Password))
             {
-                return null;
+                ErrorMessage message = new ErrorMessage
+                {
+                    Code = HttpStatusCode.NotModified,
+                    Message = "Validation Error"
+                };
+                return message;
             }
             else
             {
@@ -33,32 +39,69 @@ namespace FinalProject.BL
                 {
                     HashWithSaltResult hashResultSha256 = pwHasher.HashWithSalt(loginModal.Password, loginModal.Email);
                     loginModal.Password = hashResultSha256.Digest + hashResultSha256.Salt;
-                    return usersCRUD.Login(loginModal);
+                    User user =  usersCRUD.Login(loginModal);
+                    if (user != null)
+                    {
+                        ErrorMessage message = new ErrorMessage
+                        {
+                            Code = HttpStatusCode.OK,
+                        };
+                        return message;
+                    }
+                    else
+                    {
+                        ErrorMessage message = new ErrorMessage
+                        {
+                            Code = HttpStatusCode.NotModified,
+                            Message = "Validation Error"
+                        };
+                        return message;
+                    }
                 }
                 catch (Exception e)
                 {
-                    Console.WriteLine(e);
-                    return null;
+                    throw e;
                 }
             }
         }
 
-        public User ExternalLogin(string email)
+        public ErrorMessage ExternalLogin(string email)
         {
             if (string.IsNullOrEmpty(email))
             {
-                return null;
+                ErrorMessage message = new ErrorMessage
+                {
+                    Code = HttpStatusCode.NotModified,
+                    Message = "Validation Error"
+                };
+                return message;
             }
             else
             {
                 try
                 {
-                    return usersCRUD.ExternalLogin(email);
+                    User user = usersCRUD.ExternalLogin(email);
+                    if (user != null)
+                    {
+                        ErrorMessage message = new ErrorMessage
+                        {
+                            Code = HttpStatusCode.OK,
+                        };
+                        return message;
+                    }
+                    else
+                    {
+                        ErrorMessage message = new ErrorMessage
+                        {
+                            Code = HttpStatusCode.NotModified,
+                            Message = "Validation Error"
+                        };
+                        return message;
+                    }
                 }
                 catch (Exception e)
                 {
-                    Console.WriteLine(e);
-                    return null;
+                    throw e;
                 }
             }
         }

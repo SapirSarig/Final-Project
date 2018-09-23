@@ -76,14 +76,14 @@ class BusinessRegister extends Component {
         return (
             <div className="Container">
                 <span>Company's Name *</span>
-                <input type="text" value={userInfo? userInfo.CompanyName : CompanyName}name="CompanyName" onChange={this.handleInputChange} />
+                <input type="text" value={Object.getOwnPropertyNames(userInfo).length > 0? userInfo.CompanyName : CompanyName}name="CompanyName" onChange={this.handleInputChange} />
                 <br />
                 <span> Company's logo </span>
-                <img id="uploadPreview" src={userInfo? userInfo.Picture : src} className="logo" />
+                <img id="uploadPreview" src={Object.getOwnPropertyNames(userInfo).length > 0? userInfo.Picture : src} className="logo" />
                 <input type="file" name="myFile" onChange={this.handleImgChange} />
 
                 <span>Link To Company's Site</span>
-                <input type="text" value={userInfo? userInfo.LinkToCompanySite : LinkToCompanySite} name="LinkToCompanySite" onChange={this.handleInputChange} />
+                <input type="text" value={Object.getOwnPropertyNames(userInfo).length > 0 ? userInfo.LinkToCompanySite : LinkToCompanySite} name="LinkToCompanySite" onChange={this.handleInputChange} />
                 <span className="errorInput">{errors["LinkToCompanySite"] && errors["LinkToCompanySite"]}</span>
 
 

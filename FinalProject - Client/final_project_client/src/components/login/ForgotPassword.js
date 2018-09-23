@@ -11,8 +11,8 @@ export default class ForgotPassword extends Component {
         super(props);
         this.state = {
             email: "",
-            question1: "",
-            question2: "",
+            Question1: "",
+            Question2: "",
             emailError: "",
             emailSent: false
         }
@@ -38,18 +38,18 @@ export default class ForgotPassword extends Component {
     }
 
     submitClicked() {
-        const { email, question1, question2 } = this.state;
+        const { email, Question1, Question2 } = this.state;
         let { emailSent } = this.state;
         let obj = {
             "Email": email,
-            "Question1": question1,
-            "Question2": question2
+            "Question1": Question1,
+            "Question2": Question2
         }
-        this.userService.sendPasswordToUser(obj).then(req => {
+        this.userService.SendLinkToResetPassword(obj).then(req => {
             //console.log(req);
             if (req) {
                 //this.setState({ signUpOk: true });
-                alert("The password was succefully sent to your email!");
+                alert("A link to reset your password was succefully sent to your email!");
                 this.setState({
                     emailSent: true
                 });
@@ -87,7 +87,7 @@ export default class ForgotPassword extends Component {
                         <span className="errorInput" > {emailError} </span>
                     </div> :
                     <Redirect to={{
-                        pathname: '/login'
+                        pathname: '/'
                         // state: { userInfo }
                     }} />}
             </div>

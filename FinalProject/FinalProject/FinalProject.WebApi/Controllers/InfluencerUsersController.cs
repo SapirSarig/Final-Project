@@ -8,6 +8,7 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Cors;
+using System.Web.Http.Results;
 
 namespace FinalProject.WebApi.Controllers
 {
@@ -16,27 +17,40 @@ namespace FinalProject.WebApi.Controllers
     public class InfluencerUsersController : ApiController
     {
         private InfluencerUsersBL influencerUsersBL = new InfluencerUsersBL();
+        private UsersBL usersBL = new UsersBL();
 
         [HttpPost]
         public IHttpActionResult CreateUser(InfluencerUser user)
         {
-            bool isCreated = influencerUsersBL.CreateInfluencerUser(user);
-            if (isCreated)
+            ErrorMessage errorMessage = influencerUsersBL.CreateInfluencerUser(user);
+            if (errorMessage.Code == HttpStatusCode.OK)
             {
-                return Ok(user);
+                User createdUser = usersBL.GetUserByEmail(user.Email);
+                return Ok(createdUser);
             }
-            return NotFound();
+
+            return new ResponseMessageResult(Request.CreateErrorResponse(
+                    errorMessage.Code,
+                   new HttpError(errorMessage.Message)
+               )
+           );
         }
 
         [HttpPatch]
         public IHttpActionResult UpdateInfluencerUser(UpdatedInfluencerUserModal userToUpdate)
         {
-            User updatedUser = influencerUsersBL.UpdateInfluencerUser(userToUpdate);
-            if (updatedUser!=null)
+            ErrorMessage errorMessage = influencerUsersBL.UpdateInfluencerUser(userToUpdate);
+            if (errorMessage.Code == HttpStatusCode.OK)
             {
+                User updatedUser = usersBL.GetUserByEmail(userToUpdate.Email);
                 return Ok(updatedUser);
             }
-            return NotFound();
+
+            return new ResponseMessageResult(Request.CreateErrorResponse(
+                    errorMessage.Code,
+                   new HttpError(errorMessage.Message)
+               )
+           );
         }
 
         [Route("GetAllOffers")]

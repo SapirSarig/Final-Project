@@ -40,7 +40,9 @@ namespace FinalProject.DAL
 
         public User GetUserByEmail(string email)
         {
-            return context.Users.FirstOrDefault(u => u.Email == email);
+            User user = context.Users.FirstOrDefault(u => u.Email == email);
+            user.Password = null;
+            return user;
         }
 
         public IEnumerable<User> GetFilteredUsersByName(string searchStr)
@@ -99,8 +101,6 @@ namespace FinalProject.DAL
 
         public User UpdateInfluencerUser(UpdatedInfluencerUserModal userToUpdate)
         {
-            //how can I look in the db if the mail can change??
-            //assume for now it's the same mail
             User CurrUser = context.Users.FirstOrDefault(u => u.Email == userToUpdate.Email);
             if (CurrUser == null)
             {

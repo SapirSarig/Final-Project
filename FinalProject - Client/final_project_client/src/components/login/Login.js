@@ -90,17 +90,25 @@ class Login extends Component {
         const { rememberMe } = this.state;
         this.userService.loginUser(this.state).then(req => {
             if (req) {
-                this.setState({
-                    loggedIn: true,
-                    loggedUser: req
-                });
-
-                if (rememberMe) {
-                    LocalStorageUtil.SaveLoggedUser(req);
-                } else {
-                    LocalStorageUtil.RemoveLoggedUser();
-                    SessionStorageUtil.SaveLoggedUser(req);
+                if (req.Message) {
+                    alert(req.Message);
                 }
+                else {
+
+                    this.setState({
+                        loggedIn: true,
+                        loggedUser: req
+                    }, () => {
+                        if (rememberMe) {
+                            SessionStorageUtil.RemoveLoggedUser();
+                            LocalStorageUtil.SaveLoggedUser(req);
+                        } else {
+                            LocalStorageUtil.RemoveLoggedUser();
+                            SessionStorageUtil.SaveLoggedUser(req);
+                        }
+                    });
+                }
+
             } else {
                 alert("Validation Error");
             }
@@ -108,15 +116,22 @@ class Login extends Component {
     }
 
     responseFacebook(response) {
-        const {clickOnLoginFaceBook} = this.state;
+        const { clickOnLoginFaceBook } = this.state;
         if (clickOnLoginFaceBook && response.accessToken) {
             //if(isLogged && this.checkIfUserSignUp(response.email))
             //false 
             this.userService.loginExternalUser(response).then(req => {
                 if (req) {
-                    LocalStorageUtil.SaveLoggedUser(req);
-                    this.setState({ loggedIn: true, loggedUser: req })
-                } else {
+                    if (req.Message) {
+                        alert(req.Message);
+                    }
+                    else {
+                        LocalStorageUtil.SaveLoggedUser(req);
+                        this.setState({ loggedIn: true, loggedUser: req })
+                    }
+
+                }
+                else {
                     LocalStorageUtil.RemoveLoggedUser();
                     this.setState({ externalLogin: true, loggedUser: response })
                 }
@@ -126,7 +141,7 @@ class Login extends Component {
     }
 
     componentClicked(res) {
-        this.setState({clickOnLoginFaceBook: true});
+        this.setState({ clickOnLoginFaceBook: true });
     }
 
     render() {

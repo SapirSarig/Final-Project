@@ -5,16 +5,15 @@ import HomeHeader from './HomeHeader.js';
 import HotAuctions from '../userHomePage/hotAuctions.js';
 import OffersStatus from '../offers/offersStatus.js';
 import '../userHomePage/homePages.css';
-const initialState = {
-    userInfo: {},
-    updatedUser:{}
-};
+
 
 class BusinessHomePage extends Component {
     constructor(props) {
         super(props);
-        this.state = initialState;
-    }
+        this.state = {
+            userInfo: {},
+            updatedUser: {}
+        }    }
 
     componentDidMount() {
         const { location } = this.props;
@@ -35,26 +34,44 @@ class BusinessHomePage extends Component {
 
     render() {
         //const name = "Coca Cola";
-        const { userInfo, updatedUser } = this.state;
-        const theAuctions = [{
-            Title: 'Tal0'
-        }, {
-            Title: 'Tal1'
-        }, {
-            Title: 'Tal2'
-        }];
+        const {  updatedUser } = this.state;
+        const userInfo =
+            {
+                Name: "rinat",
+                Email: "rinat@gmail.com",
+                ConfirmEmail: "rinat@gmail.com",
+                Picture: "string",
+                Description: "pop",
+                Type: "Business Owner",
+                CompanyName: "cola",
+                LinkToCompanySite: "www.walla.com",
+                SocialNetworks: [
+                    {
+                        Value: "Facebook",
+                        LinkToProfile: "www.facebook.com"
+                    }
+                ],
+                Interests: [
+                    {
+                        Value: "Sport"
+                    },
+                    {
+                        Value: "Music"
+                    }
+                ]
 
+            };
         return (
             <div className="businessHomePage">
                 {userInfo &&
                     <div>
                         <div className="TopPage">
-                            <HomeHeader  userInfo={Object.getOwnPropertyNames(updatedUser).length > 0  ? updatedUser : userInfo}/>
+                            <HomeHeader  user={Object.getOwnPropertyNames(updatedUser).length > 0  ? updatedUser : userInfo}/>
                         </div>
                         <div className="LeftPage">
                             {/* We need to add "auctions" when user is created */}
                             <HotAuctions auctions={userInfo.Auctions} />
-                            <Link className="myAuctions" to={{ pathname: "/myAuctions", state: { auctions: theAuctions } }}>
+                            <Link className="myAuctions" to={{ pathname: "/myAuctions", state: { auctions: userInfo.Auctions } }}>
                                 <button className="myAuctions">
                                     myAuctions
                         </button>

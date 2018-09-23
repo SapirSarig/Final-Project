@@ -30,10 +30,52 @@ const CheckIfUserAuthenticated = () => {
   return false;
 }
 
+const CheckIfCurrentTypeUserLogged = (type) => {
+  const user = LocalStorageUtil.GetLoggedUser() || SessionStorageUtil.GetLoggedUser();
+  if (user && type && user.Email && user.Type) {
+    return user.Type === type
+  }
+  return false;
+}
+
+const PublicRoute = ({ component: Component, ...rest }) => (
+  <Route {...rest} render={(props) => (
+    CheckIfUserAuthenticated() === true
+      ? CheckIfCurrentTypeUserLogged("Business Owner")
+        ? <Redirect state={LocalStorageUtil.GetLoggedUser() || SessionStorageUtil.GetLoggedUser()} to='/businessHomePage' />
+        : <Redirect state={LocalStorageUtil.GetLoggedUser() || SessionStorageUtil.GetLoggedUser()} to='/influencerHomePage' />
+      : <Component {...props} />
+  )} />
+)
+
 const PrivateRoute = ({ component: Component, ...rest }) => (
   <Route {...rest} render={(props) => (
-    true //CheckIfUserAuthenticated() === true
+    CheckIfUserAuthenticated() === true
       ? <Component {...props} />
+      : <Redirect to='/login' />
+  )} />
+)
+
+const PrivateBusinessUserRoute = ({ component: Component, ...rest }) => (
+  <Route {...rest} render={(props) => (
+    CheckIfUserAuthenticated() === true 
+    ? CheckIfCurrentTypeUserLogged("Business Owner")
+      ? <Component {...props} />
+      : CheckIfCurrentTypeUserLogged("Social Influencer")
+        ? <Redirect state={LocalStorageUtil.GetLoggedUser() || SessionStorageUtil.GetLoggedUser()} to='/influencerHomePage' />
+        : <Redirect to='/' />
+      : <Redirect to='/login' />
+  )} />
+)
+
+const PrivateInfluencerUserRoute = ({ component: Component, ...rest }) => (
+  <Route {...rest} render={(props) => (
+    CheckIfUserAuthenticated() === true 
+    ? CheckIfCurrentTypeUserLogged("Social Influencer")
+      ? <Component {...props} />
+      : CheckIfCurrentTypeUserLogged("Business Owner")
+        ? <Redirect state={LocalStorageUtil.GetLoggedUser() || SessionStorageUtil.GetLoggedUser()} to='/businessHomePage' />
+        : <Redirect to='/' />
       : <Redirect to='/login' />
   )} />
 )
@@ -46,17 +88,17 @@ class App extends Component {
       <div>
         <Router>
           <div className="routeContainer">
-            <Route exact path="/" component={HomePage} />
-            <Route path="/login" component={LoginPage} />
-            <Route path="/signUp" component={SignUpPage} />
+            <PublicRoute exact path="/" component={HomePage} />
+            <PublicRoute path="/login" component={LoginPage} />
+            <PublicRoute path="/signUp" component={SignUpPage} />
             <PrivateRoute path="/auction" component={Auction} />
             <PrivateRoute path="/allOffers" component={allOffers} />
             <PrivateRoute path="/starOffer" component={starOffer} />
             <PrivateRoute path="/myAuctions" component={myAuctions} />
             <PrivateRoute path="/starProfile" component={StarProfile} />
             <PrivateRoute path="/profile" component={Profile} />
-            <PrivateRoute path="/influencerHomePage" component={InfluencerHomePage} />
-            <PrivateRoute path="/businessHomePage" component={BusinessHomePage} />
+            <PrivateInfluencerUserRoute path="/influencerHomePage" component={InfluencerHomePage} />
+            <PrivateBusinessUserRoute path="/businessHomePage" component={BusinessHomePage} />
             <PrivateRoute path="/allAuctions" component={AllAuctions} />
             <PrivateRoute path="/allUsers" component={AllUsers} />
             <PrivateRoute path="/negotiationPage" component={NegotiationPage} />

@@ -3,6 +3,7 @@ using FinalProject.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -12,17 +13,20 @@ namespace FinalProject.BL
     {
         private OffersCRUD offersCRUD = new OffersCRUD();
 
-        public bool CreateOffer(Offer offer)
+        public ErrorMessage CreateOffer(Offer offer)
         {
             try
             {
                 offersCRUD.AddOffer(offer);
-                return true;
+                ErrorMessage errorMessage = new ErrorMessage
+                {
+                    Code = HttpStatusCode.OK
+                };
+                return errorMessage;
             }
             catch (Exception e)
             {
-                return false;
-                throw;
+                throw e;
             }
 
         }
@@ -35,8 +39,7 @@ namespace FinalProject.BL
             }
             catch (Exception e)
             {
-                return null;
-                throw;
+                throw e;
             }
         }
 
@@ -45,17 +48,20 @@ namespace FinalProject.BL
             return offersCRUD.GetOffers();
         }
 
-        public bool DeleteOffer(int id)
+        public ErrorMessage DeleteOffer(int id)
         {
             try
             {
                 offersCRUD.DeleteOffer(id);
-                return true;
+                ErrorMessage errorMessage = new ErrorMessage
+                {
+                    Code = HttpStatusCode.OK
+                };
+                return errorMessage;
             }
             catch (Exception e)
             {
-                return false;
-                throw;
+                throw e;
             }
         }
     }

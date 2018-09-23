@@ -87,8 +87,14 @@ class Profile extends Component {
         this.userService.AddReviewToUser(user.Id, obj).then(req => {
             //console.log(req);
             if (req) {
-                user.Reviews.push(obj);
-                this.setState({ user });
+                if (req.Message) {
+                    alert(req.Message);
+                }
+                else {
+                    user.Reviews.push(obj);
+                    this.setState({ user });
+                }
+
             }
             else {
                 alert("Server Error");

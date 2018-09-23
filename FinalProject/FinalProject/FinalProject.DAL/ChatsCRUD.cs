@@ -17,6 +17,9 @@ namespace FinalProject.DAL
             context.SaveChanges();
         }
 
-       
+        public Chat GetChat(int id)
+        {
+            return context.Chats.FirstOrDefault((chat)=>chat.Id == id);
+        }
     }
 }

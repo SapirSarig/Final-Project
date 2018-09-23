@@ -69,8 +69,8 @@ export default class UserService {
     //var data = new FormData();
     //data.append("json", JSON.stringify(user));
     var data = JSON.stringify(user);
-    return fetch(`${this.host}/api/InfluencerUsers
-    `, {
+    return fetch(`${this.host}/api/InfluencerUsers`, 
+    {
         method: "POST",
         body: data,
         headers: {
@@ -159,9 +159,9 @@ export default class UserService {
       })
   }
 
-  sendPasswordToUser(obj) {
+  SendLinkToResetPassword(obj) {
     var data = JSON.stringify(obj);
-    return fetch(`${this.host}/api/Users/SendPassword`, {
+    return fetch(`${this.host}/api/Users/SendLinkToResetPassword`, {
       method: "POST",
       body: data,
       headers: {
@@ -178,7 +178,7 @@ export default class UserService {
   }
 
   resetPasswordToUser(authUser, password) {
-    var data = JSON.stringify({AuthUser: authUser, Password: password});
+    var data = JSON.stringify({ AuthUser: authUser, Password: password });
     return fetch(`${this.host}/api/Users/ResetPassword`, {
       method: "POST",
       body: data,
@@ -198,13 +198,13 @@ export default class UserService {
   UpdateBusinessUser(userToUpdate) {
     var data = JSON.stringify(userToUpdate);
     return fetch(`${this.host}/api/BusinessUsers`, {
-        method: "PATCH",
-        body: data,
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json"
-        }
-      })
+      method: "PATCH",
+      body: data,
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json"
+      }
+    })
       .then((res) => {
         return res.json();
       })
@@ -216,13 +216,13 @@ export default class UserService {
   UpdateInfluencerUser(userToUpdate) {
     var data = JSON.stringify(userToUpdate);
     return fetch(`${this.host}/api/InfluencerUsers`, {
-        method: "PATCH",
-        body: data,
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json"
-        }
-      })
+      method: "PATCH",
+      body: data,
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json"
+      }
+    })
       .then((res) => {
         return res.json();
       })

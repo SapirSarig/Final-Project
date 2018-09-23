@@ -2,8 +2,11 @@
 using FinalProject.Entities;
 using System;
 using System.Collections.Generic;
+using System.Net;
+using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Cors;
+using System.Web.Http.Results;
 
 namespace FinalProject.WebApi.Controllers
 {
@@ -18,12 +21,18 @@ namespace FinalProject.WebApi.Controllers
         {
             message.TimeSent = DateTime.Now;
 
-            bool isAdded = messagesBL.AddMessage(message);
-            if (isAdded)
+            ErrorMessage errorMessage = messagesBL.AddMessage(message);
+            if (errorMessage.Code == HttpStatusCode.OK)
             {
-                return Ok(message);
+                Message createdMessage = messagesBL.GetMessageById(message.Id);
+                return Ok(createdMessage);
             }
-            return NotFound();
+
+            return new ResponseMessageResult(Request.CreateErrorResponse(
+                    errorMessage.Code,
+                   new HttpError(errorMessage.Message)
+               )
+           );
         }
 
         [HttpGet]

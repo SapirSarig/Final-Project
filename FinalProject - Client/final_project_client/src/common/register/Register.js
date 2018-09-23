@@ -11,22 +11,8 @@ import VerifyQuestions from "../../common/verifyQuestions/VerifyQuestions";
 import SignUp from '../../components/signUp/SignUp';
 
 const initialState = {
-    user: {
-        Name: "",
-        Email: "",
-        Password: "",
-        ConfirmPassword: "",
-        ConfirmMail: "",
-        Type: "Social Influencer",
-        ChooseTypeState: {},
-        Interests: [],
-        Description: "",
-        IsAllValid: false,
-        ExternalLogin: false,
-        Question1: "",
-        Question2: "",
-    },
-
+    user: {},
+    chooseTypeState:{},
     errors: {
         Name: "",
         Email: "",
@@ -34,7 +20,7 @@ const initialState = {
         ConfirmPassword: "",
         ConfirmMail: ""
     },
-    userInfo: {}
+
 };
 
 class Register extends Component {
@@ -57,36 +43,26 @@ class Register extends Component {
     // }
 
     componentDidMount() {
-        let { user } = this.state;
-        const {
-            location
-        } = this.props;
+        const { location } = this.props;
         if (location && location.state) {
-            const {
-                loggedUser,
-                externalLogin,
-                userInfo
-            } = location.state;
+            const { loggedUser, externalLogin, user } = location.state;
             if (loggedUser && externalLogin) {
-                const {
-                    email,
-                    name
-                } = loggedUser;
+                const { email, name } = loggedUser;
                 user.Email = email;
                 user.Name = name;
                 user.ExternalLogin = externalLogin;
                 user.ConfirmMail = email;
-                this.setState({
-                    user
-                });
-            } else if (userInfo) {
-                this.setState({
-                    userInfo
-                });
             }
+            this.setState({
+                user
+            });
+
+        } else {
+            const { user } = this.props;
+            this.setState({
+                user
+            });
         }
-
-
     }
 
 
@@ -96,7 +72,6 @@ class Register extends Component {
         const value = target.value;
         const name = target.name;
         let { user } = this.state;
-        let { userInfo } = this.state;
 
         if (name === "Interests") {
             let obj = {
@@ -105,19 +80,10 @@ class Register extends Component {
             if (target.type === "checkbox") {
                 if (target.checked) {
 
-
-
                     value && user.Interests.push(obj);
-
-                    if (Object.getOwnPropertyNames(userInfo).length > 0) {
-                        value && userInfo.Interests && userInfo.Interests.push(obj);
-                        this.setState({
-                            userInfo
-                        })
-                    }
                     this.setState({
                         user
-                    })
+                    });
                 }
                 else {
                     const index = user.Interests.findIndex((interest) => interest.Value === value);
@@ -125,27 +91,14 @@ class Register extends Component {
                     this.setState({
                         user
                     });
-                    if (Object.getOwnPropertyNames(userInfo).length > 0) {
-                        const index = userInfo.Interests.findIndex((interest) => interest.Value === value);
-                        userInfo.Interests.splice(index, index + 1);
-                        this.setState({
-                            userInfo
-                        })
-                    }
                 }
             }
             else {
                 value && user.Interests.push(obj);
-
                 this.setState({
                     user
                 });
-                if (Object.getOwnPropertyNames(userInfo).length > 0) {
-                    value && userInfo.Interests.push(obj);
-                    this.setState({
-                        userInfo
-                    })
-                }
+               
             }
         }
         else {
@@ -153,17 +106,8 @@ class Register extends Component {
             this.setState({
                 user
             });
-            if (Object.getOwnPropertyNames(userInfo).length > 0) {
-                userInfo[name] = value;
-                this.setState({
-                    userInfo
-                });
-            }
-
             this.checkValidation(name, value);
         }
-
-        console.log("******", this.state);
     }
 
 
@@ -200,7 +144,7 @@ class Register extends Component {
     }
 
     createUserClicked() {
-        const { user } = this.state;
+        const { user, chooseTypeState } = this.state;
         const {
             CreateBusinessUser,
             CreateInfluencerUser
@@ -208,10 +152,10 @@ class Register extends Component {
         let userToCreate = {
             "Name": user.Name,
             "Email": user.Email,
-            "Password": user.Passwordpassword,
+            "Password": user.Password,
             "Interests": user.Interests,
             "Description": user.Description,
-            "Type": user.Typetype,
+            "Type": user.Type,
             "Picture": user.ChooseTypeState.src,
             "Reviews": [],
             "Chats": [],
@@ -219,13 +163,13 @@ class Register extends Component {
             "Question2": user.Question2
         };
         if (user.Type === "Social Influencer") {
-            userToCreate["DateOfBirth"] = user.ChooseTypeState.dateOfBirth;
-            userToCreate["SocialNetworks"] = user.ChooseTypeState.socialNetworks;
+            userToCreate["DateOfBirth"] = chooseTypeState.DateOfBirth;
+            userToCreate["SocialNetworks"] = chooseTypeState.socialNetworks;
             userToCreate["Offers"] = [];
             CreateInfluencerUser(userToCreate);
         } else {
-            userToCreate["CompanyName"] = user.ChooseTypeState.CompanyName;
-            userToCreate["WebsiteLink"] = user.ChooseTypeState.LinkToCompanySite;
+            userToCreate["CompanyName"] = chooseTypeState.CompanyName;
+            userToCreate["WebsiteLink"] = chooseTypeState.LinkToCompanySite;
             userToCreate["auctions"] = [];
             CreateBusinessUser(userToCreate);
         }
@@ -237,13 +181,13 @@ class Register extends Component {
         const {
             isAllValidCustome
         } = this.props;
-        const { errors, user } = this.state;
+        const { errors, user, chooseTypeState } = this.state;
         let isValidInputs = isAllValidCustome ? isAllValidCustome() : true;
 
         isValidInputs =
-            (user.ChooseTypeState && user.ChooseTypeState.errors &&
-                ((user.Type === "Business Owner" && typeof (user.ChooseTypeState.errors.LinkToCompanySite) === "undefined") ||
-                    ((user.Type === "Social Influencer") && (typeof (user.ChooseTypeState.errors.DateOfBirth) === "undefined") && (typeof (user.ChooseTypeState.DateOfBirth) !== "undefined")) &&
+            (chooseTypeState && chooseTypeState.errors &&
+                ((user.Type === "Business Owner" && (chooseTypeState.errors.LinkToCompanySite) === "") ||
+                    ((user.Type === "Social Influencer") && (chooseTypeState.errors.DateOfBirth === undefined) && (chooseTypeState.DateOfBirth !== undefined)) &&
                     (StringUtil.isEmptyString(RegisterService.nameValidation(user.Question1))) &&
                     (StringUtil.isEmptyString(RegisterService.nameValidation(user.Question2))) &&
                     (StringUtil.isEmptyString(RegisterService.nameValidation(user.Name))) &&
@@ -282,11 +226,11 @@ class Register extends Component {
 
     render() {
         const { children, signUp } = this.props;
-        const { userInfo, user, errors } = this.state;
+        const { user, errors } = this.state;
         return (
             <div className="Container">
                 <span > Name * </span>
-                <input type="text" name="Name" disabled={user.ExternalLogin} value={Object.getOwnPropertyNames(userInfo).length > 0 ? userInfo.Name : user.Name} onChange={this.handleInputChange} />
+                <input type="text" name="Name" disabled={user.ExternalLogin} value={user.Name} onChange={this.handleInputChange} />
                 <span className="errorInput" > {errors["Name"] && errors["Name"]} </span>
 
                 {signUp && <div className="emailContainer">
@@ -321,18 +265,18 @@ class Register extends Component {
                     </select>
                 </div>}
 
-                <Interests handleInputChange={this.handleInputChange} interests={Object.getOwnPropertyNames(userInfo).length > 0 ? userInfo.Interests : undefined} signUp={signUp} />
+                <Interests handleInputChange={this.handleInputChange} interests={user.Interests} signUp={signUp} />
 
-                {(Object.getOwnPropertyNames(userInfo).length > 0) ?
+                {/* {(Object.getOwnPropertyNames(userInfo).length > 0) ?
                     (userInfo.Type === "Social Influencer" ?
                         <InfluencerRegister errors={errors} updateChooseTypeStateObject={this.updateChooseTypeStateObject} signUp={signUp} userInfo={userInfo} />
-                        : <BusinessRegister updateChooseTypeStateObject={this.updateChooseTypeStateObject} userInfo={userInfo} />)
+                        : <BusinessRegister updateChooseTypeStateObject={this.updateChooseTypeStateObject} userInfo={userInfo} />) */}
 
-                    : user.Type === "Social Influencer" ? <InfluencerRegister errors={errors} updateChooseTypeStateObject={this.updateChooseTypeStateObject} signUp={signUp} />
-                        : <BusinessRegister updateChooseTypeStateObject={this.updateChooseTypeStateObject} />}
+                {user.Type === "Social Influencer" ? <InfluencerRegister errors={errors} updateChooseTypeStateObject={this.updateChooseTypeStateObject} signUp={signUp} userInfo={user} />
+                    : <BusinessRegister updateChooseTypeStateObject={this.updateChooseTypeStateObject} userInfo={user} />}
 
                 <span> Description: </span>
-                <input type="text" name="Description" value={userInfo ? userInfo.Description : user.Description} onChange={this.handleInputChange} />
+                <input type="text" name="Description" value={user.Description} onChange={this.handleInputChange} />
 
                 <VerifyQuestions signUp={signUp} handleInputChange={this.handleInputChange} question1={user.Question1} question2={user.Question2} />
 

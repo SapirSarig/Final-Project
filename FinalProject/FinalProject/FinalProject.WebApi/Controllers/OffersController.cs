@@ -7,6 +7,7 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Cors;
+using System.Web.Http.Results;
 
 namespace FinalProject.WebApi.Controllers
 {
@@ -20,12 +21,18 @@ namespace FinalProject.WebApi.Controllers
         [HttpPost]
         public IHttpActionResult CreateOffer(Offer offer)
         {
-            bool isCreated = offersBL.CreateOffer(offer);
-            if (isCreated)
+            ErrorMessage errorMessage = offersBL.CreateOffer(offer);
+            if (errorMessage.Code == HttpStatusCode.OK)
             {
-                return Ok(offer);
+                Offer createdOffer = offersBL.GetOffer(offer.Id);
+                return Ok(createdOffer);
             }
-            return NotFound();
+
+            return new ResponseMessageResult(Request.CreateErrorResponse(
+                    errorMessage.Code,
+                   new HttpError(errorMessage.Message)
+               )
+           );
         }
 
         [HttpGet]
@@ -44,12 +51,17 @@ namespace FinalProject.WebApi.Controllers
         [HttpDelete]
         public IHttpActionResult DeleteOffer(int id)
         {
-            bool isDeleted = offersBL.DeleteOffer(id);
-            if (isDeleted)
+            ErrorMessage errorMessage = offersBL.DeleteOffer(id);
+            if (errorMessage.Code == HttpStatusCode.OK)
             {
                 return Ok();
             }
-            return NotFound();
+
+            return new ResponseMessageResult(Request.CreateErrorResponse(
+                    errorMessage.Code,
+                   new HttpError(errorMessage.Message)
+               )
+           );
         }
 
         [HttpGet]

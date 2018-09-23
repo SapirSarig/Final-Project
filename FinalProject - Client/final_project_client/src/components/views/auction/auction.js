@@ -99,9 +99,8 @@ class Auction extends Component {
         const { errors } = this.state;
 
         let errorMessage;
-        if ((fieldName === "Title") || (fieldName === "Product") || (fieldName === "NumOfMinFollowers")) 
-        {
-            if(StringUtil.isEmptyString(value)){
+        if ((fieldName === "Title") || (fieldName === "Product") || (fieldName === "NumOfMinFollowers")) {
+            if (StringUtil.isEmptyString(value)) {
                 errorMessage = `${fieldName} is not valid`;
             }
         } else if ((fieldName === "StartDate") || (fieldName === "EndDate")) {
@@ -120,9 +119,13 @@ class Auction extends Component {
         this.auctionService.createAuction(auction).then(req => {
             console.log(req);
             if (req) {
-                alert("Your auction was submitted succefully!");
-                this.setState({ auctionOk: true });
-
+                if (req.Message) {
+                    alert(req.Message);
+                }
+                else {
+                    alert("Your auction was submitted succefully!");
+                    this.setState({ auctionOk: true });
+                }
             }
             else {
                 alert("Server Error");

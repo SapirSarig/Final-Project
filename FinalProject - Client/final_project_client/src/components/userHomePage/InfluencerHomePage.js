@@ -6,15 +6,14 @@ import HotAuctions from '../userHomePage/hotAuctions.js';
 import OffersStatus from '../offers/offersStatus.js';
 import '../userHomePage/homePages.css';
 
-const initialState = {
-    userInfo: {},
-    updatedUser: {}
-};
 
 class InfluencerHomePage extends Component {
     constructor(props) {
         super(props);
-        this.state = initialState;
+        this.state = {
+            userInfo: {},
+            updatedUser: {}
+        }
     }
 
     componentDidMount() {
@@ -65,7 +64,7 @@ class InfluencerHomePage extends Component {
                 {userInfo &&
                     <div>
                         <div className="TopPage">
-                            <HomeHeader userInfo={Object.getOwnPropertyNames(updatedUser).length > 0  ? updatedUser : userInfo} />
+                            <HomeHeader user={Object.getOwnPropertyNames(updatedUser).length > 0 ? updatedUser : userInfo} />
                         </div>
                         <div className="LeftPage">
                             {/* We need to add "auctions" when user is created */}

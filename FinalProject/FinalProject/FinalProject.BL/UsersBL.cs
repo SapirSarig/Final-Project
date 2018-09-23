@@ -64,37 +64,58 @@ namespace FinalProject.BL
             }
         }
 
-        public bool AddReview(int userId, Review review)
+        public ErrorMessage AddReview(int userId, Review review)
         {
             try
             {
-                return userCRUD.AddReview(userId, review);
+                bool isCreated = (userCRUD.AddReview(userId, review));
+                if (isCreated)
+                {
+
+                    ErrorMessage message = new ErrorMessage
+                    {
+                        Code = HttpStatusCode.OK
+                    };
+                    return message;
+
+                }
+                else
+                {
+                    ErrorMessage message = new ErrorMessage
+                    {
+                        Code = HttpStatusCode.NotModified,
+                        Message = "User not found"
+                    };
+                    return message;
+                }
             }
             catch (Exception e)
             {
-                return false;
-                throw;
+                throw e;
             }
         }
 
-        public bool DeleteUser(int id)
+        public ErrorMessage DeleteUser(int id)
         {
             try
             {
                 userCRUD.DeleteUser(id);
-                return true;
+                ErrorMessage errorMessage = new ErrorMessage
+                {
+                    Code = HttpStatusCode.OK
+                };
+                return errorMessage;
             }
             catch (Exception e)
             {
-                return false;
-                throw;
+                throw e;
             }
         }
 
-        public bool SendPassword(VerifyPasswordModal verifyPasswordObject)
+        public bool SendLinkToResetPassword(VerifyPasswordModal verifyPasswordObject)
         {
             User user;
-            if(checkUserAnswers(verifyPasswordObject, out user))
+            if (checkUserAnswers(verifyPasswordObject, out user))
             {
                 //send email
                 try
@@ -106,12 +127,11 @@ namespace FinalProject.BL
                     string tokenEmailPassword = JwtManager.GenerateToken(user.Email, user.Password);
                     string body = String.Format(@"
                                     Hello {0}! 
-                                    Your password is {1}
-                                    Please erase that email after you entered your account succefully.
-                                    http://localhost:3000/resetPassword?authUser={2}
+                                    Please click the following link to reset your password:
+                                    http://localhost:3000/resetPassword?authUser={1}
                                     Thanks!
-                                    Its a deal team", user.Name, user.Password, tokenEmailPassword);
-                    
+                                    Its a deal team", user.Name, tokenEmailPassword);
+
 
                     MailMessage mail = new MailMessage(from, to, subject, body);
                     SmtpClient client = new SmtpClient("smtp.gmail.com");
@@ -121,7 +141,7 @@ namespace FinalProject.BL
                     client.Send(mail);
                     return true;
                 }
-                catch(Exception ex)
+                catch (Exception ex)
                 {
                     Console.WriteLine(ex.Message);
                     return false;
@@ -151,10 +171,10 @@ namespace FinalProject.BL
             return false;
         }
 
-            private bool checkUserAnswers(VerifyPasswordModal verifyPasswordObject, out User user)
+        private bool checkUserAnswers(VerifyPasswordModal verifyPasswordObject, out User user)
         {
             user = userCRUD.GetUserByEmail(verifyPasswordObject.Email);
-            if(user.Question1 == verifyPasswordObject.Question1 && user.Question2 == verifyPasswordObject.Question2)
+            if (user.Question1 == verifyPasswordObject.Question1 && user.Question2 == verifyPasswordObject.Question2)
             {
                 return true;
             }

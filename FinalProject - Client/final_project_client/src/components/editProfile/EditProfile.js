@@ -28,10 +28,16 @@ export default class EditProfile extends Component {
         this.userService.UpdateInfluencerUser(userToUpdate).then(req => {
             //console.log(req);
             if (req) {
-                this.setState({
-                    editOk: true,
-                    updatedUser: req
-                });
+                if(req.Message){
+                    alert(req.Message);
+                }
+                else{
+                    this.setState({
+                        editOk: true,
+                        updatedUser: req
+                    });
+                }
+               
             }
             else {
                 alert("Server Error");
@@ -43,10 +49,16 @@ export default class EditProfile extends Component {
         this.userService.UpdateBusinessUser(userToUpdate).then(req => {
             //console.log(req);
             if (req) {
-                this.setState({
-                    editOk: true,
-                    updatedUser: req
-                });
+                if (req.Message) {
+                    alert(req.Message);
+                }
+                else {
+                    this.setState({
+                        editOk: true,
+                        updatedUser: req
+                    });
+                }
+
             }
             else {
                 alert("Server Error");
@@ -54,7 +66,7 @@ export default class EditProfile extends Component {
         });
     }
     render() {
-        const { userInfo, editOk , updatedUser} = this.state;
+        const { userInfo, editOk, updatedUser } = this.state;
         return (
             <div>
                 {editOk ?
@@ -67,7 +79,7 @@ export default class EditProfile extends Component {
                             pathname: '/businessHomePage',
                             state: { updatedUser }
                         }} />
-                    : <Register signUp={false} userInfo={userInfo} {...this.props} UpdateInfluencerUser={this.UpdateInfluencerUser} UpdateBusinessUser={this.UpdateBusinessUser} />}
+                    : <Register signUp={false} user={userInfo} {...this.props} UpdateInfluencerUser={this.UpdateInfluencerUser} UpdateBusinessUser={this.UpdateBusinessUser} />}
             </div>
         );
     }

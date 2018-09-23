@@ -49,6 +49,7 @@
     <Compile Include="Enums\AdvertisingFormType.cs" />
     <Compile Include="Enums\InterestType.cs" />
     <Compile Include="Enums\SocialNetworkType.cs" />
+    <Compile Include="ErrorMessage.cs" />
     <Compile Include="HashWithSaltResult.cs" />
     <Compile Include="InfluencerUser.cs" />
     <Compile Include="Interest.cs" />

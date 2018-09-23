@@ -8,6 +8,7 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Cors;
+using System.Web.Http.Results;
 
 namespace FinalProject.WebApi.Controllers
 {
@@ -43,12 +44,17 @@ namespace FinalProject.WebApi.Controllers
         [HttpDelete]
         public IHttpActionResult DeleteUser(int id)
         {
-            bool isDeleted = usersBL.DeleteUser(id);
-            if (isDeleted)
+            ErrorMessage errorMessage = usersBL.DeleteUser(id);
+            if (errorMessage.Code == HttpStatusCode.OK)
             {
                 return Ok();
             }
-            return NotFound();
+
+            return new ResponseMessageResult(Request.CreateErrorResponse(
+                    errorMessage.Code,
+                   new HttpError(errorMessage.Message)
+               )
+           );
         }
 
         [HttpGet]
@@ -74,19 +80,24 @@ namespace FinalProject.WebApi.Controllers
         [Route("AddReview")]
         public IHttpActionResult AddReview(int userId, Review review)
         {
-            bool isAdded = usersBL.AddReview(userId, review);
-            if (isAdded)
+            ErrorMessage errorMessage = usersBL.AddReview(userId, review);
+            if (errorMessage.Code == HttpStatusCode.OK)
             {
-                return Ok(userId);
+                return Ok();
             }
-            return NotFound();
+
+            return new ResponseMessageResult(Request.CreateErrorResponse(
+                    errorMessage.Code,
+                   new HttpError(errorMessage.Message)
+               )
+           );
         }
 
         [HttpPost]
-        [Route("SendPassword")]
-        public IHttpActionResult SendPassword(VerifyPasswordModal verifyPasswordObject)
+        [Route("SendLinkToResetPassword")]
+        public IHttpActionResult SendLinkToResetPassword(VerifyPasswordModal verifyPasswordObject)
         {
-            bool isSent = usersBL.SendPassword(verifyPasswordObject);
+            bool isSent = usersBL.SendLinkToResetPassword(verifyPasswordObject);
             if (isSent)
             {
                 return Ok(verifyPasswordObject);
