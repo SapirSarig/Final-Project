@@ -86,10 +86,10 @@ export default class UserService {
       })
   }
 
-  loginUser({ email, password }) {
+  loginUser(info) {
     //var data = new FormData();
     //data.append("json", JSON.stringify(user));
-    var data = JSON.stringify({ email, password });
+    var data = JSON.stringify(info);
     return fetch(`${this.host}/api/Authentication`, {
       method: "POST",
       body: data,

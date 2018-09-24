@@ -41,7 +41,6 @@ namespace FinalProject.DAL
         public User GetUserByEmail(string email)
         {
             User user = context.Users.FirstOrDefault(u => u.Email == email);
-            //user.Password = null;
             return user;
         }
 

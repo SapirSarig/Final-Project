@@ -23,6 +23,7 @@ namespace FinalProject.Controllers
             if (errorMessage.Code == HttpStatusCode.OK)
             {
                 User user = userBL.GetUserByEmail(loginModal.Email);
+                user.Password = null;
                 return Ok(user);
             }
 
@@ -40,6 +41,7 @@ namespace FinalProject.Controllers
             if (errorMessage.Code == HttpStatusCode.OK)
             {
                 User user = userBL.GetUserByEmail(email);
+                user.Password = null;
                 return Ok(user);
             }
 

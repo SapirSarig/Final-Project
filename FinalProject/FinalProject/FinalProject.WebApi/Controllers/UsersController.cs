@@ -22,6 +22,7 @@ namespace FinalProject.WebApi.Controllers
         public IHttpActionResult GetUser(int id)
         {
             User user = usersBL.GetUser(id);
+            user.Password = null;
             return Ok(user);
         }
 
@@ -67,6 +68,7 @@ namespace FinalProject.WebApi.Controllers
         public IHttpActionResult GetUserByEmail(string email)
         {
             User user = usersBL.GetUserByEmail(email);
+            user.Password = null;
             return Ok(user);
         }
 
@@ -97,7 +99,7 @@ namespace FinalProject.WebApi.Controllers
         [Route("SendLinkToResetPassword")]
         public IHttpActionResult SendLinkToResetPassword(VerifyPasswordModal verifyPasswordObject)
         {
-            bool isSent = usersBL.SendLinkToResetPassword(verifyPasswordObject);
+            bool isSent = usersBL.SendLinkToResetPassword(verifyPasswordObject, Request.Headers.Referrer.Authority, Request.Headers.Referrer.Scheme);
             if (isSent)
             {
                 return Ok(verifyPasswordObject);

@@ -15,7 +15,7 @@ const initialState = {
     errors: { email: "", password: "" },
     rememberMe: false,
     loggedIn: false,
-    loggedUser: {},
+    user: {},
     externalLogin: false,
     clickOnLoginFaceBook: false
 };
@@ -87,8 +87,12 @@ class Login extends Component {
     }
 
     loginUser(event) {
-        const { rememberMe } = this.state;
-        this.userService.loginUser(this.state).then(req => {
+        const { rememberMe, email, password } = this.state;
+        const info = {
+            "Email": email,
+            "Password": password
+        };
+        this.userService.loginUser(info).then(req => {
             if (req) {
                 if (req.Message) {
                     alert(req.Message);
@@ -97,7 +101,7 @@ class Login extends Component {
 
                     this.setState({
                         loggedIn: true,
-                        loggedUser: req
+                        user: req
                     }, () => {
                         if (rememberMe) {
                             //SessionStorageUtil.RemoveLoggedUser();
@@ -127,13 +131,13 @@ class Login extends Component {
                     }
                     else {
                         LocalStorageUtil.SaveLoggedUser(req);
-                        this.setState({ loggedIn: true, loggedUser: req })
+                        this.setState({ loggedIn: true, user: req })
                     }
 
                 }
                 else {
                     LocalStorageUtil.RemoveLoggedUser();
-                    this.setState({ externalLogin: true, loggedUser: response })
+                    this.setState({ externalLogin: true, user: response })
                 }
             });
 
@@ -145,22 +149,22 @@ class Login extends Component {
     }
 
     render() {
-        const { email, password, rememberMe, errors, loggedIn, loggedUserInfo, externalLogin, loggedUser } = this.state;
-        console.log(loggedUser);
+        const { email, password, rememberMe, errors, loggedIn, externalLogin, user } = this.state;
+        console.log(user);
         return (
             externalLogin ?
                 <Redirect to={{
                     pathname: '/signUp',
-                    state: { loggedUser, externalLogin }
+                    state: { user, externalLogin }
                 }} /> :
-                loggedIn ? (loggedUser.Type === "InfluencerUser") ?
+                loggedIn ? (user.Type === "Social Influencer") ?
                     <Redirect to={{
                         pathname: '/influencerHomePage',
-                        state: { loggedUser }
+                        state: { user }
                     }} /> :
                     <Redirect to={{
                         pathname: '/businessHomePage',
-                        state: { loggedUser }
+                        state: { user }
                     }} /> :
                     (<div className="Container">
                         <span> email </span>

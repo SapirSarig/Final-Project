@@ -156,7 +156,7 @@ class Register extends Component {
             "Interests": user.Interests,
             "Description": user.Description,
             "Type": user.Type,
-            "Picture": user.ChooseTypeState.src,
+            "Picture": chooseTypeState.src,
             "Reviews": [],
             "Chats": [],
             "Question1": user.Question1,
@@ -199,21 +199,21 @@ class Register extends Component {
         return isValidInputs;
     }
     handleSubmitClicked() {
-        const { userInfo } = this.props;
+        const { user } = this.state;
         const { UpdateInfluencerUser, UpdateBusinessUser } = this.props;
         let userToUpdate = {
             "Name": "Sapir",
-            "Email": userInfo.Email,
-            "Interests": userInfo.Interests,
-            "Description": userInfo.Description,
-            "Picture": userInfo.Picture,
+            "Email": user.Email,
+            "Interests": user.Interests,
+            "Description": user.Description,
+            "Picture": user.Picture,
         };
-        if (userInfo.Type === "Social Influencer") {
-            userToUpdate["SocialNetworks"] = userInfo.SocialNetworks;
+        if (user.Type === "Social Influencer") {
+            userToUpdate["SocialNetworks"] = user.SocialNetworks;
             UpdateInfluencerUser(userToUpdate);
         } else {
-            userToUpdate["CompanyName"] = userInfo.CompanyName;
-            userToUpdate["WebsiteLink"] = userInfo.WebsiteLink;
+            userToUpdate["CompanyName"] = user.CompanyName;
+            userToUpdate["WebsiteLink"] = user.WebsiteLink;
             UpdateBusinessUser(userToUpdate);
         }
     }

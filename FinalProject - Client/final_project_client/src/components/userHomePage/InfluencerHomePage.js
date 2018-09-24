@@ -11,7 +11,7 @@ class InfluencerHomePage extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            userInfo: {},
+            user: {},
             updatedUser: {}
         }
     }
@@ -19,13 +19,13 @@ class InfluencerHomePage extends Component {
     componentDidMount() {
         const { location } = this.props;
         if (location && location.state) {
-            const { userInfo } = location.state;
+            const { user } = location.state;
             const { updatedUser } = location.state;
             if (updatedUser) {
                 this.setState({ updatedUser });
             }
             else {
-                this.setState({ userInfo });
+                this.setState({ user });
             }
         }
     }
@@ -57,23 +57,22 @@ class InfluencerHomePage extends Component {
                 ]
 
             };
-        //const name = "influencer";
-        const { updatedUser } = this.state;
+        const { updatedUser, user } = this.state;
         return (
             <div className="influencerHomePage">
-                {userInfo &&
+                {user &&
                     <div>
                         <div className="TopPage">
-                            <HomeHeader user={Object.getOwnPropertyNames(updatedUser).length > 0 ? updatedUser : userInfo} />
+                            <HomeHeader user={Object.getOwnPropertyNames(updatedUser).length > 0 ? updatedUser : user} />
                         </div>
                         <div className="LeftPage">
                             {/* We need to add "auctions" when user is created */}
-                            <HotAuctions auctions={userInfo.Auctions} />
+                            <HotAuctions auctions={user.Auctions} />
                             <button> All Auctions </button>
                         </div>
                         <div className="RightPage">
                             {/* We need to add "offers" when user is created */}
-                            <OffersStatus offers={userInfo.Offers} />
+                            <OffersStatus offers={user.Offers} />
                             <Link className="allOffers" to="/allOffers">
                                 <button className="allOffersBtn">
                                     allOffers

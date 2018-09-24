@@ -112,7 +112,7 @@ namespace FinalProject.BL
             }
         }
 
-        public bool SendLinkToResetPassword(VerifyPasswordModal verifyPasswordObject)
+        public bool SendLinkToResetPassword(VerifyPasswordModal verifyPasswordObject, string Authority, string Scheme)
         {
             User user;
             if (checkUserAnswers(verifyPasswordObject, out user))
@@ -128,9 +128,9 @@ namespace FinalProject.BL
                     string body = String.Format(@"
                                     Hello {0}! 
                                     Please click the following link to reset your password:
-                                    http://localhost:3000/resetPassword?authUser={1}
+                                    {1}://{2}/resetPassword?authUser={3}
                                     Thanks!
-                                    Its a deal team", user.Name, tokenEmailPassword);
+                                    Its a deal team", user.Name, Scheme, Authority, tokenEmailPassword);
 
 
                     MailMessage mail = new MailMessage(from, to, subject, body);
