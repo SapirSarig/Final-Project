@@ -18,7 +18,6 @@ C:\Users\Meital\Desktop\Meital\My Final Project\Final-Project\FinalProject\Final
 C:\Users\Meital\Desktop\Meital\My Final Project\Final-Project\FinalProject\FinalProject\FinalProject.Entities\obj\Debug\FinalProject.Entities.pdb
 C:\Users\Admin\Documents\GitHub\Final-Project\FinalProject\FinalProject\FinalProject.Entities\bin\Debug\FinalProject.Entities.dll
 C:\Users\Admin\Documents\GitHub\Final-Project\FinalProject\FinalProject\FinalProject.Entities\bin\Debug\FinalProject.Entities.pdb
-C:\Users\Admin\Documents\GitHub\Final-Project\FinalProject\FinalProject\FinalProject.Entities\obj\Debug\FinalProject.Entities.csprojAssemblyReference.cache
 C:\Users\Admin\Documents\GitHub\Final-Project\FinalProject\FinalProject\FinalProject.Entities\obj\Debug\FinalProject.Entities.csproj.CoreCompileInputs.cache
 C:\Users\Admin\Documents\GitHub\Final-Project\FinalProject\FinalProject\FinalProject.Entities\obj\Debug\FinalProject.Entities.dll
 C:\Users\Admin\Documents\GitHub\Final-Project\FinalProject\FinalProject\FinalProject.Entities\obj\Debug\FinalProject.Entities.pdb

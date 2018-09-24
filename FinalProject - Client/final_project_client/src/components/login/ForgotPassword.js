@@ -82,7 +82,7 @@ export default class ForgotPassword extends Component {
                     <div>
                         <span > Email* </span>
                         <input type="email" name="email" value={email} onChange={this.handleInputChange} />
-                        <VerifyQuestions handleInputChange={this.handleInputChange} question1={question1} question2={question2} />
+                        <VerifyQuestions handleInputChange={this.handleInputChange} question1={question1} question2={question2} signUp={true}/>
                         <button className={`${this.isEmailValid() ? "" : "disableElement"}`} onClick={this.submitClicked}>Submit</button>
                         <span className="errorInput" > {emailError} </span>
                     </div> :

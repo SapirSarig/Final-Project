@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace FinalProject.DAL
 {
-    public class MessagesCRUD
+    public class MessagesCRUD : IDisposable
     {
         private FinalProjectContext context = new FinalProjectContext();
 
@@ -36,5 +36,28 @@ namespace FinalProject.DAL
         {
             return context.Messages.FirstOrDefault((message) => message.Id == id);
         }
+        #region IDisposable - Do Using
+
+        public void Dispose()
+        {
+            _dispose(true);
+        }
+
+        ~MessagesCRUD()
+        {
+            _dispose(false);
+        }
+
+        private void _dispose(bool disposing)
+        {
+            // close context
+            context.Dispose();
+            if (disposing)
+            {
+                GC.SuppressFinalize(this);
+            }
+        }
+
+        #endregion
     }
 }

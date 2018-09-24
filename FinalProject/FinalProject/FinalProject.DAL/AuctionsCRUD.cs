@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace FinalProject.DAL
 {
-    public class AuctionsCRUD
+    public class AuctionsCRUD : IDisposable
     {
         private FinalProjectContext context = new FinalProjectContext();
 
@@ -73,6 +73,30 @@ namespace FinalProject.DAL
             }
             return (IEnumerable<Offer>)auctionsOffers;
         }
+
+        #region IDisposable - Do Using
+
+        public void Dispose()
+        {
+            _dispose(true);
+        }
+
+        ~AuctionsCRUD()
+        {
+            _dispose(false);
+        }
+
+        private void _dispose(bool disposing)
+        {
+            // close context
+            context.Dispose();
+            if (disposing)
+            {
+                GC.SuppressFinalize(this);
+            }
+        }
+
+        #endregion
     }
 
 }

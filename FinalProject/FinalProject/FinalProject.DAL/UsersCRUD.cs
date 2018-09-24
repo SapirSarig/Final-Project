@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace FinalProject.DAL
 {
-    public class UsersCRUD
+    public class UsersCRUD : IDisposable
     {
         private FinalProjectContext context = new FinalProjectContext();
 
@@ -41,7 +41,7 @@ namespace FinalProject.DAL
         public User GetUserByEmail(string email)
         {
             User user = context.Users.FirstOrDefault(u => u.Email == email);
-            user.Password = null;
+            //user.Password = null;
             return user;
         }
 
@@ -159,5 +159,28 @@ namespace FinalProject.DAL
                 return true;
             return false;
         }
+        #region IDisposable - Do Using
+
+        public void Dispose()
+        {
+            _dispose(true);
+        }
+
+        ~UsersCRUD()
+        {
+            _dispose(false);
+        }
+
+        private void _dispose(bool disposing)
+        {
+            // close context
+            context.Dispose();
+            if (disposing)
+            {
+                GC.SuppressFinalize(this);
+            }
+        }
+
+        #endregion
     }
 }

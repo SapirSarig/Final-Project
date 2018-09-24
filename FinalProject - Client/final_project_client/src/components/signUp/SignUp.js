@@ -51,8 +51,8 @@ class SignUp extends Component {
                         signUpOk: true,
                         user: req
                     }, () => {
-                        LocalStorageUtil.RemoveLoggedUser();
-                        SessionStorageUtil.RemoveLoggedUser();
+                        //LocalStorageUtil.RemoveLoggedUser();
+                        //SessionStorageUtil.RemoveLoggedUser();
                         SessionStorageUtil.SaveLoggedUser(req);
                     });
                 }
@@ -74,8 +74,8 @@ class SignUp extends Component {
                     signUpOk: true,
                     user: req
                 }, () => {
-                    LocalStorageUtil.RemoveLoggedUser();
-                    SessionStorageUtil.RemoveLoggedUser();
+                    //LocalStorageUtil.RemoveLoggedUser();
+                    //SessionStorageUtil.RemoveLoggedUser();
                     SessionStorageUtil.SaveLoggedUser(req);
                 });
             }

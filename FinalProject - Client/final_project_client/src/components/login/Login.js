@@ -100,10 +100,10 @@ class Login extends Component {
                         loggedUser: req
                     }, () => {
                         if (rememberMe) {
-                            SessionStorageUtil.RemoveLoggedUser();
+                            //SessionStorageUtil.RemoveLoggedUser();
                             LocalStorageUtil.SaveLoggedUser(req);
                         } else {
-                            LocalStorageUtil.RemoveLoggedUser();
+                            //LocalStorageUtil.RemoveLoggedUser();
                             SessionStorageUtil.SaveLoggedUser(req);
                         }
                     });

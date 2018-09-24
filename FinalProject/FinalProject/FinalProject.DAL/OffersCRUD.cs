@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace FinalProject.DAL
 {
-    public class OffersCRUD
+    public class OffersCRUD : IDisposable
     {
         private FinalProjectContext context = new FinalProjectContext();
 
@@ -33,5 +33,28 @@ namespace FinalProject.DAL
             context.Offers.Remove(offer);
             context.SaveChanges();
         }
+        #region IDisposable - Do Using
+
+        public void Dispose()
+        {
+            _dispose(true);
+        }
+
+        ~OffersCRUD()
+        {
+            _dispose(false);
+        }
+
+        private void _dispose(bool disposing)
+        {
+            // close context
+            context.Dispose();
+            if (disposing)
+            {
+                GC.SuppressFinalize(this);
+            }
+        }
+
+        #endregion
     }
 }

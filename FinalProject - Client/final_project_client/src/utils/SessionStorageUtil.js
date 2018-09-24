@@ -1,6 +1,10 @@
+import LocalStorageUtil from './LocalStorageUtil';
+
 export default class SessionStorageUtil {
     static SaveLoggedUser(userLogged) {
         if (typeof (Storage) !== "undefined") {
+            LocalStorageUtil.RemoveLoggedUser();
+            this.RemoveLoggedUser();
             sessionStorage.setItem("userLogged", JSON.stringify(userLogged));
         } else {
             alert("No Web Storage support");

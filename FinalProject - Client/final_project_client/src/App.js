@@ -103,9 +103,10 @@ class App extends Component {
             <PrivateRoute path="/allUsers" component={AllUsers} />
             <PrivateRoute path="/negotiationPage" component={NegotiationPage} />
             <PrivateRoute path="/offersPerAuctionPage" component={offersPerAuctionPage} />
-            <PrivateRoute path="/forgotPassword" component={ForgotPassword} />
+            {/* check forgot password route */}
+            <PublicRoute path="/forgotPassword" component={ForgotPassword} />
             <PrivateRoute path="/editProfile" component={EditProfile} />
-            <PrivateRoute path="/resetPassword" component={ResetPassword} />
+            <PublicRoute path="/resetPassword" component={ResetPassword} />
           </div>
         </Router>
       </div>
