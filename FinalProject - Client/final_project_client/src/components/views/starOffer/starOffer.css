@@ -4,6 +4,8 @@
     padding: 30px 0;
     display: flex;
     overflow-x: hidden;
+    max-width: 75vw;
+    margin: 0 auto;
 }
 
 .firstLineWrapper{
@@ -28,7 +30,6 @@
     box-sizing: border-box;
     text-decoration:none;
     text-transform:uppercase;
-    font-family:'Roboto',sans-serif;
     font-weight:400;
     color:#FFFFFF;
     text-align:center;
@@ -47,7 +48,7 @@
     border-color:#BBBBBB;
 }
 
-.socialMediaContainer{
+/* .socialMediaContainer{
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
@@ -58,34 +59,34 @@
     font-size: 20px;
     font-weight: bolder;
     padding-bottom: 10px;
-}
+} */
 
-.accessoriesContainer, .socialMediaIcons{
+.accessoriesContainer/*, .socialMediaIcons*/{
     display: flex;
     flex-direction: row;
     justify-content: flex-start;
     padding-top: 20px;
 }
 
-.accessoriestWrapper, .socialMediatWrapper{
+.accessoriestWrapper/*, .socialMediatWrapper*/{
     display: flex;
     flex-direction: row;
     margin-right: 8%;
     align-items: center;
 }
 
-.otherInput{
+/* .otherInput{
     background: transparent;
     border: transparent;
     outline: none;
     border-bottom: 1px solid black;
-}
+} */
 
-.descTitle{
+.accessoriestWrapper .descTitle{
     margin-left: 24%;
 }
 
-.descTitleForSocialMedia{
+/* .descTitleForSocialMedia{
     margin-left: 40%;
 }
 
@@ -109,11 +110,11 @@
     font-size: 4em;
 }
 
-[class ^= "checkboxfor"] {
+.socialMediatWrapper .[class ^= "checkboxfor"] {
     position: relative;
 }
 
-[class ^= "checkboxfor"] label {
+.socialMediatWrapper [class ^= "checkboxfor"] label {
     cursor: pointer;
     position: absolute;
     width: 18px;
@@ -124,7 +125,7 @@
     border-radius: 5px;
 }
 
-[class ^= "checkboxfor"] label:after {
+.socialMediatWrapper .[class ^= "checkboxfor"] label:after {
     opacity: 0.2;
     content: '';
     position: absolute;
@@ -140,16 +141,16 @@
     transform: rotate(-45deg);
 }
 
-[class ^= "checkboxfor"] label:hover::after {
+.socialMediatWrapper .[class ^= "checkboxfor"] label:hover::after {
     opacity: 0.5;
-}
+} */
 
 /**
  * Create the checkbox state for the tick
  */
- [class ^= "checkboxfor"] input[type=checkbox]:checked + label:after {
+ /* .socialMediatWrapper .[class ^= "checkboxfor"] input[type=checkbox]:checked + label:after {
     opacity: 1;
-}
+} */
 
 .dueDate{
     display: flex;
@@ -157,9 +158,9 @@
     margin: 2% 0;
 }
 
-.socialMediaTitle{
+/* .socialMediaTitle{
     display: flex;
-}
+} */
 
 .btnContainer{
     display: flex;

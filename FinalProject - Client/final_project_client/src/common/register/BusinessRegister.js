@@ -1,6 +1,19 @@
 import React, { Component } from 'react';
-import Interests from "./Interests";
 import RegisterService from '../../services/register/RegisterService';
+
+import PropTypes from 'prop-types';
+import TextField from '@material-ui/core/TextField';
+import { withStyles } from '@material-ui/core/styles';
+
+import FileUploader from '../../components/fileUploader/fileUploader';
+
+const styles = theme => ({
+    textField: {
+      marginLeft: theme.spacing.unit,
+      marginRight: theme.spacing.unit,
+      width: 300,
+    }
+});
 
 class BusinessRegister extends Component {
     constructor(props) {
@@ -71,18 +84,41 @@ class BusinessRegister extends Component {
     }
 
     render() {
-        const { src, errors } = this.state;
+        const { classes } = this.props;
+        const { src, errors, CompanyName, LinkToCompanySite } = this.state;
         return (
-            <div className="Container">
-                <span>Company's Name *</span>
-                <input type="text" name="CompanyName" onChange={this.handleInputChange} />
-                <br />
-                <span> Company's logo </span>
+            <div className="businessContainer">
+                <TextField
+                    id="companyName"
+                    label="Company's Name *"
+                    className={classes.textField}
+                    value={CompanyName}
+                    name="CompanyName"
+                    onChange={this.handleInputChange}
+                    margin="normal"
+                />
+                
+                {/* <input type="text" name="CompanyName" onChange={this.handleInputChange} /> */}
+                
+                <div className="imgWrapper businessImgWrapper">
+                    <span> Company's logo: </span>
+                    <FileUploader/>
+                </div>
+                {/* <span> Company's logo </span>
                 <img id="uploadPreview" src={src} className="logo" />
-                <input type="file" name="myFile" onChange={this.handleImgChange} />
+                <input type="file" name="myFile" onChange={this.handleImgChange} /> */}
 
-                <span>Link To Company's Site</span>
-                <input type="text" name="LinkToCompanySite" onChange={this.handleInputChange} />
+                <TextField
+                    id="companyLink"
+                    label="Link To Company's Site"
+                    className={classes.textField}
+                    value={LinkToCompanySite}
+                    name="LinkToCompanySite"
+                    onChange={this.handleInputChange}
+                    margin="normal"
+                />
+                {/* <span>Link To Company's Site</span>
+                <input type="text" name="LinkToCompanySite" onChange={this.handleInputChange} /> */}
                 <span className="errorInput">{errors["LinkToCompanySite"] && errors["LinkToCompanySite"]}</span>
 
 
@@ -91,4 +127,8 @@ class BusinessRegister extends Component {
     }
 }
 
-export default BusinessRegister;
+BusinessRegister.propTypes = {
+    classes: PropTypes.object.isRequired,
+};
+
+export default withStyles(styles)(BusinessRegister);

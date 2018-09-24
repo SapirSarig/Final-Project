@@ -1,0 +1,41 @@
+[class ^= "checkboxfor"] {
+    position: relative;
+}
+
+[class ^= "checkboxfor"] label {
+    cursor: pointer;
+    position: absolute;
+    width: 18px;
+    height: 18px;
+    top: 0;
+    left: 0;
+    background: #eee;
+    border-radius: 3px;
+}
+
+[class ^= "checkboxfor"] label:after {
+    opacity: 0.2;
+    content: '';
+    position: absolute;
+    width: 9px;
+    height: 5px;
+    background: transparent;
+    top: 4px;
+    left: 4px;
+    border: 3px solid #333;
+    border-top: none;
+    border-right: none;
+
+    transform: rotate(-45deg);
+}
+
+[class ^= "checkboxfor"] label:hover::after {
+    opacity: 0.5;
+}
+
+/**
+ * Create the checkbox state for the tick
+ */
+[class ^= "checkboxfor"] input[type=checkbox]:checked + label:after {
+    opacity: 1;
+}

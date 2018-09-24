@@ -4,6 +4,8 @@ import TextField from '@material-ui/core/TextField';
 import { withStyles } from '@material-ui/core/styles';
 import './starOffer.css';
 
+import SocialMedia from '../../../common/socialMedia/socialMedia';
+
 const styles = theme => ({
     container: {
       display: 'flex',
@@ -120,7 +122,8 @@ class starOffer extends Component {
                             <div className="descTitle">Post</div>
                         </div>
                     </div>
-                    <div className="socialMediaContainer">
+                    <SocialMedia isExtra="false"/>
+                    {/* <div className="socialMediaContainer">
                         <div className="socialMediaTitle">Social Media</div>
                         <div className="socialMediaIcons">
                             <div className="facebook socialMediatWrapper">
@@ -160,7 +163,7 @@ class starOffer extends Component {
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </div> */}
                     <TextField
                         id="offerDescription"
                         label="Offer's Description"

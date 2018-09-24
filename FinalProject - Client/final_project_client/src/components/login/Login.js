@@ -2,9 +2,15 @@ import React, { Component } from 'react';
 import UserService from '../../services/apis/UserService';
 import RegisterService from '../../services/register/RegisterService';
 import StringUtil from '../../utils/StringUtil';
+import PropTypes from 'prop-types';
+import TextField from '@material-ui/core/TextField';
+import { withStyles } from '@material-ui/core/styles';
 import './Login.css';
 import FacebookLogin from 'react-facebook-login';
 import { Route, Redirect } from 'react-router';
+
+import PasswordInput from '../passwordInput/passwordInput';
+import LayoutButton from '../../common/layoutButton/layoutButton';
 
 const initialState = {
     email: "",
@@ -15,6 +21,14 @@ const initialState = {
     loggedUser: {},
     externalLogin: false
 };
+
+const styles = theme => ({
+    textField: {
+      marginLeft: theme.spacing.unit,
+      marginRight: theme.spacing.unit,
+      width: 300,
+    }
+});
 
 class Login extends Component {
     userService;
@@ -151,6 +165,7 @@ class Login extends Component {
     }
 
     render() {
+        const { classes } = this.props;
         const { email, password, rememberMe, errors, loggedIn, loggedUserInfo, externalLogin, loggedUser } = this.state;
         console.log(loggedUser);
         return (
@@ -169,30 +184,50 @@ class Login extends Component {
                         state: { loggedUser }
                     }} /> :
                     (<div className="Container">
-                        <span> email </span>
-                        <input type="text" name="email" value={email} onChange={this.handleInputChange} />
-                        {<span className="errorInput">{errors["email"] && errors["email"]}</span>}
+                        <div className="wrapper">
+                            <TextField
+                                id="email"
+                                label="Email"
+                                className={classes.textField}
+                                value={email}
+                                name="email"
+                                onChange={this.handleInputChange}
+                                margin="normal"
+                            />
+                            {/* <input type="text" name="email" value={email} onChange={this.handleInputChange} /> */}
+                            {<span className="errorInput">{errors["email"] && errors["email"]}</span>}
 
-                        <span> Password </span>
-                        <input type="password" name="password" value={password} onChange={this.handleInputChange} />
-                        {<span className="errorInput">{errors["password"] && errors["password"]}</span>}
+                            <PasswordInput name="password" value={password} onChange={this.handleInputChange} label="Password"/>
+                            {/* <input type="password" name="password" value={password} onChange={this.handleInputChange} /> */}
+                            {<span className="errorInput">{errors["password"] && errors["password"]}</span>}
 
-                        <input type="button" value="Login" className={`${this.isAllValid() ? "" : "disableElement"}`} onClick={this.loginUser} />
-                        <FacebookLogin
-                            appId="271386353659285"
-                            autoLoad={true}
-                            fields="name,email,picture"
-                            onClick={this.componentClicked}
-                            callback={this.responseFacebook} />
-                        <div>
-                            <input type="checkbox" checked={rememberMe} onChange={this.handleInputChange} name="rememberMe" />
-                            <span>Remember me</span>
+                            <div className={`${this.isAllValid() ? "" : "disableElement"}`} onClick={this.loginUser}>
+                                <LayoutButton text="Login" />
+                            </div>
+                            <span className="or">Or</span>
+                            {/* <input type="button" value="Login" className={`${this.isAllValid() ? "" : "disableElement"}`} onClick={this.loginUser} /> */}
+                            <FacebookLogin
+                                appId="271386353659285"
+                                autoLoad={true}
+                                fields="name,email,picture"
+                                onClick={this.componentClicked}
+                                callback={this.responseFacebook}
+                                className="facebook-login"
+                                buttonText="Connect With Facebook" />
+                            <div className="rememberMe">
+                                <input type="checkbox" checked={rememberMe} onChange={this.handleInputChange} name="rememberMe" />
+                                <span>Remember me</span>
+                            </div>
+                            <span>Forgot my username/ password </span>
                         </div>
-                        <span>Forgot my username/ password </span>
                     </div>)
         );
     }
 
 }
 
-export default Login;
+Login.propTypes = {
+    classes: PropTypes.object.isRequired,
+};
+
+export default withStyles(styles)(Login);

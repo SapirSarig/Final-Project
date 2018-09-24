@@ -1,0 +1,45 @@
+@import '../checkbox.css';
+
+.interestsContainer{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    padding-left: 7px;
+    margin-bottom: 30px;
+}
+
+.interestsContainer > div:nth-child(1){
+    font-size: 20px;
+    font-weight: bolder;
+    padding-bottom: 10px;
+}
+
+.partOfInterests{
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.interestWrapper{
+    display: flex;
+    margin-right: 30px;
+}
+
+.otherInput{
+    background: transparent;
+    border: transparent;
+    outline: none;
+    border-bottom: 1px solid black;
+    margin-left: 5px;
+}
+
+.descTitle{
+    margin-left: 8px;
+}
+
+.descOfInterest{
+    margin-right: 10%;
+}
+
+.checkboxforInterest {
+    position: relative;
+}

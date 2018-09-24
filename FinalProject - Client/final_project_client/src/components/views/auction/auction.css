@@ -48,7 +48,7 @@
     align-items: center;
 }
 
-.interestsContainer{
+/* .interestsContainer{
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
@@ -123,14 +123,14 @@
 
 .checkboxforInterest label:hover::after {
     opacity: 0.5;
-}
+} */
 
 /**
  * Create the checkbox state for the tick
  */
-.checkboxforInterest input[type=checkbox]:checked + label:after {
+/* .checkboxforInterest input[type=checkbox]:checked + label:after {
     opacity: 1;
-}
+} */
 
 .dueDate{
     display: flex;

@@ -5,6 +5,7 @@ import { withStyles } from '@material-ui/core/styles';
 import FileUploader from '../../fileUploader/fileUploader';
 import './auction.css';
 import AuctionService from '../../../services/apis/AuctionService';
+import Interests from '../../../common/register/Interests';
 
 const styles = theme => ({
     container: {
@@ -120,7 +121,8 @@ class Auction extends Component {
                         margin="normal"
                         style = {{width: '80%'}}
                     />
-                    <div className="interestsContainer">
+                    <Interests />
+                    {/* <div className="interestsContainer">
                         <div>Interests</div>
                         <div className="partOfInterests">
                             <div className="foodInterest interestWrapper">
@@ -149,7 +151,7 @@ class Auction extends Component {
                                 <input type="text" className="otherInput"/>
                             </div>
                         </div>
-                    </div>
+                    </div> */}
                     <TextField
                         id="numberFollowers"
                         label="Number of minimum followers"

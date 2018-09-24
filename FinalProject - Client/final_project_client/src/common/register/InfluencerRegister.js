@@ -1,8 +1,21 @@
 import React, { Component } from 'react';
 import './InfluencerRegister.css';
-import Interests from "./Interests";
 import RegisterService from '../../services/register/RegisterService';
 
+import FileUploader from '../../components/fileUploader/fileUploader';
+import SocialMedia from '../socialMedia/socialMedia';
+
+import PropTypes from 'prop-types';
+import TextField from '@material-ui/core/TextField';
+import { withStyles } from '@material-ui/core/styles';
+
+const styles = theme => ({
+    textField: {
+      marginLeft: theme.spacing.unit,
+      marginRight: theme.spacing.unit,
+      width: 300,
+    }
+});
 
 class InfluencerRegister extends Component {
     constructor(props) {
@@ -57,47 +70,45 @@ class InfluencerRegister extends Component {
         const value = target.value;
         const name = target.name;
         let { socialNetworks } = this.state;
+        let socialNetworkName;
 
-        if (this.checkValidation(name, value)) {
-            if (name.startsWith("LinkTo")) {
-                let socialNetworkName;
-                if (name.includes("Twitter")) {
-                    socialNetworkName = "Twitter";
-                }
-                else if (name.includes("Facebook")) {
-                    socialNetworkName = "Facebook";
-                }
-                else if (name.includes("Instagram")) {
-                    socialNetworkName = "Instagram";
-                }
-                else {
-                    socialNetworkName = "YouTube";
-                }
-
-                if (value) {
-                    const currSocialNetwork = socialNetworks.find(sn => sn.Name === socialNetworkName);
-                    if (currSocialNetwork) {
-                        currSocialNetwork.LinkToProfile = value;
-                    }
-                    else {
-                        let obj = {
-                            "Value": socialNetworkName,
-                            LinkToProfile: value
-                        };
-                        socialNetworks.push(obj);
-                    }
-                }
-                this.setState({
-                    socialNetworks
-                }, () => this.updateChooseTypeState(this.state))
+        if (name.startsWith("LinkTo")) {
+            if (name.includes("Twitter")) {
+                socialNetworkName = "Twitter";
+            }
+            else if (name.includes("Facebook")) {
+                socialNetworkName = "Facebook";
+            }
+            else if (name.includes("Instagram")) {
+                socialNetworkName = "Instagram";
             }
             else {
-                this.setState({
-                    [name]: value
-                }, () => this.updateChooseTypeState(this.state));
+                socialNetworkName = "YouTube";
             }
+
+            if (value) {
+                const currSocialNetwork = socialNetworks.find(sn => sn.Value === socialNetworkName);
+                if (currSocialNetwork) {
+                    currSocialNetwork.LinkToProfile = value;
+                }
+            }
+            
+            if (this.checkValidation(name, value)) {
+                this.setState({ socialNetworks }, () => this.updateChooseTypeState(this.state))
+            }
+            else {
+                this.setState({ socialNetworks })
+            }
+        } else {
+            if (value) {
+                if (this.checkValidation(name, value)) {
+                    this.setState({ dateOfBirth: value }, () => this.updateChooseTypeState(this.state));
+                } else {
+                    this.setState({ dateOfBirth: value })
+                }
+            }
+
         }
-        console.log("$$$$$", this.state);
     }
 
     checkValidation(name, value) {
@@ -128,7 +139,7 @@ class InfluencerRegister extends Component {
 
     focusElement(event) {
         const target = event.target;
-        const value = target.type === "checkbox" ? target.checked : target.value;
+        const value = (target.type === "checkbox") ? target.checked : target.value;
         const name = target.name;
         const {errors, socialNetworks, disabled} = this.state;
         const elementId = `LinkTo${name}Profile`;
@@ -154,18 +165,34 @@ class InfluencerRegister extends Component {
     }
 
     render() {
-        const { src, dateOfBirth, socialNetworks, errors, disabled } = this.state;
+        const { classes } = this.props;
+        const { dateOfBirth, socialNetworks, errors, disabled } = this.state;
         return (
-            <div className="Container">
-                <span> Image: </span>
-                <img id="uploadPreview" src={src} className="logo" />
-                <input type="file" name="myFile" onChange={this.handleImgChange} />
+            <div className="influencerContainer">
+                <div className="imgWrapper">
+                    <span> Image: </span>
+                    <FileUploader/>
+                </div>
+                {/* <img id="uploadPreview" src={src} className="logo" />
+                <input type="file" name="myFile" onChange={this.handleImgChange} /> */}
 
-                <span> Date Of Birth *</span>
-                <input type="date" name="dateOfBirth" value={dateOfBirth} onChange={this.handleInputChange} />
+                <TextField
+                    id="birthDate"
+                    label="Date Of Birth *"
+                    type="date"
+                    name="dateOfBirth"
+                    className={classes.textField}
+                    value={dateOfBirth}
+                    onChange={this.handleInputChange}
+                    InputLabelProps={{
+                    shrink: true,
+                    }}
+                />
+                {/* <input type="date" name="dateOfBirth" value={dateOfBirth} onChange={this.handleInputChange} /> */}
                 <span className="errorInput">{errors["dateOfBirth"]}</span>
 
-                <span> Social Networks: </span>
+                <SocialMedia isExtra="true" onFocus={this.focusElement} disabled={disabled} onChange={this.handleInputChange} errors={errors} socialNetworks={socialNetworks}/>
+                {/* <span> Social Networks: </span>
                 <div className="SocialNetworksContainer">
                     <input type="checkbox" name="Twitter" onChange={this.focusElement} />
                     <img src={require("../../images/Twitter.jpg")} className="logo" />
@@ -195,12 +222,14 @@ class InfluencerRegister extends Component {
                     <input id="LinkToYouTubeProfile" disabled={disabled["LinkToYouTubeProfile"]} type="text" name="LinkToYouTubeProfile" onChange={this.handleInputChange} />
                     <span className="errorInput">{errors["LinkToYouTubeProfile"] && errors["LinkToYouTubeProfile"]}</span>
 
-                </div>
-
-
+                </div> */}
             </div>
         )
     }
 }
 
-export default InfluencerRegister;
+InfluencerRegister.propTypes = {
+    classes: PropTypes.object.isRequired,
+};
+
+export default withStyles(styles)(InfluencerRegister);

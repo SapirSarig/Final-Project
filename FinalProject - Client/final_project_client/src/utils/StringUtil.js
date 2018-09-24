@@ -1,6 +1,6 @@
 export default class StringUtil {
     static isEmptyString(value){
-       return value == undefined || !value.trim();
+       return value === undefined || !value.trim();
     }
 
     static isString(value) {
