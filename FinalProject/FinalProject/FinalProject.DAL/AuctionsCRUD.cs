@@ -38,6 +38,17 @@ namespace FinalProject.DAL
             return filteredAuctions.ToList();
         }
 
+        public IEnumerable<Auction> GetAuctionsByEmail(string email)
+        {
+            // Query for all Auctions that their Title contains searchStr
+            IQueryable<Auction> filteredAuctions = from auction in context.Auctions
+                                                   where auction.BusinessUser.Email.Equals(email)
+                                                   select auction;
+
+
+            return filteredAuctions.ToList();
+        }
+
         public IEnumerable<Offer> GetAllOffers(int auctionId)
         {
             Auction auction = context.Auctions.FirstOrDefault(a => a.Id == auctionId);
