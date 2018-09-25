@@ -34,12 +34,6 @@ class InfluencerRegister extends Component {
                 LinkToYouTubeProfile: "",
                 DateOfBirth: ""
             },
-            disabled: {
-                LinkToTwitterProfile: true,
-                LinkToFacebookProfile: true,
-                LinkToInstagramProfile: true,
-                LinkToYouTubeProfile: true
-            }
             // userInfo: {
             //     Name: "rinat",
             //     Email: "rinat@gmail.com",
@@ -74,6 +68,7 @@ class InfluencerRegister extends Component {
         this.handleInputChange = this.handleInputChange.bind(this);
         this.focusElement = this.focusElement.bind(this);
         this.checkIfChecked = this.checkIfChecked.bind(this);
+        this.getLink = this.getLink.bind(this);
     }
 
     componentDidMount() {
@@ -173,7 +168,7 @@ class InfluencerRegister extends Component {
         const target = event.target;
         const value = (target.type === "checkbox") ? target.checked : target.value;
         const name = target.name;
-        const { errors, socialNetworks, disabled } = this.state;
+        const { errors, socialNetworks } = this.state;
         const elementId = `LinkTo${name}Profile`;
         let element = document.getElementById(elementId);
         if (target.checked) {
@@ -187,12 +182,11 @@ class InfluencerRegister extends Component {
                 errors[elementId] = "";
 
             }
-            disabled && (disabled[elementId] = true);
             const index = socialNetworks.findIndex(socialNetwork => socialNetwork.Value === name);
             if (index !== -1)
                 socialNetworks.splice(index, index + 1);
         }
-        this.setState({ errors, socialNetworks, disabled });
+        this.setState({ errors, socialNetworks });
         console.log("@@@@@", this.state);
     }
 
@@ -216,7 +210,7 @@ class InfluencerRegister extends Component {
 
     getLink(value) {
         const { userInfo } = this.props;
-        const { disabled, socialNetworks } = this.state;
+        const { socialNetworks } = this.state;
         if (Object.getOwnPropertyNames(userInfo).length > 0) {
             if (socialNetworks) {
                 for (var i = 0; i < socialNetworks.length; i++) {
@@ -233,7 +227,7 @@ class InfluencerRegister extends Component {
 
     render() {
         const { classes, signUp, userInfo } = this.props;
-        const { src, DateOfBirth, socialNetworks, errors, disabled } = this.state;
+        const { src, DateOfBirth, socialNetworks, errors } = this.state;
         return (
             <div className="influencerContainer">
                 <div className="imgWrapper">
@@ -259,7 +253,7 @@ class InfluencerRegister extends Component {
                 {/* <input type="date" name="dateOfBirth" value={dateOfBirth} onChange={this.handleInputChange} /> */}
                 <span className="errorInput">{errors["DateOfBirth"]}</span>
 
-                <SocialMedia isExtra="true" onFocus={this.focusElement} disabled={disabled} onChange={this.handleInputChange} errors={errors} socialNetworks={socialNetworks} />
+                <SocialMedia isExtra="true" onFocus={this.focusElement} onChange={this.handleInputChange} errors={errors} socialNetworks={socialNetworks} getLink={this.getLink} checkIfChecked={this.checkIfChecked}/>
                 {/* <span> Social Networks: </span>
                 <div className="SocialNetworksContainer">
                     <input type="checkbox" checked={this.checkIfChecked("Twitter")} name="Twitter" onChange={this.focusElement} />

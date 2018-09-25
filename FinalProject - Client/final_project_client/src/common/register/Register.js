@@ -282,7 +282,7 @@ class Register extends Component {
                 {/* < input type="email" name="confirmMail" disabled={externalLogin} value={confirmMail} onChange={this.handleInputChange} /> */}
                 <span className="errorInput" > {errors["ConfirmMail"] && errors["ConfirmMail"]} </span>
 
-                {signUp && <PasswordInput name="Password" style= {{width: '60%'}} placeholder="Min 6 chars, at least one number and one lower case English letter" value={user.Password} onChange={this.handleInputChange} label={"Password" + " " + ( user.ExternalLogin && (<span>for the website </span>)) + "*"}/>}
+                {signUp && <PasswordInput name="Password" style= {{width: '60%'}} placeholder="Min 6 chars, at least one number and one lower case English letter" value={user.Password} onChange={this.handleInputChange} label={"Password *"}/>}
                 {/* <span > Password {externalLogin && (<span>for the website </span>)} *</span> */}
 
                 {/* <input type="password" placeholder="Min 6 chars, at least one number and one lower case English letter" name="password" value={password} onChange={this.handleInputChange} /> */}
