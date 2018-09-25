@@ -10,7 +10,7 @@ export default class EditProfile extends Component {
         this.state = {
             userInfo: {},
             editOk: false,
-            updatedUser: {}
+            user: {}
         }
         this.userService = new UserService();
         this.UpdateInfluencerUser = this.UpdateInfluencerUser.bind(this);
@@ -34,7 +34,7 @@ export default class EditProfile extends Component {
                 else{
                     this.setState({
                         editOk: true,
-                        updatedUser: req
+                        user: req
                     });
                 }
                
@@ -55,7 +55,7 @@ export default class EditProfile extends Component {
                 else {
                     this.setState({
                         editOk: true,
-                        updatedUser: req
+                        user: req
                     });
                 }
 
@@ -66,18 +66,18 @@ export default class EditProfile extends Component {
         });
     }
     render() {
-        const { userInfo, editOk, updatedUser } = this.state;
+        const { userInfo, editOk, user } = this.state;
         return (
             <div>
                 {editOk ?
                     (userInfo.Type === "Social Influencer") ?
                         <Redirect to={{
                             pathname: '/influencerHomePage',
-                            state: { updatedUser }
+                            state: { user }
                         }} /> :
                         <Redirect to={{
                             pathname: '/businessHomePage',
-                            state: { updatedUser }
+                            state: { user }
                         }} />
                     : <Register signUp={false} user={userInfo} {...this.props} UpdateInfluencerUser={this.UpdateInfluencerUser} UpdateBusinessUser={this.UpdateBusinessUser} />}
             </div>
