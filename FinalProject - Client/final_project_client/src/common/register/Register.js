@@ -327,7 +327,7 @@ class Register extends Component {
                 </div>}
 
                 {!signUp && <div className={`${this.isAllValid() ? "signUpBtnWrapper" : "disableElement signUpBtnWrapper"}`}>
-                     <LayoutButton text="Submit!" onClick={this.handleSubmitClicked} />}
+                     <LayoutButton text="Submit!" onClick={this.handleSubmitClicked} />
                 </div>}
                 {/* <input type="button" className={`${this.isAllValid() ? "" : "disableElement"}`} onClick={this.createUserClicked} value="Sign up!" /> */}
             </div>

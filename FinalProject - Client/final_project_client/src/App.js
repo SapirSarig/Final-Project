@@ -88,25 +88,25 @@ class App extends Component {
       <div>
         <Router>
           <div className="routeContainer">
-            <PublicRoute exact path="/" component={HomePage} />
-            <PublicRoute path="/login" component={LoginPage} />
-            <PublicRoute path="/signUp" component={SignUpPage} />
-            <PrivateRoute path="/auction" component={Auction} />
-            <PrivateRoute path="/allOffers" component={allOffers} />
-            <PrivateRoute path="/starOffer" component={starOffer} />
-            <PrivateRoute path="/myAuctions" component={myAuctions} />
-            <PrivateRoute path="/starProfile" component={StarProfile} />
-            <PrivateRoute path="/profile" component={Profile} />
-            <PrivateInfluencerUserRoute path="/influencerHomePage" component={InfluencerHomePage} />
-            <PrivateBusinessUserRoute path="/businessHomePage" component={BusinessHomePage} />
-            <PrivateRoute path="/allAuctions" component={AllAuctions} />
-            <PrivateRoute path="/allUsers" component={AllUsers} />
-            <PrivateRoute path="/negotiationPage" component={NegotiationPage} />
-            <PrivateRoute path="/offersPerAuctionPage" component={offersPerAuctionPage} />
+            <Route exact path="/" component={HomePage} />
+            <Route path="/login" component={LoginPage} />
+            <Route path="/signUp" component={SignUpPage} />
+            <Route path="/auction" component={Auction} />
+            <Route path="/allOffers" component={allOffers} />
+            <Route path="/starOffer" component={starOffer} />
+            <Route path="/myAuctions" component={myAuctions} />
+            <Route path="/starProfile" component={StarProfile} />
+            <Route path="/profile" component={Profile} />
+            <Route path="/influencerHomePage" component={InfluencerHomePage} />
+            <Route path="/businessHomePage" component={BusinessHomePage} />
+            <Route path="/allAuctions" component={AllAuctions} />
+            <Route path="/allUsers" component={AllUsers} />
+            <Route path="/negotiationPage" component={NegotiationPage} />
+            <Route path="/offersPerAuctionPage" component={offersPerAuctionPage} />
             {/* check forgot password route */}
-            <PublicRoute path="/forgotPassword" component={ForgotPassword} />
-            <PrivateRoute path="/editProfile" component={EditProfile} />
-            <PublicRoute path="/resetPassword" component={ResetPassword} />
+            <Route path="/forgotPassword" component={ForgotPassword} />
+            <Route path="/editProfile" component={EditProfile} />
+            <Route path="/resetPassword" component={ResetPassword} />
           </div>
         </Router>
       </div>
