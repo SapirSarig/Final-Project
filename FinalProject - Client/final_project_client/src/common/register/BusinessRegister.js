@@ -22,7 +22,7 @@ class BusinessRegister extends Component {
 
         this.state = {
             CompanyName: "",
-            src: require('../../images/AddAnImage.png'),
+            src: "",
             LinkToCompanySite: "",
             errors: { LinkToCompanySite: "" }
         }

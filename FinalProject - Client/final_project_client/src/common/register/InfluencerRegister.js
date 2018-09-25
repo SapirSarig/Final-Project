@@ -24,7 +24,7 @@ class InfluencerRegister extends Component {
         this.checkValidation = this.checkValidation.bind(this);
 
         this.state = {
-            src: require('../../images/AddAnImage.png'),
+            src:"",
             DateOfBirth: undefined,
             socialNetworks: [],
             errors: {

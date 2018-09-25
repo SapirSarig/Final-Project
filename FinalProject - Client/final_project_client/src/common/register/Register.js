@@ -256,7 +256,7 @@ class Register extends Component {
                 {/* <input type="text" name="name" disabled={externalLogin} value={name} onChange={this.handleInputChange} /> */}
                 <span className="errorInput" > {errors["Name"] && errors["Name"]} </span>
 
-                <TextField
+                {signUp && <TextField
                     id="email"
                     label="Email *"
                     className={classes.textField}
@@ -265,24 +265,24 @@ class Register extends Component {
                     onChange={this.handleInputChange}
                     disabled={user.ExternalLogin}
                     margin="normal"
-                />
+                />}
                 {/* < input type="email" name="email" disabled={externalLogin} value={email} onChange={this.handleInputChange} /> */}
                 <span className="errorInput" > {errors["Email"] && errors["Email"]} </span>
 
-                <TextField
+                {signUp && <TextField
                     id="confirmMail"
                     label="Confirm Email *"
                     className={classes.textField}
                     value={user.ConfirmMail}
                     name="ConfirmMail"
                     onChange={this.handleInputChange}
-                    disabled={externalLogin}
+                    disabled={ user.ExternalLogin}
                     margin="normal"
-                />
+                />}
                 {/* < input type="email" name="confirmMail" disabled={externalLogin} value={confirmMail} onChange={this.handleInputChange} /> */}
                 <span className="errorInput" > {errors["ConfirmMail"] && errors["ConfirmMail"]} </span>
 
-                {signUp && <PasswordInput name="Password" style= {{width: '60%'}} placeholder="Min 6 chars, at least one number and one lower case English letter" value={user.Password} onChange={this.handleInputChange} label={"Password" + " " + (externalLogin && (<span>for the website </span>)) + "*"}/>}
+                {signUp && <PasswordInput name="Password" style= {{width: '60%'}} placeholder="Min 6 chars, at least one number and one lower case English letter" value={user.Password} onChange={this.handleInputChange} label={"Password" + " " + ( user.ExternalLogin && (<span>for the website </span>)) + "*"}/>}
                 {/* <span > Password {externalLogin && (<span>for the website </span>)} *</span> */}
 
                 {/* <input type="password" placeholder="Min 6 chars, at least one number and one lower case English letter" name="password" value={password} onChange={this.handleInputChange} /> */}
