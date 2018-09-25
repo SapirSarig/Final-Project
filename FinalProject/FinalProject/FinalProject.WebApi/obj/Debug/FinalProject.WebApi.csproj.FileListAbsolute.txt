@@ -160,6 +160,7 @@ C:\Users\Meital\Desktop\Meital\My Final Project\Final-Project\FinalProject\Final
 C:\Users\Meital\Desktop\Meital\My Final Project\Final-Project\FinalProject\FinalProject\FinalProject.WebApi\obj\Debug\FinalProject.WebApi.csproj.CopyComplete
 C:\Users\Meital\Desktop\Meital\My Final Project\Final-Project\FinalProject\FinalProject\FinalProject.WebApi\obj\Debug\FinalProject.WebApi.dll
 C:\Users\Meital\Desktop\Meital\My Final Project\Final-Project\FinalProject\FinalProject\FinalProject.WebApi\obj\Debug\FinalProject.WebApi.pdb
+<<<<<<< HEAD
 C:\Users\Admin\Documents\GitHub\Final-Project\FinalProject\FinalProject\FinalProject.WebApi\bin\FinalProject.WebApi.dll.config
 C:\Users\Admin\Documents\GitHub\Final-Project\FinalProject\FinalProject\FinalProject.WebApi\bin\FinalProject.WebApi.dll
 C:\Users\Admin\Documents\GitHub\Final-Project\FinalProject\FinalProject\FinalProject.WebApi\bin\FinalProject.WebApi.pdb
@@ -253,3 +254,5 @@ C:\Users\Admin\Documents\GitHub\Final-Project\FinalProject\FinalProject\FinalPro
 C:\Users\Admin\Documents\GitHub\Final-Project\FinalProject\FinalProject\FinalProject.WebApi\bin\Microsoft.IdentityModel.Logging.xml
 C:\Users\Admin\Documents\GitHub\Final-Project\FinalProject\FinalProject\FinalProject.WebApi\bin\Microsoft.IdentityModel.JsonWebTokens.pdb
 C:\Users\Admin\Documents\GitHub\Final-Project\FinalProject\FinalProject\FinalProject.WebApi\bin\Microsoft.IdentityModel.JsonWebTokens.xml
+=======
+>>>>>>> 0db0e9be4a38f74ce25cef55c6879feac19d7765

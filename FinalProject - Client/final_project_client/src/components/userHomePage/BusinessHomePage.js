@@ -1,86 +1,89 @@
-
+// change to user from userInfo
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import HomeHeader from './HomeHeader.js';
 import HotAuctions from '../userHomePage/hotAuctions.js';
 import OffersStatus from '../offers/offersStatus.js';
+import AuctionService from '../../services/apis/AuctionService';
 import '../userHomePage/homePages.css';
-
+const initialState = {
+    user: {},
+    theAuctions: [],
+    updatedUser: {}
+};
 
 class BusinessHomePage extends Component {
+    auctionService;
     constructor(props) {
         super(props);
-        this.state = {
-            userInfo: {},
-            updatedUser: {}
-        }    }
+        this.state = initialState;
+
+        this.auctionService = new AuctionService();
+        this.onMyAuctionsClick = this.onMyAuctionsClick.bind(this);
+    }
 
     componentDidMount() {
         const { location } = this.props;
+        console.log("location", location);
         if (location && location.state) {
-            const { userInfo } = location.state;
-            const {updatedUser } = location.state;
-            if(updatedUser)
-            {
+            const { user } = location.state;
+            const { updatedUser } = location.state;
+            if (updatedUser) {
                 this.setState({ updatedUser });
 
             }
-            else{
-                this.setState({ userInfo });
+            else {
+                this.setState({ user });
 
             }
         }
     }
 
-    render() {
-        //const name = "Coca Cola";
-        const {  updatedUser } = this.state;
-        const userInfo =
-            {
-                Name: "rinat",
-                Email: "rinat@gmail.com",
-                ConfirmEmail: "rinat@gmail.com",
-                Picture: "string",
-                Description: "pop",
-                Type: "Business Owner",
-                CompanyName: "cola",
-                LinkToCompanySite: "www.walla.com",
-                SocialNetworks: [
-                    {
-                        Value: "Facebook",
-                        LinkToProfile: "www.facebook.com"
-                    }
-                ],
-                Interests: [
-                    {
-                        Value: "Sport"
-                    },
-                    {
-                        Value: "Music"
-                    }
-                ]
+    // componentWillReceiveProps(nextProps){
+    //     const { location } = this.props;
+    //     if (location && location.state) {
+    //         const { userInfo } = location.state;
+    //         this.setState({ userInfo });
 
-            };
+
+    //     }
+    // }
+    onMyAuctionsClick(event) {
+        const { user } = this.state;
+        //console.log("userInfo", userInfo);
+        if (user) {
+            this.auctionService.getAuctionsByEmail(user.Email).then(req => {
+                this.setState({ theAuctions: req });
+                console.log(req);
+            })
+        }
+    }
+
+    render() {
+        const { updatedUser, user, theAuctions } = this.state;
+
         return (
             <div className="businessHomePage">
-                {userInfo &&
+                {user &&
                     <div>
                         <div className="TopPage">
-                            <HomeHeader  user={Object.getOwnPropertyNames(updatedUser).length > 0  ? updatedUser : userInfo}/>
+                            <HomeHeader user={Object.getOwnPropertyNames(updatedUser).length > 0 ? updatedUser : user} name={user.Name} />
                         </div>
                         <div className="LeftPage">
                             {/* We need to add "auctions" when user is created */}
-                            <HotAuctions auctions={userInfo.Auctions} />
-                            <Link className="myAuctions" to={{ pathname: "/myAuctions", state: { auctions: userInfo.Auctions } }}>
-                                <button className="myAuctions">
+                            <HotAuctions auctions={user.Auctions} />
+                            <Link className="myAuctions" to={{ pathname: "/myAuctions", state: { auctions: theAuctions } }}>
+                                <button className="myAuctions" onClick={this.onMyAuctionsClick}>
                                     myAuctions
                         </button>
                             </Link>
                         </div>
                         <div className="RightPage">
                             {/* We need to add "offers" when user is created */}
-                            <OffersStatus offers={userInfo.Offers} />
-                            <button> All Offers </button>
+                            <OffersStatus offers={user.Offers} />
+                            {/* <Link className="myOffers" to={{pathname:"/myOffers", state:{offers: theOffers}}}> */}
+                            <button className="myOffers"> All Offers </button>
+                            {/* </Link> */}
                         </div>
                         <br />
                         <Link className="auction" to="/auction">

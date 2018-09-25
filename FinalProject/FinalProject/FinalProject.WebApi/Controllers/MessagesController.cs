@@ -21,13 +21,8 @@ namespace FinalProject.WebApi.Controllers
         {
             message.TimeSent = DateTime.Now;
 
-<<<<<<< HEAD
             ErrorMessage errorMessage = messagesBL.AddMessage(message);
             if (errorMessage.Code == HttpStatusCode.OK)
-=======
-            bool isAdded = messagesBL.AddMessage(message);
-            if (isAdded)
->>>>>>> f01b6aafa5d16019eb6da40d0016b8f859842f75
             {
                 Message createdMessage = messagesBL.GetMessageById(message.Id);
                 return Ok(createdMessage);
