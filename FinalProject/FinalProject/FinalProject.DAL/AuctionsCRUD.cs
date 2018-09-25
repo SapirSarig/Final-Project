@@ -73,6 +73,7 @@ namespace FinalProject.DAL
             }
             return (IEnumerable<Offer>)auctionsOffers;
         }
+<<<<<<< HEAD
 
         #region IDisposable - Do Using
 
@@ -97,6 +98,8 @@ namespace FinalProject.DAL
         }
 
         #endregion
+=======
+>>>>>>> f01b6aafa5d16019eb6da40d0016b8f859842f75
     }
 
 }
