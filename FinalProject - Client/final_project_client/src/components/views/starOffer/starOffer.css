@@ -4,6 +4,8 @@
     padding: 30px 0;
     display: flex;
     overflow-x: hidden;
+    max-width: 80vw;
+    margin: 0 auto;
 }
 
 .firstLineWrapper{
@@ -18,137 +20,22 @@
     border-bottom: 1px solid white;
 }
 
-.designBtn{
-    font-size: 0.9em;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding:0.5em 1em;
-    border:0.1em solid #FFFFFF;
-    box-sizing: border-box;
-    text-decoration:none;
-    text-transform:uppercase;
-    font-family:'Roboto',sans-serif;
-    font-weight:400;
-    color:#FFFFFF;
-    text-align:center;
-    transition: all 0.15s;
-    cursor: pointer;
-    border-radius: 5px;
-}
-
-.designBtn:hover{
-    color:#DDDDDD;
-    border-color:#DDDDDD;
-}
-
-.designBtn:active{
-    color:#BBBBBB;
-    border-color:#BBBBBB;
-}
-
-.socialMediaContainer{
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    padding-top: 20px;
-}
-
-.socialMediaContainer > div:nth-child(1){
-    font-size: 20px;
-    font-weight: bolder;
-    padding-bottom: 10px;
-}
-
-.accessoriesContainer, .socialMediaIcons{
+.accessoriesContainer{
     display: flex;
     flex-direction: row;
     justify-content: flex-start;
     padding-top: 20px;
 }
 
-.accessoriestWrapper, .socialMediatWrapper{
+.accessoriestWrapper{
     display: flex;
     flex-direction: row;
     margin-right: 8%;
     align-items: center;
 }
 
-.otherInput{
-    background: transparent;
-    border: transparent;
-    outline: none;
-    border-bottom: 1px solid black;
-}
-
-.descTitle{
+.accessoriestWrapper .descTitle{
     margin-left: 24%;
-}
-
-.descTitleForSocialMedia{
-    margin-left: 40%;
-}
-
-.fa-facebook-square {
-    color: #3b5998;
-}
-
-.fa-twitter-square {
-    color: #1da1f2;  
-}
-
-.fa-youtube-square{
-    color: #bb0000;
-}
-
-.fa-instagram {
-     color: #833ab4; 
-} 
-
-.fab, .fa{
-    font-size: 4em;
-}
-
-[class ^= "checkboxfor"] {
-    position: relative;
-}
-
-[class ^= "checkboxfor"] label {
-    cursor: pointer;
-    position: absolute;
-    width: 18px;
-    height: 18px;
-    top: 5px;
-    left: 0;
-    background: #eee;
-    border-radius: 5px;
-}
-
-[class ^= "checkboxfor"] label:after {
-    opacity: 0.2;
-    content: '';
-    position: absolute;
-    width: 10px;
-    height: 6px;
-    background: transparent;
-    top: 6px;
-    left: 5px;
-    border: 3px solid #333;
-    border-top: none;
-    border-right: none;
-
-    transform: rotate(-45deg);
-}
-
-[class ^= "checkboxfor"] label:hover::after {
-    opacity: 0.5;
-}
-
-/**
- * Create the checkbox state for the tick
- */
- [class ^= "checkboxfor"] input[type=checkbox]:checked + label:after {
-    opacity: 1;
 }
 
 .dueDate{
@@ -157,19 +44,11 @@
     margin: 2% 0;
 }
 
-.socialMediaTitle{
-    display: flex;
-}
-
 .btnContainer{
     display: flex;
     flex-direction: row;
     justify-content: space-evenly;
     padding-top: 20px;
-}
-
-.send{
-    width: 26%;
 }
 
 @media only screen and (min-width: 1220px){

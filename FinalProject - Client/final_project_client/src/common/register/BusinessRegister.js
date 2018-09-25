@@ -1,6 +1,19 @@
 import React, { Component } from 'react';
-import Interests from "./Interests";
 import RegisterService from '../../services/register/RegisterService';
+
+import PropTypes from 'prop-types';
+import TextField from '@material-ui/core/TextField';
+import { withStyles } from '@material-ui/core/styles';
+
+import FileUploader from '../../components/fileUploader/fileUploader';
+
+const styles = theme => ({
+    textField: {
+        marginLeft: theme.spacing.unit,
+        marginRight: theme.spacing.unit,
+        width: 300,
+    }
+});
 
 class BusinessRegister extends Component {
     constructor(props) {
@@ -11,7 +24,7 @@ class BusinessRegister extends Component {
             CompanyName: "",
             src: require('../../images/AddAnImage.png'),
             LinkToCompanySite: "",
-            errors: {LinkToCompanySite:""}
+            errors: { LinkToCompanySite: "" }
         }
 
         this.handleInputChange = this.handleInputChange.bind(this);
@@ -72,18 +85,39 @@ class BusinessRegister extends Component {
 
     render() {
         const { src, errors, CompanyName, LinkToCompanySite } = this.state;
-        const {userInfo} = this.props;
+        const { userInfo, classes } = this.props;
         return (
-            <div className="Container">
-                <span>Company's Name *</span>
-                <input type="text" value={Object.getOwnPropertyNames(userInfo).length > 0? userInfo.CompanyName : CompanyName}name="CompanyName" onChange={this.handleInputChange} />
-                <br />
-                <span> Company's logo </span>
-                <img id="uploadPreview" src={Object.getOwnPropertyNames(userInfo).length > 0? userInfo.Picture : src} className="logo" />
-                <input type="file" name="myFile" onChange={this.handleImgChange} />
+            <div className="businessContainer">
+                <TextField
+                    id="companyName"
+                    label="Company's Name *"
+                    className={classes.textField}
+                    value={Object.getOwnPropertyNames(userInfo).length > 0 ? userInfo.CompanyName : CompanyName} name="CompanyName"
+                    onChange={this.handleInputChange}
+                    margin="normal"
+                />
 
-                <span>Link To Company's Site</span>
-                <input type="text" value={Object.getOwnPropertyNames(userInfo).length > 0 ? userInfo.LinkToCompanySite : LinkToCompanySite} name="LinkToCompanySite" onChange={this.handleInputChange} />
+                {/* <input type="text" name="CompanyName" onChange={this.handleInputChange} /> */}
+
+                <div className="imgWrapper businessImgWrapper">
+                    <span> Company's logo: </span>
+                    <FileUploader />
+                </div>
+                {/* src={Object.getOwnPropertyNames(userInfo).length > 0? userInfo.Picture : src} 
+                <span> Company's logo </span>
+                <img id="uploadPreview" src={src} className="logo" />
+                <input type="file" name="myFile" onChange={this.handleImgChange} /> */}
+
+                <TextField
+                    id="companyLink"
+                    label="Link To Company's Site"
+                    className={classes.textField}
+                    value={Object.getOwnPropertyNames(userInfo).length > 0 ? userInfo.LinkToCompanySite : LinkToCompanySite} name="LinkToCompanySite"
+                    onChange={this.handleInputChange}
+                    margin="normal"
+                />
+                {/* <span>Link To Company's Site</span>
+                <input type="text" name="LinkToCompanySite" onChange={this.handleInputChange} /> */}
                 <span className="errorInput">{errors["LinkToCompanySite"] && errors["LinkToCompanySite"]}</span>
 
 
@@ -92,4 +126,8 @@ class BusinessRegister extends Component {
     }
 }
 
-export default BusinessRegister;
+BusinessRegister.propTypes = {
+    classes: PropTypes.object.isRequired,
+};
+
+export default withStyles(styles)(BusinessRegister);

@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 
+import './interests.css';
+
 class Interests extends Component {
     constructor(props) {
         super(props);
@@ -82,34 +84,89 @@ class Interests extends Component {
         const { otherDisabled } = this.state;
 
         return (
-            <div className="Container">
-                <span> Interests: </span>
-                <span> Sport</span>
-                <input type="checkbox" checked={this.checkIfChecked("Sport")} name="Interests" value="Sport" onChange={handleInputChange} />
-
-                <span> Style </span>
-                <input type="checkbox" checked={this.checkIfChecked("Style")} name="Interests" value="Style" onChange={handleInputChange} />
-
-                <span> Food</span>
-                <input type="checkbox" checked={this.checkIfChecked("Food")} name="Interests" value="Food" onChange={handleInputChange} />
-
-                <span> Music</span>
-                <input type="checkbox" checked={this.checkIfChecked("Music")} name="Interests" value="Music" onChange={handleInputChange} />
-
-                <span> Technology</span>
-                <input type="checkbox" checked={this.checkIfChecked("Technology")} name="Interests" value="Technology" onChange={handleInputChange} />
-
-                <span> Pets</span>
-                <input type="checkbox" checked={this.checkIfChecked("Pets")} name="Interests" value="Pets" onChange={handleInputChange} />
-
-                <span> Travel</span>
-                <input type="checkbox" checked={this.checkIfChecked("Travel")} name="Interests" value="Travel" onChange={handleInputChange} />
-
-                {/* how to save it in the server? */}
-                {/* <span>Other</span>
-                <input type="checkbox" checked={signUp? !otherDisabled: this.checkIfOtherChecked()} name="Other" onChange={this.focusElement} />
-                <input id="OtherDetails" value={this.getOtherValue()} disabled={signUp? otherDisabled : !this.checkIfOtherChecked()} type="text" name="Interests" onChange={handleInputChange} /> */}
+            <div className="interestsContainer">
+                <div>Interests</div>
+                <div className="partOfInterests">
+                    <div className="foodInterest interestWrapper">
+                        <div className="checkboxforInterest">
+                            <input type="checkbox" checked={this.checkIfChecked("Food")} value="Food" id="checkboxFoodInput" name="Interests" value="Food" onChange={handleInputChange}/>
+                            <label for="checkboxFoodInput"></label>
+                        </div>
+                        <div className="descTitle">Food</div>
+                    </div>
+                    <div className="sportInterest interestWrapper">
+                        <div className="checkboxforInterest">
+                            <input type="checkbox" checked={this.checkIfChecked("Sport")} name="Interests" value="Sport" id="checkboxFSportInput" onChange={handleInputChange}/>
+                            <label for="checkboxFSportInput"></label>
+                        </div>
+                        <div className="descTitle">Sport</div>
+                    </div>
+                    <div className="styleInterest interestWrapper">
+                        <div className="checkboxforInterest">
+                            <input type="checkbox" checked={this.checkIfChecked("Style")} name="Interests" value="Style" id="checkboxStyleInput" onChange={handleInputChange}/>
+                            <label for="checkboxStyleInput"></label>
+                        </div>
+                        <div className="descTitle">Style</div>
+                    </div>
+                    <div className="musicInterest interestWrapper">
+                        <div className="checkboxforInterest">
+                            <input type="checkbox" checked={this.checkIfChecked("Music")} name="Interests" value="Music" id="checkboxMusicInput" onChange={handleInputChange}/>
+                            <label for="checkboxMusicInput"></label>
+                        </div>
+                        <div className="descTitle">Music</div>
+                    </div>
+                    <div className="technologyInterest interestWrapper">
+                        <div className="checkboxforInterest">
+                            <input type="checkbox" checked={this.checkIfChecked("Technology")} name="Interests" value="Technology" id="checkboxTechnologyInput" onChange={handleInputChange}/>
+                            <label for="checkboxTechnologyInput"></label>
+                        </div>
+                        <div className="descTitle">Technology</div>
+                    </div>
+                    <div className="petsInterest interestWrapper">
+                        <div className="checkboxforInterest">
+                            <input type="checkbox"  checked={this.checkIfChecked("Pets")} name="Interests" value="Pets" id="checkboxPetsInput" onChange={handleInputChange}/>
+                            <label for="checkboxPetsInput"></label>
+                        </div>
+                        <div className="descTitle">Pets</div>
+                    </div>
+                    <div className="travelInterest interestWrapper">
+                        <div className="checkboxforInterest">
+                            <input type="checkbox" checked={this.checkIfChecked("Travel")} name="Interests" value="Travel" id="checkboxTravelInput" onChange={handleInputChange}/>
+                            <label for="checkboxTravelInput"></label>
+                        </div>
+                        <div className="descTitle">Travel</div>
+                    </div>
+                </div>
             </div>
+
+            // <div className="Container">
+            //     <span> Interests: </span>
+            //     <span> Sport</span>
+            //     <input type="checkbox" name="Interests" value="Sport" onChange={handleInputChange} />
+
+            //     <span> Style </span>
+            //     <input type="checkbox" name="Interests" value="Style" onChange={handleInputChange} />
+
+            //     <span> Food</span>
+            //     <input type="checkbox" name="Interests" value="Food" onChange={handleInputChange} />
+
+            //     <span> Music</span>
+            //     <input type="checkbox" name="Interests" value="Music" onChange={handleInputChange} />
+
+            //     <span> Technology</span>
+            //     <input type="checkbox" name="Interests" value="Technology" onChange={handleInputChange} />
+
+            //     <span> Pets</span>
+            //     <input type="checkbox" name="Interests" value="Pets" onChange={handleInputChange} />
+
+            //     <span> Travel</span>
+            //     <input type="checkbox" name="Interests" value="Travel" onChange={handleInputChange} />
+
+            //     {/* how to save it in the server? */}
+            //     <span>Other</span>
+            //     <input type="checkbox" name="Other" onChange={this.focusElement} />
+            //     <input id="OtherDetails" disabled={otherDisabled} type="text" name="Interests" onChange={handleInputChange} />
+            // </div>
         )
     }
 }

@@ -1,14 +1,19 @@
-import React, {
-    Component
-} from 'react';
+import React, { Component } from 'react';
 import './Register.css';
 import RegisterService from '../../services/register/RegisterService';
 import StringUtil from '../../utils/StringUtil';
+
 import InfluencerRegister from './InfluencerRegister';
 import BusinessRegister from './BusinessRegister';
 import Interests from "./Interests";
 import VerifyQuestions from "../../common/verifyQuestions/VerifyQuestions";
 import SignUp from '../../components/signUp/SignUp';
+import PasswordInput from '../../components/passwordInput/passwordInput';
+import LayoutButton from '../layoutButton/layoutButton';
+
+import PropTypes from 'prop-types';
+import TextField from '@material-ui/core/TextField';
+import { withStyles } from '@material-ui/core/styles';
 
 const initialState = {
     user: {},
@@ -22,6 +27,14 @@ const initialState = {
     },
 
 };
+
+const styles = theme => ({
+    textField: {
+      marginLeft: theme.spacing.unit,
+      marginRight: theme.spacing.unit,
+      width: 300,
+    }
+});
 
 class Register extends Component {
     constructor(props) {
@@ -225,41 +238,63 @@ class Register extends Component {
     // }
 
     render() {
-        const { children, signUp } = this.props;
+        const { children, signUp, classes } = this.props;
         const { user, errors } = this.state;
         return (
-            <div className="Container">
-                <span > Name * </span>
-                <input type="text" name="Name" disabled={user.ExternalLogin} value={user.Name} onChange={this.handleInputChange} />
+            <div className="registerContainer">
+                <TextField
+                    id="name"
+                    label="Name *"
+                    className={classes.textField}
+                    value={user.Name}
+                    name="Name"
+                    onChange={this.handleInputChange}
+                    disabled={user.ExternalLogin}
+                    margin="normal"
+                />
+
+                {/* <input type="text" name="name" disabled={externalLogin} value={name} onChange={this.handleInputChange} /> */}
                 <span className="errorInput" > {errors["Name"] && errors["Name"]} </span>
 
-                {signUp && <div className="emailContainer">
-                    <span > Email * </span>
-                    < input type="email" name="Email" disabled={user.ExternalLogin} value={user.Email} onChange={this.handleInputChange} />
-                    <span className="errorInput" > {errors["Email"] && errors["Email"]} </span>
-                </div>}
+                <TextField
+                    id="email"
+                    label="Email *"
+                    className={classes.textField}
+                    value={user.Email}
+                    name="Email"
+                    onChange={this.handleInputChange}
+                    disabled={user.ExternalLogin}
+                    margin="normal"
+                />
+                {/* < input type="email" name="email" disabled={externalLogin} value={email} onChange={this.handleInputChange} /> */}
+                <span className="errorInput" > {errors["Email"] && errors["Email"]} </span>
 
-                {signUp && <div className="confirmEmailContainer">
-                    <span > Confirm Email * </span>
-                    <input type="email" name="ConfirmMail" disabled={user.ExternalLogin} value={user.ConfirmMail} onChange={this.handleInputChange} />
-                    <span className="errorInput" > {errors["ConfirmMail"] && errors["ConfirmMail"]} </span>
-                </div>}
+                <TextField
+                    id="confirmMail"
+                    label="Confirm Email *"
+                    className={classes.textField}
+                    value={user.ConfirmMail}
+                    name="ConfirmMail"
+                    onChange={this.handleInputChange}
+                    disabled={externalLogin}
+                    margin="normal"
+                />
+                {/* < input type="email" name="confirmMail" disabled={externalLogin} value={confirmMail} onChange={this.handleInputChange} /> */}
+                <span className="errorInput" > {errors["ConfirmMail"] && errors["ConfirmMail"]} </span>
 
-                {signUp && <div className="passwordContainer">
-                    <span > Password {user.ExternalLogin && (<span>for the website </span>)} *</span>
-                    <input type="password" placeholder="Min 6 chars, at least one number and one lower case English letter" name="Password" value={user.Password} onChange={this.handleInputChange} />
-                    <span className="errorInput" > {errors["Password"] && errors["Password"]} </span>
-                </div>}
+                {signUp && <PasswordInput name="Password" style= {{width: '60%'}} placeholder="Min 6 chars, at least one number and one lower case English letter" value={user.Password} onChange={this.handleInputChange} label={"Password" + " " + (externalLogin && (<span>for the website </span>)) + "*"}/>}
+                {/* <span > Password {externalLogin && (<span>for the website </span>)} *</span> */}
 
-                {signUp && <div className="confirmPasswordContainer">
-                    <span > Confirm Password * </span>
-                    <input type="password" name="ConfirmPassword" value={user.ConfirmPassword} onChange={this.handleInputChange} />
-                    <span className="errorInput" > {errors["ConfirmPassword"] && errors["ConfirmPassword"]} </span>
-                </div>}
+                {/* <input type="password" placeholder="Min 6 chars, at least one number and one lower case English letter" name="password" value={password} onChange={this.handleInputChange} /> */}
+                <span className="errorInput" > {errors["Password"] && errors["Password"]} </span>
 
-                {signUp && <div className="pickerContainer">
-                    <span > I 'm a: </span>
-                    <select name="Type" onChange={this.handleInputChange} >
+                {signUp && <PasswordInput name="ConfirmPassword" style= {{width: '60%'}} value={user.ConfirmPassword} onChange={this.handleInputChange} label={"Confirm Password *"}/>}
+                {/* <input type="password" name="confirmPassword" value={confirmPassword} onChange={this.handleInputChange} /> */}
+                <span className="errorInput" > {errors["ConfirmPassword"] && errors["ConfirmPassword"]} </span>
+
+                {signUp && <div className="typeOfUser">
+                    <span > I'm a: </span>
+                    <select className="chooseType" name="Type" onChange={this.handleInputChange} >
                         <option value="Social Influencer" > Social Influencer </option>
                         <option value="Business Owner" > Business Owner </option>
                     </select>
@@ -267,25 +302,41 @@ class Register extends Component {
 
                 <Interests handleInputChange={this.handleInputChange} interests={user.Interests} signUp={signUp} />
 
-                {/* {(Object.getOwnPropertyNames(userInfo).length > 0) ?
-                    (userInfo.Type === "Social Influencer" ?
-                        <InfluencerRegister errors={errors} updateChooseTypeStateObject={this.updateChooseTypeStateObject} signUp={signUp} userInfo={userInfo} />
-                        : <BusinessRegister updateChooseTypeStateObject={this.updateChooseTypeStateObject} userInfo={userInfo} />) */}
-
                 {user.Type === "Social Influencer" ? <InfluencerRegister errors={errors} updateChooseTypeStateObject={this.updateChooseTypeStateObject} signUp={signUp} userInfo={user} />
                     : <BusinessRegister updateChooseTypeStateObject={this.updateChooseTypeStateObject} userInfo={user} />}
 
-                <span> Description: </span>
-                <input type="text" name="Description" value={user.Description} onChange={this.handleInputChange} />
+                <TextField
+                    id="description"
+                    label="Description"
+                    multiline
+                    rowsMax="8"
+                    name="Description"
+                    value={user.Description}
+                    onChange={this.handleInputChange}
+                    className={classes.textField}
+                    margin="normal"
+                    style = {{width: '80%'}}
+                />
+                {/* <input type="text" name="description" onChange={this.handleInputChange} /> */}
 
                 <VerifyQuestions signUp={signUp} handleInputChange={this.handleInputChange} question1={user.Question1} question2={user.Question2} />
 
-                {signUp && <input type="button" className={`${this.isAllValid() ? "" : "disableElement"}`} onClick={this.createUserClicked} value="Sign up!" />}
-                {!signUp && <input type="button" value="Submit" onClick={this.handleSubmitClicked} />}
 
+                {signUp && <div className={`${this.isAllValid() ? "signUpBtnWrapper" : "disableElement signUpBtnWrapper"}`}>
+                    <LayoutButton text="Sign Up!" onClick={this.createUserClicked} />
+                </div>}
+
+                {!signUp && <div className={`${this.isAllValid() ? "signUpBtnWrapper" : "disableElement signUpBtnWrapper"}`}>
+                     <LayoutButton text="Submit!" onClick={this.handleSubmitClicked} />}
+                </div>}
+                {/* <input type="button" className={`${this.isAllValid() ? "" : "disableElement"}`} onClick={this.createUserClicked} value="Sign up!" /> */}
             </div>
         );
     }
 }
 
-export default Register;
+Register.propTypes = {
+    classes: PropTypes.object.isRequired,
+};
+
+export default withStyles(styles)(Register);

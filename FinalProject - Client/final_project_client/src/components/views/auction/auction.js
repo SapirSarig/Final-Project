@@ -158,8 +158,6 @@ class Auction extends Component {
             <div>
                 {!auctionOk ?
                     <div className="auctionWrapper">
-                        {/* <form onsubmit={this.AddAuction} className={classes.container} noValidate autoComplete="off"> */}
-
                         <div className={classes.container}>
                             <div className="firstLineWrapper">
                                 <TextField
@@ -175,54 +173,43 @@ class Auction extends Component {
                                 />
                                 <div className="editAuctionBtn designBtn">
                                     Edit auction
-                                </div>
+                        </div>
                             </div>
                             <div className="businessNameContainer">
                                 <div className="businessWrapper">
                                     Name of the business
-                                </div>
+                        </div>
                             </div>
                             <TextField
                                 id="name"
-                                name="Title"
-                                label="Auction title*"
+                                label="Auction title"
                                 className={classes.textField + " titleTextField"}
-                                value={auction.Title}
-                                onChange={this.handleChange}
-                                margin="normal"
-                            />
-                            <span className="errorInput" > {errors["Title"] && errors["Title"]} </span>
+                                value={this.state.name}
+                                onChange={this.handleChange('name')}
+                                margin="normal" />
                             <div className="productWrapper">
                                 <TextField
                                     id="nameOfProduct"
-                                    name="Product"
-                                    label="Product*"
+                                    label="Product"
                                     className={classes.textField}
-                                    value={auction.Product}
-                                    onChange={this.handleChange}
+                                    value={this.state.nameOfProduct}
+                                    onChange={this.handleChange('nameOfProduct')}
                                     margin="normal"
                                     style={{ width: '60%' }}
                                 />
                                 <FileUploader />
                             </div>
-                            <span className="errorInput" > {errors["Product"] && errors["Product"]} </span>
-
                             <TextField
                                 id="description"
-                                name="Description"
                                 label="Description"
-                                value={auction.Description}
                                 multiline
                                 rowsMax="8"
-                                onChange={this.handleChange}
+                                onChange={this.handleChange('description')}
                                 className={classes.textField + " descTextField"}
                                 margin="normal"
                                 style={{ width: '80%' }}
                             />
-                            <div className="interestsContainer">
-                                {/* <div>Interests</div> */}
-                                <Interests handleInputChange={this.handleChange} />
-                            </div>
+                            <Interests handleInputChange={this.handleChange} />
                             <TextField
                                 id="numberFollowers"
                                 name="NumOfMinFollowers"
@@ -268,13 +255,61 @@ class Auction extends Component {
                             {/* <div className="submitAuctionBtn designBtn"> */}
                             <button className={`${this.isAllValid() ? "" : "disableElement"}`} onClick={this.AddAuction}>Submit</button>
                             {/* </div> */}
-
                         </div>
                     </div>
-                    : <Redirect to={{
+                    :
+                    <Redirect to={{
                         pathname: '/BusinessHomePage'
                         // state: { userInfo }
                     }} />}
+
+
+                {/* <TextField
+                                id="numberFollowers"
+                                label="Number of minimum followers"
+                                value={this.state.numberFollowers}
+                                onChange={this.handleChange('numberFollowers')}
+                                type="number"
+                                className={classes.textField}
+                                InputLabelProps={{
+                                    shrink: true,
+                                }}
+                                margin="normal" />
+                            <TextField
+                                id="pament"
+                                label="Payment"
+                                className={classes.textField}
+                                value={this.state.payment}
+                                onChange={this.handleChange('payment')}
+                                margin="normal" />
+                            <div className="dueDate">
+                                <TextField
+                                    id="startDate"
+                                    label="Start date"
+                                    type="date"
+                                    className={classes.textField}
+                                    value={this.state.startDate}
+                                    onChange={this.handleChange('startDate')}
+                                    InputLabelProps={{
+                                        shrink: true,
+                                    }}
+                                />
+                                <TextField
+                                    id="endDate"
+                                    label="End date"
+                                    type="date"
+                                    className={classes.textField}
+                                    value={this.state.endtDate}
+                                    onChange={this.handleChange('endtDate')}
+                                    InputLabelProps={{
+                                        shrink: true,
+                                    }}
+                                />
+                            </div>
+                            <div className="submitContainer">
+                                <div className="submitAuctionBtn designBtn">
+                                    Submit auction
+                        </div> */}
             </div>
         );
     }
