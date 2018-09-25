@@ -2,6 +2,9 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import TextField from '@material-ui/core/TextField';
 import { withStyles } from '@material-ui/core/styles';
+
+import LayoutButton from '../../../common/layoutButton/layoutButton';
+
 import './allOffers.css';
 
 const styles = theme => ({
@@ -77,11 +80,7 @@ class AllOffers extends Component {
                                     readOnly: true,
                                 }}
                             />
-                            <div className="goToOfferContainer">
-                                <div className="goToOfferBtn designBtn">
-                                    Go To Offer 
-                                </div>
-                            </div>
+                            <LayoutButton text="Go To Offer" />
                         </div>
                         <div className="separatorLine"></div>
                     </div>
