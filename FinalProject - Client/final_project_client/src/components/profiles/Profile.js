@@ -14,7 +14,7 @@ class Profile extends Component {
             user: {
                 Id: 1,
                 Name: "Sapir",
-                Picture: '../../images/AddAnImage.png',
+                Picture: "",
                 Interests: [
                     {
                         Value: "Sport",

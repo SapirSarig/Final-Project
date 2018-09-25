@@ -57,6 +57,13 @@ namespace FinalProject.BL
                 return auctionsCRUD.GetFilteredAuctions(searchStr);
         }
         
+        public IEnumerable<Auction> GetAuctionsByEmail(string Email)
+        {
+            if (Email == null || Email == "")
+                return GetAuctions();
+            else
+                return auctionsCRUD.GetAuctionsByEmail(Email);
+        }
 
         public IEnumerable<Offer> GetAllOffers(int auctionId)
         {

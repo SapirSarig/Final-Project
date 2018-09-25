@@ -47,6 +47,7 @@ class myAuctions extends Component {
                     </div>
                 </div>
                 <div className="auctionsWrapper">
+                {console.log("theAuctions", theAuctions)}
                     {theAuctions && theAuctions.map((auction) =>
                         <div className="myAuctionWrapper">
                             <TextField

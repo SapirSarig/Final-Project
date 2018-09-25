@@ -2,7 +2,12 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import TextField from '@material-ui/core/TextField';
 import { withStyles } from '@material-ui/core/styles';
+
+import LayoutButton from '../../../common/layoutButton/layoutButton';
+
 import './starOffer.css';
+
+import SocialMedia from '../../../common/socialMedia/socialMedia';
 
 const styles = theme => ({
     container: {
@@ -69,9 +74,7 @@ class starOffer extends Component {
                             }}
                             style={{ width: '30%' }}
                         />
-                        <div className="editAuctionBtn designBtn">
-                            Edit offer
-                        </div>
+                        <LayoutButton text="Edit offer" />
                     </div>
                     <TextField
                         id="read-only-input"
@@ -120,6 +123,7 @@ class starOffer extends Component {
                             <div className="descTitle">Post</div>
                         </div>
                     </div>
+                    <SocialMedia isExtra="false"/>
                     <TextField
                         id="offerDescription"
                         name="Description"
@@ -130,50 +134,9 @@ class starOffer extends Component {
                         onChange={this.handleChange}
                         className={classes.textField}
                         margin="normal"
-                        style={{ width: '80%' }}
+                        style = {{width: '80%'}}
                     />
-                    <div className="socialMediaContainer">
-                        <div className="socialMediaTitle">Social Media</div>
-                        <div className="socialMediaIcons">
-                            <div className="facebook socialMediatWrapper">
-                                <div className="checkboxforSocialMedia">
-                                    <input type="checkbox" value="1" id="checkboxfacebookInput" name="" />
-                                    <label for="checkboxfacebookInput"></label>
-                                </div>
-                                <div className="descTitleForSocialMedia">
-                                    <i className="fab fa-facebook-square" aria-hidden="true"></i>
-                                </div>
-                            </div>
-                            <div className="instagram socialMediatWrapper">
-                                <div className="checkboxforSocialMedia">
-                                    <input type="checkbox" value="2" id="checkboxFInstagramInput" name="" />
-                                    <label for="checkboxFInstagramInput"></label>
-                                </div>
-                                <div className="descTitleForSocialMedia">
-                                    <i class="fab fa-instagram" aria-hidden="true"></i>
-                                </div>
-                            </div>
-                            <div className="twitter socialMediatWrapper">
-                                <div className="checkboxforSocialMedia">
-                                    <input type="checkbox" value="3" id="checkboxTwitterInput" name="" />
-                                    <label for="checkboxTwitterInput"></label>
-                                </div>
-                                <div className="descTitleForSocialMedia">
-                                    <i class="fab fa-twitter-square" aria-hidden="true"></i>
-                                </div>
-                            </div>
-                            <div className="youtube socialMediatWrapper">
-                                <div className="checkboxforSocialMedia">
-                                    <input type="checkbox" value="4" id="checkboxYoutubeInput" name="" />
-                                    <label for="checkboxYoutubeInput"></label>
-                                </div>
-                                <div className="descTitleForSocialMedia">
-                                    <i class="fab fa-youtube-square" aria-hidden="true"></i>
-                                </div>
-                            </div>
-                            
-                        </div>
-                        <TextField
+                    <TextField
                                 id="payment"
                                 name="Payment"
                                 label="Payment ($)"
@@ -184,15 +147,9 @@ class starOffer extends Component {
                                 margin="normal"
                                 style={{ width: '80%' }}
                             />
-                    </div>
-
                     <div className="btnContainer">
-                        <div className="send designBtn">
-                            Send Offer
-                        </div>
-                        <div className="send designBtn">
-                            Open negotiaition
-                        </div>
+                        <LayoutButton text="Send Offer" />
+                        <LayoutButton text="Open negotiaition" />
                     </div>
                 </form>
             </div>

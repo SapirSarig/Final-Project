@@ -11,8 +11,8 @@
 }
 
 .emptyDiv {
-    background-image: url('../../../images/cover.png');
-    background-size: cover;
+    background-image: url('../../../images/homePage.jpg');
+    background-size: contain;
     background-position: center;
     background-repeat: no-repeat;
     opacity: 0.5;
@@ -107,15 +107,7 @@
 }
 
 .explanation div:first-child{
-    width: 70%;
     font-size: 1.2em;
-}
-
-.explanation div:nth-child(2){
-    width: 70%;
-    font-size: 1em;
-    margin: 20px 0 0 140px;
-    text-align: right;
 }
 
 .explanation div:last-child{

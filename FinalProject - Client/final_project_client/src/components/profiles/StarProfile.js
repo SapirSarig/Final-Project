@@ -12,7 +12,7 @@ class StarProfile extends Component {
                 {socialNetworks && socialNetworks.length > 0 ?
                  <div className="socialNetworks">
                 {socialNetworks.map(sn =>
-                        (<a href={sn.LinkToProfile}> <img src={require(`../../images/${sn.Value}.png`)} className="logo" /><br/></a>))}
+                        (<a href={sn.LinkToProfile}> <img src={""} className="logo" /><br/></a>))}
                 </div> : <div>No Social Networks To Show!</div>}
                 <span> Date Of Birth </span>
                 <span> {dateOfBirth} </span>
