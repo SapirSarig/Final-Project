@@ -37,6 +37,23 @@ class SignUp extends Component {
         }
     }
 
+    componentDidMount() {
+        let { user } = this.state;
+        const { location } = this.props;
+        if (location && location.state) {
+            const { loggedUser, externalLogin } = location.state;
+            if (loggedUser && externalLogin) {
+                const { email, name } = loggedUser;
+                user.Email = email;
+                user.Name = name;
+                user.ExternalLogin = externalLogin;
+                user.ConfirmMail = email;
+            }
+            this.setState({
+                user
+            });
+        }
+    }
     CreateInfluencerUser(user) {
         //const userInfo = Object.assign({}, registerObj, this.state);
         //console.log('#########', userInfo);

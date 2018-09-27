@@ -231,8 +231,11 @@ class InfluencerRegister extends Component {
         return (
             <div className="influencerContainer">
                 <div className="imgWrapper">
-                    <span> Image: </span>
-                    <FileUploader />
+                <img src={Object.getOwnPropertyNames(userInfo).length > 0 ? userInfo.Picture : src} />
+                <img id="uploadPreview" src={src} className="logo" />
+                <input type="file" name="myFile" onChange={this.handleImgChange} />
+                    {/* <span> Image: </span>
+                    <FileUploader/> */}
                 </div>
                 {/* src={Object.getOwnPropertyNames(userInfo).length > 0 ? userInfo.Picture : src} 
                 <img id="uploadPreview" src={src} className="logo" />

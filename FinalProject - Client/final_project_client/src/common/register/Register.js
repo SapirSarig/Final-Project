@@ -17,7 +17,7 @@ import { withStyles } from '@material-ui/core/styles';
 
 const initialState = {
     user: {},
-    chooseTypeState:{},
+    chooseTypeState: {},
     errors: {
         Name: "",
         Email: "",
@@ -30,9 +30,9 @@ const initialState = {
 
 const styles = theme => ({
     textField: {
-      marginLeft: theme.spacing.unit,
-      marginRight: theme.spacing.unit,
-      width: 300,
+        marginLeft: theme.spacing.unit,
+        marginRight: theme.spacing.unit,
+        width: 300,
     }
 });
 
@@ -56,27 +56,49 @@ class Register extends Component {
     // }
 
     componentDidMount() {
+        // } else {
+        // const { user } = this.props;
+        // this.setState({
+        //     user
+        // });
         const { location } = this.props;
         if (location && location.state) {
-            const { loggedUser, externalLogin, user } = location.state;
-            if (loggedUser && externalLogin) {
-                const { email, name } = loggedUser;
-                user.Email = email;
-                user.Name = name;
-                user.ExternalLogin = externalLogin;
-                user.ConfirmMail = email;
+            {
+                const { user } = location.state;
+                this.setState({
+                    user
+                });
             }
-            this.setState({
-                user
-            });
 
-        } else {
+        }
+        else {
             const { user } = this.props;
             this.setState({
                 user
             });
         }
     }
+    // const { location } = this.props;
+    // if (location && location.state) {
+    //     const { loggedUser, externalLogin, user } = location.state;
+    //     if (loggedUser && externalLogin) {
+    //         const { email, name } = loggedUser;
+    //         user.Email = email;
+    //         user.Name = name;
+    //         user.ExternalLogin = externalLogin;
+    //         user.ConfirmMail = email;
+    //     }
+    //     this.setState({
+    //         user
+    //     });
+
+    // } else {
+    //     const { user } = this.props;
+    //     this.setState({
+    //         user
+    //     });
+    // }
+
 
 
     handleInputChange(event) {
@@ -111,7 +133,7 @@ class Register extends Component {
                 this.setState({
                     user
                 });
-               
+
             }
         }
         else {
@@ -276,19 +298,19 @@ class Register extends Component {
                     value={user.ConfirmMail}
                     name="ConfirmMail"
                     onChange={this.handleInputChange}
-                    disabled={ user.ExternalLogin}
+                    disabled={user.ExternalLogin}
                     margin="normal"
                 />}
                 {/* < input type="email" name="confirmMail" disabled={externalLogin} value={confirmMail} onChange={this.handleInputChange} /> */}
                 <span className="errorInput" > {errors["ConfirmMail"] && errors["ConfirmMail"]} </span>
 
-                {signUp && <PasswordInput name="Password" style= {{width: '60%'}} placeholder="Min 6 chars, at least one number and one lower case English letter" value={user.Password} onChange={this.handleInputChange} label={"Password *"}/>}
+                {signUp && <PasswordInput name="Password" style={{ width: '60%' }} placeholder="Min 6 chars, at least one number and one lower case English letter" value={user.Password} onChange={this.handleInputChange} label={"Password *"} />}
                 {/* <span > Password {externalLogin && (<span>for the website </span>)} *</span> */}
 
                 {/* <input type="password" placeholder="Min 6 chars, at least one number and one lower case English letter" name="password" value={password} onChange={this.handleInputChange} /> */}
                 <span className="errorInput" > {errors["Password"] && errors["Password"]} </span>
 
-                {signUp && <PasswordInput name="ConfirmPassword" style= {{width: '60%'}} value={user.ConfirmPassword} onChange={this.handleInputChange} label={"Confirm Password *"}/>}
+                {signUp && <PasswordInput name="ConfirmPassword" style={{ width: '60%' }} value={user.ConfirmPassword} onChange={this.handleInputChange} label={"Confirm Password *"} />}
                 {/* <input type="password" name="confirmPassword" value={confirmPassword} onChange={this.handleInputChange} /> */}
                 <span className="errorInput" > {errors["ConfirmPassword"] && errors["ConfirmPassword"]} </span>
 
@@ -315,7 +337,7 @@ class Register extends Component {
                     onChange={this.handleInputChange}
                     className={classes.textField}
                     margin="normal"
-                    style = {{width: '80%'}}
+                    style={{ width: '80%' }}
                 />
                 {/* <input type="text" name="description" onChange={this.handleInputChange} /> */}
 
@@ -327,7 +349,7 @@ class Register extends Component {
                 </div>}
 
                 {!signUp && <div className={`${this.isAllValid() ? "signUpBtnWrapper" : "disableElement signUpBtnWrapper"}`}>
-                     <LayoutButton text="Submit!" onClick={this.handleSubmitClicked} />
+                    <LayoutButton text="Submit!" onClick={this.handleSubmitClicked} />
                 </div>}
                 {/* <input type="button" className={`${this.isAllValid() ? "" : "disableElement"}`} onClick={this.createUserClicked} value="Sign up!" /> */}
             </div>
