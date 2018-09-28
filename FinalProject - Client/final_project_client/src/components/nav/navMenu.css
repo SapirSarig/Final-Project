@@ -1,0 +1,12 @@
+.navMenu {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  padding-top: 5rem;
+  flex: 1;
+}
+
+.linksWrapper{
+    display: flex;
+    flex-direction: column;
+}

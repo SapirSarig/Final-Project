@@ -116,7 +116,7 @@ class Profile extends Component {
         let { okDisabled } = this.state;
         return (
             <div>
-                {user && (<div className="Container">
+                {user && (<div className="profileContainer">
                     <span> Image: </span>
                     <img src={user.Picture} className="logo" />
 
