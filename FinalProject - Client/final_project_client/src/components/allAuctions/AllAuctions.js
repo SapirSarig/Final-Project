@@ -31,7 +31,7 @@ class AllAuctions extends Component {
             <div className="allAuctions">
                 <label className="searchFieldLabel"> Search: </label>
                 <input className="searchFieldInput" onChange={this.handleSearchFieldChange} />
-                <MyAuctions auctions={auctions}/>
+                <MyAuctions auctions={auctions} title="All Auctions"/>
             </div>
         );
     }
