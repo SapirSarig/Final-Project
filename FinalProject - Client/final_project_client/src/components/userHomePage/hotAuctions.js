@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import AuctionInList from './auctionInList';
 
 class hotAuctions extends Component {
 
@@ -15,7 +16,7 @@ class hotAuctions extends Component {
             auctions && auctions.length > 0 ?  <div className="hotAuctions">
                 Hot auctions:
                 {auctions.map((auction) =>
-                   <div>{auction}</div>)
+                   <AuctionInList auction = {auction}/>)
               }
             </div> :<div>No Auctions Yet!</div>
         );
