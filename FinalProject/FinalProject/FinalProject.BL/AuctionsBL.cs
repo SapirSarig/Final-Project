@@ -62,7 +62,12 @@ namespace FinalProject.BL
             if (Email == null || Email == "")
                 return GetAuctions();
             else
-                return auctionsCRUD.GetAuctionsByEmail(Email);
+            {
+                IEnumerable <Auction> res = auctionsCRUD.GetAuctionsByEmail(Email);
+                return res;
+            }
+            //return auctionsCRUD.GetAuctionsByEmail(Email);
+
         }
 
         public IEnumerable<Offer> GetAllOffers(int auctionId)

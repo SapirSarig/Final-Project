@@ -82,3 +82,17 @@ C:\Users\Admin\Documents\GitHub\Final-Project\FinalProject\FinalProject\FinalPro
 C:\Users\Admin\Documents\GitHub\Final-Project\FinalProject\FinalProject\FinalProject.BL\bin\Debug\Newtonsoft.Json.xml
 C:\Users\Admin\Documents\GitHub\Final-Project\FinalProject\FinalProject\FinalProject.BL\bin\Debug\System.IdentityModel.Tokens.Jwt.pdb
 C:\Users\Admin\Documents\GitHub\Final-Project\FinalProject\FinalProject\FinalProject.BL\bin\Debug\System.IdentityModel.Tokens.Jwt.xml
+C:\Users\Meital\Desktop\Meital\My Final Project\Final-Project\FinalProject\FinalProject\FinalProject.BL\bin\Debug\Microsoft.IdentityModel.JsonWebTokens.dll
+C:\Users\Meital\Desktop\Meital\My Final Project\Final-Project\FinalProject\FinalProject\FinalProject.BL\bin\Debug\Microsoft.IdentityModel.Logging.dll
+C:\Users\Meital\Desktop\Meital\My Final Project\Final-Project\FinalProject\FinalProject\FinalProject.BL\bin\Debug\Microsoft.IdentityModel.Tokens.dll
+C:\Users\Meital\Desktop\Meital\My Final Project\Final-Project\FinalProject\FinalProject\FinalProject.BL\bin\Debug\Newtonsoft.Json.dll
+C:\Users\Meital\Desktop\Meital\My Final Project\Final-Project\FinalProject\FinalProject\FinalProject.BL\bin\Debug\System.IdentityModel.Tokens.Jwt.dll
+C:\Users\Meital\Desktop\Meital\My Final Project\Final-Project\FinalProject\FinalProject\FinalProject.BL\bin\Debug\Microsoft.IdentityModel.JsonWebTokens.pdb
+C:\Users\Meital\Desktop\Meital\My Final Project\Final-Project\FinalProject\FinalProject\FinalProject.BL\bin\Debug\Microsoft.IdentityModel.JsonWebTokens.xml
+C:\Users\Meital\Desktop\Meital\My Final Project\Final-Project\FinalProject\FinalProject\FinalProject.BL\bin\Debug\Microsoft.IdentityModel.Logging.pdb
+C:\Users\Meital\Desktop\Meital\My Final Project\Final-Project\FinalProject\FinalProject\FinalProject.BL\bin\Debug\Microsoft.IdentityModel.Logging.xml
+C:\Users\Meital\Desktop\Meital\My Final Project\Final-Project\FinalProject\FinalProject\FinalProject.BL\bin\Debug\Microsoft.IdentityModel.Tokens.pdb
+C:\Users\Meital\Desktop\Meital\My Final Project\Final-Project\FinalProject\FinalProject\FinalProject.BL\bin\Debug\Microsoft.IdentityModel.Tokens.xml
+C:\Users\Meital\Desktop\Meital\My Final Project\Final-Project\FinalProject\FinalProject\FinalProject.BL\bin\Debug\Newtonsoft.Json.xml
+C:\Users\Meital\Desktop\Meital\My Final Project\Final-Project\FinalProject\FinalProject\FinalProject.BL\bin\Debug\System.IdentityModel.Tokens.Jwt.pdb
+C:\Users\Meital\Desktop\Meital\My Final Project\Final-Project\FinalProject\FinalProject\FinalProject.BL\bin\Debug\System.IdentityModel.Tokens.Jwt.xml

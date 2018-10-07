@@ -256,3 +256,15 @@ C:\Users\Admin\Documents\GitHub\Final-Project\FinalProject\FinalProject\FinalPro
 C:\Users\Admin\Documents\GitHub\Final-Project\FinalProject\FinalProject\FinalProject.WebApi\bin\Microsoft.IdentityModel.JsonWebTokens.xml
 =======
 >>>>>>> 0db0e9be4a38f74ce25cef55c6879feac19d7765
+C:\Users\Meital\Desktop\Meital\My Final Project\Final-Project\FinalProject\FinalProject\FinalProject.WebApi\bin\System.IdentityModel.Tokens.Jwt.dll
+C:\Users\Meital\Desktop\Meital\My Final Project\Final-Project\FinalProject\FinalProject\FinalProject.WebApi\bin\Microsoft.IdentityModel.Tokens.dll
+C:\Users\Meital\Desktop\Meital\My Final Project\Final-Project\FinalProject\FinalProject\FinalProject.WebApi\bin\Microsoft.IdentityModel.Logging.dll
+C:\Users\Meital\Desktop\Meital\My Final Project\Final-Project\FinalProject\FinalProject\FinalProject.WebApi\bin\Microsoft.IdentityModel.JsonWebTokens.dll
+C:\Users\Meital\Desktop\Meital\My Final Project\Final-Project\FinalProject\FinalProject\FinalProject.WebApi\bin\System.IdentityModel.Tokens.Jwt.pdb
+C:\Users\Meital\Desktop\Meital\My Final Project\Final-Project\FinalProject\FinalProject\FinalProject.WebApi\bin\System.IdentityModel.Tokens.Jwt.xml
+C:\Users\Meital\Desktop\Meital\My Final Project\Final-Project\FinalProject\FinalProject\FinalProject.WebApi\bin\Microsoft.IdentityModel.Tokens.pdb
+C:\Users\Meital\Desktop\Meital\My Final Project\Final-Project\FinalProject\FinalProject\FinalProject.WebApi\bin\Microsoft.IdentityModel.Tokens.xml
+C:\Users\Meital\Desktop\Meital\My Final Project\Final-Project\FinalProject\FinalProject\FinalProject.WebApi\bin\Microsoft.IdentityModel.Logging.pdb
+C:\Users\Meital\Desktop\Meital\My Final Project\Final-Project\FinalProject\FinalProject\FinalProject.WebApi\bin\Microsoft.IdentityModel.Logging.xml
+C:\Users\Meital\Desktop\Meital\My Final Project\Final-Project\FinalProject\FinalProject\FinalProject.WebApi\bin\Microsoft.IdentityModel.JsonWebTokens.pdb
+C:\Users\Meital\Desktop\Meital\My Final Project\Final-Project\FinalProject\FinalProject\FinalProject.WebApi\bin\Microsoft.IdentityModel.JsonWebTokens.xml
