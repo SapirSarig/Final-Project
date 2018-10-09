@@ -217,20 +217,20 @@ class Register extends Component {
             isAllValidCustome
         } = this.props;
         const { errors, user, chooseTypeState } = this.state;
-        let isValidInputs = isAllValidCustome ? isAllValidCustome() : true;
+        // let isValidInputs = isAllValidCustome ? isAllValidCustome() : true;
 
-        isValidInputs =
-            (chooseTypeState && chooseTypeState.errors &&
-                ((user.Type === "Business Owner" && (chooseTypeState.errors.LinkToCompanySite) === "") ||
-                    ((user.Type === "Social Influencer") && (chooseTypeState.errors.DateOfBirth === undefined) && (chooseTypeState.DateOfBirth !== undefined)) &&
-                    (StringUtil.isEmptyString(RegisterService.nameValidation(user.Question1))) &&
-                    (StringUtil.isEmptyString(RegisterService.nameValidation(user.Question2))) &&
-                    (StringUtil.isEmptyString(RegisterService.nameValidation(user.Name))) &&
-                    (StringUtil.isEmptyString(RegisterService.emailValidation(user.Email))) &&
-                    (StringUtil.isEmptyString(RegisterService.passwordValidation(user.Password))) &&
-                    (StringUtil.isEmptyString(RegisterService.confirmValidation(user.ConfirmPassword, user.Password))) &&
-                    (StringUtil.isEmptyString(RegisterService.confirmValidation(user.ConfirmMail, user.Email))))); //init, check all fields
-
+        // isValidInputs =
+        //     (chooseTypeState && chooseTypeState.errors &&
+        //         ((user.Type === "Business Owner" && (chooseTypeState.errors.LinkToCompanySite) === "") ||
+        //             ((user.Type === "Social Influencer") && (chooseTypeState.errors.DateOfBirth === undefined) && (chooseTypeState.DateOfBirth !== undefined)) &&
+        //             (StringUtil.isEmptyString(RegisterService.nameValidation(user.Question1))) &&
+        //             (StringUtil.isEmptyString(RegisterService.nameValidation(user.Question2))) &&
+        //             (StringUtil.isEmptyString(RegisterService.nameValidation(user.Name))) &&
+        //             (StringUtil.isEmptyString(RegisterService.emailValidation(user.Email))) &&
+        //             (StringUtil.isEmptyString(RegisterService.passwordValidation(user.Password))) &&
+        //             (StringUtil.isEmptyString(RegisterService.confirmValidation(user.ConfirmPassword, user.Password))) &&
+        //             (StringUtil.isEmptyString(RegisterService.confirmValidation(user.ConfirmMail, user.Email))))); //init, check all fields
+        let isValidInputs = true;
         return isValidInputs;
     }
     handleSubmitClicked() {
