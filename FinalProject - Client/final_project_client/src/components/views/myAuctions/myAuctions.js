@@ -36,14 +36,15 @@ class myAuctions extends Component {
     }
 
     render() {
-        const { classes, location, auctions } = this.props;
+        const { classes, location, auctions, title } = this.props;
         const theAuctions  = (location && location.state.auctions) || auctions;
+        const theTitle = (location && location.state.title) || title;
 
         return (
             <form className={classes.container} noValidate autoComplete="off">
                 <div className="myAuctionsTitleContainer">
                     <div className="myAuctionsTitle">
-                        My Auctions
+                        {theTitle}
                     </div>
                 </div>
                 <div className="auctionsWrapper">
