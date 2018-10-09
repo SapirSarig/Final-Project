@@ -171,7 +171,7 @@ class Auction extends Component {
 
     getCompanyName(userId){
         console.log("userId", userId);
-        return this.userService.getUserById(userId)
+        this.userService.getUserById(userId)
         .then(req=>{
             console.log("req",req);
             console.log("req.CompanyName", req.CompanyName);
@@ -211,7 +211,7 @@ class Auction extends Component {
                             </div>
                             <div className="businessNameContainer">
                                 <div className="businessWrapper">
-                                    {this.getCompanyName(theAuction.UserId)}
+                                    {/* {this.getCompanyName(theAuction.UserId)} */}
                                 </div>
                             </div>
                             <TextField
