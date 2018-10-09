@@ -297,7 +297,7 @@ class Auction extends Component {
                                         shrink: true,
                                     }}
                                 />
-                                <span className="errorInput" > {errors["StartDate"] && errors["StartDate"]} </span>
+                                <span className="errorInput"> {errors["StartDate"] && errors["StartDate"]} </span>
                                 <TextField
                                     id="endDate"
                                     name="EndDate"
