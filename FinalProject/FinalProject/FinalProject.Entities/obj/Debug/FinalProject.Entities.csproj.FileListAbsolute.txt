@@ -31,3 +31,9 @@ C:\Users\Admin\Documents\GitHub\Final-Project\FinalProject\FinalProject\FinalPro
 =======
 C:\Users\Avi-Laptop\Documents\GitHub\Final-Project\FinalProject\FinalProject\FinalProject.Entities\obj\Debug\FinalProject.Entities.csprojAssemblyReference.cache
 >>>>>>> 0db0e9be4a38f74ce25cef55c6879feac19d7765
+C:\Users\tal\Final-Project\FinalProject\FinalProject\FinalProject.Entities\bin\Debug\FinalProject.Entities.dll
+C:\Users\tal\Final-Project\FinalProject\FinalProject\FinalProject.Entities\bin\Debug\FinalProject.Entities.pdb
+C:\Users\tal\Final-Project\FinalProject\FinalProject\FinalProject.Entities\obj\Debug\FinalProject.Entities.csprojAssemblyReference.cache
+C:\Users\tal\Final-Project\FinalProject\FinalProject\FinalProject.Entities\obj\Debug\FinalProject.Entities.csproj.CoreCompileInputs.cache
+C:\Users\tal\Final-Project\FinalProject\FinalProject\FinalProject.Entities\obj\Debug\FinalProject.Entities.dll
+C:\Users\tal\Final-Project\FinalProject\FinalProject\FinalProject.Entities\obj\Debug\FinalProject.Entities.pdb

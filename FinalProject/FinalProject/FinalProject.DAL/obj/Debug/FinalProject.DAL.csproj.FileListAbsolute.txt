@@ -68,3 +68,17 @@ C:\Users\Avi-Laptop\Documents\GitHub\Final-Project\FinalProject\FinalProject\Fin
 C:\Users\Avi-Laptop\Documents\GitHub\Final-Project\FinalProject\FinalProject\FinalProject.DAL\obj\Debug\FinalProject.DAL.csproj.CopyComplete
 C:\Users\Avi-Laptop\Documents\GitHub\Final-Project\FinalProject\FinalProject\FinalProject.DAL\obj\Debug\FinalProject.DAL.dll
 C:\Users\Avi-Laptop\Documents\GitHub\Final-Project\FinalProject\FinalProject\FinalProject.DAL\obj\Debug\FinalProject.DAL.pdb
+C:\Users\tal\Final-Project\FinalProject\FinalProject\FinalProject.DAL\bin\Debug\FinalProject.DAL.dll.config
+C:\Users\tal\Final-Project\FinalProject\FinalProject\FinalProject.DAL\bin\Debug\FinalProject.DAL.dll
+C:\Users\tal\Final-Project\FinalProject\FinalProject\FinalProject.DAL\bin\Debug\FinalProject.DAL.pdb
+C:\Users\tal\Final-Project\FinalProject\FinalProject\FinalProject.DAL\bin\Debug\EntityFramework.dll
+C:\Users\tal\Final-Project\FinalProject\FinalProject\FinalProject.DAL\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\tal\Final-Project\FinalProject\FinalProject\FinalProject.DAL\bin\Debug\FinalProject.Entities.dll
+C:\Users\tal\Final-Project\FinalProject\FinalProject\FinalProject.DAL\bin\Debug\FinalProject.Entities.pdb
+C:\Users\tal\Final-Project\FinalProject\FinalProject\FinalProject.DAL\bin\Debug\EntityFramework.xml
+C:\Users\tal\Final-Project\FinalProject\FinalProject\FinalProject.DAL\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\tal\Final-Project\FinalProject\FinalProject\FinalProject.DAL\obj\Debug\FinalProject.DAL.csprojAssemblyReference.cache
+C:\Users\tal\Final-Project\FinalProject\FinalProject\FinalProject.DAL\obj\Debug\FinalProject.DAL.csproj.CoreCompileInputs.cache
+C:\Users\tal\Final-Project\FinalProject\FinalProject\FinalProject.DAL\obj\Debug\FinalProject.DAL.csproj.CopyComplete
+C:\Users\tal\Final-Project\FinalProject\FinalProject\FinalProject.DAL\obj\Debug\FinalProject.DAL.dll
+C:\Users\tal\Final-Project\FinalProject\FinalProject\FinalProject.DAL\obj\Debug\FinalProject.DAL.pdb

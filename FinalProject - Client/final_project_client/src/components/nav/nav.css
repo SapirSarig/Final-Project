@@ -1,0 +1,24 @@
+.nav {
+  position: fixed;
+  width: 30rem;
+  left: 100%;
+  padding: 2.5rem 4.5rem;
+  z-index: 25;
+  top: 0;
+  transition: transform 0.25s ease;
+  background-color: white;
+  color: gray;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.navOpen {
+    transform: translateX(-25rem);
+}
+
+/* .LinkActive {
+  color: $menu-links-hover;
+  text-decoration: none;
+} */
+

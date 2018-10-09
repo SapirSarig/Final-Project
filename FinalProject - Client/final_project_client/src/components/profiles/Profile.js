@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import StarProfile from './StarProfile';
 import UserService from '../../services/apis/UserService';
+import NavToggle from '../navToggle/navToggle';
+
+import './profile.css';
 
 class Profile extends Component {
     userService;
@@ -116,36 +119,44 @@ class Profile extends Component {
         let { okDisabled } = this.state;
         return (
             <div>
-                {user && (<div className="Container">
-                    <span> Image: </span>
-                    <img src={user.Picture} className="logo" />
+                <NavToggle />
+                {user && (<div className="profileContainer">
+                    <div className="rightSideWrapper">
+                        <div className="profileImgWrapper">
+                            <img src={user.Picture} className="profliePic" />
+                        </div>
+                        <span className="name"> {user.Name} </span>
+                    </div>
 
-                    <span > Name </span>
-                    <span> {user.Name} </span>
-
-                    <span> Interests </span>
-                    {user.Interests && user.Interests.length > 0 ?
-                        <div className="interests">
-                            {user.Interests.map(interest =>
-                                (<div> {interest.value} </div>))}
-                        </div> : <div>No Interests To Show!</div>}
-
-                    <span> Description </span>
-                    <span> {user.Description} </span>
+                    <div className="interestsWrapper">
+                        <span className="interestsTitle"> Interests: </span>
+                        {user.Interests && user.Interests.length > 0 ?
+                            <div className="interests">
+                                {user.Interests.map(interest =>
+                                    (<div> {interest.value} </div>))}
+                            </div> : <div>No Interests To Show!</div>}
+                    </div>
+                    
+                    <div className="descriptionWrapper">
+                        <span> Description: </span>
+                        <span> {user.Description} </span>
+                    </div>
 
                     {user.Type === "Social Influencer" ?
                         <StarProfile dateOfBirth={user.DateOfBirth} socialNetworks={user.SocialNetworks} /> : null}
-
-                    <span> Reviews </span>
-                    {user.Reviews && user.Reviews.length > 0 ?
-                        <div className="reviews">
-                            {user.Reviews.map(review =>
-                                (<div> {review.value} </div>))}
-                        </div> : <div>No Reviews Yet!</div>}
-
-                    <span> Write A Review </span>
-                    <input id="review" type="text" name="review" onChange={this.handleInputChange} />
-                    <button id="okButton" value={!!document.getElementById("review") ? document.getElementById("review").value : null} disabled={okDisabled} onClick={this.handleButtonOkClicked}> OK </button>
+                    
+                    <div className="reviewsWrapper">
+                        <span> Reviews: </span>
+                        {user.Reviews && user.Reviews.length > 0 ?
+                            <div className="reviews">
+                                {user.Reviews.map(review =>
+                                    (<div> {review.value} </div>))}
+                            </div> : <div>No Reviews Yet!</div>}
+                    </div>
+                    
+                    <span> Write A Review: </span>
+                    <textarea id="review" type="text" rows="2" name="review" onChange={this.handleInputChange} className="reviewInput" />
+                    <button id="okButton" className={!okDisabled ? "reviewOkBtn" + " " + "enable" : "reviewOkBtn"} value={!!document.getElementById("review") ? document.getElementById("review").value : null} disabled={okDisabled} onClick={this.handleButtonOkClicked}> OK </button>
                 </div>)}
             </div>
         );

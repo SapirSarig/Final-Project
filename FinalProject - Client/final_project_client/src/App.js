@@ -21,6 +21,8 @@ import EditProfile from "./components/editProfile/EditProfile";
 import ResetPassword from "./components/resetPassword/ResetPassword";
 import LocalStorageUtil from './utils/LocalStorageUtil';
 import SessionStorageUtil from './utils/SessionStorageUtil';
+import Nav from './components/nav/nav';
+import Overlay from './components/overlay/overlay';
 
 const CheckIfUserAuthenticated = () => {
   const user = LocalStorageUtil.GetLoggedUser() || SessionStorageUtil.GetLoggedUser();
@@ -86,6 +88,8 @@ class App extends Component {
   render() {
     return (
       <div>
+        <Nav />
+        <Overlay />
         <Router>
           <div className="routeContainer">
             <Route exact path="/" component={HomePage} />

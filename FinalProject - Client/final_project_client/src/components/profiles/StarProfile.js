@@ -6,17 +6,15 @@ class StarProfile extends Component {
         const { dateOfBirth, socialNetworks } = this.props;
         //const {socialNetworks, dateOfBirth} = this.props;
         return (
-            <div className="Container">
-
-                <span> Social Networks </span>
+            <div className="starContainer">
+                <span> Social Networks: </span>
                 {socialNetworks && socialNetworks.length > 0 ?
                  <div className="socialNetworks">
                 {socialNetworks.map(sn =>
-                        (<a href={sn.LinkToProfile}> <img src={""} className="logo" /><br/></a>))}
+                        (<a href={sn.LinkToProfile}> <img src={""} /><br/></a>))}
                 </div> : <div>No Social Networks To Show!</div>}
-                <span> Date Of Birth </span>
+                <span> Date Of Birth: </span>
                 <span> {dateOfBirth} </span>
-
             </div>
         );
     }

@@ -5,7 +5,10 @@ import HomeHeader from './HomeHeader.js';
 import HotAuctions from '../userHomePage/hotAuctions.js';
 import OffersStatus from '../offers/offersStatus.js';
 import AuctionService from '../../services/apis/AuctionService';
+import NavToggle from '../navToggle/navToggle';
 import '../userHomePage/homePages.css';
+import './businessHomePage.css';
+
 const initialState = {
     user: {},
     theAuctions: [],
@@ -74,6 +77,7 @@ class BusinessHomePage extends Component {
         console.log("theAuctions", theAuctions);
         return (
             <div className="businessHomePage">
+                <NavToggle />
                 {user &&
                     <div>
                         <div className="TopPage">

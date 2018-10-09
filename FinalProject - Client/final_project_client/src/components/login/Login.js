@@ -202,7 +202,7 @@ class Login extends Component {
                             <div className={`${this.isAllValid() ? "" : "disableElement"}`} onClick={this.loginUser}>
                                 <LayoutButton text="Login" />
                             </div>
-                            <span className="or">Or</span>
+                            <span className="or">OR</span>
                             {/* <input type="button" value="Login" className={`${this.isAllValid() ? "" : "disableElement"}`} onClick={this.loginUser} /> */}
                             <FacebookLogin
                                 appId="271386353659285"
@@ -216,13 +216,12 @@ class Login extends Component {
                                 <input type="checkbox" checked={rememberMe} onChange={this.handleInputChange} name="rememberMe" />
                                 <span>Remember me</span>
                             </div>
-                            <span>Forgot my username/ password </span>
+                            <Link className="forgotPassword" to="/forgotPassword">
+                                <button className="forgotPasswordBtn">
+                                    Forgot My Password
+                                </button>
+                            </Link>
                         </div>
-                        <Link className="forgotPassword" to="/forgotPassword">
-                            <button className="forgotPasswordBtn">
-                                Forgot My Password
-                            </button>
-                        </Link>
                     </div>)
         );
     }
