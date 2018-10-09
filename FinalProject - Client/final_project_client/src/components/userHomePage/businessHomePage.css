@@ -1,0 +1,10 @@
+.businessHomePage{
+    width: 100%;
+    padding: 100px 0;
+    display: flex;
+    overflow: hidden;
+    flex-direction: column;
+    max-width: 80vw;
+    margin: 0 auto;
+    font-size: 1.3em;
+}

@@ -2,9 +2,11 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import './homePages.css';
+import './homeHeader.css';
 import { Route, Redirect } from 'react-router';
 import LocalStorageUtil from '../../utils/LocalStorageUtil';
 import SessionStorageUtil from '../../utils/SessionStorageUtil';
+import LayoutButton from '../../common/layoutButton/layoutButton';
 
 class HomeHeader extends Component {
     constructor(props) {
@@ -68,11 +70,14 @@ class HomeHeader extends Component {
                         <div>
                             <button onClick={this.LogoutClicked}>Logout </button>
 
-                            <img src={user.Picture} className="logo" />
+                            <div className="businessProfileImgWrapper">
+                                <img src={user.Picture} className="profliePic"/>
+                            </div>
                             <div className="helloAndLink">
                                 Hello {user.Name} !
                         </div>
-                            <button onClick={this.EditProfileClicked}> Edit Profile </button>
+                            <LayoutButton text ="Edit Profile" onClick={this.EditProfileClicked}/>
+                            {/* <button onClick={this.EditProfileClicked}> Edit Profile </button> */}
                         </div>
                         : <Redirect to={{
                             pathname: '/editProfile',
