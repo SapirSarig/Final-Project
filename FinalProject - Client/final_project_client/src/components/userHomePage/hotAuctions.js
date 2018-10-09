@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import AuctionInList from './auctionInList';
 
 class hotAuctions extends Component {
 
@@ -12,12 +13,16 @@ class hotAuctions extends Component {
         const {auctions} = this.props;
 
         return (
-            auctions && auctions.length > 0 ?  <div className="hotAuctions">
-                Hot auctions:
-                {auctions.map((auction) =>
-                   <div>{auction}</div>)
-              }
-            </div> :<div>No Auctions Yet!</div>
+            auctions &&
+            auctions.length > 0 ?  
+            <div className="hotAuctions">
+                Hot Auctions:
+                {
+                    auctions.map((auction) =>
+                    <AuctionInList auction = {auction}/>)
+                }
+            </div> 
+            : <div>No Auctions Yet!</div>
         );
     }
 } 
