@@ -1,0 +1,10 @@
+.businessProfileImgWrapper{
+    display: flex;
+    height: 25vh;
+    justify-content: flex-end;
+}
+
+.profliePic{
+    width: 200px;
+    border: 1px solid white;
+}

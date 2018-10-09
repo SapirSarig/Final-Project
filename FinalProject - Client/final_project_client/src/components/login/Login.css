@@ -45,3 +45,23 @@
     padding-right: 105px;
     padding-top: 20px;
 }
+
+.forgotPassword{
+    padding-right: 85px;
+    padding-top: 5px;
+}
+
+.forgotPasswordBtn{
+    background: transparent;
+    border: 1px solid black;
+    border-radius: 5px;
+    cursor: pointer;
+    font-family: 'Concert One', cursive;
+    padding: 3px;
+    outline: none;
+}
+
+.forgotPasswordBtn:hover{
+    color: #d262ff;
+    border-color: #d262ff;
+}
