@@ -173,7 +173,7 @@ class Auction extends Component {
                                 />
                                 <div className="editAuctionBtn designBtn">
                                     Edit auction
-                        </div>
+                                </div>
                             </div>
                             <div className="businessNameContainer">
                                 <div className="businessWrapper">
@@ -185,7 +185,7 @@ class Auction extends Component {
                                 label="Auction title"
                                 className={classes.textField + " titleTextField"}
                                 value={this.state.name}
-                                onChange={this.handleChange('name')}
+                                onChange={this.handleChange}
                                 margin="normal" />
                             <div className="productWrapper">
                                 <TextField
@@ -193,7 +193,7 @@ class Auction extends Component {
                                     label="Product"
                                     className={classes.textField}
                                     value={this.state.nameOfProduct}
-                                    onChange={this.handleChange('nameOfProduct')}
+                                    onChange={this.handleChange}
                                     margin="normal"
                                     style={{ width: '60%' }}
                                 />
@@ -204,7 +204,7 @@ class Auction extends Component {
                                 label="Description"
                                 multiline
                                 rowsMax="8"
-                                onChange={this.handleChange('description')}
+                                onChange={this.handleChange}
                                 className={classes.textField + " descTextField"}
                                 margin="normal"
                                 style={{ width: '80%' }}
