@@ -211,7 +211,7 @@ class Auction extends Component {
                             </div>
                             <div className="businessNameContainer">
                                 <div className="businessWrapper">
-                                    {/* {this.getCompanyName(theAuction.UserId)} */}
+                                    {/* {this.getCompanyName(theAuction.UserId)}  ds*/}
                                 </div>
                             </div>
                             <TextField
