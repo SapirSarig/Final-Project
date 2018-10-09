@@ -9,6 +9,7 @@ import Interests from '../../../common/register/Interests';
 import { Route, Redirect } from 'react-router';
 import StringUtil from '../../../utils/StringUtil';
 import auctionUtil from './auctionUtil';
+import UserService from '../../../services/apis/UserService';
 
 const styles = theme => ({
     container: {
@@ -26,6 +27,7 @@ const styles = theme => ({
 
 class Auction extends Component {
     auctionService;
+    userService;
 
     constructor(props) {
         super(props);
@@ -53,10 +55,12 @@ class Auction extends Component {
 
         };
         this.auctionService = new AuctionService();
-
+        this.userService = new UserService();
         this.handleChange = this.handleChange.bind(this);
 
         this.AddAuction = this.AddAuction.bind(this);
+        this.convertDate = this.convertDate.bind(this);
+        this.getCompanyName = this.getCompanyName.bind(this);
     }
 
     handleChange(event) {
@@ -116,6 +120,10 @@ class Auction extends Component {
 
     AddAuction() {
         const { auction } = this.state;
+
+        if (!this.isAllValid())
+            return false;
+
         this.auctionService.createAuction(auction).then(req => {
             console.log(req);
             if (req) {
@@ -149,51 +157,91 @@ class Auction extends Component {
         return isValidInputs;
     }
 
+    convertDate(date) {
+        let resDate = "";
+
+        resDate += date.substring(0, 4);
+        resDate += "-"
+        resDate += date.substring(5, 7);
+        resDate += "-"
+        resDate += date.substring(8, 10);
+
+        return resDate;
+    }
+
+    getCompanyName(userId) {
+        let res = "";
+        console.log("userId", userId);
+        this.userService.getUserById(userId)
+            .then(req => {
+                console.log("req", req);
+                console.log("req.CompanyName", req.CompanyName);
+                res = req.CompanyName;
+            });
+        return res;
+    }
+
     render() {
-        const { classes } = this.props;
+        const { classes, isNew, location } = this.props;
         //const { UserId, Title, Product, Description, NumOfMinFollowers, StartDate, EndDate } = this.state;
         const { auction, auctionOk, errors } = this.state;
+        const theAuction = (location && location.state.auction) || auction;
+        const isAuctionNew = (location && location.state.isNew) || isNew;
 
+        console.log("isAuctionNew", isAuctionNew);
         return (
             <div>
                 {!auctionOk ?
                     <div className="auctionWrapper">
                         <div className={classes.container}>
                             <div className="firstLineWrapper">
-                                <TextField
+                                {!isAuctionNew && <TextField
                                     id="read-only-input"
+                                    name="AuctionNumber"
                                     label="Auction number"
-                                    defaultValue="1000"
+                                    defaultValue={theAuction.Id}
                                     className={classes.textField}
                                     margin="normal"
                                     InputProps={{
                                         readOnly: true,
                                     }}
                                     style={{ width: '18%' }}
-                                />
-                                <div className="editAuctionBtn designBtn">
+                                />}
+                                {!isAuctionNew && <div className="editAuctionBtn designBtn">
                                     Edit auction
-                                </div>
+                                </div>}
                             </div>
                             <div className="businessNameContainer">
                                 <div className="businessWrapper">
-                                    Name of the business
-                        </div>
+                                    {this.getCompanyName(theAuction.UserId)}
+                                </div>
                             </div>
                             <TextField
                                 id="name"
+                                name="Title"
                                 label="Auction title"
+                                defaultValue={isAuctionNew ? "" : theAuction.Title}
                                 className={classes.textField + " titleTextField"}
-                                value={this.state.name}
+                                // value={this.state.name}
+                                // onChange={this.handleChange('name')}
                                 onChange={this.handleChange}
+                                InputProps={{
+                                    readOnly: Boolean(!isAuctionNew)
+                                }}
                                 margin="normal" />
                             <div className="productWrapper">
                                 <TextField
                                     id="nameOfProduct"
+                                    name="Product"
                                     label="Product"
                                     className={classes.textField}
-                                    value={this.state.nameOfProduct}
+                                    defaultValue={isAuctionNew ? "" : theAuction.Product}
+                                    //value={this.state.nameOfProduct}
+                                    //onChange={this.handleChange('nameOfProduct')}
                                     onChange={this.handleChange}
+                                    InputProps={{
+                                        readOnly: Boolean(!isAuctionNew)
+                                    }}
                                     margin="normal"
                                     style={{ width: '60%' }}
                                 />
@@ -201,21 +249,31 @@ class Auction extends Component {
                             </div>
                             <TextField
                                 id="description"
+                                name="Description"
                                 label="Description"
                                 multiline
                                 rowsMax="8"
+                                defaultValue={isAuctionNew ? "" : theAuction.Description}
+                                //onChange={this.handleChange('description')}
                                 onChange={this.handleChange}
+                                InputProps={{
+                                    readOnly: Boolean(!isAuctionNew)
+                                }}
                                 className={classes.textField + " descTextField"}
                                 margin="normal"
                                 style={{ width: '80%' }}
                             />
-                            <Interests handleInputChange={this.handleChange} />
+                            <Interests handleInputChange={this.handleChange} interests={theAuction.Interests}/>
                             <TextField
                                 id="numberFollowers"
                                 name="NumOfMinFollowers"
                                 label="Number of minimum followers*"
-                                value={auction.NumOfMinFollowers}
+                                defaultValue={isAuctionNew ? "" : theAuction.NumOfMinFollowers}
+                                //value={theAuction.NumOfMinFollowers}
                                 onChange={this.handleChange}
+                                InputProps={{
+                                    readOnly: Boolean(!isAuctionNew)
+                                }}
                                 type="number"
                                 className={classes.textField}
                                 InputLabelProps={{
@@ -231,21 +289,29 @@ class Auction extends Component {
                                     label="Start date*"
                                     type="date"
                                     className={classes.textField}
-                                    value={auction.StartDate}
+                                    defaultValue={isAuctionNew ? "" : this.convertDate(theAuction.StartDate)}
+                                    //value={theAuction.StartDate}
                                     onChange={this.handleChange}
+                                    InputProps={{
+                                        readOnly: Boolean(!isAuctionNew)
+                                    }}
                                     InputLabelProps={{
                                         shrink: true,
                                     }}
                                 />
-                                <span className="errorInput" > {errors["StartDate"] && errors["StartDate"]} </span>
+                                <span className="errorInput"> {errors["StartDate"] && errors["StartDate"]} </span>
                                 <TextField
                                     id="endDate"
                                     name="EndDate"
                                     label="End date*"
                                     type="date"
                                     className={classes.textField}
-                                    value={auction.EndDate}
+                                    defaultValue={isAuctionNew ? "" : this.convertDate(theAuction.EndDate)}
+                                    //value={theAuction.EndDate}
                                     onChange={this.handleChange}
+                                    InputProps={{
+                                        readOnly: Boolean(!isAuctionNew)
+                                    }}
                                     InputLabelProps={{
                                         shrink: true,
                                     }}
@@ -253,63 +319,23 @@ class Auction extends Component {
                                 <span className="errorInput" > {errors["EndDate"] && errors["EndDate"]} </span>
                             </div>
                             {/* <div className="submitAuctionBtn designBtn"> */}
-                            <button className={`${this.isAllValid() ? "" : "disableElement"}`} onClick={this.AddAuction}>Submit</button>
+                            <button hidden={!isAuctionNew} className={`${this.isAllValid() ? "" : "disableElement"}`} onClick={this.AddAuction}>Submit</button>
                             {/* </div> */}
                         </div>
                     </div>
                     :
                     <Redirect to={{
-                        pathname: '/BusinessHomePage'
-                        // state: { userInfo }
+                        pathname: '/BusinessHomePage',
+                        state: { user: this.props.location.state.userInfo }
                     }} />}
 
-
-                {/* <TextField
-                                id="numberFollowers"
-                                label="Number of minimum followers"
-                                value={this.state.numberFollowers}
-                                onChange={this.handleChange('numberFollowers')}
-                                type="number"
-                                className={classes.textField}
-                                InputLabelProps={{
-                                    shrink: true,
-                                }}
-                                margin="normal" />
-                            <TextField
-                                id="pament"
-                                label="Payment"
-                                className={classes.textField}
-                                value={this.state.payment}
-                                onChange={this.handleChange('payment')}
-                                margin="normal" />
-                            <div className="dueDate">
-                                <TextField
-                                    id="startDate"
-                                    label="Start date"
-                                    type="date"
-                                    className={classes.textField}
-                                    value={this.state.startDate}
-                                    onChange={this.handleChange('startDate')}
-                                    InputLabelProps={{
-                                        shrink: true,
-                                    }}
-                                />
-                                <TextField
-                                    id="endDate"
-                                    label="End date"
-                                    type="date"
-                                    className={classes.textField}
-                                    value={this.state.endtDate}
-                                    onChange={this.handleChange('endtDate')}
-                                    InputLabelProps={{
-                                        shrink: true,
-                                    }}
-                                />
-                            </div>
-                            <div className="submitContainer">
-                                <div className="submitAuctionBtn designBtn">
-                                    Submit auction
-                        </div> */}
+                {/* // <div>
+                    //     {this.context.router.push({ */}
+                {/* //         pathname: '/BusinessHomePage',
+                    //         state: { userInfo }
+                    //     })}
+                    // </div>}
+            </div> */}
             </div>
         );
     }

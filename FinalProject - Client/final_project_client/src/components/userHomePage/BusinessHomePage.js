@@ -5,8 +5,8 @@ import HomeHeader from './HomeHeader.js';
 import HotAuctions from '../userHomePage/hotAuctions.js';
 import OffersStatus from '../offers/offersStatus.js';
 import AuctionService from '../../services/apis/AuctionService';
-import NavToggle from '../navToggle/navToggle';
 import '../userHomePage/homePages.css';
+import NavToggle from '../navToggle/navToggle';
 import './businessHomePage.css';
 
 const initialState = {
@@ -34,11 +34,21 @@ class BusinessHomePage extends Component {
             if (updatedUser) {
                 this.setState({ updatedUser });
 
+                this.auctionService.getAuctionsByEmail(updatedUser.Email).then(req => {
+                    this.setState({ theAuctions: req });
+                    console.log(req);
+                })
             }
             else {
                 this.setState({ user });
 
+                this.auctionService.getAuctionsByEmail(user.Email).then(req => {
+                    this.setState({ theAuctions: req });
+                    console.log(req);
+                })
             }
+            this.onMyAuctionsClick();
+
         }
     }
 
@@ -64,7 +74,7 @@ class BusinessHomePage extends Component {
 
     render() {
         const { updatedUser, user, theAuctions } = this.state;
-
+        console.log("theAuctions", theAuctions);
         return (
             <div className="businessHomePage">
                 <NavToggle />
@@ -75,8 +85,8 @@ class BusinessHomePage extends Component {
                         </div>
                         <div className="LeftPage">
                             {/* We need to add "auctions" when user is created */}
-                            <HotAuctions auctions={user.Auctions} />
-                            <Link className="myAuctions" to={{ pathname: "/myAuctions", state: { auctions: theAuctions } }}>
+                            <HotAuctions auctions={theAuctions} />
+                            <Link className="myAuctions" to={{ pathname: "/myAuctions", state: { auctions: theAuctions, title: "My Auctions" } }}>
                                 <button className="myAuctions" onClick={this.onMyAuctionsClick}>
                                     myAuctions
                         </button>
@@ -90,7 +100,7 @@ class BusinessHomePage extends Component {
                             {/* </Link> */}
                         </div>
                         <br />
-                        <Link className="auction" to="/auction">
+                        <Link className="auction" to={{ pathname: "/auction", state: { userInfo: this.state.user, isNew: true } }}>
                             <button className="auctionBtn">
                                 Add Auction
                             </button>
@@ -98,7 +108,6 @@ class BusinessHomePage extends Component {
                         <br />
                         <button> All Influencers </button>
                     </div>}
-
             </div>
         );
     }

@@ -12,7 +12,8 @@ class AllAuctions extends Component {
         super(props);
         this.state = {
             auctions:[],
-            searchField:""
+            searchField:"",
+            user:{}
         };
         this.auctionService = new AuctionService();
         this.handleSearchFieldChange = this.handleSearchFieldChange.bind(this);
@@ -21,17 +22,19 @@ class AllAuctions extends Component {
     componentDidMount() {
         this.auctionService.getFilteredAuctions(this.state.searchField).then(req=>{
             this.setState({auctions: req});
-        })
+        });
+        const user = this.props.location.state;
+        this.setState({user});
     }
 
     render() {
-        const {auctions} = this.state;
+        const {auctions, user} = this.state;
         
         return (
             <div className="allAuctions">
                 <label className="searchFieldLabel"> Search: </label>
                 <input className="searchFieldInput" onChange={this.handleSearchFieldChange} />
-                <MyAuctions auctions={auctions} title="All Auctions"/>
+                <MyAuctions user={user} auctions={auctions} title="All Auctions"/>
             </div>
         );
     }
