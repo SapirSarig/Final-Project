@@ -220,17 +220,12 @@ class Auction extends Component {
                                 label="Auction title"
                                 defaultValue={isAuctionNew ? "" : theAuction.Title}
                                 className={classes.textField + " titleTextField"}
-<<<<<<< HEAD
                                 // value={this.state.name}
                                 // onChange={this.handleChange('name')}
                                 onChange={this.handleChange}
                                 InputProps={{
                                     readOnly: Boolean(!isAuctionNew)
                                 }}
-=======
-                                value={this.state.name}
-                                onChange={this.handleChange}
->>>>>>> 0fddf43e4f0eeb20cbc7c5fc3daf91eda82ea701
                                 margin="normal" />
                             <div className="productWrapper">
                                 <TextField
@@ -238,7 +233,6 @@ class Auction extends Component {
                                     name="Product"
                                     label="Product"
                                     className={classes.textField}
-<<<<<<< HEAD
                                     defaultValue={isAuctionNew ? "" : theAuction.Product}
                                     //value={this.state.nameOfProduct}
                                     //onChange={this.handleChange('nameOfProduct')}
@@ -246,10 +240,6 @@ class Auction extends Component {
                                     InputProps={{
                                         readOnly: Boolean(!isAuctionNew)
                                     }}
-=======
-                                    value={this.state.nameOfProduct}
-                                    onChange={this.handleChange}
->>>>>>> 0fddf43e4f0eeb20cbc7c5fc3daf91eda82ea701
                                     margin="normal"
                                     style={{ width: '60%' }}
                                 />
@@ -261,16 +251,12 @@ class Auction extends Component {
                                 label="Description"
                                 multiline
                                 rowsMax="8"
-<<<<<<< HEAD
                                 defaultValue={isAuctionNew ? "" : theAuction.Description}
                                 //onChange={this.handleChange('description')}
                                 onChange={this.handleChange}
                                 InputProps={{
                                     readOnly: Boolean(!isAuctionNew)
                                 }}
-=======
-                                onChange={this.handleChange}
->>>>>>> 0fddf43e4f0eeb20cbc7c5fc3daf91eda82ea701
                                 className={classes.textField + " descTextField"}
                                 margin="normal"
                                 style={{ width: '80%' }}
