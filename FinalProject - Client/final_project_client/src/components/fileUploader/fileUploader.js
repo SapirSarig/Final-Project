@@ -23,7 +23,7 @@ class FileUploader extends Component {
             reader = new FileReader();
             
         if (!fileName.type.match(pattern)) {
-            alert('Formato inválido');
+            alert('Invalid Format');
             return;
         }
         

@@ -18,9 +18,9 @@ export default class EditProfile extends Component {
     }
     componentDidMount() {
         const { location } = this.props;
-        if (location && location.state && location.state.userInfo) {
-            const { userInfo } = location.state;
-            this.setState({ userInfo });
+        if (location && location.state && location.state.user) {
+            const { user } = location.state;
+            this.setState({ userInfo: user });
         }
     }
 
