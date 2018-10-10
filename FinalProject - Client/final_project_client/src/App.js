@@ -88,10 +88,6 @@ class App extends Component {
   render() {
     return (
       <div>
-<<<<<<< HEAD
-        <Nav />
-=======
->>>>>>> 9122ae5e55282d3f6d8232ba162eb2d086279d38
         <Overlay />
         <Router>
           <div className="routeContainer">
