@@ -110,3 +110,17 @@ C:\Users\tal\Final-Project\FinalProject\FinalProject\FinalProject.BL\obj\Debug\F
 C:\Users\tal\Final-Project\FinalProject\FinalProject\FinalProject.BL\obj\Debug\FinalProject.BL.csproj.CopyComplete
 C:\Users\tal\Final-Project\FinalProject\FinalProject\FinalProject.BL\obj\Debug\FinalProject.BL.dll
 C:\Users\tal\Final-Project\FinalProject\FinalProject\FinalProject.BL\obj\Debug\FinalProject.BL.pdb
+C:\Users\Avi-Laptop\Documents\GitHub\Final-Project\FinalProject\FinalProject\FinalProject.BL\bin\Debug\Microsoft.IdentityModel.JsonWebTokens.dll
+C:\Users\Avi-Laptop\Documents\GitHub\Final-Project\FinalProject\FinalProject\FinalProject.BL\bin\Debug\Microsoft.IdentityModel.Logging.dll
+C:\Users\Avi-Laptop\Documents\GitHub\Final-Project\FinalProject\FinalProject\FinalProject.BL\bin\Debug\Microsoft.IdentityModel.Tokens.dll
+C:\Users\Avi-Laptop\Documents\GitHub\Final-Project\FinalProject\FinalProject\FinalProject.BL\bin\Debug\Newtonsoft.Json.dll
+C:\Users\Avi-Laptop\Documents\GitHub\Final-Project\FinalProject\FinalProject\FinalProject.BL\bin\Debug\System.IdentityModel.Tokens.Jwt.dll
+C:\Users\Avi-Laptop\Documents\GitHub\Final-Project\FinalProject\FinalProject\FinalProject.BL\bin\Debug\Microsoft.IdentityModel.JsonWebTokens.pdb
+C:\Users\Avi-Laptop\Documents\GitHub\Final-Project\FinalProject\FinalProject\FinalProject.BL\bin\Debug\Microsoft.IdentityModel.JsonWebTokens.xml
+C:\Users\Avi-Laptop\Documents\GitHub\Final-Project\FinalProject\FinalProject\FinalProject.BL\bin\Debug\Microsoft.IdentityModel.Logging.pdb
+C:\Users\Avi-Laptop\Documents\GitHub\Final-Project\FinalProject\FinalProject\FinalProject.BL\bin\Debug\Microsoft.IdentityModel.Logging.xml
+C:\Users\Avi-Laptop\Documents\GitHub\Final-Project\FinalProject\FinalProject\FinalProject.BL\bin\Debug\Microsoft.IdentityModel.Tokens.pdb
+C:\Users\Avi-Laptop\Documents\GitHub\Final-Project\FinalProject\FinalProject\FinalProject.BL\bin\Debug\Microsoft.IdentityModel.Tokens.xml
+C:\Users\Avi-Laptop\Documents\GitHub\Final-Project\FinalProject\FinalProject\FinalProject.BL\bin\Debug\Newtonsoft.Json.xml
+C:\Users\Avi-Laptop\Documents\GitHub\Final-Project\FinalProject\FinalProject\FinalProject.BL\bin\Debug\System.IdentityModel.Tokens.Jwt.pdb
+C:\Users\Avi-Laptop\Documents\GitHub\Final-Project\FinalProject\FinalProject\FinalProject.BL\bin\Debug\System.IdentityModel.Tokens.Jwt.xml

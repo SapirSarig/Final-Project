@@ -48,7 +48,7 @@ class myAuctions extends Component {
         const { classes, location, auctions, title, user } = this.props;
         const theAuctions = (location && location.state.auctions) || auctions;
         const theTitle = (location && location.state.title) || title;
-        //const {user} = this.state;
+        const theUser = (location && location.state.user) || user;
 
         return (
             <form className={classes.container} noValidate autoComplete="off">
@@ -71,15 +71,16 @@ class myAuctions extends Component {
                                     readOnly: true,
                                 }}
                             />
-                            {console.log("inside", auction)}
                             
                             <div className="btnWrapper">
                                 <div className="detailsContainer ">
-                                    <Link className="detailsBtn designBtn" to={{ pathname: "/auction", state: { auction: auction, isNew: false } }}>
+                                    {console.log("user: ", theUser)}
+                                    <Link className="detailsBtn designBtn" to={{ pathname: "/auction", state: { auction: auction, isNew: false, user:theUser } }}>
                                         Details
                                     </Link>
                                 </div>
-                                {user.Type === "Social Influencer" ?
+
+                                {/* {theUser.Type === "Social Influencer" ?
                                     <div className="offersContainer">
                                         <Link className="OffersBtn designBtn" to={{ pathname: "/starOffer", state: {user} }}>
                                             Add Offer
@@ -90,7 +91,8 @@ class myAuctions extends Component {
                                             Offers
                                         </Link>
                                     </div>
-                                }
+                                } */}
+                                
                             </div>
                         </div>
                     )}
