@@ -88,10 +88,10 @@ class App extends Component {
   render() {
     return (
       <div>
-        <Nav />
         <Overlay />
         <Router>
           <div className="routeContainer">
+            <Nav />
             <Route exact path="/" component={HomePage} />
             <Route path="/login" component={LoginPage} />
             <Route path="/signUp" component={SignUpPage} />

@@ -13,23 +13,14 @@ class HomeHeader extends Component {
         super(props);
         this.state = {
             EditProfileClicked: false,
-            LogoutClicked: false
         }
         this.EditProfileClicked = this.EditProfileClicked.bind(this);
-        this.LogoutClicked = this.LogoutClicked.bind(this);
     }
 
     EditProfileClicked() {
         this.setState({ EditProfileClicked: true });
     }
 
-    LogoutClicked() {
-        this.setState({ LogoutClicked: true }, () => {
-            LocalStorageUtil.RemoveLoggedUser();
-            SessionStorageUtil.RemoveLoggedUser();
-        });
-
-    }
 
     render() {
         const { user } = this.props;
@@ -59,16 +50,13 @@ class HomeHeader extends Component {
         //         ]
 
         //     };
-        const { EditProfileClicked, LogoutClicked } = this.state;
+        const { EditProfileClicked } = this.state;
         return (
             <div className="HomeHeader">
-                {LogoutClicked ?
-                    <Redirect to={{
-                        pathname: '/',
-                    }} /> :
+                {
                     !EditProfileClicked ?
                         <div>
-                            <button onClick={this.LogoutClicked}>Logout </button>
+                           
 
                             <div className="businessProfileImgWrapper">
                                 <img src={user.Picture} className="profliePic"/>

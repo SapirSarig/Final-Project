@@ -1,27 +1,27 @@
-import React from 'react';
-import { bindActionCreators } from 'redux';
-import { connect } from 'react-redux';
-// import { NavLink } from 'react-router-dom';
+import React from "react";
+import { bindActionCreators } from "redux";
+import { connect } from "react-redux";
+import { BrowserRouter as Router, NavLink  } from "react-router-dom";
 
-import { closeNav } from '../../actions';
-import NavMenu from './navMenu';
-import './nav.css';
+import { closeNav } from "../../actions";
+import NavMenu from "./navMenu";
+import "./nav.css";
 
 const Nav = ({ isOpen, closeNav }) => {
   return (
-    <aside className={isOpen ? "nav" + " " + "navOpen" : "nav"}>
-      <NavMenu />
-    </aside>
+      <aside className={isOpen ? "nav" + " " + "navOpen" : "nav"}>
+        <NavMenu />
+      </aside>
   );
 };
 
-const mapStateToProps = (state) => {
+const mapStateToProps = state => {
   return {
-    isOpen: state.isNavOpen,
+    isOpen: state.isNavOpen
   };
 };
 
-const mapDispatchToProps = (dispatch) => {
+const mapDispatchToProps = dispatch => {
   return bindActionCreators({ closeNav }, dispatch);
 };
 

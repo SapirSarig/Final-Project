@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import HomeHeader from './HomeHeader.js';
 import HotAuctions from '../userHomePage/hotAuctions.js';
 import OffersStatus from '../offers/offersStatus.js';
+import NavToggle from '../navToggle/navToggle';
 import '../userHomePage/homePages.css';
 
 
@@ -60,6 +61,7 @@ class InfluencerHomePage extends Component {
         const { updatedUser, user } = this.state;
         return (
             <div className="influencerHomePage">
+                <NavToggle />
                 {user &&
                     <div>
                         <div className="TopPage">

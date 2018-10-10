@@ -1,16 +1,25 @@
 import React from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { NavLink, withRouter } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import { closeNav } from '../../actions';
-
+import { BrowserRouter as Router, withRouter } from "react-router-dom";
+import LocalStorageUtil from "../../utils/LocalStorageUtil";
+import SessionStorageUtil from "../../utils/SessionStorageUtil";
 import './navMenuLink.css';
 
-const NavMenuLink = ({ title, to, closeNav, isOpen }) => {
+const NavMenuLink = ({ title, to, closeNav, isOpen, logout }) => {
   return (
     <NavLink
       className={isOpen ? "navMenuLink" + " " + "open" : "navMenuLink"}
-      onClick={() => closeNav()}
+      onClick={() => {closeNav();
+
+          if(logout === "true" ){
+            LocalStorageUtil.RemoveLoggedUser();
+            SessionStorageUtil.RemoveLoggedUser();
+          }
+        }
+      }
       activeClassName="linkActive"
       exact
       to={to}>
@@ -29,9 +38,7 @@ const mapDispatchToProps = (dispatch) => {
   return bindActionCreators({ closeNav }, dispatch);
 };
 
-export default withRouter(
-    connect(
+export default withRouter(connect(
       mapStateToProps,
       mapDispatchToProps
-    )(NavMenuLink)
-);
+    )(NavMenuLink));
