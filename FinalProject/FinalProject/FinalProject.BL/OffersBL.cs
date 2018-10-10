@@ -64,5 +64,17 @@ namespace FinalProject.BL
                 throw e;
             }
         }
+
+        public IEnumerable<Offer> GetOffersByUserId(int userId)
+        {
+            try
+            {
+                return offersCRUD.GetOffersByUserId(userId);
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
     }
 }

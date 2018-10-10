@@ -75,5 +75,11 @@ namespace FinalProject.WebApi.Controllers
         {
             return auctionBl.GetOffersByAuctionId(auctionId);
         }
+
+        [Route("GetOffersByUserId")]
+        public IEnumerable<Offer> GetOffersByUserId(int userId)
+        {
+            return offersBL.GetOffersByUserId(userId);
+        }
     }
 }

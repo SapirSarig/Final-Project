@@ -34,7 +34,7 @@ class HomePage extends Component {
                 <div className="rightContainer">
                     <div className="explanationWrapper">
                         <div className="explanation">
-                            <div>Business Owner? Star Influencer?</div>
+                            <div>Business Owner? Social Influencer?</div>
                             <div>Use our website to connect with each other!</div>
                         </div>
                     </div>

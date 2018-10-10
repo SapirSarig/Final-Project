@@ -87,7 +87,7 @@ class Login extends Component {
         errors[fieldName] = errorMessage;
         this.setState({
             errors,
-            rememberMe: false
+            //rememberMe: false
         });
     }
 
@@ -202,7 +202,7 @@ class Login extends Component {
                             <div className={`${this.isAllValid() ? "" : "disableElement"}`} onClick={this.loginUser}>
                                 <LayoutButton text="Login" />
                             </div>
-                            <span className="or">Or</span>
+                            <span className="or">OR</span>
                             {/* <input type="button" value="Login" className={`${this.isAllValid() ? "" : "disableElement"}`} onClick={this.loginUser} /> */}
                             <FacebookLogin
                                 appId="271386353659285"

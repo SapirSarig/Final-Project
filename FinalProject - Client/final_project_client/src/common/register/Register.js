@@ -45,6 +45,7 @@ class Register extends Component {
         this.isAllValid = this.isAllValid.bind(this);
         this.updateChooseTypeStateObject = this.updateChooseTypeStateObject.bind(this);
         this.handleSubmitClicked = this.handleSubmitClicked.bind(this);
+        this.isSubmitBtnValid = this.isSubmitBtnValid.bind(this);
         // this.isPasswordSet = this.isPasswordSet.bind(this);
     }
 
@@ -66,7 +67,7 @@ class Register extends Component {
             {
                 const { user } = location.state;
                 this.setState({
-                    user
+                    user 
                 });
             }
 
@@ -233,6 +234,14 @@ class Register extends Component {
 
         return isValidInputs;
     }
+
+    isSubmitBtnValid(){
+        // const {user} = this.state;
+        
+        // if(user.Type === "Business Owner"){
+        //     if (StringUtil.isEmptyString(RegisterService.nameValidation(user.Name));
+        // }
+    }
     handleSubmitClicked() {
         const { user } = this.state;
         const { UpdateInfluencerUser, UpdateBusinessUser } = this.props;
@@ -252,6 +261,8 @@ class Register extends Component {
             UpdateBusinessUser(userToUpdate);
         }
     }
+
+   
     // isPasswordSet(password){
     //     return StringUtil.isEmptyString(password);
     // }
@@ -348,7 +359,7 @@ class Register extends Component {
                     <LayoutButton text="Sign Up!" onClick={this.createUserClicked} />
                 </div>}
 
-                {!signUp && <div className={`${this.isAllValid() ? "signUpBtnWrapper" : "disableElement signUpBtnWrapper"}`}>
+                {!signUp && <div className={`${this.isSubmitBtnValid() ? "signUpBtnWrapper" : "disableElement signUpBtnWrapper"}`}>
                     <LayoutButton text="Submit!" onClick={this.handleSubmitClicked} />
                 </div>}
                 {/* <input type="button" className={`${this.isAllValid() ? "" : "disableElement"}`} onClick={this.createUserClicked} value="Sign up!" /> */}

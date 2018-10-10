@@ -73,7 +73,7 @@ class InfluencerHomePage extends Component {
                         <div className="RightPage">
                             {/* We need to add "offers" when user is created */}
                             <OffersStatus offers={user.Offers} />
-                            <Link className="allOffers" to="/allOffers">
+                            <Link className="allOffers" to={{ pathname: "/allOffers", state:{user: Object.getOwnPropertyNames(updatedUser).length > 0 ? updatedUser : user}}}>
                                 <button className="allOffersBtn">
                                     allOffers
                                 </button>
