@@ -216,13 +216,12 @@ class Login extends Component {
                                 <input type="checkbox" checked={rememberMe} onChange={this.handleInputChange} name="rememberMe" />
                                 <span>Remember me</span>
                             </div>
-                            <span>Forgot my username/ password </span>
+                            <Link className="forgotPassword" to="/forgotPassword">
+                                <button className="forgotPasswordBtn">
+                                    Forgot My Password
+                                </button>
+                            </Link>
                         </div>
-                        <Link className="forgotPassword" to="/forgotPassword">
-                            <button className="forgotPasswordBtn">
-                                Forgot My Password
-                            </button>
-                        </Link>
                     </div>)
         );
     }

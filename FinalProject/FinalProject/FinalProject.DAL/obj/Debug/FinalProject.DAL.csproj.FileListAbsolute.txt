@@ -81,4 +81,7 @@ C:\Users\tal\Final-Project\FinalProject\FinalProject\FinalProject.DAL\obj\Debug\
 C:\Users\tal\Final-Project\FinalProject\FinalProject\FinalProject.DAL\obj\Debug\FinalProject.DAL.csproj.CopyComplete
 C:\Users\tal\Final-Project\FinalProject\FinalProject\FinalProject.DAL\obj\Debug\FinalProject.DAL.dll
 C:\Users\tal\Final-Project\FinalProject\FinalProject\FinalProject.DAL\obj\Debug\FinalProject.DAL.pdb
+<<<<<<< HEAD
 C:\Users\Admin\Documents\GitHub\Final-Project\FinalProject\FinalProject\FinalProject.DAL\obj\Debug\FinalProject.DAL.csprojAssemblyReference.cache
+=======
+>>>>>>> 9122ae5e55282d3f6d8232ba162eb2d086279d38

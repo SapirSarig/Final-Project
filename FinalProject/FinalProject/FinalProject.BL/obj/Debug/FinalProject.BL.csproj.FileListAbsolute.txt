@@ -110,6 +110,7 @@ C:\Users\tal\Final-Project\FinalProject\FinalProject\FinalProject.BL\obj\Debug\F
 C:\Users\tal\Final-Project\FinalProject\FinalProject\FinalProject.BL\obj\Debug\FinalProject.BL.csproj.CopyComplete
 C:\Users\tal\Final-Project\FinalProject\FinalProject\FinalProject.BL\obj\Debug\FinalProject.BL.dll
 C:\Users\tal\Final-Project\FinalProject\FinalProject\FinalProject.BL\obj\Debug\FinalProject.BL.pdb
+<<<<<<< HEAD
 C:\Users\Avi-Laptop\Documents\GitHub\Final-Project\FinalProject\FinalProject\FinalProject.BL\bin\Debug\Microsoft.IdentityModel.JsonWebTokens.dll
 C:\Users\Avi-Laptop\Documents\GitHub\Final-Project\FinalProject\FinalProject\FinalProject.BL\bin\Debug\Microsoft.IdentityModel.Logging.dll
 C:\Users\Avi-Laptop\Documents\GitHub\Final-Project\FinalProject\FinalProject\FinalProject.BL\bin\Debug\Microsoft.IdentityModel.Tokens.dll
@@ -124,3 +125,5 @@ C:\Users\Avi-Laptop\Documents\GitHub\Final-Project\FinalProject\FinalProject\Fin
 C:\Users\Avi-Laptop\Documents\GitHub\Final-Project\FinalProject\FinalProject\FinalProject.BL\bin\Debug\Newtonsoft.Json.xml
 C:\Users\Avi-Laptop\Documents\GitHub\Final-Project\FinalProject\FinalProject\FinalProject.BL\bin\Debug\System.IdentityModel.Tokens.Jwt.pdb
 C:\Users\Avi-Laptop\Documents\GitHub\Final-Project\FinalProject\FinalProject\FinalProject.BL\bin\Debug\System.IdentityModel.Tokens.Jwt.xml
+=======
+>>>>>>> 9122ae5e55282d3f6d8232ba162eb2d086279d38

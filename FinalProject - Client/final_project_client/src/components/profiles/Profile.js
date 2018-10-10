@@ -14,37 +14,7 @@ class Profile extends Component {
         this.handleButtonOkClicked = this.handleButtonOkClicked.bind(this);
         this.userService = new UserService();
         this.state = {
-            user: {
-                Id: 1,
-                Name: "Sapir",
-                Picture: "",
-                Interests: [
-                    {
-                        Value: "Sport",
-                    },
-                    {
-                        Value: "Music"
-                    }
-                ],
-                Description: "the best",
-                DateOfBirth: "31/03/1993",
-                SocialNetworks: [
-                    {
-                        Value: "Facebook",
-                        LinkToProfile: "https://www.facebook.com/sapir.sarig"
-                    },
-                    {
-                        Value: "Instagram",
-                        LinkToProfile: "https://www.instagram.com/sapu9/"
-                    }
-                ],
-                Reviews: [
-                    {
-                        value: "You are great!"
-                    }
-                ],
-                Type: "Social Influencer"
-            },
+            user: {},
             review: "",
             okDisabled: true
             // name: "",
@@ -58,11 +28,11 @@ class Profile extends Component {
     }
 
     componentDidMount() {
-        // const { user } = this.props;
+         const { user } = this.props;
 
-        // this.setState({
-        //     user
-        // })
+         this.setState({
+             user
+         })
     }
 
     handleInputChange(event) {
