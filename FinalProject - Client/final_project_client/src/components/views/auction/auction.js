@@ -10,6 +10,7 @@ import { Route, Redirect } from 'react-router';
 import StringUtil from '../../../utils/StringUtil';
 import auctionUtil from './auctionUtil';
 import UserService from '../../../services/apis/UserService';
+import { Link } from 'react-router-dom';
 
 const styles = theme => ({
     container: {
@@ -61,6 +62,7 @@ class Auction extends Component {
         this.AddAuction = this.AddAuction.bind(this);
         this.convertDate = this.convertDate.bind(this);
         this.getCompanyName = this.getCompanyName.bind(this);
+        this.isBusinessUser = this.isBusinessUser.bind(this);
     }
 
     handleChange(event) {
@@ -95,7 +97,7 @@ class Auction extends Component {
                 auction
             });
         }
-        console.log(this.state);
+
         this.checkValidation(name, value);
     }
 
@@ -125,7 +127,6 @@ class Auction extends Component {
             return false;
 
         this.auctionService.createAuction(auction).then(req => {
-            console.log(req);
             if (req) {
                 if (req.Message) {
                     alert(req.Message);
@@ -171,24 +172,31 @@ class Auction extends Component {
 
     getCompanyName(userId) {
         let res = "";
-        console.log("userId", userId);
+
         this.userService.getUserById(userId)
             .then(req => {
-                console.log("req", req);
-                console.log("req.CompanyName", req.CompanyName);
                 res = req.CompanyName;
             });
         return res;
     }
 
+    isBusinessUser(){
+        const { user, location} = this.props;
+        const theUser = (location && location.state.user) || user;
+        console.log("theUser", theUser);
+        console.log("theUser.Type", theUser.Type);
+        console.log("bool:", (theUser.Type === "BusinessUser"));
+        return (theUser.Type === "BusinessUser");
+    }
+
     render() {
-        const { classes, isNew, location } = this.props;
+        const { classes, isNew, location, user } = this.props;
         //const { UserId, Title, Product, Description, NumOfMinFollowers, StartDate, EndDate } = this.state;
         const { auction, auctionOk, errors } = this.state;
         const theAuction = (location && location.state.auction) || auction;
         const isAuctionNew = (location && location.state.isNew) || isNew;
+        const theUser = (location && location.state.user) || user;
 
-        console.log("isAuctionNew", isAuctionNew);
         return (
             <div>
                 {!auctionOk ?
@@ -319,6 +327,13 @@ class Auction extends Component {
                             </div>
                             {/* <div className="submitAuctionBtn designBtn"> */}
                             <button hidden={!isAuctionNew} className={`${this.isAllValid() ? "" : "disableElement"}`} onClick={this.AddAuction}>Submit</button>
+
+                            {this.isBusinessUser() && <Link className="designBtn" to={{ pathname: "/offersPerAuctionPage", state: {auction: theAuction, user:theUser } }}>
+                                Show Offers
+                            </Link>}
+                            {!this.isBusinessUser() && <Link className="designBtn" to={{ pathname: "/starOffer", state: {auction: theAuction, user:theUser } }}>
+                                Add Offer
+                            </Link>}
                             {/* </div> */}
                         </div>
                     </div>

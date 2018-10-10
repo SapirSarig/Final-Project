@@ -8,7 +8,7 @@ class AuctionInList extends Component {
     }
 
     render() {
-        const { auction } = this.props;
+        const { auction, user } = this.props;
 
         return (
             <div className="AuctionContainer">
@@ -19,7 +19,7 @@ class AuctionInList extends Component {
                     {auction.Description}
                 </div>
                 {/* send in props that the auction is already exist and need to show its details */}
-                <Link className="auction" to={{ pathname: "/auction", state: { auction: auction, isNew: false}}} >
+                <Link className="auction" to={{ pathname: "/auction", state: { auction: auction, isNew: false, user:user}}} >
                     <button className="auctionBtn">
                         Show Auction
                     </button>

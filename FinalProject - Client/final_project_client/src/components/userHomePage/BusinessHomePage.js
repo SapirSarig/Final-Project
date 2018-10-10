@@ -85,8 +85,8 @@ class BusinessHomePage extends Component {
                         </div>
                         <div className="LeftPage">
                             {/* We need to add "auctions" when user is created */}
-                            <HotAuctions auctions={theAuctions} />
-                            <Link className="myAuctions" to={{ pathname: "/myAuctions", state: { auctions: theAuctions, title: "My Auctions" } }}>
+                            <HotAuctions auctions={theAuctions} user={user} />
+                            <Link className="myAuctions" to={{ pathname: "/myAuctions", state: { auctions: theAuctions, title: "My Auctions", user: user } }}>
                                 <button className="myAuctions" onClick={this.onMyAuctionsClick}>
                                     myAuctions
                         </button>

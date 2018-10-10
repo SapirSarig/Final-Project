@@ -10,7 +10,7 @@ class hotAuctions extends Component {
         // listOfauctions.push("FDS");
         // listOfauctions.push("EWR");
         // listOfauctions.push("VLF");
-        const {auctions} = this.props;
+        const {auctions, user} = this.props;
 
         return (
             auctions &&
@@ -19,7 +19,7 @@ class hotAuctions extends Component {
                 Hot Auctions:
                 {
                     auctions.map((auction) =>
-                    <AuctionInList auction = {auction}/>)
+                    <AuctionInList auction={auction} user={user}/>)
                 }
             </div> 
             : <div>No Auctions Yet!</div>

@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import TextField from '@material-ui/core/TextField';
 import { withStyles } from '@material-ui/core/styles';
+import { Link } from 'react-router-dom';
 import './UsersContainer.css';
 
 const styles = theme => ({
@@ -32,18 +33,18 @@ class UsersContainer extends Component {
 
         return (
             <form className={classes.container} noValidate autoComplete="off">
-                {/* <div className="myAuctionsTitleContainer">
-                    <div className="myAuctionsTitle">
-                        My Auctions
+                <div className="allUsersTitleContainer">
+                    <div className="allUsersTitle">
+                        All Users
                     </div>
-                </div> */}
+                </div>
                 {console.log(theUsers)}
                 <div className="auctionsWrapper">
                     {theUsers && theUsers.map((user) =>
                         <div className="myAuctionWrapper">
                             <TextField
                                 id="nameAuction"
-                                label="Auction's name"
+                                label="User's name"
                                 defaultValue= {user.Name}
                                 className={classes.textField}
                                 margin="normal"
@@ -51,12 +52,12 @@ class UsersContainer extends Component {
                                     readOnly: true,
                                 }}
                             />
-                            {console.log("inside", user)}
+
                             <div className="btnWrapper">
                                 <div className="detailsContainer ">
-                                    <div className="detailsBtn designBtn">
+                                    <Link className="detailsBtn designBtn" to={{ pathname: "/Profile", state: {user:user } }}>
                                         Details
-                                    </div>
+                                    </Link>
                                 </div>
                                 <div className="offersContainer">
                                     <div className="OffersBtn designBtn">

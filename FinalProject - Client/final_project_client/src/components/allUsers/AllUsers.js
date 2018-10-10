@@ -1,7 +1,6 @@
 
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-//import MyAuctions from '../views/myAuctions/myAuctions.js';
 import UserService from '../../services/apis/UserService';
 import UsersContainer from './UsersContainer';
 import './AllUsers.css';
