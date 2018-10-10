@@ -263,7 +263,6 @@ class Auction extends Component {
                                 margin="normal"
                                 style={{ width: '80%' }}
                             />
-                            <Interests handleInputChange={this.handleChange} interests={theAuction.Interests}/>
                             <TextField
                                 id="numberFollowers"
                                 name="NumOfMinFollowers"

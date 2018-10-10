@@ -25,6 +25,9 @@ class myAuctions extends Component {
     constructor(props) {
         super(props);
 
+        // this.state = {
+        //     user:{}
+        // };
         // this.auctions = [{
         //     nameOfAuction: 'Tal',
         // }, {
@@ -36,10 +39,16 @@ class myAuctions extends Component {
         // }];
     }
 
+    // componentDidMount(){
+    //     const {user} = this.props;
+    //     this.setState({user});
+    // }
+
     render() {
         const { classes, location, auctions, title, user } = this.props;
         const theAuctions = (location && location.state.auctions) || auctions;
         const theTitle = (location && location.state.title) || title;
+        //const {user} = this.state;
 
         return (
             <form className={classes.container} noValidate autoComplete="off">
@@ -63,6 +72,7 @@ class myAuctions extends Component {
                                 }}
                             />
                             {console.log("inside", auction)}
+                            
                             <div className="btnWrapper">
                                 <div className="detailsContainer ">
                                     <Link className="detailsBtn designBtn" to={{ pathname: "/auction", state: { auction: auction, isNew: false } }}>

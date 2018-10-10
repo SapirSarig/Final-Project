@@ -23,13 +23,13 @@ class AllAuctions extends Component {
         this.auctionService.getFilteredAuctions(this.state.searchField).then(req=>{
             this.setState({auctions: req});
         });
-        const user = this.props.location.state;
-        this.setState({user});
+        
     }
 
     render() {
-        const {auctions, user} = this.state;
-        
+        const {auctions} = this.state;
+        const user = this.props.location.state;
+
         return (
             <div className="allAuctions">
                 <label className="searchFieldLabel"> Search: </label>
