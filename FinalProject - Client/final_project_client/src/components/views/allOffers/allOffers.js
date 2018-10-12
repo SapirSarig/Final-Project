@@ -5,7 +5,7 @@ import { withStyles } from '@material-ui/core/styles';
 import { Link } from 'react-router-dom';
 import LayoutButton from '../../../common/layoutButton/layoutButton';
 import './allOffers.css';
-import OfferService from '../../../services/apis/OfferService';
+import UserService from '../../../services/apis/UserService';
 
 const styles = theme => ({
     container: {
@@ -22,7 +22,7 @@ const styles = theme => ({
 });
 
 class AllOffers extends Component {
-    offerService;
+    userService;
     constructor(props) {
         super(props);
 
@@ -40,7 +40,7 @@ class AllOffers extends Component {
             offers: []
         }
         this.getAllOffersForUser = this.getAllOffersForUser.bind(this);
-        this.offerService = new OfferService();
+        this.userService = new UserService();
     }
 
     componentDidMount() {
@@ -51,7 +51,7 @@ class AllOffers extends Component {
 
     getAllOffersForUser(user) {
         if (user.Type === "Social Influencer") {
-            this.offerService.getAllOffersByUserId(user.Id).then(req => {
+            this.userService.GetAllInfluencerUserOffers(user.Id).then(req => {
                 this.setState({ offers: req });
             });
         }
@@ -116,7 +116,7 @@ class AllOffers extends Component {
                                     readOnly: true,
                                 }}
                             />
-                            <Link className="goToStarOffer" to="/starOffer">
+                            <Link className="goToStarOffer" to={{pathname: "/starOffer" , state: {currOffer: offer, fromAllOffers:true}}}>
                                 <LayoutButton text="Go To Offer" />
                             </Link>
                         </div>

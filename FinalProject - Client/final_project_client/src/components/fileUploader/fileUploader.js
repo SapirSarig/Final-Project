@@ -33,7 +33,8 @@ class FileUploader extends Component {
             this.setState({ 
                 imageSrc: reader.result, 
                 loaded: true 
-            }); 
+            },()=>{this.props.updateFileImage(this.state.imageSrc)}); 
+            
         }
         
         reader.readAsDataURL(fileName);
@@ -56,7 +57,7 @@ class FileUploader extends Component {
             <div className="editProdPicWrapper">
                 <div className="productImgContainer">
                     <div className="imgContainer">
-                        <img src={state.imageSrc} className={state.loaded ? 'loaded': undefined}/>
+                        <img src={state.imageSrc||this.props.imgSrc} className={state.loaded ? 'loaded': undefined}/>
                     </div>
                 </div>
                 <input type="file" id="chooseFile" ref="fileUploader" accept="image/*" 

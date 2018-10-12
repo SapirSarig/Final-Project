@@ -89,7 +89,7 @@ class OffersList extends Component {
                                     readOnly: true,
                                 }}
                             />
-                            <Link className="goToStarOffer" to="/starOffer">
+                            <Link className="goToStarOffer" to={{pathname: "/starOffer" , state: {currOffer: offer, fromBusiness:true}}}>
                                 <LayoutButton text="Go To Offer" />
                             </Link>
                         </div>

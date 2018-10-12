@@ -38,7 +38,8 @@ class PasswordInput extends Component {
       <TextField 
           type={passwordIsMasked ? "password" : "text"} 
           className={classes.textField}
-          defaultValue={this.props.placeholder}
+          defaultValue={this.props.defaultValue}
+          label={this.props.placeholder}
           style = {this.props.style}
           {...this.props} 
           InputProps={{

@@ -25,6 +25,7 @@ const initialState = {
         ConfirmPassword: "",
         ConfirmMail: ""
     },
+    externalLogin:false
 
 };
 
@@ -65,9 +66,10 @@ class Register extends Component {
         const { location } = this.props;
         if (location && location.state) {
             {
-                const { user } = location.state;
+                const { user, externalLogin } = location.state;
                 this.setState({
-                    user 
+                    user ,
+                    externalLogin
                 });
             }
 
@@ -144,6 +146,7 @@ class Register extends Component {
             });
             this.checkValidation(name, value);
         }
+        console.log("%^%^%^%", this.state);
     }
 
 
@@ -236,17 +239,31 @@ class Register extends Component {
     }
 
     isSubmitBtnValid(){
-        // const {user} = this.state;
-        
+        const {user} = this.state;
+        if(StringUtil.isEmptyString(user.Name)){
+            return false;
+        }
+        if(user.Type==="Business Owner"){
+            if(StringUtil.isEmptyString(user.CompanyName)){
+                return false;
+            }
+        }
+        return true;
+        // if(StringUtil.isEmptyString(RegisterService.nameValidation(user.Name)))
         // if(user.Type === "Business Owner"){
-        //     if (StringUtil.isEmptyString(RegisterService.nameValidation(user.Name));
+        //     if (StringUtil.isEmptyString(RegisterService.nameValidation(user.CompanyName))){
+        //         res = false;
+        //     }
         // }
+        // else{
+        //     if (StringUtil.isEmptyString(RegisterService.nameValidation(user.CompanyName)))
+    
     }
     handleSubmitClicked() {
         const { user } = this.state;
         const { UpdateInfluencerUser, UpdateBusinessUser } = this.props;
         let userToUpdate = {
-            "Name": "Sapir",
+            "Name": user.Name,
             "Email": user.Email,
             "Interests": user.Interests,
             "Description": user.Description,
@@ -272,17 +289,19 @@ class Register extends Component {
 
     render() {
         const { children, signUp, classes } = this.props;
-        const { user, errors } = this.state;
+        const { user, errors, externalLogin } = this.state;
         return (
             <div className="registerContainer">
+            {user &&    <React.Fragment>
+
                 <TextField
                     id="name"
-                    label="Name *"
+                    label={user.Name? "" : "Name *"}
                     className={classes.textField}
                     value={user.Name}
                     name="Name"
                     onChange={this.handleInputChange}
-                    disabled={user.ExternalLogin}
+                    disabled={externalLogin}
                     margin="normal"
                 />
 
@@ -291,12 +310,12 @@ class Register extends Component {
 
                 {signUp && <TextField
                     id="email"
-                    label="Email *"
+                    label={user.Email? "" : "Email *"}
                     className={classes.textField}
                     value={user.Email}
                     name="Email"
                     onChange={this.handleInputChange}
-                    disabled={user.ExternalLogin}
+                    disabled={externalLogin}
                     margin="normal"
                 />}
                 {/* < input type="email" name="email" disabled={externalLogin} value={email} onChange={this.handleInputChange} /> */}
@@ -304,24 +323,24 @@ class Register extends Component {
 
                 {signUp && <TextField
                     id="confirmMail"
-                    label="Confirm Email *"
+                    label={user.Email? "" : "Confirm Email *"}
                     className={classes.textField}
                     value={user.ConfirmMail}
                     name="ConfirmMail"
                     onChange={this.handleInputChange}
-                    disabled={user.ExternalLogin}
+                    disabled={externalLogin}
                     margin="normal"
                 />}
                 {/* < input type="email" name="confirmMail" disabled={externalLogin} value={confirmMail} onChange={this.handleInputChange} /> */}
                 <span className="errorInput" > {errors["ConfirmMail"] && errors["ConfirmMail"]} </span>
 
-                {signUp && <PasswordInput name="Password" style={{ width: '60%' }} placeholder="Min 6 chars, at least one number and one lower case English letter" value={user.Password} onChange={this.handleInputChange} label={"Password *"} />}
+                {signUp && <PasswordInput name="Password" style={{ width: '75%' }} placeholder="Min 6 chars, one number and one lower case letter" value={user.Password} onChange={this.handleInputChange} label={"Password *"} />}
                 {/* <span > Password {externalLogin && (<span>for the website </span>)} *</span> */}
 
                 {/* <input type="password" placeholder="Min 6 chars, at least one number and one lower case English letter" name="password" value={password} onChange={this.handleInputChange} /> */}
                 <span className="errorInput" > {errors["Password"] && errors["Password"]} </span>
 
-                {signUp && <PasswordInput name="ConfirmPassword" style={{ width: '60%' }} value={user.ConfirmPassword} onChange={this.handleInputChange} label={"Confirm Password *"} />}
+                {signUp && <PasswordInput name="ConfirmPassword" style={{ width: '75%' }} value={user.ConfirmPassword} onChange={this.handleInputChange} label={"Confirm Password *"} />}
                 {/* <input type="password" name="confirmPassword" value={confirmPassword} onChange={this.handleInputChange} /> */}
                 <span className="errorInput" > {errors["ConfirmPassword"] && errors["ConfirmPassword"]} </span>
 
@@ -362,6 +381,8 @@ class Register extends Component {
                 {!signUp && <div className={`${this.isSubmitBtnValid() ? "signUpBtnWrapper" : "disableElement signUpBtnWrapper"}`}>
                     <LayoutButton text="Submit!" onClick={this.handleSubmitClicked} />
                 </div>}
+                </React.Fragment>}
+
                 {/* <input type="button" className={`${this.isAllValid() ? "" : "disableElement"}`} onClick={this.createUserClicked} value="Sign up!" /> */}
             </div>
         );

@@ -8,7 +8,7 @@ class socialMedia extends Component {
 
     }
     render() {
-        let {socialNetworks} = this.props;
+        let {socialNetworks, starOffer} = this.props;
         const IsExtra = ({ idName, socialNetworkName }) => {
             if(this.props.isExtra === "true"){
                 return(
@@ -26,11 +26,11 @@ class socialMedia extends Component {
 
         return (
             <div className="socialMediaContainer">
-                <div className="socialMediaTitle">Social Media</div>
+                <div className="socialMediaTitle">Social Media: {starOffer? "*" :""}</div>
                 <div className="socialMediaIcons">
                     <div className="facebook socialMediatWrapper">
                         <div className="checkboxforSocialMedia">
-                            <input type="checkbox" id="checkboxfacebookInput" name="Facebook" onChange={this.props.onFocus}/>
+                            <input type="checkbox" id="checkboxfacebookInput" name="Facebook" onChange={starOffer? this.props.onChange : this.props.onFocus}/>
                             <label for="checkboxfacebookInput"></label>
                         </div>
                         <svg width="32" height="32" viewBox="0 0 32 32" className="icon">
@@ -40,7 +40,7 @@ class socialMedia extends Component {
                     </div>
                     <div className="instagram socialMediatWrapper">
                         <div className="checkboxforSocialMedia">
-                            <input type="checkbox" id="checkboxFInstagramInput" name="Instagram" onChange={this.props.onFocus}/>
+                            <input type="checkbox" id="checkboxFInstagramInput" name="Instagram" onChange={starOffer? this.props.onChange : this.props.onFocus}/>
                             <label for="checkboxFInstagramInput"></label>
                         </div>
                         <svg width="32" height="32" viewBox="0 0 32 32" className="icon">
@@ -50,7 +50,7 @@ class socialMedia extends Component {
                     </div>
                     <div className="twitter socialMediatWrapper">
                         <div className="checkboxforSocialMedia">
-                            <input type="checkbox" value="3" id="checkboxTwitterInput" name="Twitter" onChange={this.props.onFocus}/>
+                            <input type="checkbox" value="3" id="checkboxTwitterInput" name="Twitter" onChange={starOffer? this.props.onChange : this.props.onFocus}/>
                             <label for="checkboxTwitterInput"></label>
                         </div>
                         <svg width="32" height="32" viewBox="0 0 32 32" className="icon">
@@ -60,7 +60,7 @@ class socialMedia extends Component {
                     </div>
                     <div className="youtube socialMediatWrapper">
                         <div className="checkboxforSocialMedia">
-                            <input type="checkbox" value="4" id="checkboxYoutubeInput" name="YouTube" onChange={this.props.onFocus}/>
+                            <input type="checkbox" value="4" id="checkboxYoutubeInput" name="YouTube" onChange={starOffer? this.props.onChange : this.props.onFocus}/>
                             <label for="checkboxYoutubeInput"></label>
                         </div>
                         <svg width="32" height="32" viewBox="0 0 32 32" className="icon">

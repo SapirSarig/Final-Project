@@ -25,11 +25,13 @@ namespace FinalProject.Entities
 
         public string Description { get; set; }
 
+        public double Payment { get; set; }
+
         public int? AuctionId { get; set; }
         [ForeignKey("AuctionId")]
         public virtual Auction Auction { get; set; }
 
-        public int UserId { get; set; }
+        public int? UserId { get; set; }
         [ForeignKey("UserId")]
         public virtual InfluencerUser InfluencerUser { get; set; }
 

@@ -100,7 +100,7 @@ class BusinessHomePage extends Component {
                             {/* </Link> */}
                         </div>
                         <br />
-                        <Link className="auction" to={{ pathname: "/auction", state: { userInfo: this.state.user, isNew: true } }}>
+                        <Link className="auction" to={{ pathname: "/auction", state: { user: this.state.user, isNew: true } }}>
                             <button className="auctionBtn">
                                 Add Auction
                             </button>

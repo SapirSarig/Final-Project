@@ -169,8 +169,9 @@ class Login extends Component {
         return (
             externalLogin ?
                 <Redirect to={{
-                    pathname: '/signUp',
-                    state: { loggedUser: user, externalLogin }
+                    pathname: '/signUp',                                              
+                    state: { user: {Name: user.name, Email: user.email, ConfirmMail: user.email, Password: "", ConfirmPassword: "", Type : "Social Influencer", ChooseTypeState: {}, Interests:[],SocialNetworks: [],
+                    Description: "", IsAllValid: false, Question1: "",  Question2: ""}, externalLogin }
                 }} /> :
                 loggedIn ? (user.Type === "Social Influencer") ?
                     <Redirect to={{

@@ -35,6 +35,13 @@ class BusinessRegister extends Component {
 
     componentDidMount() {
         this.updateChooseTypeState({});
+        const { userInfo} = this.props;
+        if(Object.getOwnPropertyNames(userInfo).length > 0){
+            this.setState({
+                CompanyName: userInfo.CompanyName,
+                LinkToCompanySite: userInfo.WebsiteLink
+            })
+        }
     }
 
     handleInputChange(event) {
@@ -85,14 +92,15 @@ class BusinessRegister extends Component {
 
     render() {
         const { src, errors, CompanyName, LinkToCompanySite } = this.state;
-        const { userInfo, classes } = this.props;
+        const {  classes } = this.props;
         return (
             <div className="businessContainer">
                 <TextField
                     id="companyName"
                     label="Company's Name *"
                     className={classes.textField}
-                    value={Object.getOwnPropertyNames(userInfo).length > 0 ? userInfo.CompanyName : CompanyName} name="CompanyName"
+                    value={CompanyName} 
+                    name="CompanyName"
                     onChange={this.handleInputChange}
                     margin="normal"
                 />
@@ -112,7 +120,7 @@ class BusinessRegister extends Component {
                     id="companyLink"
                     label="Link To Company's Site"
                     className={classes.textField}
-                    value={Object.getOwnPropertyNames(userInfo).length > 0 ? userInfo.LinkToCompanySite : LinkToCompanySite} name="LinkToCompanySite"
+                    value={LinkToCompanySite} name="LinkToCompanySite"
                     onChange={this.handleInputChange}
                     margin="normal"
                 />

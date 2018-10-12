@@ -65,6 +65,13 @@ class Auction extends Component {
         this.isBusinessUser = this.isBusinessUser.bind(this);
     }
 
+    componentDidMount(){
+        let {auction} = this.state;
+        const {user} = this.props.location.state;
+        auction.UserId = user.Id;
+        this.setState({auction});
+    }
+
     handleChange(event) {
 
         const target = event.target;
@@ -215,13 +222,13 @@ class Auction extends Component {
                                     }}
                                     style={{ width: '18%' }}
                                 />}
-                                {!isAuctionNew && <div className="editAuctionBtn designBtn">
+                                {!isAuctionNew && this.isBusinessUser() && <div className="editAuctionBtn designBtn">
                                     Edit auction
                                 </div>}
                             </div>
                             <div className="businessNameContainer">
                                 <div className="businessWrapper">
-                                    {this.getCompanyName(theAuction.UserId)}
+                                   <label> {this.getCompanyName(theAuction.UserId)} </label>
                                 </div>
                             </div>
                             <TextField
@@ -331,7 +338,7 @@ class Auction extends Component {
                             {this.isBusinessUser() && <Link className="designBtn" to={{ pathname: "/offersPerAuctionPage", state: {auction: theAuction, user:theUser } }}>
                                 Show Offers
                             </Link>}
-                            {!this.isBusinessUser() && <Link className="designBtn" to={{ pathname: "/starOffer", state: {auction: theAuction, user:theUser } }}>
+                            {!this.isBusinessUser() && <Link className="designBtn" to={{ pathname: "/starOffer", state: {auction: theAuction, user:theUser, fromBusiness:false } }}>
                                 Add Offer
                             </Link>}
                             {/* </div> */}
@@ -339,7 +346,7 @@ class Auction extends Component {
                     </div>
                     :
                     <Redirect to={{
-                        pathname: '/BusinessHomePage',
+                        pathname: '/businessHomePage',
                         state: { user: this.props.location.state.userInfo }
                     }} />}
 
