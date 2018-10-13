@@ -33,7 +33,7 @@ class HomeHeader extends Component {
         //         Description: "pop",
         //         Type: "Social Influencer",
         //         CompanyName: "cola",
-        //         LinkToCompanySite: "www.walla.com",
+        //         WebsiteLink: "www.walla.com",
         //         SocialNetworks: [
         //             {
         //                 Value: "Facebook",

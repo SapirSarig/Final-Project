@@ -4,7 +4,7 @@ import './layoutButton.css';
 class LayoutButton extends Component {
   render() {
     return (
-      <div className="layoutButtonWrapper" {...this.props}>
+      <div className="layoutButtonWrapper">
         <button className="layoutButton" onClick={this.props.onClick}>
           <span>{this.props.text}</span>
         </button>

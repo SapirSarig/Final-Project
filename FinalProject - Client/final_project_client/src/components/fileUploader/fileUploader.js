@@ -5,7 +5,7 @@ import { withStyles } from '@material-ui/core/styles';
 import './fileUploader.css';
 
 class FileUploader extends Component {
-    constructor(props){
+    constructor(props) {
         super(props);
 
         this.state = {
@@ -21,49 +21,52 @@ class FileUploader extends Component {
         let fileName = file || e.target.files[0],
             pattern = /image-*/,
             reader = new FileReader();
-            
+
         if (!fileName.type.match(pattern)) {
             alert('Invalid Format');
             return;
         }
-        
+
         this.setState({ loaded: false });
-        
+
         reader.onload = (e) => {
-            this.setState({ 
-                imageSrc: reader.result, 
-                loaded: true 
-            },()=>{this.props.updateFileImage(this.state.imageSrc)}); 
-            
+            this.setState({
+                imageSrc: reader.result,
+                loaded: true
+            }, () => { this.props.updateFileImage(this.state.imageSrc) });
+
         }
-        
+
         reader.readAsDataURL(fileName);
     }
 
     getFileObject() {
         return this.refs.input.files[0];
     }
-    
+
     getFileString() {
         return this.state.imageSrc;
     }
 
-    render(){
+    render() {
         let state = this.state,
-        props = this.props,
-        labelClass  = `uploader ${state.loaded && 'loaded'}`;
-
-        return(
+            props = this.props,
+            labelClass = `uploader ${state.loaded && 'loaded'}`;
+        const { isAuctionNew, fromAuction } = this.props;
+        return (
             <div className="editProdPicWrapper">
-                <div className="productImgContainer">
-                    <div className="imgContainer">
-                        <img src={state.imageSrc||this.props.imgSrc} className={state.loaded ? 'loaded': undefined}/>
-                    </div>
-                </div>
-                <input type="file" id="chooseFile" ref="fileUploader" accept="image/*" 
-                    onChange={this.onFileChange} className="editPicInput" 
-                    onClick={this.uploadHandler}/>
-                <label for="chooseFile" className={labelClass}>Choose a file</label>
+                {(!isAuctionNew && props.imgSrc === "no pic") ?
+                    "" :
+                    <div className="productImgContainer">
+
+                        <div className="imgContainer">
+                            <img src={state.imageSrc || this.props.imgSrc} className={state.loaded ? 'loaded' : undefined} />
+                        </div>
+                    </div>}
+                <input type="file" id="chooseFile" ref="fileUploader" accept="image/*"
+                    onChange={this.onFileChange} className="editPicInput"
+                    onClick={this.uploadHandler} />
+                {(isAuctionNew === false) ? "" : <label for="chooseFile" className={labelClass}>Choose a file</label>}
             </div>
         );
     }

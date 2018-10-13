@@ -69,7 +69,9 @@ namespace FinalProject.BL
 
         public ErrorMessage UpdateInfluencerUser(UpdatedInfluencerUserModal userToUpdate)
         {
-            User user = userCRUD.UpdateInfluencerUser(userToUpdate);
+
+            userCRUD.UpdateInfluencerUser(userToUpdate);
+            User user = userCRUD.GetUserByEmail(userToUpdate.Email);
             if (user == null)
             {
                 ErrorMessage message = new ErrorMessage

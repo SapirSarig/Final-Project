@@ -23,13 +23,14 @@ class BusinessRegister extends Component {
         this.state = {
             CompanyName: "",
             src: "",
-            LinkToCompanySite: "",
-            errors: { LinkToCompanySite: "" }
+            WebsiteLink: "",
+            errors: { WebsiteLink: undefined }
         }
 
         this.handleInputChange = this.handleInputChange.bind(this);
         this.handleImgChange = this.handleImgChange.bind(this);
         this.checkValidation = this.checkValidation.bind(this);
+        this.updateFileImage = this.updateFileImage.bind(this);
 
     }
 
@@ -39,7 +40,7 @@ class BusinessRegister extends Component {
         if(Object.getOwnPropertyNames(userInfo).length > 0){
             this.setState({
                 CompanyName: userInfo.CompanyName,
-                LinkToCompanySite: userInfo.WebsiteLink
+                WebsiteLink: userInfo.WebsiteLink
             })
         }
     }
@@ -57,7 +58,7 @@ class BusinessRegister extends Component {
     checkValidation(name, value) {
         const { errors, LinksToProfiles } = this.state;
         let errorMessage;
-        if (name.startsWith("LinkTo")) {
+        if (name === "WebsiteLink") {
             errorMessage = RegisterService.linkValidation(value);
         }
 
@@ -90,9 +91,13 @@ class BusinessRegister extends Component {
         }
     }
 
+    updateFileImage(src) {
+        this.setState({ src })
+    }
+
     render() {
-        const { src, errors, CompanyName, LinkToCompanySite } = this.state;
-        const {  classes } = this.props;
+        const { src, errors, CompanyName, WebsiteLink } = this.state;
+        const {  classes,userInfo } = this.props;
         return (
             <div className="businessContainer">
                 <TextField
@@ -109,7 +114,7 @@ class BusinessRegister extends Component {
 
                 <div className="imgWrapper businessImgWrapper">
                     <span> Company's logo: </span>
-                    <FileUploader />
+                    <FileUploader updateFileImage={this.updateFileImage} imgSrc={userInfo.Picture}/>
                 </div>
                 {/* src={Object.getOwnPropertyNames(userInfo).length > 0? userInfo.Picture : src} 
                 <span> Company's logo </span>
@@ -120,13 +125,13 @@ class BusinessRegister extends Component {
                     id="companyLink"
                     label="Link To Company's Site"
                     className={classes.textField}
-                    value={LinkToCompanySite} name="LinkToCompanySite"
+                    value={WebsiteLink} name="WebsiteLink"
                     onChange={this.handleInputChange}
                     margin="normal"
                 />
                 {/* <span>Link To Company's Site</span>
-                <input type="text" name="LinkToCompanySite" onChange={this.handleInputChange} /> */}
-                <span className="errorInput">{errors["LinkToCompanySite"] && errors["LinkToCompanySite"]}</span>
+                <input type="text" name="WebsiteLink" onChange={this.handleInputChange} /> */}
+                <span className="errorInput">{errors["WebsiteLink"] && errors["WebsiteLink"]}</span>
 
 
             </div>

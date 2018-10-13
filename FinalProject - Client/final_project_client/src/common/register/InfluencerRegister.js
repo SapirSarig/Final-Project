@@ -24,7 +24,7 @@ class InfluencerRegister extends Component {
         this.checkValidation = this.checkValidation.bind(this);
 
         this.state = {
-            src:"",
+            src: "",
             DateOfBirth: undefined,
             socialNetworks: [],
             errors: {
@@ -42,7 +42,7 @@ class InfluencerRegister extends Component {
             //     Description: "pop",
             //     Type: "Social Influencer",
             //     CompanyName: "cola",
-            //     LinkToCompanySite: "www.walla.com",
+            //     WebsiteLink: "www.walla.com",
             //     SocialNetworks: [
             //         {
             //             Value: "Facebook",
@@ -78,8 +78,8 @@ class InfluencerRegister extends Component {
         this.updateChooseTypeState({});
     }
 
-    updateFileImage(src){
-        this.setState({src})
+    updateFileImage(src) {
+        this.setState({ src })
     }
 
     handleImgChange(e) {
@@ -191,7 +191,7 @@ class InfluencerRegister extends Component {
             if (index !== -1)
                 socialNetworks.splice(index, index + 1);
         }
-        this.setState({ errors, socialNetworks });
+        this.setState({ errors, socialNetworks },() => this.updateChooseTypeState(this.state));
         console.log("@@@@@", this.state);
     }
 
@@ -236,11 +236,11 @@ class InfluencerRegister extends Component {
         return (
             <div className="influencerContainer">
                 <div className="imgWrapper">
-                {/* <img src={Object.getOwnPropertyNames(userInfo).length > 0 ? userInfo.Picture : src} />
+                    {/* <img src={Object.getOwnPropertyNames(userInfo).length > 0 ? userInfo.Picture : src} />
                 <img id="uploadPreview" src={src} className="logo" /> */}
-                {/* <input type="file" name="myFile" onChange={this.handleImgChange} /> */}
+                    {/* <input type="file" name="myFile" onChange={this.handleImgChange} /> */}
                     {/* <span> Image: </span>*/}
-                    <FileUploader updateFileImage={this.updateFileImage} imgSrc={userInfo.Picture}/> 
+                    <FileUploader updateFileImage={this.updateFileImage} imgSrc={userInfo.Picture} />
                 </div>
                 {/* src={Object.getOwnPropertyNames(userInfo).length > 0 ? userInfo.Picture : src} 
                 <img id="uploadPreview" src={src} className="logo" />
@@ -261,7 +261,7 @@ class InfluencerRegister extends Component {
                 {/* <input type="date" name="dateOfBirth" value={dateOfBirth} onChange={this.handleInputChange} /> */}
                 <span className="errorInput">{errors["DateOfBirth"]}</span>
 
-                <SocialMedia isExtra="true" onFocus={this.focusElement} onChange={this.handleInputChange} errors={errors} socialNetworks={socialNetworks} getLink={this.getLink} checkIfChecked={this.checkIfChecked} starOffer={false}/>
+                <SocialMedia isExtra="true" onFocus={this.focusElement} onChange={this.handleInputChange} errors={errors} socialNetworks={socialNetworks} getLink={this.getLink} checkIfChecked={this.checkIfChecked} starOffer={false} />
                 {/* <span> Social Networks: </span>
                 <div className="SocialNetworksContainer">
                     <input type="checkbox" checked={this.checkIfChecked("Twitter")} name="Twitter" onChange={this.focusElement} />

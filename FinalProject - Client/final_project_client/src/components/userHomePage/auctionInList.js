@@ -14,10 +14,10 @@ class AuctionInList extends Component {
             <div className="AuctionContainer">
                 <div> <span className="AuctionName"> Auction:  </span> {auction.Title}</div>
                 <div> Product: {auction.Product} </div>
-                <div> Description: </div>
-                <div className="AuctionDescription">
+                <div> Description: {auction.Description}</div>
+                {/* <div className="AuctionDescription">
                     {auction.Description}
-                </div>
+                </div> */}
                 {/* send in props that the auction is already exist and need to show its details */}
                 <Link className="auction" to={{ pathname: "/auction", state: { auction: auction, isNew: false, user:user}}} >
                     <button className="auctionBtn">

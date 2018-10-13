@@ -10,6 +10,6 @@ namespace FinalProject.Entities
     public class PublishSocialNetwork
     {
         public int Id { get; set; }
-        public SocialNetworkType Value { get; set; }
+        public string Value { get; set; }
     }
 }

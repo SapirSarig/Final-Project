@@ -53,7 +53,10 @@ export default class RegisterService {
 
     static linkValidation(value){
         let linkError = undefined; 
-        if(!ValidationUtil.validateLink(value)){
+        if(value===""){
+            return linkError;
+        }
+        else if(!ValidationUtil.validateLink(value)){
             linkError = "Link not valid";
         }
         return linkError;

@@ -19,9 +19,9 @@ namespace FinalProject.Entities
         [Key]
         public int Id { get; set; }
 
-        public ICollection<AdvertisingForm> AdvertisingForms { get; set; }
+        public virtual ICollection<AdvertisingForm> AdvertisingForms { get; set; }
 
-        public ICollection<PublishSocialNetwork> PublishSocialNetworks { get; set; }
+        public virtual ICollection<PublishSocialNetwork> PublishSocialNetworks { get; set; }
 
         public string Description { get; set; }
 

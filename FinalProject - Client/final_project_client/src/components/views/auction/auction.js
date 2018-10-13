@@ -43,8 +43,10 @@ class Auction extends Component {
                 StartDate: '',
                 EndDate: '',
                 Offers: [],
-                Interests: []
+                Interests: [],
+                Picture: ""
             },
+            CompanyName: "",
             auctionOk: false,
             errors: {
                 Title: "",
@@ -63,13 +65,16 @@ class Auction extends Component {
         this.convertDate = this.convertDate.bind(this);
         this.getCompanyName = this.getCompanyName.bind(this);
         this.isBusinessUser = this.isBusinessUser.bind(this);
+        this.updateFileImage = this.updateFileImage.bind(this);
     }
 
-    componentDidMount(){
-        let {auction} = this.state;
-        const {user} = this.props.location.state;
+    componentDidMount() {
+        let { auction } = this.state;
+        const { user } = this.props.location.state;
+        const theAuction = (this.props.location && this.props.location.state.auction) || auction;
         auction.UserId = user.Id;
-        this.setState({auction});
+        this.getCompanyName(theAuction.UserId)
+        this.setState({ auction });
     }
 
     handleChange(event) {
@@ -183,12 +188,12 @@ class Auction extends Component {
         this.userService.getUserById(userId)
             .then(req => {
                 res = req.CompanyName;
+                this.setState({ CompanyName: res });
             });
-        return res;
     }
 
-    isBusinessUser(){
-        const { user, location} = this.props;
+    isBusinessUser() {
+        const { user, location } = this.props;
         const theUser = (location && location.state.user) || user;
         console.log("theUser", theUser);
         console.log("theUser.Type", theUser.Type);
@@ -196,12 +201,20 @@ class Auction extends Component {
         return (theUser.Type === "BusinessUser");
     }
 
+
+    updateFileImage(src) {
+        let{auction} = this.state;
+        auction.Picture = src;
+        this.setState({ auction})
+    }
+
+
     render() {
         const { classes, isNew, location, user } = this.props;
         //const { UserId, Title, Product, Description, NumOfMinFollowers, StartDate, EndDate } = this.state;
-        const { auction, auctionOk, errors } = this.state;
+        const { auction, auctionOk, errors, CompanyName } = this.state;
         const theAuction = (location && location.state.auction) || auction;
-        const isAuctionNew = (location && location.state.isNew) || isNew;
+        const isAuctionNew = (location && location.state.isNew);
         const theUser = (location && location.state.user) || user;
 
         return (
@@ -222,19 +235,19 @@ class Auction extends Component {
                                     }}
                                     style={{ width: '18%' }}
                                 />}
-                                {!isAuctionNew && this.isBusinessUser() && <div className="editAuctionBtn designBtn">
+                                {/* {!isAuctionNew && this.isBusinessUser() && <div className="editAuctionBtn designBtn">
                                     Edit auction
-                                </div>}
+                                </div>} */}
                             </div>
                             <div className="businessNameContainer">
                                 <div className="businessWrapper">
-                                   <label> {this.getCompanyName(theAuction.UserId)} </label>
+                                    <label> {CompanyName} </label>
                                 </div>
                             </div>
                             <TextField
                                 id="name"
                                 name="Title"
-                                label="Auction title"
+                                label="Auction title *"
                                 defaultValue={isAuctionNew ? "" : theAuction.Title}
                                 className={classes.textField + " titleTextField"}
                                 // value={this.state.name}
@@ -248,7 +261,7 @@ class Auction extends Component {
                                 <TextField
                                     id="nameOfProduct"
                                     name="Product"
-                                    label="Product"
+                                    label="Product *"
                                     className={classes.textField}
                                     defaultValue={isAuctionNew ? "" : theAuction.Product}
                                     //value={this.state.nameOfProduct}
@@ -260,12 +273,12 @@ class Auction extends Component {
                                     margin="normal"
                                     style={{ width: '60%' }}
                                 />
-                                <FileUploader />
+                                <FileUploader updateFileImage={this.updateFileImage} imgSrc={theAuction.Picture} isAuctionNew={isAuctionNew}/>
                             </div>
                             <TextField
                                 id="description"
                                 name="Description"
-                                label="Description"
+                                label="Description *"
                                 multiline
                                 rowsMax="8"
                                 defaultValue={isAuctionNew ? "" : theAuction.Description}
@@ -335,10 +348,10 @@ class Auction extends Component {
                             {/* <div className="submitAuctionBtn designBtn"> */}
                             <button hidden={!isAuctionNew} className={`${this.isAllValid() ? "" : "disableElement"}`} onClick={this.AddAuction}>Submit</button>
 
-                            {this.isBusinessUser() && <Link className="designBtn" to={{ pathname: "/offersPerAuctionPage", state: {auction: theAuction, user:theUser } }}>
+                            {this.isBusinessUser() && <Link className="designBtn" to={{ pathname: "/offersPerAuctionPage", state: { auction: theAuction, user: theUser } }}>
                                 Show Offers
                             </Link>}
-                            {!this.isBusinessUser() && <Link className="designBtn" to={{ pathname: "/starOffer", state: {auction: theAuction, user:theUser, fromBusiness:false } }}>
+                            {!this.isBusinessUser() && <Link className="designBtn" to={{ pathname: "/starOffer", state: { auction: theAuction, user: theUser, fromBusiness: false } }}>
                                 Add Offer
                             </Link>}
                             {/* </div> */}
@@ -347,7 +360,7 @@ class Auction extends Component {
                     :
                     <Redirect to={{
                         pathname: '/businessHomePage',
-                        state: { user: this.props.location.state.userInfo }
+                        state: { user: this.props.location.state.user }
                     }} />}
 
                 {/* // <div>

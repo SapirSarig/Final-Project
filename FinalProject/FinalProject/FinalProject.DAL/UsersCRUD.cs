@@ -98,22 +98,17 @@ namespace FinalProject.DAL
             }
         }
 
-        public User UpdateInfluencerUser(UpdatedInfluencerUserModal userToUpdate)
+        public void UpdateInfluencerUser(UpdatedInfluencerUserModal userToUpdate)
         {
             User CurrUser = context.Users.FirstOrDefault(u => u.Email == userToUpdate.Email);
-            if (CurrUser == null)
-            {
-                return null;
-            }
-            else
-            {
+            if (CurrUser != null)
+            {            
                 CurrUser.Name = userToUpdate.Name;
                 CurrUser.Interests = userToUpdate.Interests;
                 CurrUser.Picture = userToUpdate.Picture;
                 CurrUser.Description = userToUpdate.Description;
                 (CurrUser as InfluencerUser).SocialNetworks = userToUpdate.SocialNetworks;
                 context.SaveChanges();
-                return CurrUser;
             }
         }
 

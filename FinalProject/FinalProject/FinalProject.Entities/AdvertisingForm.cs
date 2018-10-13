@@ -10,6 +10,6 @@ namespace FinalProject.Entities
     public class AdvertisingForm
     {
         public int Id { get; set; }
-        public AdvertisingFormType Value { get; set; }
+        public string Value { get; set; }
     }
 }

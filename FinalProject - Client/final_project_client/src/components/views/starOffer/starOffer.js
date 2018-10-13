@@ -8,6 +8,7 @@ import './starOffer.css';
 import SocialMedia from '../../../common/socialMedia/socialMedia';
 import OfferService from '../../../services/apis/OfferService';
 import StringUtil from '../../../utils/StringUtil';
+import socialMedia from '../../../common/socialMedia/socialMedia';
 
 const styles = theme => ({
     container: {
@@ -93,7 +94,7 @@ class starOffer extends Component {
         return true;
     }
 
-    checkIfChecked(arrName, value) {
+    checkIfChecked(value, arrName) {
         let arr;
         // if (arrName === "PublishSocialNetworks") {
         //     const { PublishSocialNetworks } = this.state;
@@ -150,12 +151,11 @@ class starOffer extends Component {
         }
         else {
             offer[name] = value;
-            this.setState({
-                offer
-            });
+            
         }
-        console.log("*&*&*&*&", offer);
-
+        this.setState({
+            offer
+        });
     }
 
     sendOfferClicked() {
@@ -179,7 +179,7 @@ class starOffer extends Component {
 
     render() {
         const { classes } = this.props;
-        const { fromBusiness } = this.props.location.state;
+        const { fromBusiness, fromAllOffers } = this.props.location.state;
         let { offer, AuctionName, StarName, offerOk } = this.state;
         return (
             <div className="offerWrapper">
@@ -197,7 +197,7 @@ class starOffer extends Component {
                                 }}
                                 style={{ width: '30%' }}
                             />
-                            {!fromBusiness && <LayoutButton text="Edit offer" />}
+                            {/* {!fromBusiness && <LayoutButton text="Edit offer" />} */}
                         </div>
                         <TextField
                             id="read-only-input"
@@ -226,27 +226,27 @@ class starOffer extends Component {
                         <div className="accessoriesContainer">
                             <div className="video accessoriestWrapper">
                                 <div className="checkboxforaccessories">
-                                    <input type="checkbox" value="Video" id="checkboxVideoInput" name="AdvertisingForms" onChange={this.handleChange} />
+                                    <input type="checkbox" checked={this.checkIfChecked("Video","AdvertisingForms")}value="Video" id="checkboxVideoInput" name="AdvertisingForms" onChange={ (fromAllOffers || fromBusiness)? undefined : this.handleChange} />
                                     <label for="checkboxVideoInput"></label>
                                 </div>
                                 <div className="descTitle">Video</div>
                             </div>
                             <div className="picture accessoriestWrapper">
                                 <div className="checkboxforaccessories">
-                                    <input type="checkbox" value="Picture" id="checkboxFPictureInput" name="AdvertisingForms" onChange={this.handleChange} />
+                                    <input type="checkbox" checked={this.checkIfChecked("Picture", "AdvertisingForms")} value="Picture" id="checkboxFPictureInput" name="AdvertisingForms" onChange={ (fromAllOffers || fromBusiness)? undefined : this.handleChange} />
                                     <label for="checkboxFPictureInput"></label>
                                 </div>
                                 <div className="descTitle">Picture</div>
                             </div>
                             <div className="post accessoriestWrapper">
                                 <div className="checkboxforaccessories">
-                                    <input type="checkbox" value="Post" id="checkboxPostInput" name="AdvertisingForms" onChange={this.handleChange} />
+                                    <input type="checkbox" checked={this.checkIfChecked("Post","AdvertisingForms")} value="Post" id="checkboxPostInput" name="AdvertisingForms" onChange={ (fromAllOffers || fromBusiness)? undefined : this.handleChange} />
                                     <label for="checkboxPostInput"></label>
                                 </div>
                                 <div className="descTitle">Post</div>
                             </div>
                         </div>
-                        <SocialMedia isExtra="false" onChange={this.handleChange} checkIfChecked={this.checkIfChecked} starOffer={true} />
+                        <SocialMedia isExtra="false" socialNetworks={offer.PublishSocialNetworks} onChange={ (fromAllOffers || fromBusiness)? undefined : this.handleChange} checkIfChecked={this.checkIfChecked} starOffer={true} />
                         <TextField
                             id="offerDescription"
                             name="Description"
@@ -258,6 +258,9 @@ class starOffer extends Component {
                             className={classes.textField}
                             margin="normal"
                             style={{ width: '80%' }}
+                            InputProps={{
+                                readOnly:  (fromAllOffers || fromBusiness)? true:false,
+                            }}
                         />
                         <TextField
                             id="payment"
@@ -269,11 +272,14 @@ class starOffer extends Component {
                             className={classes.textField}
                             margin="normal"
                             style={{ width: '80%' }}
+                            InputProps={{
+                                readOnly: (fromAllOffers || fromBusiness)? true:false,
+                            }}
                         />
                         <div className="btnContainer">
                         {/* className={`${this.isAllValid() ? "" : "disableElement"}`} */}
-                            <LayoutButton text="Send Offer" onClick={this.sendOfferClicked} />
-                            <LayoutButton text="Open negotiaition" />
+                            {!(fromAllOffers || fromBusiness) && <LayoutButton text="Send Offer" onClick={this.sendOfferClicked} />}
+                            {!(fromAllOffers || fromBusiness) && <LayoutButton text="Open negotiaition" />}
                         </div>
                     </div> :
                     <Redirect to={{
