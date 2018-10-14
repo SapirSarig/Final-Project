@@ -92,7 +92,7 @@ class UserRating extends Component {
 
     render() {
         const { user } = this.props;
-        if (user) {
+        if (user && user.NumOfVoters > 0) {
             let width1 = (user.OneStar / user.NumOfVoters)*100 + "%";
             var style1 = {
                 width: width1,
@@ -131,7 +131,7 @@ class UserRating extends Component {
                         <br />
                         <div className="row">
                             <div className="side">
-                                <div>5 star</div>
+                                <div>5 stars</div>
                             </div>
                             <div className="middle">
                                 <div className="bar-container">
@@ -142,7 +142,7 @@ class UserRating extends Component {
                                 <div>{user.FiveStars}</div>
                             </div>
                             <div className="side">
-                                <div>4 star</div>
+                                <div>4 stars</div>
                             </div>
                             <div className="middle">
                                 <div className="bar-container">
@@ -153,7 +153,7 @@ class UserRating extends Component {
                                 <div>{user.FourStars}</div>
                             </div>
                             <div className="side">
-                                <div>3 star</div>
+                                <div>3 stars</div>
                             </div>
                             <div className="middle">
                                 <div className="bar-container">
@@ -164,7 +164,7 @@ class UserRating extends Component {
                                 <div>{user.ThreeStars}</div>
                             </div>
                             <div className="side">
-                                <div>2 star</div>
+                                <div>2 stars</div>
                             </div>
                             <div className="middle">
                                 <div className="bar-container">

@@ -1,18 +1,3 @@
-C:\Users\Avi-Laptop\Documents\GitHub\Final-Project\FinalProject\FinalProject\FinalProject.DAL\bin\Debug\FinalProject.DAL.dll.config
-C:\Users\Avi-Laptop\Documents\GitHub\Final-Project\FinalProject\FinalProject\FinalProject.DAL\bin\Debug\FinalProject.DAL.dll
-C:\Users\Avi-Laptop\Documents\GitHub\Final-Project\FinalProject\FinalProject\FinalProject.DAL\bin\Debug\FinalProject.DAL.pdb
-C:\Users\Avi-Laptop\Documents\GitHub\Final-Project\FinalProject\FinalProject\FinalProject.DAL\bin\Debug\EntityFramework.dll
-C:\Users\Avi-Laptop\Documents\GitHub\Final-Project\FinalProject\FinalProject\FinalProject.DAL\bin\Debug\EntityFramework.SqlServer.dll
-C:\Users\Avi-Laptop\Documents\GitHub\Final-Project\FinalProject\FinalProject\FinalProject.DAL\bin\Debug\FinalProject.Entities.dll
-C:\Users\Avi-Laptop\Documents\GitHub\Final-Project\FinalProject\FinalProject\FinalProject.DAL\bin\Debug\FinalProject.Entities.pdb
-C:\Users\Avi-Laptop\Documents\GitHub\Final-Project\FinalProject\FinalProject\FinalProject.DAL\bin\Debug\EntityFramework.xml
-C:\Users\Avi-Laptop\Documents\GitHub\Final-Project\FinalProject\FinalProject\FinalProject.DAL\bin\Debug\EntityFramework.SqlServer.xml
-C:\Users\Avi-Laptop\Documents\GitHub\Final-Project\FinalProject\FinalProject\FinalProject.DAL\obj\Debug\FinalProject.DAL.csprojAssemblyReference.cache
-C:\Users\Avi-Laptop\Documents\GitHub\Final-Project\FinalProject\FinalProject\FinalProject.DAL\obj\Debug\FinalProject.DAL.csproj.CoreCompileInputs.cache
-C:\Users\Avi-Laptop\Documents\GitHub\Final-Project\FinalProject\FinalProject\FinalProject.DAL\obj\Debug\FinalProject.DAL.csproj.CopyComplete
-C:\Users\Avi-Laptop\Documents\GitHub\Final-Project\FinalProject\FinalProject\FinalProject.DAL\obj\Debug\FinalProject.DAL.dll
-C:\Users\Avi-Laptop\Documents\GitHub\Final-Project\FinalProject\FinalProject\FinalProject.DAL\obj\Debug\FinalProject.DAL.pdb
-<<<<<<< HEAD
 C:\Users\Admin\Documents\GitHub\Final-Project\FinalProject\FinalProject\FinalProject.DAL\bin\Debug\FinalProject.DAL.dll.config
 C:\Users\Admin\Documents\GitHub\Final-Project\FinalProject\FinalProject\FinalProject.DAL\bin\Debug\FinalProject.DAL.dll
 C:\Users\Admin\Documents\GitHub\Final-Project\FinalProject\FinalProject\FinalProject.DAL\bin\Debug\FinalProject.DAL.pdb
@@ -27,19 +12,3 @@ C:\Users\Admin\Documents\GitHub\Final-Project\FinalProject\FinalProject\FinalPro
 C:\Users\Admin\Documents\GitHub\Final-Project\FinalProject\FinalProject\FinalProject.DAL\obj\Debug\FinalProject.DAL.csproj.CopyComplete
 C:\Users\Admin\Documents\GitHub\Final-Project\FinalProject\FinalProject\FinalProject.DAL\obj\Debug\FinalProject.DAL.dll
 C:\Users\Admin\Documents\GitHub\Final-Project\FinalProject\FinalProject\FinalProject.DAL\obj\Debug\FinalProject.DAL.pdb
-=======
-C:\Users\Meital\Desktop\Meital\14-10-Final Project\Final-Project\FinalProject\FinalProject\FinalProject.DAL\bin\Debug\FinalProject.DAL.dll.config
-C:\Users\Meital\Desktop\Meital\14-10-Final Project\Final-Project\FinalProject\FinalProject\FinalProject.DAL\bin\Debug\FinalProject.DAL.dll
-C:\Users\Meital\Desktop\Meital\14-10-Final Project\Final-Project\FinalProject\FinalProject\FinalProject.DAL\bin\Debug\FinalProject.DAL.pdb
-C:\Users\Meital\Desktop\Meital\14-10-Final Project\Final-Project\FinalProject\FinalProject\FinalProject.DAL\bin\Debug\EntityFramework.dll
-C:\Users\Meital\Desktop\Meital\14-10-Final Project\Final-Project\FinalProject\FinalProject\FinalProject.DAL\bin\Debug\EntityFramework.SqlServer.dll
-C:\Users\Meital\Desktop\Meital\14-10-Final Project\Final-Project\FinalProject\FinalProject\FinalProject.DAL\bin\Debug\FinalProject.Entities.dll
-C:\Users\Meital\Desktop\Meital\14-10-Final Project\Final-Project\FinalProject\FinalProject\FinalProject.DAL\bin\Debug\FinalProject.Entities.pdb
-C:\Users\Meital\Desktop\Meital\14-10-Final Project\Final-Project\FinalProject\FinalProject\FinalProject.DAL\bin\Debug\EntityFramework.xml
-C:\Users\Meital\Desktop\Meital\14-10-Final Project\Final-Project\FinalProject\FinalProject\FinalProject.DAL\bin\Debug\EntityFramework.SqlServer.xml
-C:\Users\Meital\Desktop\Meital\14-10-Final Project\Final-Project\FinalProject\FinalProject\FinalProject.DAL\obj\Debug\FinalProject.DAL.csprojResolveAssemblyReference.cache
-C:\Users\Meital\Desktop\Meital\14-10-Final Project\Final-Project\FinalProject\FinalProject\FinalProject.DAL\obj\Debug\FinalProject.DAL.csproj.CoreCompileInputs.cache
-C:\Users\Meital\Desktop\Meital\14-10-Final Project\Final-Project\FinalProject\FinalProject\FinalProject.DAL\obj\Debug\FinalProject.DAL.csproj.CopyComplete
-C:\Users\Meital\Desktop\Meital\14-10-Final Project\Final-Project\FinalProject\FinalProject\FinalProject.DAL\obj\Debug\FinalProject.DAL.dll
-C:\Users\Meital\Desktop\Meital\14-10-Final Project\Final-Project\FinalProject\FinalProject\FinalProject.DAL\obj\Debug\FinalProject.DAL.pdb
->>>>>>> d632f013f77d0f64ef66732e0ac2c1e4c2abe533
