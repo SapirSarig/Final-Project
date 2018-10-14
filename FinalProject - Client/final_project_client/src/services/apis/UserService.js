@@ -264,7 +264,7 @@ export default class UserService {
 
   sendMailToBusinessUser(auctionId){
     var data = JSON.stringify(auctionId);
-    return fetch(`${this.host}/api/Users/sendMailToBusinessUser`, {
+    return fetch(`${this.host}/api/Users/SendMailToBusinessUser?auctionId=${auctionId}`, {
       method: "POST",
       body: data,
       headers: {

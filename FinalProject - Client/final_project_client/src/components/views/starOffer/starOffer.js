@@ -79,9 +79,9 @@ class starOffer extends Component {
         else {
             const { auction, user } = this.props.location.state;
             offer.AuctionId = auction.Id;
-            offer.UserId = user.user.Id; //check why
+            offer.UserId = user.user? user.user.Id : user.Id; //check why
             AuctionName = auction.Title;
-            StarName = user.user.Name; //check why
+            StarName = user.user? user.user.Name: user.Name; //check why
         }
         this.setState({
             AuctionName,
@@ -228,8 +228,17 @@ class starOffer extends Component {
                     }
                     else {
                         alert("Your offer was submitted succefully!");
-                        this.userSerive.sendMailToBusinessUser(offer.AuctionId);
-                        this.setState({ offerOk: true });
+                        this.userSerive.sendMailToBusinessUser(offer.AuctionId).then(req => {
+                            if (req) {
+                                if (req.Message) {
+                                    alert(req.Message);
+                                }
+                            }
+                            else {
+                                this.setState({ offerOk: true });
+                            }
+                        });
+
                     }
                 }
                 else {
@@ -349,7 +358,7 @@ class starOffer extends Component {
                     (offerOk) ?
                         <Redirect to={{
                             pathname: '/influencerHomePage',
-                            state: { user: this.props.location.state.user.user }//check why
+                            state: { user: this.props.location.state.user.user? this.props.location.state.user.user : this.props.location.state.user }//check why
                         }} /> :
                         <Redirect to={{
                             pathname: '/businessHomePage',

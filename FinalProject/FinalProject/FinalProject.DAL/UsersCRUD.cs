@@ -168,7 +168,9 @@ namespace FinalProject.DAL
 
         public User FindUserByAuctionId(int auctionId)
         {
-            throw new NotImplementedException();
+            Auction auction = context.Auctions.FirstOrDefault( a=>a.Id == auctionId);
+            User user = auction.BusinessUser;
+            return user;
         }
 
         public bool IsEmailExist(string email)

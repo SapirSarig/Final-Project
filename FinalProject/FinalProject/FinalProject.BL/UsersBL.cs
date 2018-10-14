@@ -178,7 +178,7 @@ namespace FinalProject.BL
                 string body = String.Format(@"
                                     Hello {0}! 
                                     An Influencer user has sent an offer to one of your auctions.
-                                    You are welcome to take a look!
+                                    Take a look here: (link)
                                     Cheers,
                                     Its a deal team", user.Name);
 
