@@ -29,7 +29,7 @@ class OffersList extends Component {
 
     render() {
         const { classes } = this.props;
-        const { offers, location } = this.props;
+        const { offers, location, user } = this.props;
         const theOffers = (location && location.state.offers) || offers;
 
         return (
@@ -60,7 +60,7 @@ class OffersList extends Component {
                         /> */}
                         <TextField
                             id="offerDescription"
-                            label="Offer's description"
+                            label="Offer's Description"
                             defaultValue={offer.Description}
                             className={classes.textField}
                             margin="normal"
@@ -70,7 +70,7 @@ class OffersList extends Component {
                         />
                         <TextField
                             id="nameAuction"
-                            label="Auction's name"
+                            label="Auction's Name"
                             defaultValue={offer.Auction.Title}
                             className={classes.textField}
                             margin="normal"
@@ -78,18 +78,29 @@ class OffersList extends Component {
                                 readOnly: true,
                             }}
                         />
+                        <TextField
+                            id="numberAuction"
+                            label="Auction's Number"
+                            defaultValue={offer.Auction.Id}
+                            className={classes.textField}
+                            margin="normal"
+                            InputProps={{
+                                readOnly: true,
+                            }}
+                        />
+
                         <div className="bottomWrapper">
                             <TextField
-                                id="numberAuction"
-                                label="Auction's number"
-                                defaultValue={offer.Auction.Id}
+                                id="offerStatus"
+                                label="Offer's Status"
+                                defaultValue={offer.Status}
                                 className={classes.textField}
                                 margin="normal"
                                 InputProps={{
                                     readOnly: true,
                                 }}
                             />
-                            <Link className="goToStarOffer" to={{pathname: "/starOffer" , state: {currOffer: offer, fromBusiness:true}}}>
+                            <Link className="goToStarOffer" to={{ pathname: "/starOffer", state: { currOffer: offer, fromBusiness: this.props.fromBusiness, fromAllOffers: this.props.fromAllOffers, user } }}>
                                 <LayoutButton text="Go To Offer" />
                             </Link>
                         </div>

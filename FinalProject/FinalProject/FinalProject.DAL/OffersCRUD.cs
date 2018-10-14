@@ -64,7 +64,17 @@ namespace FinalProject.DAL
             }
         }
 
-        
+        public void UpdateOffer(int offerId, string status)
+        {
+            Offer currOffer = context.Offers.FirstOrDefault(o => o.Id == offerId);
+            if (currOffer != null)
+            {
+                currOffer.Status = status;
+                context.SaveChanges();
+            }
+        }
+
+
 
         #endregion
     }

@@ -23,7 +23,9 @@ const initialState = {
         Email: "",
         Password: "",
         ConfirmPassword: "",
-        ConfirmMail: ""
+        ConfirmMail: "",
+        Question1:"",
+        Question2:""
     },
     externalLogin: false
 
@@ -174,6 +176,9 @@ class Register extends Component {
             errorMessage = RegisterService.confirmValidation(value, user.Password);
         } else if (fieldName === "ConfirmMail") {
             errorMessage = RegisterService.confirmValidation(value, user.Email);
+        }
+        else if ((fieldName === "Question1") || (fieldName === "Question2")){
+            errorMessage = StringUtil.isEmptyString(value) ? "Input not valid" : "";
         }
 
         errors[fieldName] = errorMessage;
@@ -376,7 +381,7 @@ class Register extends Component {
                     />
                     {/* <input type="text" name="description" onChange={this.handleInputChange} /> */}
 
-                    <VerifyQuestions signUp={signUp} handleInputChange={this.handleInputChange} question1={user.Question1} question2={user.Question2} />
+                    <VerifyQuestions signUp={signUp} handleInputChange={this.handleInputChange} question1={user.Question1} question2={user.Question2} errors={errors}/>
 
 
                     {signUp && <div className={`${this.isAllValid() ? "signUpBtnWrapper" : "disableElement signUpBtnWrapper"}`}>

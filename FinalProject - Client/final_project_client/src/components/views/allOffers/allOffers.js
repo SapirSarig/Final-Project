@@ -69,7 +69,7 @@ class AllOffers extends Component {
         const { offers } = this.state;
         return (
 
-            <OffersList offers={offers} />
+            <OffersList offers={offers} fromBusiness={false} fromAllOffers={true}/>
 
 
             // <form className={classes.container} noValidate autoComplete="off">

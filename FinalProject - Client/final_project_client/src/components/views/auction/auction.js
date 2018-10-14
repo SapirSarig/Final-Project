@@ -301,7 +301,7 @@ class Auction extends Component {
                                 InputProps={{
                                     readOnly: Boolean(!isAuctionNew)
                                 }}
-                                type="number"
+                                type="number" min="0"
                                 className={classes.textField}
                                 InputLabelProps={{
                                     shrink: true,
@@ -348,7 +348,7 @@ class Auction extends Component {
                             {/* <div className="submitAuctionBtn designBtn"> */}
                             <button hidden={!isAuctionNew} className={`${this.isAllValid() ? "" : "disableElement"}`} onClick={this.AddAuction}>Submit</button>
 
-                            {this.isBusinessUser() && <Link className="designBtn" to={{ pathname: "/offersPerAuctionPage", state: { auction: theAuction, user: theUser } }}>
+                            {this.isBusinessUser() && (!isAuctionNew) && <Link className="designBtn" to={{ pathname: "/offersPerAuctionPage", state: { auction: theAuction, user: theUser } }}>
                                 Show Offers
                             </Link>}
                             {!this.isBusinessUser() && <Link className="designBtn" to={{ pathname: "/starOffer", state: { auction: theAuction, user: theUser, fromBusiness: false } }}>

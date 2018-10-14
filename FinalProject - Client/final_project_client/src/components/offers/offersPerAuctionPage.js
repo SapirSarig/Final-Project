@@ -29,7 +29,7 @@ class offersPerAuctionPage extends Component {
     }
 
     render() {
-        const { auction } = this.props.location.state;
+        const { auction, user } = this.props.location.state;
         //const Auction = { id: 1, Title: "cola" };
         const { offers } = this.state;
         return (
@@ -44,7 +44,7 @@ class offersPerAuctionPage extends Component {
                     <br />
                 </div>
                 {console.log("offers", offers)}
-                <OffersList offers={offers} />
+                <OffersList offers={offers} fromBusiness={true} user={user}/>
             </div>
         );
     }

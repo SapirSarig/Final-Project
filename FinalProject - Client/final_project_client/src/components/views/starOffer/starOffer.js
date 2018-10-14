@@ -9,7 +9,6 @@ import SocialMedia from '../../../common/socialMedia/socialMedia';
 import OfferService from '../../../services/apis/OfferService';
 import StringUtil from '../../../utils/StringUtil';
 import socialMedia from '../../../common/socialMedia/socialMedia';
-
 const styles = theme => ({
     container: {
         display: 'flex',
@@ -37,12 +36,15 @@ class starOffer extends Component {
                 AdvertisingForms: [],
                 Description: '',
                 PublishSocialNetworks: [],
-                Payment: ''
+                Payment: '',
+                Status: 'Pending'
 
             },
             AuctionName: '', //props
             StarName: '', //props
-            offerOk: false
+            offerOk: false,
+            OfferId: '',
+            OfferStatusUpdated: false
 
         };
         this.offerService = new OfferService();
@@ -50,11 +52,13 @@ class starOffer extends Component {
         this.checkIfChecked = this.checkIfChecked.bind(this);
         this.sendOfferClicked = this.sendOfferClicked.bind(this);
         this.isAllValid = this.isAllValid.bind(this);
+        this.acceptClicked = this.acceptClicked.bind(this);
+        this.declinedClicked = this.declinedClicked.bind(this);
     }
 
     componentDidMount() {
         const { fromBusiness, fromAllOffers } = this.props.location.state;
-        let { offer, AuctionName, StarName } = this.state;
+        let { offer, AuctionName, StarName, OfferId } = this.state;
 
         if (fromBusiness || fromAllOffers) {
             const { currOffer } = this.props.location.state;
@@ -64,8 +68,10 @@ class starOffer extends Component {
             offer.Payment = currOffer.Payment;
             offer.PublishSocialNetworks = currOffer.PublishSocialNetworks;
             offer.UserId = currOffer.UserId;
-            AuctionName = currOffer.Auction.Title,
-                StarName = currOffer.InfluencerUser.Name;
+            offer.Status = currOffer.Status;
+            AuctionName = currOffer.Auction.Title;
+            StarName = currOffer.InfluencerUser.Name;
+            OfferId = currOffer.Id
         }
         else {
             const { auction, user } = this.props.location.state;
@@ -77,7 +83,8 @@ class starOffer extends Component {
         this.setState({
             AuctionName,
             StarName,
-            offer
+            offer,
+            OfferId
         });
         console.log("#$#$#$$$", offer);
 
@@ -103,9 +110,9 @@ class starOffer extends Component {
         // else{
         //     const { AdvertisingForms } = this.state;
         // }
-        const {offer} = this.state;
+        const { offer } = this.state;
         arr = offer[arrName];
-        
+
         //if (Object.getOwnPropertyNames(userInfo).length > 0) {
         if (arr) {
             for (var i = 0; i < arr.length; i++) {
@@ -136,7 +143,7 @@ class starOffer extends Component {
                 }
             }
             else {
-                
+
                 if (name === "AdvertisingForms") {
                     const index = offer.AdvertisingForms.findIndex(advfrm => advfrm.Value === value);
                     if (index !== -1)
@@ -151,39 +158,91 @@ class starOffer extends Component {
         }
         else {
             offer[name] = value;
-            
+
         }
         this.setState({
             offer
         });
     }
 
-    sendOfferClicked() {
-        const { offer } = this.state;
-        this.offerService.createOffer(offer).then(req => {
-            if (req) {
-                if (req.Message) {
-                    alert(req.Message);
+    acceptClicked() {
+        let r = window.confirm("By accepting the offer you commit to pay the social influencer after your product is published");
+        let status;
+        if (r == true) {
+            status = "Accepted";
+            const { OfferId } = this.state;
+            this.offerService.updateOffer(OfferId, status).then(req => {
+                if (req) {
+                    if (req.Message) {
+                        alert(req.Message);
+                    }
+                    else {
+                        alert("The offer was accepted succefully!");
+                        this.setState({ OfferStatusUpdated: true });
+                    }
                 }
                 else {
-                    alert("Your offer was submitted succefully!");
-                    this.setState({ offerOk: true });
+                    alert("Server Error");
                 }
-            }
-            else {
-                alert("Server Error");
-            }
 
-        });
+            });
+        }
+    }
+    declinedClicked() {
+        let r = window.confirm("Are you sure that you want to decline the offer?");
+        let status;
+        if (r == true) {
+            status = "Declined";
+            const { OfferId } = this.state;
+            this.offerService.updateOffer(OfferId, status).then(req => {
+                if (req) {
+                    if (req.Message) {
+                        alert(req.Message);
+                    }
+                    else {
+                        alert("The offer was declined succefully");
+                        this.setState({ OfferStatusUpdated: true });
+                    }
+                }
+                else {
+                    alert("Server Error");
+                }
+
+            });
+        }
+    }
+
+
+    sendOfferClicked() {
+        let r = window.confirm("By sending the offer you commit to publish the product in the way you described");
+        let status;
+        if (r == true) {
+            const { offer } = this.state;
+            this.offerService.createOffer(offer).then(req => {
+                if (req) {
+                    if (req.Message) {
+                        alert(req.Message);
+                    }
+                    else {
+                        alert("Your offer was submitted succefully!");
+                        this.setState({ offerOk: true });
+                    }
+                }
+                else {
+                    alert("Server Error");
+                }
+
+            });
+        }
     }
 
     render() {
         const { classes } = this.props;
-        const { fromBusiness, fromAllOffers } = this.props.location.state;
-        let { offer, AuctionName, StarName, offerOk } = this.state;
+        const { fromBusiness, fromAllOffers, user } = this.props.location.state;
+        let { offer, AuctionName, StarName, offerOk, OfferStatusUpdated } = this.state;
         return (
             <div className="offerWrapper">
-                {!offerOk ?
+                {(!offerOk && !OfferStatusUpdated) ?
                     <div className={classes.container} noValidate autoComplete="off">
                         <div className="firstLineWrapper">
                             <TextField
@@ -226,27 +285,27 @@ class starOffer extends Component {
                         <div className="accessoriesContainer">
                             <div className="video accessoriestWrapper">
                                 <div className="checkboxforaccessories">
-                                    <input type="checkbox" checked={this.checkIfChecked("Video","AdvertisingForms")}value="Video" id="checkboxVideoInput" name="AdvertisingForms" onChange={ (fromAllOffers || fromBusiness)? undefined : this.handleChange} />
+                                    <input type="checkbox" checked={this.checkIfChecked("Video", "AdvertisingForms")} value="Video" id="checkboxVideoInput" name="AdvertisingForms" onChange={(fromAllOffers || fromBusiness) ? undefined : this.handleChange} />
                                     <label for="checkboxVideoInput"></label>
                                 </div>
                                 <div className="descTitle">Video</div>
                             </div>
                             <div className="picture accessoriestWrapper">
                                 <div className="checkboxforaccessories">
-                                    <input type="checkbox" checked={this.checkIfChecked("Picture", "AdvertisingForms")} value="Picture" id="checkboxFPictureInput" name="AdvertisingForms" onChange={ (fromAllOffers || fromBusiness)? undefined : this.handleChange} />
+                                    <input type="checkbox" checked={this.checkIfChecked("Picture", "AdvertisingForms")} value="Picture" id="checkboxFPictureInput" name="AdvertisingForms" onChange={(fromAllOffers || fromBusiness) ? undefined : this.handleChange} />
                                     <label for="checkboxFPictureInput"></label>
                                 </div>
                                 <div className="descTitle">Picture</div>
                             </div>
                             <div className="post accessoriestWrapper">
                                 <div className="checkboxforaccessories">
-                                    <input type="checkbox" checked={this.checkIfChecked("Post","AdvertisingForms")} value="Post" id="checkboxPostInput" name="AdvertisingForms" onChange={ (fromAllOffers || fromBusiness)? undefined : this.handleChange} />
+                                    <input type="checkbox" checked={this.checkIfChecked("Post", "AdvertisingForms")} value="Post" id="checkboxPostInput" name="AdvertisingForms" onChange={(fromAllOffers || fromBusiness) ? undefined : this.handleChange} />
                                     <label for="checkboxPostInput"></label>
                                 </div>
                                 <div className="descTitle">Post</div>
                             </div>
                         </div>
-                        <SocialMedia isExtra="false" socialNetworks={offer.PublishSocialNetworks} onChange={ (fromAllOffers || fromBusiness)? undefined : this.handleChange} checkIfChecked={this.checkIfChecked} starOffer={true} />
+                        <SocialMedia isExtra="false" socialNetworks={offer.PublishSocialNetworks} onChange={(fromAllOffers || fromBusiness) ? undefined : this.handleChange} checkIfChecked={this.checkIfChecked} starOffer={true} />
                         <TextField
                             id="offerDescription"
                             name="Description"
@@ -259,7 +318,7 @@ class starOffer extends Component {
                             margin="normal"
                             style={{ width: '80%' }}
                             InputProps={{
-                                readOnly:  (fromAllOffers || fromBusiness)? true:false,
+                                readOnly: (fromAllOffers || fromBusiness) ? true : false,
                             }}
                         />
                         <TextField
@@ -273,19 +332,25 @@ class starOffer extends Component {
                             margin="normal"
                             style={{ width: '80%' }}
                             InputProps={{
-                                readOnly: (fromAllOffers || fromBusiness)? true:false,
+                                readOnly: (fromAllOffers || fromBusiness) ? true : false,
                             }}
                         />
                         <div className="btnContainer">
-                        {/* className={`${this.isAllValid() ? "" : "disableElement"}`} */}
+                            {/* className={`${this.isAllValid() ? "" : "disableElement"}`} */}
                             {!(fromAllOffers || fromBusiness) && <LayoutButton text="Send Offer" onClick={this.sendOfferClicked} />}
-                            {!(fromAllOffers || fromBusiness) && <LayoutButton text="Open negotiaition" />}
+                            {fromBusiness && offer.Status === "Pending" && <LayoutButton text="Accept" onClick={this.acceptClicked} />}
+                            {fromBusiness && offer.Status === "Pending" && <LayoutButton text="Decline" onClick={this.declinedClicked} />}
                         </div>
                     </div> :
-                    <Redirect to={{
-                        pathname: '/influencerHomePage',
-                        state: { user: this.props.location.state.user.user }//check why
-                    }} />}
+                    (offerOk) ?
+                        <Redirect to={{
+                            pathname: '/influencerHomePage',
+                            state: { user: this.props.location.state.user.user }//check why
+                        }} /> :
+                        <Redirect to={{
+                            pathname: '/businessHomePage',
+                            state: { user }//check why
+                        }} />}
             </div>
         );
     }

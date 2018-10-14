@@ -27,6 +27,8 @@ namespace FinalProject.Entities
 
         public double Payment { get; set; }
 
+        public string Status { get; set; }
+
         public int? AuctionId { get; set; }
         [ForeignKey("AuctionId")]
         public virtual Auction Auction { get; set; }

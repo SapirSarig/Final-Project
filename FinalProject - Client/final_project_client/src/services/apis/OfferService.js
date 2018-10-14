@@ -80,4 +80,21 @@ export default class OfferService {
         console.log(err);
       })
   }
+  updateOffer(offerId, status){
+    var data = JSON.stringify(status);
+    return fetch(`${this.host}/api/Offers?offerId=${offerId}&status=${status}`, {
+      method: "PATCH",
+      body: data,
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json"
+      }
+    })
+      .then((res) => {
+        return res.json();
+      })
+      .catch((err) => {
+        console.log(err);
+      })
+  }
 }

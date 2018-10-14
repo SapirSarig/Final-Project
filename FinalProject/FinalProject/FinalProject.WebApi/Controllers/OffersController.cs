@@ -43,9 +43,20 @@ namespace FinalProject.WebApi.Controllers
         }
 
         [HttpPatch]
-        public IHttpActionResult UpdateOffer(Offer offer)
+        public IHttpActionResult UpdateOffer(int offerId, string status)
         {
-            return Ok();
+            ErrorMessage errorMessage = offersBL.UpdateOffer(offerId, status);
+            if (errorMessage.Code == HttpStatusCode.OK)
+            {
+                Offer updatedOffer = offersBL.GetOffer(offerId);
+                return Ok(updatedOffer);
+            }
+
+            return new ResponseMessageResult(Request.CreateErrorResponse(
+                    errorMessage.Code,
+                   new HttpError(errorMessage.Message)
+               )
+           );
         }
 
         [HttpDelete]

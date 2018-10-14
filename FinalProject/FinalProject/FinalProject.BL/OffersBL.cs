@@ -65,6 +65,29 @@ namespace FinalProject.BL
             }
         }
 
+        public ErrorMessage UpdateOffer(int offerId, string status)
+        {
+            offersCRUD.UpdateOffer(offerId, status);
+            Offer offer = offersCRUD.GetOffer(offerId);
+            if (offer == null)
+            {
+                ErrorMessage message = new ErrorMessage
+                {
+                    Message = "User does not exist",
+                    Code = HttpStatusCode.NotModified
+                };
+                return message;
+            }
+            else
+            {
+                ErrorMessage message = new ErrorMessage
+                {
+                    Code = HttpStatusCode.OK
+                };
+                return message;
+            }
+        }
+
         public IEnumerable<Offer> GetOffersByUserId(int userId)
         {
             try
