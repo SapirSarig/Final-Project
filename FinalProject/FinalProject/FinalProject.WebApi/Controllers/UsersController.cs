@@ -108,6 +108,18 @@ namespace FinalProject.WebApi.Controllers
         }
 
         [HttpPost]
+        [Route("SendMailToBusinessUser")]
+        public IHttpActionResult SendMailToBusinessUser(int auctionId)
+        {
+            bool isSent = usersBL.SendMailToBusinessUser(auctionId);
+            if (isSent)
+            {
+                return Ok(auctionId);
+            }
+            return NotFound();
+        }
+
+        [HttpPost]
         [Route("ResetPassword")]
         public IHttpActionResult ResetPassword([FromBody]ResetPasswordModal ResetPasswordModal)
         {

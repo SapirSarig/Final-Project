@@ -146,6 +146,11 @@ namespace FinalProject.DAL
             context.SaveChanges();
         }
 
+        public User FindUserByAuctionId(int auctionId)
+        {
+            throw new NotImplementedException();
+        }
+
         public bool IsEmailExist(string email)
         {
             User res = context.Users.FirstOrDefault(user => user.Email == email);

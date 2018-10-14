@@ -153,6 +153,38 @@ namespace FinalProject.BL
             }
         }
 
+        public bool SendMailToBusinessUser(int auctionId)
+        {
+            try
+            {
+                User user = userCRUD.FindUserByAuctionId(auctionId);
+                string to = user.Email;
+                string from = "itsadealteam@gmail.com";
+                string subject = "Someone sent you an offer!";
+
+                string body = String.Format(@"
+                                    Hello {0}! 
+                                    An Influencer user has sent an offer to one of your auctions.
+                                    You are welcome to take a look!
+                                    Cheers,
+                                    Its a deal team", user.Name);
+
+
+                MailMessage mail = new MailMessage(from, to, subject, body);
+                SmtpClient client = new SmtpClient("smtp.gmail.com");
+                client.Credentials = new NetworkCredential("itsadealteam@gmail.com", "12345@Aa");
+                client.Port = 25;
+                client.EnableSsl = true;
+                client.Send(mail);
+                return true;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return false;
+            }
+        }
+
         public bool ResetPassword(string userAuth, string newPassword)
         {
             IEnumerable<Claim> claims = JwtManager.JwtTokenGetClaims(userAuth);
