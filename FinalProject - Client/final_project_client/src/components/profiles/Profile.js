@@ -28,7 +28,11 @@ class Profile extends Component {
     }
 
     componentDidMount() {
-         const { user } = this.props;
+         let { user, location } = this.props;
+
+         if(!user && location){
+            user  = location.state.user;
+         }
 
          this.setState({
              user
@@ -79,14 +83,18 @@ class Profile extends Component {
         let okButton = document.getElementById("okButton");
         okButton.disabled = true;
 
-        console.log(this.state);
     }
 
     render() {
         //const { review, type, name, interests, description, reviews, dateOfBirth, socialNetworks } = this.state;
         //const { user } = this.state;
+        const { location } = this.props;
         const { user } = this.state;
         let { okDisabled } = this.state;
+
+        const isOkDisabled  = (location && location.state.okDisabled) || okDisabled;
+
+        console.log(user);
         return (
             <div>
                 <NavToggle />
@@ -126,7 +134,7 @@ class Profile extends Component {
                     
                     <span> Write A Review: </span>
                     <textarea id="review" type="text" rows="2" name="review" onChange={this.handleInputChange} className="reviewInput" />
-                    <button id="okButton" className={!okDisabled ? "reviewOkBtn" + " " + "enable" : "reviewOkBtn"} value={!!document.getElementById("review") ? document.getElementById("review").value : null} disabled={okDisabled} onClick={this.handleButtonOkClicked}> OK </button>
+                    <button id="okButton" className={!isOkDisabled ? "reviewOkBtn" + " " + "enable" : "reviewOkBtn"} value={!!document.getElementById("review") ? document.getElementById("review").value : null} disabled={isOkDisabled} onClick={this.handleButtonOkClicked}> OK </button>
                 </div>)}
             </div>
         );

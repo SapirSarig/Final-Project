@@ -55,7 +55,7 @@ class UsersContainer extends Component {
 
                             <div className="btnWrapper">
                                 <div className="detailsContainer ">
-                                    <Link className="detailsBtn designBtn" to={{ pathname: "/Profile", state: {user:user } }}>
+                                    <Link className="detailsBtn designBtn" to={{ pathname: "/Profile", state: {user:user, okDisabled:false} }}>
                                         Details
                                     </Link>
                                 </div>
