@@ -81,5 +81,12 @@ namespace FinalProject.WebApi.Controllers
         {
             return offersBL.GetOffersByUserId(userId);
         }
+
+        [Route("GetAllOffersByBusinessUserId")]
+        public IEnumerable<Offer> GetAllOffersByBusinessUserId(int userId)
+        {
+            return offersBL.GetAllOffersByBusinessUserId(userId);
+        }
+
     }
 }

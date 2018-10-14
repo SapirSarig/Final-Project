@@ -76,5 +76,18 @@ namespace FinalProject.BL
                 throw e;
             }
         }
+
+        public IEnumerable<Offer> GetAllOffersByBusinessUserId(int userId)
+        {
+            try
+            {
+                return offersCRUD.GetAllOffersByBusinessUserId(userId);
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
+
     }
 }
