@@ -9,6 +9,8 @@ import SocialMedia from '../../../common/socialMedia/socialMedia';
 import OfferService from '../../../services/apis/OfferService';
 import StringUtil from '../../../utils/StringUtil';
 import socialMedia from '../../../common/socialMedia/socialMedia';
+import UserSerive from '../../../services/apis/UserService';
+
 const styles = theme => ({
     container: {
         display: 'flex',
@@ -25,7 +27,7 @@ const styles = theme => ({
 
 class starOffer extends Component {
     offerService;
-
+    userSerive;
     constructor(props) {
         super(props);
 
@@ -48,6 +50,7 @@ class starOffer extends Component {
 
         };
         this.offerService = new OfferService();
+        this.userSerive = new UserSerive();
         this.handleChange = this.handleChange.bind(this);
         this.checkIfChecked = this.checkIfChecked.bind(this);
         this.sendOfferClicked = this.sendOfferClicked.bind(this);
@@ -225,6 +228,7 @@ class starOffer extends Component {
                     }
                     else {
                         alert("Your offer was submitted succefully!");
+                        this.userSerive.sendMailToBusinessUser(offer.AuctionId);
                         this.setState({ offerOk: true });
                     }
                 }

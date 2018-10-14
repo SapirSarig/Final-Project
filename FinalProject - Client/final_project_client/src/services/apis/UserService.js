@@ -247,4 +247,22 @@ export default class UserService {
       })
   }
 
+  sendMailToBusinessUser(auctionId){
+    var data = JSON.stringify(auctionId);
+    return fetch(`${this.host}/api/Users/sendMailToBusinessUser`, {
+      method: "POST",
+      body: data,
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json"
+      }
+    })
+      .then((res) => {
+        return res.json();
+      })
+      .catch((err) => {
+        alert(err);
+      })
+  }
+
 }
