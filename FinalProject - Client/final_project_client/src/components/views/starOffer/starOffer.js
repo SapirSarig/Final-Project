@@ -79,9 +79,9 @@ class starOffer extends Component {
         else {
             const { auction, user } = this.props.location.state;
             offer.AuctionId = auction.Id;
-            offer.UserId = user.user.Id; //check why
+            offer.UserId = user.user ? user.user.Id : user.Id; //check why
             AuctionName = auction.Title;
-            StarName = user.user.Name; //check why
+            StarName = user.user ? user.user.Name : user.Name; //check why
         }
         this.setState({
             AuctionName,
@@ -349,7 +349,7 @@ class starOffer extends Component {
                     (offerOk) ?
                         <Redirect to={{
                             pathname: '/influencerHomePage',
-                            state: { user: this.props.location.state.user.user }//check why
+                            state: { user: this.props.location.state.user.user ? this.props.location.state.user.user : this.props.location.state.user }//check why
                         }} /> :
                         <Redirect to={{
                             pathname: '/businessHomePage',

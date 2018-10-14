@@ -68,7 +68,7 @@ class OffersList extends Component {
                                 readOnly: true,
                             }}
                         />
-                        <TextField
+                        {!this.props.fromBusiness && <TextField
                             id="nameAuction"
                             label="Auction's Name"
                             defaultValue={offer.Auction.Title}
@@ -77,8 +77,8 @@ class OffersList extends Component {
                             InputProps={{
                                 readOnly: true,
                             }}
-                        />
-                        <TextField
+                        />}                        
+                        {!this.props.fromBusiness && <TextField
                             id="numberAuction"
                             label="Auction's Number"
                             defaultValue={offer.Auction.Id}
@@ -87,7 +87,7 @@ class OffersList extends Component {
                             InputProps={{
                                 readOnly: true,
                             }}
-                        />
+                        />}
 
                         <div className="bottomWrapper">
                             <TextField

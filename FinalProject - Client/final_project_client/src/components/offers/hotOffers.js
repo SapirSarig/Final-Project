@@ -19,7 +19,7 @@ class HotOffers extends Component {
         this.offerService = new OfferService();
     }
 
-    componentDidMount() {
+    componentWillMount() {
         const { user } = this.props;
         this.getAllOffersForUser(user);
     }
@@ -48,7 +48,7 @@ class HotOffers extends Component {
         else { 
             this.offerService.getAllOffersByBusinessUserId(user.Id).then(req => {
                 const top3Offers = this.getTop3Offers(req);
-                this.setState({ offers: req });
+                this.setState({ offers: top3Offers });
             });
         }
 
