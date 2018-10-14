@@ -95,6 +95,24 @@ namespace FinalProject.WebApi.Controllers
            );
         }
 
+        [Route("AddStars")]
+        public IHttpActionResult AddStars(int id, int NumOfStars)
+        {
+            ErrorMessage errorMessage = usersBL.AddStars(id, NumOfStars);
+            if (errorMessage.Code == HttpStatusCode.OK)
+            {
+                User updatedUser = usersBL.GetUser(id);
+                return Ok(updatedUser);
+            }
+
+            return new ResponseMessageResult(Request.CreateErrorResponse(
+                    errorMessage.Code,
+                   new HttpError(errorMessage.Message)
+               )
+           );
+        }
+
+
         [HttpPost]
         [Route("SendLinkToResetPassword")]
         public IHttpActionResult SendLinkToResetPassword(VerifyPasswordModal verifyPasswordObject)

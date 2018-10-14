@@ -247,4 +247,20 @@ export default class UserService {
       })
   }
 
+  AddStar(Id, NumOfStars)
+  {
+    return fetch(`${this.host}/api/Users/AddStars?id=${Id}&NumOfStars=${NumOfStars}`, {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json"
+      }
+    })
+      .then((res) => {
+        return res.json();
+      }).catch((err) => {
+        console.log(err);
+      })
+  }
+
 }

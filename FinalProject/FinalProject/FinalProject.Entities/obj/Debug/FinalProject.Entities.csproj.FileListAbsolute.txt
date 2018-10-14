@@ -3,3 +3,9 @@ C:\Users\Avi-Laptop\Documents\GitHub\Final-Project\FinalProject\FinalProject\Fin
 C:\Users\Avi-Laptop\Documents\GitHub\Final-Project\FinalProject\FinalProject\FinalProject.Entities\obj\Debug\FinalProject.Entities.csproj.CoreCompileInputs.cache
 C:\Users\Avi-Laptop\Documents\GitHub\Final-Project\FinalProject\FinalProject\FinalProject.Entities\obj\Debug\FinalProject.Entities.dll
 C:\Users\Avi-Laptop\Documents\GitHub\Final-Project\FinalProject\FinalProject\FinalProject.Entities\obj\Debug\FinalProject.Entities.pdb
+C:\Users\Meital\Desktop\Meital\14-10-Final Project\Final-Project\FinalProject\FinalProject\FinalProject.Entities\bin\Debug\FinalProject.Entities.dll
+C:\Users\Meital\Desktop\Meital\14-10-Final Project\Final-Project\FinalProject\FinalProject\FinalProject.Entities\bin\Debug\FinalProject.Entities.pdb
+C:\Users\Meital\Desktop\Meital\14-10-Final Project\Final-Project\FinalProject\FinalProject\FinalProject.Entities\obj\Debug\FinalProject.Entities.csprojResolveAssemblyReference.cache
+C:\Users\Meital\Desktop\Meital\14-10-Final Project\Final-Project\FinalProject\FinalProject\FinalProject.Entities\obj\Debug\FinalProject.Entities.csproj.CoreCompileInputs.cache
+C:\Users\Meital\Desktop\Meital\14-10-Final Project\Final-Project\FinalProject\FinalProject\FinalProject.Entities\obj\Debug\FinalProject.Entities.dll
+C:\Users\Meital\Desktop\Meital\14-10-Final Project\Final-Project\FinalProject\FinalProject\FinalProject.Entities\obj\Debug\FinalProject.Entities.pdb

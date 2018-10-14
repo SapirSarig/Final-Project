@@ -35,6 +35,18 @@ namespace FinalProject.Entities
 
         public string Question2 { get; set; }
 
+        public int Stars { get; set; }
+
+        public int NumOfVoters { get; set; }
+
+        public double RateAvg { get; set; }
+
+        public int FiveStars { get; set; }
+        public int FourStars { get; set; }
+        public int ThreeStars { get; set; }
+        public int TwoStars { get; set; }
+        public int OneStar { get; set; }
+
         public virtual ICollection<Interest> Interests { get; set; }
 
         public virtual ICollection<Review> Reviews { get; set; }

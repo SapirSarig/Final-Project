@@ -10,13 +10,13 @@ class Message extends Component {
     }
 
     render() {
-        const { message } = this.props;
+        const { message, isReview} = this.props;
         return (
             <div>
                 <div className="messageFromHistory">
                     <div> <span className="messageTitles"> From: </span> {message.From}</div>
                     <div> <span className="messageTitles"> At: </span> {message.TimeSent} </div>
-                    <div className="messageTitles"> Message: </div>
+                    <div className="messageTitles"> {isReview? "Review:" :"Message:"} </div>
                     {message.Text.split("\n").map((item, index) =>
                         <span key={index}>
                             {item}

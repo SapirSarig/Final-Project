@@ -2,7 +2,9 @@ import React, { Component } from 'react';
 import StarProfile from './StarProfile';
 import UserService from '../../services/apis/UserService';
 import NavToggle from '../navToggle/navToggle';
-
+import SessionStorageUtil from '../../utils/SessionStorageUtil';
+import Message from '../negotiation/Message';
+import UserRating from './UserRating';
 import './profile.css';
 
 class Profile extends Component {
@@ -13,30 +15,24 @@ class Profile extends Component {
         this.handleInputChange = this.handleInputChange.bind(this);
         this.handleButtonOkClicked = this.handleButtonOkClicked.bind(this);
         this.userService = new UserService();
+        this.addStarToUserReviews = this.addStarToUserReviews.bind(this);
         this.state = {
             user: {},
             review: "",
             okDisabled: true
-            // name: "",
-            // interests: [],
-            // description: "",
-            // dateOfBirth: "",
-            // socialNetworks: [],
-            // reviews: [],
-            // type: "Social Influencer"
         }
     }
 
     componentDidMount() {
-         let { user, location } = this.props;
+        let { user, location } = this.props;
 
-         if(!user && location){
-            user  = location.state.user;
-         }
+        if (!user && location) {
+            user = location.state.user;
+        }
 
-         this.setState({
-             user
-         })
+        this.setState({
+            user
+        })
     }
 
     handleInputChange(event) {
@@ -52,31 +48,46 @@ class Profile extends Component {
         });
     }
 
+    addStarToUserReviews(starNum) {
+        this.userService.AddStar(this.state.user.Id, starNum).then(req => {
+            if (req) {
+                if (req.message) {
+                    alert(req.message);
+                }
+                else {
+                    this.setState({ user: req })
+                }
+            }
+            else {
+                alert("Server error!");
+            }
+        })
+    }
+
     handleButtonOkClicked(event) {
         const { user } = this.state;
         const target = event.target;
         const value = target.value;
         const name = target.name;
+        const FromUser = SessionStorageUtil.GetLoggedUser();
+        const currTime = Date().split("GMT");
 
         let obj = {
-            "Value": value
+            "Text": value,
+            "From": FromUser.Name,
+            "TimeSent": currTime[0]
         }
         this.userService.AddReviewToUser(user.Id, obj).then(req => {
             //console.log(req);
-            if (req) {
-                if (req.Message) {
-                    alert(req.Message);
-                }
-                else {
-                    user.Reviews.push(obj);
-                    this.setState({ user });
-                }
-
-            }
-            else {
+            if (req !== undefined) {
                 alert("Server Error");
             }
-        });
+            else {
+                user.Reviews.push(obj);
+                this.setState({ user });
+            }
+        }
+        );
         let inputelem = document.getElementById("review");
         inputelem.value = null;
         inputelem.disabled = true;
@@ -92,7 +103,7 @@ class Profile extends Component {
         const { user } = this.state;
         let { okDisabled } = this.state;
 
-        const isOkDisabled  = (location && location.state.okDisabled) || okDisabled;
+        const isOkDisabled = (location && location.state.okDisabled) || okDisabled;
 
         console.log(user);
         return (
@@ -114,7 +125,7 @@ class Profile extends Component {
                                     (<div> {interest.value} </div>))}
                             </div> : <div>No Interests To Show!</div>}
                     </div>
-                    
+
                     <div className="descriptionWrapper">
                         <span> Description: </span>
                         <span> {user.Description} </span>
@@ -122,19 +133,23 @@ class Profile extends Component {
 
                     {user.Type === "Social Influencer" ?
                         <StarProfile dateOfBirth={user.DateOfBirth} socialNetworks={user.SocialNetworks} /> : null}
-                    
+
+                    <UserRating user={user} addStarToUserReviews={this.addStarToUserReviews} />
+
+                    <br />
+                    <span> Write A Review: </span>
+                    <textarea id="review" type="text" rows="2" name="review" onChange={this.handleInputChange} className="reviewInput" />
+                    <button id="okButton" className={!isOkDisabled ? "reviewOkBtn" + " " + "enable" : "reviewOkBtn"} value={!!document.getElementById("review") ? document.getElementById("review").value : null} disabled={isOkDisabled} onClick={this.handleButtonOkClicked}> OK </button>
+
                     <div className="reviewsWrapper">
                         <span> Reviews: </span>
                         {user.Reviews && user.Reviews.length > 0 ?
                             <div className="reviews">
-                                {user.Reviews.map(review =>
-                                    (<div> {review.value} </div>))}
+                                {user.Reviews.map(newReview =>
+                                    (<Message key={newReview.Id} message={newReview} isReview={true} />))}
+                                {/* (<div key= {newReview.Id}> {newReview.Value} </div>))} */}
                             </div> : <div>No Reviews Yet!</div>}
                     </div>
-                    
-                    <span> Write A Review: </span>
-                    <textarea id="review" type="text" rows="2" name="review" onChange={this.handleInputChange} className="reviewInput" />
-                    <button id="okButton" className={!isOkDisabled ? "reviewOkBtn" + " " + "enable" : "reviewOkBtn"} value={!!document.getElementById("review") ? document.getElementById("review").value : null} disabled={isOkDisabled} onClick={this.handleButtonOkClicked}> OK </button>
                 </div>)}
             </div>
         );
