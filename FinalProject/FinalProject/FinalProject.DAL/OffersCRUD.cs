@@ -33,6 +33,7 @@ namespace FinalProject.DAL
             context.Offers.Remove(offer);
             context.SaveChanges();
         }
+
         public IEnumerable<Offer> GetOffersByUserId(int userId)
         {
             IQueryable<Offer> filteredOffers =  from offer in context.Offers
@@ -42,6 +43,17 @@ namespace FinalProject.DAL
 
             return filteredOffers.ToList();
         }
+        
+        public IEnumerable<Offer> GetAllOffersByBusinessUserId(int userId)
+        {
+            IQueryable<Offer> filteredOffers = from offer in context.Offers
+                                               where offer.Auction.UserId == userId
+                                               select offer;
+
+
+            return filteredOffers.ToList();
+        }
+
         #region IDisposable - Do Using
 
         public void Dispose()

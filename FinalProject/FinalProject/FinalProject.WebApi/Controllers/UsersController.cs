@@ -79,6 +79,13 @@ namespace FinalProject.WebApi.Controllers
             return Ok(users);
         }
 
+        [Route("GetFilteredInfluencersByName")]
+        public IHttpActionResult GetFilteredInfluencersByName(string SearchStr)
+        {
+            IEnumerable<User> users = usersBL.GetFilteredInfluencersByName(SearchStr);
+            return Ok(users);
+        }
+
         [Route("AddReview")]
         public IHttpActionResult AddReview(int userId, Review review)
         {

@@ -31,7 +31,7 @@ class AllUsers extends Component {
             <div className="allUsers">
                 <label className="searchFieldLabel"> Search: </label>
                 <input className="searchFieldInput" onChange={this.handleSearchFieldChange} />
-                <UsersContainer users={users}/>
+                <UsersContainer users={users} title={"All Users"}/>
             </div>
         );
     }

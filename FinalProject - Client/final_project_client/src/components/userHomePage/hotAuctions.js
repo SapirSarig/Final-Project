@@ -1,17 +1,60 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import AuctionInList from './auctionInList';
+import AuctionService from '../../services/apis/AuctionService';
 
 class hotAuctions extends Component {
+    auctionService;
+
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            auctions: []
+        }
+
+        this.getTop3Auctions = this.getTop3Auctions.bind(this);
+        this.getAllAuctionsForUser =  this.getAllAuctionsForUser.bind(this);
+        this.auctionService = new AuctionService();        
+    }
+
+    componentDidMount() {
+        const { user } = this.props;
+        this.getAllAuctionsForUser(user);
+    }
+
+    getAllAuctionsForUser(user) {
+        if (user.Type === "Social Influencer") {
+            this.auctionService.getAllAuctions().then(req => {
+                const top3Auctions = this.getTop3Auctions(req);
+                this.setState({ auctions: top3Auctions });
+            });
+        }
+        else { 
+            const top3Auctions = this.getTop3Auctions(user.Auctions);
+            this.setState({ auctions: top3Auctions});
+        }
+
+    }
+
+    getTop3Auctions(auctions){
+        let res = [];
+
+        if(auctions && auctions.length > 3){
+            for(let i = 0; i < 3; i++)
+                res[i] = auctions[i];
+        }
+        else
+            res = auctions;
+            
+        return res;
+    }
 
     render() {
-        // const listOfauctions = [];
-        // listOfauctions.push("ABC");
-        // listOfauctions.push("FDS");
-        // listOfauctions.push("EWR");
-        // listOfauctions.push("VLF");
-        const {auctions, user} = this.props;
 
+        const {user} = this.props;
+        const {auctions} = this.state;
+        
         return (
             auctions &&
             auctions.length > 0 ?  

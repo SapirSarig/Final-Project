@@ -30,6 +30,21 @@ export default class UserService {
       })
   }
 
+  getFilteredInfluencersByName(searchStr) {
+    return fetch(`${this.host}/api/Users/GetFilteredInfluencersByName?SearchStr=${searchStr}`, {
+      method: "GET",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json"
+      }
+    })
+      .then((res) => {
+        return res.json();
+      }).catch((err) => {
+        console.log(err);
+      })
+  }
+
   getFilteredUsersByName(searchStr) {
     return fetch(`${this.host}/api/Users/GetFilteredUsersByName?SearchStr=${searchStr}`, {
       method: "GET",

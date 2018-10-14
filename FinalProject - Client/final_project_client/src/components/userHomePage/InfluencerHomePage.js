@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import HomeHeader from './HomeHeader.js';
 import HotAuctions from '../userHomePage/hotAuctions.js';
-import OffersStatus from '../offers/offersStatus.js';
+import HotOffers from '../offers/hotOffers.js';
 import NavToggle from '../navToggle/navToggle';
 import '../userHomePage/homePages.css';
 
@@ -17,7 +17,7 @@ class InfluencerHomePage extends Component {
         }
     }
 
-    componentDidMount() {
+    componentWillMount() {
         const { location } = this.props;
         if (location && location.state) {
             const { user } = location.state;
@@ -69,20 +69,24 @@ class InfluencerHomePage extends Component {
                         </div>
                         <div className="LeftPage">
                             {/* We need to add "auctions" when user is created */}
-                            <HotAuctions auctions={user.Auctions} />
+                            <HotAuctions user={user}/>
                             <Link to={{ pathname: "/allAuctions", state: { user: Object.getOwnPropertyNames(updatedUser).length > 0 ? updatedUser : user } }}> All Auctions </Link>
                         </div>
                         <div className="RightPage">
                             {/* We need to add "offers" when user is created */}
-                            {/* <OffersStatus offers={user.Offers} /> */}
+                            <HotOffers user={user} />
                             <Link className="allOffers" to={{ pathname: "/allOffers", state:{user: Object.getOwnPropertyNames(updatedUser).length > 0 ? updatedUser : user}}}>
                                 <button className="allOffersBtn">
-                                    allOffers
+                                    My Offers
                                 </button>
                             </Link>
                         </div>
                         <br />
-                        <button> All Influencers </button>
+                        <Link className="allInfluencers" to={{ pathname: "/allInfluencers", state: { } }}>
+                            <button className="allInfluencersBtn">
+                                All Influencers
+                            </button>
+                        </Link>
                     </div>}
             </div>
         );

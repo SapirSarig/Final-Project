@@ -46,8 +46,6 @@ namespace FinalProject.DAL
 
         public IEnumerable<User> GetFilteredUsersByName(string searchStr)
         {
-            //return context.Users.FirstOrDefault(u => u.Email == email);
-
             // Query for all Users that their name contains searchStr
             IQueryable<User> filteredUsers = from user in context.Users
                                              where user.Name.Contains(searchStr)
@@ -55,6 +53,28 @@ namespace FinalProject.DAL
 
 
             return filteredUsers.ToList();
+        }
+        
+        public IEnumerable<User> GetFilteredInfluencersByName(string searchStr)
+        {
+            if (searchStr == null || searchStr == "")
+            {
+                IQueryable<User> filteredInfluencers = from user in context.Users
+                                                       where user.Type == "Social Influencer"
+                                                       select user;
+                return filteredInfluencers.ToList();
+            }
+            else
+            {
+                // Query for all Users that their name contains searchStr
+                IQueryable<User> filteredInfluencers = from user in context.Users
+                                                       where (user.Name.Contains(searchStr) && user.Type == "Social Influencer")
+                                                       select user;
+                return filteredInfluencers.ToList();
+            }
+
+
+
         }
 
         public bool AddReview(int userId, Review review)

@@ -63,6 +63,19 @@ namespace FinalProject.BL
                 throw;
             }
         }
+        
+        public IEnumerable<User> GetFilteredInfluencersByName(string searchStr)
+        {
+            try
+            {
+                    return userCRUD.GetFilteredInfluencersByName(searchStr);
+            }
+            catch (Exception e)
+            {
+                return null;
+                throw;
+            }
+        }
 
         public ErrorMessage AddReview(int userId, Review review)
         {

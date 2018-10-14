@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import HomeHeader from './HomeHeader.js';
 import HotAuctions from '../userHomePage/hotAuctions.js';
-import OffersStatus from '../offers/offersStatus.js';
+import HotOffers from '../offers/hotOffers.js';
 import AuctionService from '../../services/apis/AuctionService';
 import NavToggle from '../navToggle/navToggle';
 import '../userHomePage/homePages.css';
@@ -25,7 +25,7 @@ class BusinessHomePage extends Component {
         this.onMyAuctionsClick = this.onMyAuctionsClick.bind(this);
     }
 
-    componentDidMount() {
+    componentWillMount() {
         const { location } = this.props;
         console.log("location", location);
         if (location && location.state) {
@@ -89,15 +89,15 @@ class BusinessHomePage extends Component {
                             <Link className="myAuctions" to={{ pathname: "/myAuctions", state: { auctions: theAuctions, title: "My Auctions", user: user } }}>
                                 <button className="myAuctions" onClick={this.onMyAuctionsClick}>
                                     myAuctions
-                        </button>
+                                </button>
                             </Link>
                         </div>
                         <div className="RightPage">
                             {/* We need to add "offers" when user is created */}
-                            <OffersStatus offers={user.Offers} />
-                            {/* <Link className="myOffers" to={{pathname:"/myOffers", state:{offers: theOffers}}}> */}
-                            <button className="myOffers"> All Offers </button>
-                            {/* </Link> */}
+                            <HotOffers user={user} />
+                            <Link className="allOffers" to={{pathname:"/allOffers", state:{user: this.state.user}}}>
+                                <button className="allOffers"> All Offers </button>
+                            </Link>
                         </div>
                         <br />
                         <Link className="auction" to={{ pathname: "/auction", state: { user: this.state.user, isNew: true } }}>
@@ -106,7 +106,12 @@ class BusinessHomePage extends Component {
                             </button>
                         </Link>
                         <br />
-                        <button> All Influencers </button>
+
+                        <Link className="allInfluencers" to={{ pathname: "/allInfluencers", state: { } }}>
+                            <button className="allInfluencersBtn">
+                                All Influencers
+                            </button>
+                        </Link>
                     </div>}
             </div>
         );

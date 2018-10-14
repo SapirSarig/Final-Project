@@ -91,9 +91,27 @@ export default class OfferService {
       }
     })
       .then((res) => {
+        console.log(res);
         return res.json();
       })
       .catch((err) => {
+        console.log(err);
+      })
+    }
+
+  getAllOffersByBusinessUserId(id) {
+    return fetch(`${this.host}/api/Offers/GetAllOffersByBusinessUserId?userId=${id}`, {
+      method: "GET",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json"
+      }
+    })
+      .then((res) => {
+        return res.json();
+      })
+      .catch((err) => {
+      
         console.log(err);
       })
   }

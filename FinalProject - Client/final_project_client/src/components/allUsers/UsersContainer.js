@@ -35,7 +35,7 @@ class UsersContainer extends Component {
             <form className={classes.container} noValidate autoComplete="off">
                 <div className="allUsersTitleContainer">
                     <div className="allUsersTitle">
-                        All Users
+                        {this.props.title}
                     </div>
                 </div>
                 {console.log(theUsers)}
@@ -61,7 +61,7 @@ class UsersContainer extends Component {
                                 </div>
                                 <div className="offersContainer">
                                     <div className="OffersBtn designBtn">
-                                        -Pic Here- 
+                                        <img src={user.Picture} className="userPic" />
                                     </div>
                                 </div>
                             </div>

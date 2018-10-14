@@ -6,6 +6,7 @@ import { Link } from 'react-router-dom';
 import LayoutButton from '../../../common/layoutButton/layoutButton';
 import './allOffers.css';
 import UserService from '../../../services/apis/UserService';
+import OfferService from '../../../services/apis/OfferService';
 import OffersList from '../../offers/offersList';
 
 const styles = theme => ({
@@ -24,24 +25,18 @@ const styles = theme => ({
 
 class AllOffers extends Component {
     userService;
+    offerService;
+
     constructor(props) {
         super(props);
 
-        // this.offers = [{
-        //     date: '1.9.18',
-        //     nameOfAuction: 'Tal',
-        //     numOfAuction: '1000'
-        // }, {
-        //     date: '3.9.18',
-        //     nameOfAuction: 'Tal2',
-        //     numOfAuction: '1100'
-        // }];
         this.state = {
             user: {},
             offers: []
         }
         this.getAllOffersForUser = this.getAllOffersForUser.bind(this);
         this.userService = new UserService();
+        this.offerService = new OfferService();
     }
 
     componentDidMount() {
@@ -56,8 +51,8 @@ class AllOffers extends Component {
                 this.setState({ offers: req });
             });
         }
-        else { //TODO
-            this.offerService.getAllOffersForAllAuctions(user.Id).then(req => {
+        else { 
+            this.offerService.getAllOffersByBusinessUserId(user.Id).then(req => {
                 this.setState({ offers: req });
             });
         }
