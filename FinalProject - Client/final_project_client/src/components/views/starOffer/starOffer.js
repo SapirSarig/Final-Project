@@ -228,16 +228,17 @@ class starOffer extends Component {
                     }
                     else {
                         alert("Your offer was submitted succefully!");
-                        this.userSerive.sendMailToBusinessUser(offer.AuctionId).then(req => {
-                            if (req) {
-                                if (req.Message) {
-                                    alert(req.Message);
-                                }
-                            }
-                            else {
-                                this.setState({ offerOk: true });
-                            }
-                        });
+                        // this.userSerive.sendMailToBusinessUser(offer.AuctionId).then(req => {
+                        //     if (req) {
+                        //         if (req.Message) {
+                        //             alert(req.Message);
+                        //         }
+                        //     }
+                        //     else {
+                        //         this.setState({ offerOk: true });
+                        //     }
+                        // });
+                        this.setState({ offerOk: true });
 
                     }
                 }
