@@ -77,6 +77,41 @@ namespace FinalProject.DAL
 
         }
 
+        public bool AddStars(int id, int numOfStars)
+        {
+            bool res = false;
+            User CurrUser = context.Users.FirstOrDefault(u => u.Id == id);
+            if (CurrUser != null)
+            {
+                switch(numOfStars)
+                {
+                    case 1:
+                        CurrUser.OneStar++;
+                        break;
+                    case 2:
+                        CurrUser.TwoStars++;
+                        break;
+                    case 3:
+                        CurrUser.ThreeStars++;
+                        break;
+                    case 4:
+                        CurrUser.FourStars++;
+                        break;
+                    case 5:
+                        CurrUser.FiveStars++;
+                        break;
+
+                }
+                CurrUser.Stars += numOfStars;
+                CurrUser.NumOfVoters++;
+                double avg = (double)CurrUser.Stars / CurrUser.NumOfVoters;
+                CurrUser.RateAvg = Convert.ToDouble(String.Format("{0:0.00}", avg));
+                context.SaveChanges();
+                res = true;
+            }
+            return res;
+        }
+
         public bool AddReview(int userId, Review review)
         {
             User user = context.Users.FirstOrDefault(u => u.Id == userId);

@@ -84,8 +84,8 @@ export default class UserService {
     //var data = new FormData();
     //data.append("json", JSON.stringify(user));
     var data = JSON.stringify(user);
-    return fetch(`${this.host}/api/InfluencerUsers`, 
-    {
+    return fetch(`${this.host}/api/InfluencerUsers`,
+      {
         method: "POST",
         body: data,
         headers: {
@@ -247,7 +247,7 @@ export default class UserService {
 
   }
 
-  GetAllInfluencerUserOffers(id){
+  GetAllInfluencerUserOffers(id) {
     return fetch(`${this.host}/api/InfluencerUsers/GetAllOffers?userId=${id}`, {
       method: "GET",
       headers: {
@@ -262,7 +262,7 @@ export default class UserService {
       })
   }
 
-  sendMailToBusinessUser(auctionId){
+  sendMailToBusinessUser(auctionId) {
     var data = JSON.stringify(auctionId);
     return fetch(`${this.host}/api/Users/SendMailToBusinessUser?auctionId=${auctionId}`, {
       method: "POST",
@@ -276,7 +276,24 @@ export default class UserService {
         return res.json();
       })
       .catch((err) => {
-        alert(err);
+        console.log(err);
+      })
+
+  }
+
+  AddStar(Id, NumOfStars) {
+    return fetch(`${this.host}/api/Users/AddStars?id=${Id}&NumOfStars=${NumOfStars}`, {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json"
+      }
+    })
+      .then((res) => {
+        return res.json();
+      })
+      .catch((err) => {
+        console.log(err);
       })
   }
 

@@ -77,6 +77,37 @@ namespace FinalProject.BL
             }
         }
 
+        public ErrorMessage AddStars(int id, int NumOfStars)
+        {
+            try
+            {
+                bool isAdded = (userCRUD.AddStars(id,NumOfStars));
+                if (isAdded)
+                {
+
+                    ErrorMessage message = new ErrorMessage
+                    {
+                        Code = HttpStatusCode.OK
+                    };
+                    return message;
+
+                }
+                else
+                {
+                    ErrorMessage message = new ErrorMessage
+                    {
+                        Code = HttpStatusCode.NotModified,
+                        Message = "User not found"
+                    };
+                    return message;
+                }
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
+
         public ErrorMessage AddReview(int userId, Review review)
         {
             try
