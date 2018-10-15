@@ -3,6 +3,8 @@ import { Link } from 'react-router-dom';
 import AuctionInList from './auctionInList';
 import AuctionService from '../../services/apis/AuctionService';
 
+import './hotAuctions.css';
+
 class hotAuctions extends Component {
     auctionService;
 
@@ -60,12 +62,14 @@ class hotAuctions extends Component {
             auctions.length > 0 ?  
             <div className="hotAuctions">
                 Hot Auctions:
-                {
-                    auctions.map((auction) =>
-                    <AuctionInList auction={auction} user={user}/>)
-                }
+                <div className="auctionsList">
+                    {
+                        auctions.map((auction) =>
+                        <AuctionInList auction={auction} user={user}/>)
+                    }
+                </div>
             </div> 
-            : <div>No Auctions Yet!</div>
+            : <div className="noAuctionsMessage">No Auctions Yet!</div>
         );
     }
 } 

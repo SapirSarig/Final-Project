@@ -4,3 +4,11 @@
     padding: 10px 20px;
     font-size: 20px;
 }
+
+.auctioLink:hover{
+    color: white;
+}
+
+/* .auctioLink:visited{
+    color: #bb87c4;
+} */
