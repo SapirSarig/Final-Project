@@ -16,5 +16,11 @@ namespace FinalProject.Entities
         public int UserId { get; set; }
         [ForeignKey("UserId")]
         public virtual User User { get; set; }
+
+
+        //public int? AuctionId { get; set; }
+        //[ForeignKey("AuctionId")]
+        //public virtual Auction Auction { get; set; }
+
     }
 }

@@ -1,0 +1,74 @@
+.profileContainer{
+    width: 100%;
+    padding: 170px 0;
+    display: flex;
+    overflow: hidden;
+    flex-direction: column;
+    max-width: 80vw;
+    margin: 0 auto;
+    font-size: 1.3em;
+}
+
+.rightSideWrapper{
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    align-items: flex-end;
+}
+
+.profileImgWrapper{
+    display: flex;
+    height: 25vh;
+}
+
+.profliePic{
+    width: 200px;
+    border: 1px solid white;
+}
+
+.name{
+    text-align: center;
+    width: 200px;
+    padding: 10px 0;
+    font-size: 1.7em;
+}
+
+.interestsWrapper{
+    display: flex;
+}
+
+.interestsTitle{
+    margin-right: 5px;
+}
+
+[class $="Wrapper"]{
+    margin-bottom: 20px;
+}
+
+.reviewsWrapper{
+    margin-top: 20px;
+}
+
+.reviewInput{
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid black;
+    outline: none;
+    margin: 30px 0;
+    font-size: 1em;
+}
+
+.reviewOkBtn{
+    width: 100px;
+    border-radius: 10px;
+    border: none;
+    padding: 3px;
+    transition: width 0.5s ease;
+    font-family: 'Concert One', cursive;
+}
+
+.enable:hover{
+    width: 150px;
+    background: rgb(198, 137, 255);
+    cursor: pointer;
+}

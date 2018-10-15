@@ -1,6 +1,11 @@
 import React, { Component } from 'react';
 import StarProfile from './StarProfile';
 import UserService from '../../services/apis/UserService';
+import NavToggle from '../navToggle/navToggle';
+import SessionStorageUtil from '../../utils/SessionStorageUtil';
+import Message from '../negotiation/Message';
+import UserRating from './UserRating';
+import './profile.css';
 
 class Profile extends Component {
     userService;
@@ -10,20 +15,20 @@ class Profile extends Component {
         this.handleInputChange = this.handleInputChange.bind(this);
         this.handleButtonOkClicked = this.handleButtonOkClicked.bind(this);
         this.userService = new UserService();
+        this.addStarToUserReviews = this.addStarToUserReviews.bind(this);
         this.state = {
-            user:{}
-            // name: "",
-            // interests: [],
-            // description: "",
-            // dateOfBirth: "",
-            // socialNetworks: [],
-            // reviews: [],
-            // type: "Social Influencer"
+            user: {},
+            review: "",
+            okDisabled: true
         }
     }
 
     componentDidMount() {
-        const {user} = this.props;
+        let { user, location } = this.props;
+
+        if (!user && location) {
+            user = location.state.user;
+        }
 
         this.setState({
             user
@@ -35,55 +40,116 @@ class Profile extends Component {
         const target = event.target;
         const value = target.value;
         const name = target.name;
+        let { okDisabled } = this.state;
 
         this.setState({
-            [name]: value
+            [name]: value,
+            okDisabled: false
         });
     }
 
+    addStarToUserReviews(starNum) {
+        this.userService.AddStar(this.state.user.Id, starNum).then(req => {
+            if (req) {
+                if (req.message) {
+                    alert(req.message);
+                }
+                else {
+                    this.setState({ user: req })
+                }
+            }
+            else {
+                alert("Server error!");
+            }
+        })
+    }
+
     handleButtonOkClicked(event) {
-        const {user} = this.state;
+        const { user } = this.state;
         const target = event.target;
         const value = target.value;
         const name = target.name;
-        user.Reviews.push(value)
+        const FromUser = SessionStorageUtil.GetLoggedUser();
+        const currTime = Date().split("GMT");
 
-        //this.userService.AddReviewToUser(user.Id, value);
-        this.setState({
-            user
-        });
+        let obj = {
+            "Text": value,
+            "From": FromUser.Name,
+            "TimeSent": currTime[0]
+        }
+        this.userService.AddReviewToUser(user.Id, obj).then(req => {
+            //console.log(req);
+            if (req !== undefined) {
+                alert("Server Error");
+            }
+            else {
+                user.Reviews.push(obj);
+                this.setState({ user });
+            }
+        }
+        );
+        let inputelem = document.getElementById("review");
+        inputelem.value = null;
+        inputelem.disabled = true;
+        let okButton = document.getElementById("okButton");
+        okButton.disabled = true;
 
     }
 
     render() {
         //const { review, type, name, interests, description, reviews, dateOfBirth, socialNetworks } = this.state;
-        const {user} = this.state;
+        //const { user } = this.state;
+        const { location } = this.props;
+        const { user } = this.state;
+        let { okDisabled } = this.state;
+
+        const isOkDisabled = (location && location.state.okDisabled) || okDisabled;
+
+        console.log(user);
         return (
             <div>
-                {user && (<div className="Container">
-                <span> Image: </span>
-                <img src={require('../../images/AddAnImage.png')} className="logo" />
+                <NavToggle />
+                {user && (<div className="profileContainer">
+                    <div className="rightSideWrapper">
+                        <div className="profileImgWrapper">
+                            <img src={user.Picture} className="profliePic" />
+                        </div>
+                        <span className="name"> {user.Name} </span>
+                    </div>
 
-                <span > Name </span>
-                <span> {user.name} </span>
+                    <div className="interestsWrapper">
+                        <span className="interestsTitle"> Interests: </span>
+                        {user.Interests && user.Interests.length > 0 ?
+                            <div className="interests">
+                                {user.Interests.map(interest =>
+                                    (<div> {interest.value} </div>))}
+                            </div> : <div>No Interests To Show!</div>}
+                    </div>
 
-                <span> Interests </span>
-                <span> {user.interests} </span>
+                    <div className="descriptionWrapper">
+                        <span> Description: </span>
+                        <span> {user.Description} </span>
+                    </div>
 
-                <span> Description </span>
-                <span> {user.description} </span>
+                    {user.Type === "Social Influencer" ?
+                        <StarProfile dateOfBirth={user.DateOfBirth} socialNetworks={user.SocialNetworks} /> : null}
 
-                {user.type === "Social Influencer" ?
-                    <StarProfile dateOfBirth={user.dateOfBirth} socialNetworks={user.socialNetworks} /> : null}
+                    <UserRating user={user} addStarToUserReviews={this.addStarToUserReviews} />
 
-                <span> Reviews </span>
-                <span> {user.Reviews && user.Reviews.map((name, index) => {
-                    return <span key={index}>{name} <br /> </span>;
-                })} </span>
+                    <br />
+                    <span> Write A Review: </span>
+                    <textarea id="review" type="text" rows="2" name="review" onChange={this.handleInputChange} className="reviewInput" />
+                    <button id="okButton" className={!isOkDisabled ? "reviewOkBtn" + " " + "enable" : "reviewOkBtn"} value={!!document.getElementById("review") ? document.getElementById("review").value : null} disabled={isOkDisabled} onClick={this.handleButtonOkClicked}> OK </button>
 
-                <span> Write A Review </span>
-                <input id="review" type="text" name="review"/>
-                <button onClick={this.handleButtonOkClicked} value={!!document.getElementById("review")? document.getElementById("review").value : null  }> OK </button>
+                    <div className="reviewsWrapper">
+                        <span> Reviews: </span>
+                        {user.Reviews && user.Reviews.length > 0 ?
+                            <div className="reviews">
+                                {user.Reviews.map(newReview =>
+                                    (<Message key={newReview.Id} message={newReview} isReview={true} />))}
+                                {/* (<div key= {newReview.Id}> {newReview.Value} </div>))} */}
+                            </div> : <div>No Reviews Yet!</div>}
+                    </div>
                 </div>)}
             </div>
         );

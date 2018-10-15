@@ -5,7 +5,7 @@ class LayoutButton extends Component {
   render() {
     return (
       <div className="layoutButtonWrapper">
-        <button className="layoutButton">
+        <button className="layoutButton" onClick={this.props.onClick}>
           <span>{this.props.text}</span>
         </button>
       </div>

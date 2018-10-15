@@ -1,0 +1,55 @@
+@import '../checkbox.css';
+
+.socialMediaContainer{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    padding-top: 20px;
+}
+
+.socialMediaContainer > div:nth-child(1){
+    font-size: 20px;
+    font-weight: bolder;
+    padding-bottom: 10px;
+}
+
+.socialMediaIcons{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    padding-top: 20px;
+    flex-wrap: wrap;
+}
+
+.socialMediatWrapper{
+    display: flex;
+    flex-direction: row;
+    margin-right: 4%;
+    align-items: center;
+}
+
+.icon {
+    display: inline-block;
+    width: 2em;
+    height: 1em;
+    stroke-width: 0;
+    stroke: currentColor;
+    fill: currentColor;
+    font-size: 3em;
+}
+
+.socialMediaTitle{
+    display: flex;
+}
+
+.inputLinkWrapper{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 6vh;
+    margin-top: 20px;
+}
+
+.linkToProfile{
+    padding-right: 20px;
+}

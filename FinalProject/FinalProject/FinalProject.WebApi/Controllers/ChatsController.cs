@@ -7,6 +7,7 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Cors;
+using System.Web.Http.Results;
 
 namespace FinalProject.WebApi.Controllers
 {
@@ -19,12 +20,18 @@ namespace FinalProject.WebApi.Controllers
         [HttpPost]
         public IHttpActionResult CreateChat([FromBody]Chat chat)
         {
-            bool isCreated = chatBL.CreateChat(chat);
-            if (isCreated)
+            ErrorMessage errorMessage = chatBL.CreateChat(chat);
+            if (errorMessage.Code == HttpStatusCode.OK)
             {
-                return Ok(chat);
+                Chat createdChat = chatBL.GetChat(chat.Id);
+                return Ok(createdChat);
             }
-            return NotFound();
+
+            return new ResponseMessageResult(Request.CreateErrorResponse(
+                    errorMessage.Code,
+                   new HttpError(errorMessage.Message)
+               )
+           );
         }
 
     }

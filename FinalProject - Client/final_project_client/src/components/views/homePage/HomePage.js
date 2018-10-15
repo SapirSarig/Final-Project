@@ -1,19 +1,23 @@
 import React, { Component } from 'react';
-import LayoutButton from '../../../common/layoutButton/layoutButton';
 import { Link } from 'react-router-dom';
+
+import LayoutButton from '../../../common/layoutButton/layoutButton';
+import NavToggle from '../../navToggle/navToggle';
+
 import './HomePage.css';
 
 class HomePage extends Component {
     render() {
         return (
             <div className="guestScreenWrapper">
+                <NavToggle />
                 <div className="emptyDiv"></div>
                 <div className="leftContainer">
                     <div className="siteHeaderWrapper">
                         <div className="siteName"> It's A Deal</div>
                     </div>
                     <div className="loginButtons">
-                        <Link className="signUp" to="/SignUp">
+                        <Link className="signUp" to="/signUp">
                             <LayoutButton text="Sign Up"/>
                         </Link>
                         <div className="preLine">
@@ -30,8 +34,7 @@ class HomePage extends Component {
                 <div className="rightContainer">
                     <div className="explanationWrapper">
                         <div className="explanation">
-                            <div>Are you a star on social networks like Facebook or Instagram?</div>
-                            <div>Do you own a business and looking for an opportunity to sell your products?</div>
+                            <div>Business Owner? Social Influencer?</div>
                             <div>Use our website to connect with each other!</div>
                         </div>
                     </div>

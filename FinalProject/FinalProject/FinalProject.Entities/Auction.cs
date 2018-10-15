@@ -15,6 +15,8 @@ namespace FinalProject.Entities
         {
             Offers = new HashSet<Offer>();
             ProductScopes = new HashSet<ProductScope>();
+            //Interests = new HashSet<Interest>();
+
         }
 
         [Key]
@@ -34,7 +36,7 @@ namespace FinalProject.Entities
 
         public int NumOfMinFollowers { get; set; }
 
-        public double Payment { get; set; }
+        //public double Payment { get; set; }
 
         public DateTime StartDate { get; set; }
 
@@ -43,5 +45,8 @@ namespace FinalProject.Entities
         public virtual ICollection<Offer> Offers { get; set; }
 
         public virtual ICollection<ProductScope> ProductScopes{ get; set; }
+
+        //public virtual ICollection<Interest> Interests { get; set; }
+
     }
 }

@@ -7,6 +7,7 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Cors;
+using System.Web.Http.Results;
 
 namespace FinalProject.WebApi.Controllers
 {
@@ -16,15 +17,22 @@ namespace FinalProject.WebApi.Controllers
     {
         private AuctionsBL auctionsBL = new AuctionsBL();
 
+
         [HttpPost]
         public IHttpActionResult CreateAuction(Auction auction)
         {
-            bool isCreated = auctionsBL.CreateAuction(auction);
-            if (isCreated)
+            ErrorMessage errorMessage = auctionsBL.CreateAuction(auction);
+            if (errorMessage.Code == HttpStatusCode.OK)
             {
-                return Ok(auction);
+                Auction createdAuction = auctionsBL.GetAuction(auction.Id);
+                return Ok(createdAuction);
             }
-            return NotFound();
+
+            return new ResponseMessageResult(Request.CreateErrorResponse(
+                    errorMessage.Code,
+                   new HttpError(errorMessage.Message)
+               )
+           );
         }
 
         [HttpGet]
@@ -34,6 +42,8 @@ namespace FinalProject.WebApi.Controllers
             return Ok(auction);
         }
 
+
+        //TO DO!
         [HttpPatch]
         public IHttpActionResult UpdateAuction(Auction auction)
         {
@@ -43,12 +53,17 @@ namespace FinalProject.WebApi.Controllers
         [HttpDelete]
         public IHttpActionResult DeleteAuction(int id)
         {
-            bool isDeleted = auctionsBL.DeleteAuction(id);
-            if (isDeleted)
+            ErrorMessage errorMessage = auctionsBL.DeleteAuction(id);
+            if (errorMessage.Code == HttpStatusCode.OK)
             {
                 return Ok();
             }
-            return NotFound();
+
+            return new ResponseMessageResult(Request.CreateErrorResponse(
+                    errorMessage.Code,
+                   new HttpError(errorMessage.Message)
+               )
+           );
         }
 
         [HttpGet]
@@ -61,6 +76,12 @@ namespace FinalProject.WebApi.Controllers
         public IEnumerable<Auction> GetFilteredAuctions(string SearchStr)
         {
             return auctionsBL.GetFilteredAuctions(SearchStr);
+        }
+
+        [Route("GetAuctionsByEmail")]
+        public IEnumerable<Auction> GetAuctionsByEmail(string Email)
+        {
+            return auctionsBL.GetAuctionsByEmail(Email);
         }
 
         [Route("GetAllOffers")]

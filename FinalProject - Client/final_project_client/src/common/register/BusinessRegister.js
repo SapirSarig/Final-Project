@@ -1,6 +1,19 @@
 import React, { Component } from 'react';
-import Interests from "./Interests";
 import RegisterService from '../../services/register/RegisterService';
+
+import PropTypes from 'prop-types';
+import TextField from '@material-ui/core/TextField';
+import { withStyles } from '@material-ui/core/styles';
+
+import FileUploader from '../../components/fileUploader/fileUploader';
+
+const styles = theme => ({
+    textField: {
+        marginLeft: theme.spacing.unit,
+        marginRight: theme.spacing.unit,
+        width: 300,
+    }
+});
 
 class BusinessRegister extends Component {
     constructor(props) {
@@ -9,19 +22,27 @@ class BusinessRegister extends Component {
 
         this.state = {
             CompanyName: "",
-            src: require('../../images/AddAnImage.png'),
-            LinkToCompanySite: "",
-            errors: {LinkToCompanySite:""}
+            src: "",
+            WebsiteLink: "",
+            errors: { WebsiteLink: undefined }
         }
 
         this.handleInputChange = this.handleInputChange.bind(this);
         this.handleImgChange = this.handleImgChange.bind(this);
         this.checkValidation = this.checkValidation.bind(this);
+        this.updateFileImage = this.updateFileImage.bind(this);
 
     }
 
     componentDidMount() {
         this.updateChooseTypeState({});
+        const { userInfo} = this.props;
+        if(Object.getOwnPropertyNames(userInfo).length > 0){
+            this.setState({
+                CompanyName: userInfo.CompanyName,
+                WebsiteLink: userInfo.WebsiteLink
+            })
+        }
     }
 
     handleInputChange(event) {
@@ -37,7 +58,7 @@ class BusinessRegister extends Component {
     checkValidation(name, value) {
         const { errors, LinksToProfiles } = this.state;
         let errorMessage;
-        if (name.startsWith("LinkTo")) {
+        if (name === "WebsiteLink") {
             errorMessage = RegisterService.linkValidation(value);
         }
 
@@ -70,20 +91,47 @@ class BusinessRegister extends Component {
         }
     }
 
+    updateFileImage(src) {
+        this.setState({ src })
+    }
+
     render() {
-        const { src, errors } = this.state;
+        const { src, errors, CompanyName, WebsiteLink } = this.state;
+        const {  classes,userInfo } = this.props;
         return (
-            <div className="Container">
-                <span>Company's Name *</span>
-                <input type="text" name="CompanyName" onChange={this.handleInputChange} />
-                <br />
+            <div className="businessContainer">
+                <TextField
+                    id="companyName"
+                    label="Company's Name *"
+                    className={classes.textField}
+                    value={CompanyName} 
+                    name="CompanyName"
+                    onChange={this.handleInputChange}
+                    margin="normal"
+                />
+
+                {/* <input type="text" name="CompanyName" onChange={this.handleInputChange} /> */}
+
+                <div className="imgWrapper businessImgWrapper">
+                    <span> Company's logo: </span>
+                    <FileUploader updateFileImage={this.updateFileImage} imgSrc={userInfo.Picture}/>
+                </div>
+                {/* src={Object.getOwnPropertyNames(userInfo).length > 0? userInfo.Picture : src} 
                 <span> Company's logo </span>
                 <img id="uploadPreview" src={src} className="logo" />
-                <input type="file" name="myFile" onChange={this.handleImgChange} />
+                <input type="file" name="myFile" onChange={this.handleImgChange} /> */}
 
-                <span>Link To Company's Site</span>
-                <input type="text" name="LinkToCompanySite" onChange={this.handleInputChange} />
-                <span className="errorInput">{errors["LinkToCompanySite"] && errors["LinkToCompanySite"]}</span>
+                <TextField
+                    id="companyLink"
+                    label="Link To Company's Site"
+                    className={classes.textField}
+                    value={WebsiteLink} name="WebsiteLink"
+                    onChange={this.handleInputChange}
+                    margin="normal"
+                />
+                {/* <span>Link To Company's Site</span>
+                <input type="text" name="WebsiteLink" onChange={this.handleInputChange} /> */}
+                <span className="errorInput">{errors["WebsiteLink"] && errors["WebsiteLink"]}</span>
 
 
             </div>
@@ -91,4 +139,8 @@ class BusinessRegister extends Component {
     }
 }
 
-export default BusinessRegister;
+BusinessRegister.propTypes = {
+    classes: PropTypes.object.isRequired,
+};
+
+export default withStyles(styles)(BusinessRegister);

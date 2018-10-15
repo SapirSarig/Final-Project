@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace FinalProject.DAL
 {
-    public class MessagesCRUD
+    public class MessagesCRUD : IDisposable
     {
         private FinalProjectContext context = new FinalProjectContext();
 
@@ -17,7 +17,7 @@ namespace FinalProject.DAL
             context.SaveChanges();
         }
 
-        public IEnumerable<Message> GetMessagesByOfferId(int chatId)
+        public IEnumerable<Message> GetMessage(int chatId)
         {
             IEnumerable<Message> allMessages = context.Messages.ToList();
             List<Message> offersMessages = new List<Message>();
@@ -31,5 +31,33 @@ namespace FinalProject.DAL
             }
             return (IEnumerable<Message>)offersMessages;
         }
+
+        public Message GetMessageById(int id)
+        {
+            return context.Messages.FirstOrDefault((message) => message.Id == id);
+        }
+        #region IDisposable - Do Using
+
+        public void Dispose()
+        {
+            _dispose(true);
+        }
+
+        ~MessagesCRUD()
+        {
+            _dispose(false);
+        }
+
+        private void _dispose(bool disposing)
+        {
+            // close context
+            context.Dispose();
+            if (disposing)
+            {
+                GC.SuppressFinalize(this);
+            }
+        }
+
+        #endregion
     }
 }

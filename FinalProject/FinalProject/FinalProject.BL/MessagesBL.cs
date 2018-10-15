@@ -3,6 +3,7 @@ using FinalProject.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -12,23 +13,31 @@ namespace FinalProject.BL
     {
         private MessagesCRUD messagesCRUD = new MessagesCRUD();
 
-        public bool AddMessage(Message message)
+        public ErrorMessage AddMessage(Message message)
         {
             try
             {
                 messagesCRUD.AddMessage(message);
-                return true;
+                ErrorMessage errorMessage = new ErrorMessage
+                {
+                    Code = HttpStatusCode.OK
+                };
+                return errorMessage;
             }
             catch (Exception e)
             {
-                return false;
-                throw;
+                throw e;
             }
         }
 
         public IEnumerable<Message> GetMessagesByOfferId(int chatId)
         {
-            return messagesCRUD.GetMessagesByOfferId(chatId);
+            return messagesCRUD.GetMessage(chatId);
+        }
+
+        public Message GetMessageById(int id)
+        {
+            return messagesCRUD.GetMessageById(id);
         }
     }
 }

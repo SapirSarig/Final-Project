@@ -1,5 +1,6 @@
 ﻿using FinalProject.BL;
 using FinalProject.Entities;
+using FinalProject.Entities.Modals;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,6 +8,7 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Cors;
+using System.Web.Http.Results;
 
 namespace FinalProject.WebApi.Controllers
 {
@@ -15,25 +17,42 @@ namespace FinalProject.WebApi.Controllers
     public class BusinessUsersController : ApiController
     {
         private BusinessUsersBL businessUsersBL = new BusinessUsersBL();
+        private UsersBL usersBL = new UsersBL();
 
         [HttpPost]
         public IHttpActionResult CreateUser(BusinessUser user)
         {
-            bool isCreated = businessUsersBL.CreateBusinessUser(user);
-            if (isCreated)
+            ErrorMessage errorMessage = businessUsersBL.CreateBusinessUser(user);
+            if (errorMessage.Code == HttpStatusCode.OK)
             {
-                return Ok(user);
+                User createdUser = usersBL.GetUserByEmail(user.Email);
+                return Ok(createdUser);
             }
-            return NotFound();
+
+            return new ResponseMessageResult(Request.CreateErrorResponse(
+                    errorMessage.Code,
+                   new HttpError(errorMessage.Message)
+               )
+           );
         }
 
         [HttpPatch]
-        public IHttpActionResult UpdateUser(BusinessUser user)
+        public IHttpActionResult UpdateBusinessUser(UpdatedBusinessUserModal userToUpdate)
         {
-            return Ok();
+            ErrorMessage errorMessage = businessUsersBL.UpdateBusinessUser(userToUpdate);
+            if (errorMessage.Code == HttpStatusCode.OK)
+            {
+                User updatedUser = usersBL.GetUserByEmail(userToUpdate.Email);
+                return Ok(updatedUser);
+            }
+
+            return new ResponseMessageResult(Request.CreateErrorResponse(
+                    errorMessage.Code,
+                   new HttpError(errorMessage.Message)
+               )
+           );
         }
 
-        //Is the CRUD ok??
         [Route("GetAllAuctions")]
         public IEnumerable<Auction> GetAllAuctions(int userId)
         {

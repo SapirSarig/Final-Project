@@ -15,7 +15,7 @@ export default class AuctionService {
         })
             .then((res) => {
                 console.log(res);
-                //return res.json();
+                return res.json();
             })
             .catch((err) => {
                 console.log(err);
@@ -54,6 +54,21 @@ export default class AuctionService {
 
       getFilteredAuctions(searchStr){
         return fetch(`${this.host}/api/Auctions/FilteredAuctions?SearchStr=${searchStr}`, {
+          method: "GET",
+          headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json"
+          }
+        })
+          .then((res) => {
+            return res.json();
+          }).catch((err)=> {
+            console.log(err);
+          })
+      }
+
+      getAuctionsByEmail(email){
+        return fetch(`${this.host}/api/Auctions/getAuctionsByEmail?Email=${email}`, {
           method: "GET",
           headers: {
             Accept: "application/json",

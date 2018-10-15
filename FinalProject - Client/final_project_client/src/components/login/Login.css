@@ -1,8 +1,67 @@
 .disabledElement {
     pointer-events:none;
 }
+
 .Container {
+    width: 100%;
+}
+
+.wrapper{
     display: flex;
     flex-direction: column;
     justify-content: center;
+    align-items: center;
+    max-width: 30vw;
+    min-width: 65vh;
+    background: #D3CCE3;  /* fallback for old browsers */
+    background: linear-gradient(to left, #E9E4F0, #D3CCE3); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+    height: 85vh;
+    border-radius: 0 0 10px 10px;
+    margin: 0 auto;
+}
+
+.or{
+    text-align: center;
+    padding: 20px 0;
+    font-size: 2em;
+}
+
+.facebook-login{
+    box-sizing: border-box;
+    position: relative;
+    margin: 0.2em;
+    padding: 0 15px 0 46px;
+    border: none;
+    text-align: left;
+    line-height: 34px;
+    white-space: nowrap;
+    border-radius: 0.2em;
+    font-size: 16px;
+    color: #FFF;
+}
+
+.rememberMe{
+    padding-right: 105px;
+    padding-top: 20px;
+}
+
+.forgotPassword{
+    padding-right: 85px;
+    padding-top: 5px;
+}
+
+.forgotPasswordBtn{
+    background: transparent;
+    border: 1px solid black;
+    border-radius: 5px;
+    cursor: pointer;
+    font-family: 'Concert One', cursive;
+    padding: 3px;
+    outline: none;
+}
+
+.forgotPasswordBtn:hover{
+    color: #d262ff;
+    border-color: #d262ff;
 }

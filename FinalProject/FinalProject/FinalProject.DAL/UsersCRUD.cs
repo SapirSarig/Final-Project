@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace FinalProject.DAL
 {
-    public class UsersCRUD
+    public class UsersCRUD : IDisposable
     {
         private FinalProjectContext context = new FinalProjectContext();
 
@@ -30,7 +30,7 @@ namespace FinalProject.DAL
 
         public User Login(LoginModal loginModal)
         {
-            return context.Users.FirstOrDefault(user => user.Email == loginModal.email && user.Password == loginModal.password);
+            return context.Users.FirstOrDefault(user => user.Email == loginModal.Email && user.Password == loginModal.Password);
         }
 
         public User ExternalLogin(string email)
@@ -40,13 +40,12 @@ namespace FinalProject.DAL
 
         public User GetUserByEmail(string email)
         {
-            return context.Users.FirstOrDefault(u => u.Email == email);
+            User user = context.Users.FirstOrDefault(u => u.Email == email);
+            return user;
         }
 
         public IEnumerable<User> GetFilteredUsersByName(string searchStr)
         {
-            //return context.Users.FirstOrDefault(u => u.Email == email);
-
             // Query for all Users that their name contains searchStr
             IQueryable<User> filteredUsers = from user in context.Users
                                              where user.Name.Contains(searchStr)
@@ -54,6 +53,63 @@ namespace FinalProject.DAL
 
 
             return filteredUsers.ToList();
+        }
+        
+        public IEnumerable<User> GetFilteredInfluencersByName(string searchStr)
+        {
+            if (searchStr == null || searchStr == "")
+            {
+                IQueryable<User> filteredInfluencers = from user in context.Users
+                                                       where user.Type == "Social Influencer"
+                                                       select user;
+                return filteredInfluencers.ToList();
+            }
+            else
+            {
+                // Query for all Users that their name contains searchStr
+                IQueryable<User> filteredInfluencers = from user in context.Users
+                                                       where (user.Name.Contains(searchStr) && user.Type == "Social Influencer")
+                                                       select user;
+                return filteredInfluencers.ToList();
+            }
+
+
+
+        }
+
+        public bool AddStars(int id, int numOfStars)
+        {
+            bool res = false;
+            User CurrUser = context.Users.FirstOrDefault(u => u.Id == id);
+            if (CurrUser != null)
+            {
+                switch(numOfStars)
+                {
+                    case 1:
+                        CurrUser.OneStar++;
+                        break;
+                    case 2:
+                        CurrUser.TwoStars++;
+                        break;
+                    case 3:
+                        CurrUser.ThreeStars++;
+                        break;
+                    case 4:
+                        CurrUser.FourStars++;
+                        break;
+                    case 5:
+                        CurrUser.FiveStars++;
+                        break;
+
+                }
+                CurrUser.Stars += numOfStars;
+                CurrUser.NumOfVoters++;
+                double avg = (double)CurrUser.Stars / CurrUser.NumOfVoters;
+                CurrUser.RateAvg = Convert.ToDouble(String.Format("{0:0.00}", avg));
+                context.SaveChanges();
+                res = true;
+            }
+            return res;
         }
 
         public bool AddReview(int userId, Review review)
@@ -97,32 +153,38 @@ namespace FinalProject.DAL
             }
         }
 
-        public User UpdateUser(User user)
+        public void UpdateInfluencerUser(UpdatedInfluencerUserModal userToUpdate)
         {
-            User CurrUser = context.Users.FirstOrDefault(u => u.Id == user.Id);
+            User CurrUser = context.Users.FirstOrDefault(u => u.Email == userToUpdate.Email);
+            if (CurrUser != null)
+            {            
+                CurrUser.Name = userToUpdate.Name;
+                CurrUser.Interests = userToUpdate.Interests;
+                CurrUser.Picture = userToUpdate.Picture;
+                CurrUser.Description = userToUpdate.Description;
+                (CurrUser as InfluencerUser).SocialNetworks = userToUpdate.SocialNetworks;
+                context.SaveChanges();
+            }
+        }
+
+        public User UpdateBusinessUser(UpdatedBusinessUserModal userToUpdate)
+        {
+            User CurrUser = context.Users.FirstOrDefault(u => u.Email == userToUpdate.Email);
             if (CurrUser == null)
             {
                 return null;
             }
             else
             {
-                //??
-                context.Users.Remove(CurrUser);
-                context.Users.Add(user);
+                CurrUser.Name = userToUpdate.Name;
+                CurrUser.Interests = userToUpdate.Interests;
+                CurrUser.Picture = userToUpdate.Picture;
+                CurrUser.Description = userToUpdate.Description;
+                (CurrUser as BusinessUser).WebsiteLink = userToUpdate.WebsiteLink;
+                (CurrUser as BusinessUser).CompanyName = userToUpdate.CompanyName;
                 context.SaveChanges();
-                return user;
+                return CurrUser;
             }
-
-            // foreach (var airplaneIndex in context.Airplanes.ToList())
-            //{
-            //    if (airplaneIndex.Id == airplane.Id)
-            //    {
-            //        context.Airplanes.Remove(airplaneIndex);
-            //        context.Airplanes.Add(airplane);
-            //        context.SaveChanges();
-            //        break;
-            //    }
-            //}
         }
 
         public void DeleteUser(int id)
@@ -131,5 +193,50 @@ namespace FinalProject.DAL
             context.Users.Remove(user);
             context.SaveChanges();
         }
+
+        public void ResetPassword(User currUser, string newHashPassword)
+        {
+            User user = context.Users.FirstOrDefault(u => u.Id == currUser.Id);
+            user.Password = newHashPassword;
+            context.SaveChanges();
+        }
+
+        public User FindUserByAuctionId(int auctionId)
+        {
+            Auction auction = context.Auctions.FirstOrDefault( a=>a.Id == auctionId);
+            User user = auction.BusinessUser;
+            return user;
+        }
+
+        public bool IsEmailExist(string email)
+        {
+            User res = context.Users.FirstOrDefault(user => user.Email == email);
+            if (res != null)
+                return true;
+            return false;
+        }
+        #region IDisposable - Do Using
+
+        public void Dispose()
+        {
+            _dispose(true);
+        }
+
+        ~UsersCRUD()
+        {
+            _dispose(false);
+        }
+
+        private void _dispose(bool disposing)
+        {
+            // close context
+            context.Dispose();
+            if (disposing)
+            {
+                GC.SuppressFinalize(this);
+            }
+        }
+
+        #endregion
     }
 }

@@ -2,11 +2,9 @@ import React, { Component } from 'react';
 import Register from '../../common/register/Register';
 import UserService from '../../services/apis/UserService';
 import { Route, Redirect } from 'react-router';
+import LocalStorageUtil from '../../utils/LocalStorageUtil';
+import SessionStorageUtil from '../../utils/SessionStorageUtil';
 
-const initialState = {
-    signUpOk: false,
-    userInfo: {}
-};
 
 class SignUp extends Component {
     userService;
@@ -14,36 +12,89 @@ class SignUp extends Component {
     constructor(props) {
         super(props);
 
-        this.state = initialState;
         this.CreateInfluencerUser = this.CreateInfluencerUser.bind(this);
         this.CreateBusinessUser = this.CreateBusinessUser.bind(this);
         this.userService = new UserService();
+
+        this.state = {
+            user: {
+                Name: "",
+                Email: "",
+                Password: "",
+                ConfirmPassword: "",
+                ConfirmMail: "",
+                Type: "Social Influencer",
+                ChooseTypeState: {},
+                Interests: [],
+                SocialNetworks: [],
+                Description: "",
+                IsAllValid: false,
+                ExternalLogin: false,
+                Question1: "",
+                Question2: "",
+            },
+            signUpOk: false
+        }
     }
 
-    CreateInfluencerUser(userInfo) {
+    componentDidMount() {
+        let { user } = this.state;
+        const { location } = this.props;
+        if (location && location.state) {
+            const { loggedUser, externalLogin } = location.state;
+            if (loggedUser && externalLogin) {
+                const { email, name } = loggedUser;
+                user.Email = email;
+                user.Name = name;
+                user.ExternalLogin = externalLogin;
+                user.ConfirmMail = email;
+            }
+            this.setState({
+                user
+            });
+        }
+    }
+    CreateInfluencerUser(user) {
         //const userInfo = Object.assign({}, registerObj, this.state);
         //console.log('#########', userInfo);
-        this.setState({ userInfo });
-        this.userService.createInfluencerUser(userInfo).then(req => {
+        this.setState({ user });
+        this.userService.createInfluencerUser(user).then(req => {
             //console.log(req);
             if (req) {
-                this.setState({ signUpOk: true });
+                if (req.Message) {
+                    alert(req.Message);
+                } else {
+                    this.setState({
+                        signUpOk: true,
+                        user: req
+                    }, () => {
+                        //LocalStorageUtil.RemoveLoggedUser();
+                        //SessionStorageUtil.RemoveLoggedUser();
+                        SessionStorageUtil.SaveLoggedUser(req);
+                    });
+                }
             }
             else {
-                alert("User already exists!");
+                alert("Server Error!");
             }
         });
     }
 
-    CreateBusinessUser(userInfo) {
+    CreateBusinessUser(user) {
         //const userInfo = Object.assign({}, registerObj, this.state);
         //console.log('#########', userInfo);
-        this.setState({ userInfo });
-        this.userService.createBusinessUser(userInfo).then(req => {
+        this.setState({ user });
+        this.userService.createBusinessUser(user).then(req => {
             //console.log(req);
             if (req) {
-                this.setState({ signUpOk: true });
-
+                this.setState({
+                    signUpOk: true,
+                    user: req
+                }, () => {
+                    //LocalStorageUtil.RemoveLoggedUser();
+                    //SessionStorageUtil.RemoveLoggedUser();
+                    SessionStorageUtil.SaveLoggedUser(req);
+                });
             }
             else {
                 alert("User already exists!");
@@ -55,20 +106,20 @@ class SignUp extends Component {
     }
 
     render() {
-        const { signUpOk, userInfo } = this.state;
+        const { signUpOk, user } = this.state;
         return (
             <div>
                 {signUpOk ?
-                    (userInfo.type === "Social Influencer") ?
+                    (user.Type === "Social Influencer") ?
                         <Redirect to={{
-                            pathname: '/InfluencerHomePage',
-                            state: { userInfo }
+                            pathname: '/influencerHomePage',
+                            state: { user }
                         }} /> :
                         <Redirect to={{
                             pathname: '/businessHomePage',
-                            state: { userInfo }
+                            state: { user }
                         }} />
-                    : <Register {...this.props} CreateInfluencerUser={this.CreateInfluencerUser} CreateBusinessUser={this.CreateBusinessUser} />}
+                    : <Register signUp={true} {...this.props} CreateInfluencerUser={this.CreateInfluencerUser} CreateBusinessUser={this.CreateBusinessUser} user={user} />}
             </div>
         );
     }

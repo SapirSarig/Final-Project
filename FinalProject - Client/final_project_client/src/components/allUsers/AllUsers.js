@@ -1,7 +1,6 @@
 
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-//import MyAuctions from '../views/myAuctions/myAuctions.js';
 import UserService from '../../services/apis/UserService';
 import UsersContainer from './UsersContainer';
 import './AllUsers.css';
@@ -32,7 +31,7 @@ class AllUsers extends Component {
             <div className="allUsers">
                 <label className="searchFieldLabel"> Search: </label>
                 <input className="searchFieldInput" onChange={this.handleSearchFieldChange} />
-                <UsersContainer users={users}/>
+                <UsersContainer users={users} title={"All Users"}/>
             </div>
         );
     }

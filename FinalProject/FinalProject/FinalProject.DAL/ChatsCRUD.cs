@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace FinalProject.DAL
 {
-    public class ChatsCRUD
+    public class ChatsCRUD : IDisposable
     {
         private FinalProjectContext context = new FinalProjectContext();
 
@@ -17,6 +17,33 @@ namespace FinalProject.DAL
             context.SaveChanges();
         }
 
-       
+        public Chat GetChat(int id)
+        {
+            return context.Chats.FirstOrDefault((chat)=>chat.Id == id);
+        }
+
+        #region IDisposable - Do Using
+
+        public void Dispose()
+        {
+            _dispose(true);
+        }
+
+        ~ChatsCRUD()
+        {
+            _dispose(false);
+        }
+
+        private void _dispose(bool disposing)
+        {
+            // close context
+            context.Dispose();
+            if (disposing)
+            {
+                GC.SuppressFinalize(this);
+            }
+        }
+
+        #endregion
     }
 }

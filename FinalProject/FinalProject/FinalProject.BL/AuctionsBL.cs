@@ -3,6 +3,7 @@ using FinalProject.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -12,17 +13,20 @@ namespace FinalProject.BL
     {
         private AuctionsCRUD auctionsCRUD = new AuctionsCRUD();
 
-        public bool CreateAuction(Auction auction)
+        public ErrorMessage CreateAuction(Auction auction)
         {
             try
             {
                 auctionsCRUD.AddAuction(auction);
-                return true;
+                ErrorMessage message = new ErrorMessage
+                {
+                    Code = HttpStatusCode.OK
+                };
+                return message;
             }
             catch (Exception e)
             {
-                return false;
-                throw;
+                throw e;
             }
 
         }
@@ -53,23 +57,33 @@ namespace FinalProject.BL
                 return auctionsCRUD.GetFilteredAuctions(searchStr);
         }
         
+        public IEnumerable<Auction> GetAuctionsByEmail(string Email)
+        {
+            if (Email == null || Email == "")
+                return GetAuctions();
+            else
+                return auctionsCRUD.GetAuctionsByEmail(Email);
+        }
 
         public IEnumerable<Offer> GetAllOffers(int auctionId)
         {
             return auctionsCRUD.GetAllOffers(auctionId);
         }
 
-        public bool DeleteAuction(int id)
+        public ErrorMessage DeleteAuction(int id)
         {
             try
             {
                 auctionsCRUD.DeleteAuction(id);
-                return true;
+                ErrorMessage message = new ErrorMessage
+                {
+                    Code = HttpStatusCode.OK
+                };
+                return message;
             }
             catch (Exception e)
             {
-                return false;
-                throw;
+                throw e;
             }
         }
 

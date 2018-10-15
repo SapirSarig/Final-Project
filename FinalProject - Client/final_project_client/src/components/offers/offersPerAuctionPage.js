@@ -16,29 +16,35 @@ class offersPerAuctionPage extends Component {
 
     componentDidMount() {
         this.getOffersPerAuction();
-        setInterval(this.getOffersPerAuction, 10000);
+        //setInterval(this.getOffersPerAuction, 10000);
     }
 
     getOffersPerAuction() {
-        //const { auction } = this.props;
-        const auction = { id: 1 }
-        this.OfferService.getOffersByAuctionId(auction.id).then(offers => {
+        const { auction } = this.props.location.state;
+        //const auction = { id: 1 }
+
+        this.OfferService.getOffersByAuctionId(auction.Id).then(offers => {
             this.setState({ offers });
         })
     }
 
     render() {
-        //const { auction } = this.props;
-        const Auction = { id: 1, Title: "cola" };
+        const { auction, user } = this.props.location.state;
+        //const Auction = { id: 1, Title: "cola" };
         const { offers } = this.state;
         return (
+
             <div className="offersPerAuctionContainer" >
+                {console.log("user", this.props.location.state.user)} 
+                {console.log("auction", this.props.location.state.auction)}
+
                 <div className="offersPerAuctionHeader">
-                    <div>Auction No. : {Auction.id}</div>
-                    <div>Auction Name : {Auction.Title}</div>
+                    <div>Auction No. : {auction.Id}</div>
+                    <div>Auction Name : {auction.Title}</div>
                     <br />
                 </div>
-                <OffersList offers={offers} />
+                {console.log("offers", offers)}
+                <OffersList offers={offers} fromBusiness={true} user={user}/>
             </div>
         );
     }

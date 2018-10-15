@@ -10,7 +10,7 @@ namespace FinalProject.Entities
     public class ProductScope
     {
         public int Id { get; set; }
-        //string?
-        public InterestType Value { get; set; }
+        
+        public string Value { get; set; }
     }
 }

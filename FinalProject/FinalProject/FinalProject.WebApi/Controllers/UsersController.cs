@@ -1,5 +1,6 @@
 ﻿using FinalProject.BL;
 using FinalProject.Entities;
+using FinalProject.Entities.Modals;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,6 +8,7 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Cors;
+using System.Web.Http.Results;
 
 namespace FinalProject.WebApi.Controllers
 {
@@ -20,6 +22,7 @@ namespace FinalProject.WebApi.Controllers
         public IHttpActionResult GetUser(int id)
         {
             User user = usersBL.GetUser(id);
+            user.Password = null;
             return Ok(user);
         }
 
@@ -42,12 +45,17 @@ namespace FinalProject.WebApi.Controllers
         [HttpDelete]
         public IHttpActionResult DeleteUser(int id)
         {
-            bool isDeleted = usersBL.DeleteUser(id);
-            if (isDeleted)
+            ErrorMessage errorMessage = usersBL.DeleteUser(id);
+            if (errorMessage.Code == HttpStatusCode.OK)
             {
                 return Ok();
             }
-            return NotFound();
+
+            return new ResponseMessageResult(Request.CreateErrorResponse(
+                    errorMessage.Code,
+                   new HttpError(errorMessage.Message)
+               )
+           );
         }
 
         [HttpGet]
@@ -60,6 +68,7 @@ namespace FinalProject.WebApi.Controllers
         public IHttpActionResult GetUserByEmail(string email)
         {
             User user = usersBL.GetUserByEmail(email);
+            user.Password = null;
             return Ok(user);
         }
 
@@ -70,13 +79,79 @@ namespace FinalProject.WebApi.Controllers
             return Ok(users);
         }
 
+        [Route("GetFilteredInfluencersByName")]
+        public IHttpActionResult GetFilteredInfluencersByName(string SearchStr)
+        {
+            IEnumerable<User> users = usersBL.GetFilteredInfluencersByName(SearchStr);
+            return Ok(users);
+        }
+
         [Route("AddReview")]
         public IHttpActionResult AddReview(int userId, Review review)
         {
-            bool isAdded = usersBL.AddReview(userId, review);
-            if (isAdded)
+            ErrorMessage errorMessage = usersBL.AddReview(userId, review);
+            if (errorMessage.Code == HttpStatusCode.OK)
             {
-                return Ok(userId);
+                return Ok();
+            }
+
+            return new ResponseMessageResult(Request.CreateErrorResponse(
+                    errorMessage.Code,
+                   new HttpError(errorMessage.Message)
+               )
+           );
+        }
+
+        [Route("AddStars")]
+        public IHttpActionResult AddStars(int id, int NumOfStars)
+        {
+            ErrorMessage errorMessage = usersBL.AddStars(id, NumOfStars);
+            if (errorMessage.Code == HttpStatusCode.OK)
+            {
+                User updatedUser = usersBL.GetUser(id);
+                return Ok(updatedUser);
+            }
+
+            return new ResponseMessageResult(Request.CreateErrorResponse(
+                    errorMessage.Code,
+                   new HttpError(errorMessage.Message)
+               )
+           );
+        }
+
+
+        [HttpPost]
+        [Route("SendLinkToResetPassword")]
+        public IHttpActionResult SendLinkToResetPassword(VerifyPasswordModal verifyPasswordObject)
+        {
+            bool isSent = usersBL.SendLinkToResetPassword(verifyPasswordObject, Request.Headers.Referrer.Authority, Request.Headers.Referrer.Scheme);
+            if (isSent)
+            {
+                return Ok(verifyPasswordObject);
+            }
+            return NotFound();
+        }
+
+        [HttpPost]
+        [Route("SendMailToBusinessUser")]
+        public IHttpActionResult SendMailToBusinessUser(int auctionId)
+        {
+            bool isSent = usersBL.SendMailToBusinessUser(auctionId);
+            if (isSent)
+            {
+                return Ok(auctionId);
+            }
+            return NotFound();
+        }
+
+        [HttpPost]
+        [Route("ResetPassword")]
+        public IHttpActionResult ResetPassword([FromBody]ResetPasswordModal ResetPasswordModal)
+        {
+            bool isSent = usersBL.ResetPassword(ResetPasswordModal.AuthUser, ResetPasswordModal.Password);
+            if (isSent)
+            {
+                return Ok("sdasda");
             }
             return NotFound();
         }

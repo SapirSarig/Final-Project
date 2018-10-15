@@ -1,5 +1,5 @@
 export default class UserService {
-    host = "http://localhost:49923";
+  host = "http://localhost:49923";
 
   getUserById(id) {
     //var data = new FormData();
@@ -30,7 +30,22 @@ export default class UserService {
       })
   }
 
-  getFilteredUsersByName(searchStr){
+  getFilteredInfluencersByName(searchStr) {
+    return fetch(`${this.host}/api/Users/GetFilteredInfluencersByName?SearchStr=${searchStr}`, {
+      method: "GET",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json"
+      }
+    })
+      .then((res) => {
+        return res.json();
+      }).catch((err) => {
+        console.log(err);
+      })
+  }
+
+  getFilteredUsersByName(searchStr) {
     return fetch(`${this.host}/api/Users/GetFilteredUsersByName?SearchStr=${searchStr}`, {
       method: "GET",
       headers: {
@@ -40,7 +55,7 @@ export default class UserService {
     })
       .then((res) => {
         return res.json();
-      }).catch((err)=> {
+      }).catch((err) => {
         console.log(err);
       })
   }
@@ -69,15 +84,15 @@ export default class UserService {
     //var data = new FormData();
     //data.append("json", JSON.stringify(user));
     var data = JSON.stringify(user);
-    return fetch(`${this.host}/api/InfluencerUsers
-    `, {
-      method: "POST",
-      body: data,
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json"
-      }
-    })
+    return fetch(`${this.host}/api/InfluencerUsers`,
+      {
+        method: "POST",
+        body: data,
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json"
+        }
+      })
       .then((res) => {
         return res.json();
       })
@@ -86,10 +101,10 @@ export default class UserService {
       })
   }
 
-  loginUser({email, password}) {
+  loginUser(info) {
     //var data = new FormData();
     //data.append("json", JSON.stringify(user));
-    var data = JSON.stringify({email, password});
+    var data = JSON.stringify(info);
     return fetch(`${this.host}/api/Authentication`, {
       method: "POST",
       body: data,
@@ -100,12 +115,12 @@ export default class UserService {
     })
       .then((res) => {
         return res.json();
-      }).catch((err)=> {
+      }).catch((err) => {
         console.log(err);
       })
   }
 
-  loginExternalUser({email}) {
+  loginExternalUser({ email }) {
     //var data = new FormData();
     //data.append("json", JSON.stringify(user));
     return fetch(`${this.host}/api/Authentication?email=${email}`, {
@@ -117,12 +132,12 @@ export default class UserService {
     })
       .then((res) => {
         return res.json();
-      }).catch((err)=> {
+      }).catch((err) => {
         console.log(err);
       })
   }
 
-  getAllUsers(){
+  getAllUsers() {
     return fetch(`${this.host}/api/Users`, {
       method: "GET",
       headers: {
@@ -132,7 +147,7 @@ export default class UserService {
     })
       .then((res) => {
         return res.json();
-      }).catch((err)=> {
+      }).catch((err) => {
         console.log(err);
       })
   }
@@ -141,10 +156,64 @@ export default class UserService {
   AddReviewToUser(userId, review) {
     //var data = new FormData();
     //data.append("json", JSON.stringify(user));
-    var data = JSON.stringify(userId,review);
-    return fetch(`${this.host}api/Users/AddReview?userId=${userId}`, 
-    {
+    var data = JSON.stringify(review);
+    return fetch(`${this.host}/api/Users/AddReview?userId=${userId}`,
+      {
+        method: "POST",
+        body: data,
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json"
+        }
+      })
+      .then((res) => {
+        return res.json();
+      })
+      .catch((err) => {
+        console.log(err);
+      })
+  }
+
+  SendLinkToResetPassword(obj) {
+    var data = JSON.stringify(obj);
+    return fetch(`${this.host}/api/Users/SendLinkToResetPassword`, {
       method: "POST",
+      body: data,
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json"
+      }
+    })
+      .then((res) => {
+        return res.json();
+      })
+      .catch((err) => {
+        alert(err);
+      })
+  }
+
+  resetPasswordToUser(authUser, password) {
+    var data = JSON.stringify({ AuthUser: authUser, Password: password });
+    return fetch(`${this.host}/api/Users/ResetPassword`, {
+      method: "POST",
+      body: data,
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json"
+      }
+    })
+      .then((res) => {
+        return res.json();
+      })
+      .catch((err) => {
+        alert(err);
+      })
+  }
+
+  UpdateBusinessUser(userToUpdate) {
+    var data = JSON.stringify(userToUpdate);
+    return fetch(`${this.host}/api/BusinessUsers`, {
+      method: "PATCH",
       body: data,
       headers: {
         Accept: "application/json",
@@ -158,5 +227,74 @@ export default class UserService {
         console.log(err);
       })
   }
-  
+
+  UpdateInfluencerUser(userToUpdate) {
+    var data = JSON.stringify(userToUpdate);
+    return fetch(`${this.host}/api/InfluencerUsers`, {
+      method: "PATCH",
+      body: data,
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json"
+      }
+    })
+      .then((res) => {
+        return res.json();
+      })
+      .catch((err) => {
+        console.log(err);
+      })
+
+  }
+
+  GetAllInfluencerUserOffers(id) {
+    return fetch(`${this.host}/api/InfluencerUsers/GetAllOffers?userId=${id}`, {
+      method: "GET",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json"
+      }
+    })
+      .then((res) => {
+        return res.json();
+      }).catch((err) => {
+        console.log(err);
+      })
+  }
+
+  sendMailToBusinessUser(auctionId) {
+    var data = JSON.stringify(auctionId);
+    return fetch(`${this.host}/api/Users/SendMailToBusinessUser?auctionId=${auctionId}`, {
+      method: "POST",
+      body: data,
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json"
+      }
+    })
+      .then((res) => {
+        return res.json();
+      })
+      .catch((err) => {
+        console.log(err);
+      })
+
+  }
+
+  AddStar(Id, NumOfStars) {
+    return fetch(`${this.host}/api/Users/AddStars?id=${Id}&NumOfStars=${NumOfStars}`, {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json"
+      }
+    })
+      .then((res) => {
+        return res.json();
+      })
+      .catch((err) => {
+        console.log(err);
+      })
+  }
+
 }

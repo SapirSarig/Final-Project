@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace FinalProject.DAL
 {
-    public class AuctionsCRUD
+    public class AuctionsCRUD : IDisposable
     {
         private FinalProjectContext context = new FinalProjectContext();
 
@@ -33,6 +33,17 @@ namespace FinalProject.DAL
             IQueryable<Auction> filteredAuctions =  from auction in context.Auctions
                                                     where auction.Title.Contains(searchStr)
                                                     select auction;
+
+
+            return filteredAuctions.ToList();
+        }
+
+        public IEnumerable<Auction> GetAuctionsByEmail(string email)
+        {
+            // Query for all Auctions that their Title contains searchStr
+            IQueryable<Auction> filteredAuctions = from auction in context.Auctions
+                                                   where auction.BusinessUser.Email.Equals(email)
+                                                   select auction;
 
 
             return filteredAuctions.ToList();
@@ -73,6 +84,30 @@ namespace FinalProject.DAL
             }
             return (IEnumerable<Offer>)auctionsOffers;
         }
+
+        #region IDisposable - Do Using
+
+        public void Dispose()
+        {
+            _dispose(true);
+        }
+
+        ~AuctionsCRUD()
+        {
+            _dispose(false);
+        }
+
+        private void _dispose(bool disposing)
+        {
+            // close context
+            context.Dispose();
+            if (disposing)
+            {
+                GC.SuppressFinalize(this);
+            }
+        }
+
+        #endregion
     }
 
 }
