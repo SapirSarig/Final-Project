@@ -44,23 +44,17 @@ img{
 }
 
 .editPicInput + label{
-    cursor: pointer;
-}
-
-.editPicInput + label{
     display: inline-block;
     padding:0.5em 1em;
     border:0.16em solid #FFFFFF;
     box-sizing: border-box;
     text-decoration:none;
     text-transform:uppercase;
-    font-weight:400;
     color:#FFFFFF;
-    text-align:center;
     transition: all 0.15s;
-    height: 50px;
     cursor: pointer;
     border-radius: 5px;
+    font-family: 'Concert One', cursive;
 }
 
 .editPicInput:hover + label{

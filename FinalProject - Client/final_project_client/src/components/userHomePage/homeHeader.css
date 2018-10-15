@@ -1,10 +1,15 @@
 .businessProfileImgWrapper{
     display: flex;
     height: 25vh;
-    justify-content: flex-end;
+    justify-content: center;
 }
 
 .profliePic{
     width: 200px;
     border: 1px solid white;
+    border-radius: 50%;
+}
+
+.helloAndLink{
+    text-align: center;
 }

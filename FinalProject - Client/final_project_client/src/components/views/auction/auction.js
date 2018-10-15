@@ -11,6 +11,7 @@ import StringUtil from '../../../utils/StringUtil';
 import auctionUtil from './auctionUtil';
 import UserService from '../../../services/apis/UserService';
 import { Link } from 'react-router-dom';
+import LayoutButton from '../../../common/layoutButton/layoutButton';
 
 const styles = theme => ({
     container: {
@@ -346,15 +347,16 @@ class Auction extends Component {
                                 <span className="errorInput" > {errors["EndDate"] && errors["EndDate"]} </span>
                             </div>
                             {/* <div className="submitAuctionBtn designBtn"> */}
-                            <button hidden={!isAuctionNew} className={`${this.isAllValid() ? "" : "disableElement"}`} onClick={this.AddAuction}>Submit</button>
-
+                            {/* <button hidden={!isAuctionNew} className={`${this.isAllValid() ? "" : "disableElement"}`} onClick={this.AddAuction}>Submit</button> */}
+                            <div hidden={!isAuctionNew} className={`${this.isAllValid() ? "submitBtn" : "disableElement submitBtn"}`}>
+                                <LayoutButton text="Submit" onClick={this.AddAuction}/>
+                            </div>
                             {this.isBusinessUser() && (!isAuctionNew) && <Link className="designBtn" to={{ pathname: "/offersPerAuctionPage", state: { auction: theAuction, user: theUser } }}>
                                 Show Offers
                             </Link>}
                             {!this.isBusinessUser() && <Link className="designBtn" to={{ pathname: "/starOffer", state: { auction: theAuction, user: theUser, fromBusiness: false } }}>
                                 Add Offer
                             </Link>}
-                            {/* </div> */}
                         </div>
                     </div>
                     :

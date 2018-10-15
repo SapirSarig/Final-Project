@@ -83,15 +83,42 @@ class BusinessHomePage extends Component {
                         <div className="TopPage">
                             <HomeHeader user={Object.getOwnPropertyNames(updatedUser).length > 0 ? updatedUser : user} name={user.Name} />
                         </div>
+<<<<<<< HEAD
                         <div className="LeftPage">
                             {/* We need to add "auctions" when user is created */}
                             <HotAuctions auctions={theAuctions} user={user} />
                             <Link className="myAuctions" to={{ pathname: "/myAuctions", state: { auctions: theAuctions, title: "My Auctions", user: user } }}>
                                 <button className="myAuctions" onClick={this.onMyAuctionsClick}>
                                     myAuctions
+=======
+                        <div className="contentWrapper">
+                            <div className="LeftPage">
+                                {/* We need to add "auctions" when user is created */}
+                                <HotAuctions auctions={user.Auctions} />
+                                <Link className="myAuctions" to={{ pathname: "/myAuctions", state: { auctions: theAuctions } }}>
+                                    <button className="myAuctionsBtn" onClick={this.onMyAuctionsClick}>
+                                        my Auctions
+                                    </button>
+                                </Link>
+                            </div>
+                            <div className="RightPage">
+                                {/* We need to add "offers" when user is created */}
+                                <OffersStatus offers={user.Offers} />
+                                {/* <Link className="myOffers" to={{pathname:"/myOffers", state:{offers: theOffers}}}> */}
+                                <button className="myOffers"> All Offers </button>
+                                {/* </Link> */}
+                            </div>
+                            <br />
+                            <Link className="auction" to="/auction">
+                                <button className="auctionBtn">
+                                    Add Auction
+>>>>>>> 1ad6879e37eb8ec4eb4d08620ab44e4882abe1b8
                                 </button>
                             </Link>
+                            <br />
+                            <button> All Influencers </button>
                         </div>
+<<<<<<< HEAD
                         <div className="RightPage">
                             {/* We need to add "offers" when user is created */}
                             <HotOffers user={user} />
@@ -106,6 +133,9 @@ class BusinessHomePage extends Component {
                             </button>
                         </Link>
                         <br />
+=======
+                    </div>}
+>>>>>>> 1ad6879e37eb8ec4eb4d08620ab44e4882abe1b8
 
                         <Link className="allInfluencers" to={{ pathname: "/allInfluencers", state: { } }}>
                             <button className="allInfluencersBtn">

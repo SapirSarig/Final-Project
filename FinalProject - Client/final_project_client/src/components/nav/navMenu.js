@@ -22,11 +22,20 @@ class NavMenu extends Component {
         const {user} = this.state;
         return (
             <nav className="navMenu">
-                <NavMenuLink title="Home" to={"/"} />
                 {
                    user && user.Type === "Business Owner"?
-                   <NavMenuLink title="Business Profile" to={{pathname: "/businessHomePage" , state: { user }}} /> :
-                   <NavMenuLink title="Star Profile" to={{pathname: "/influencerHomePage", state: { user }}} />
+                   (
+                    <div className="typeMenu">
+                        <NavMenuLink title="Business Home Page" to={{pathname: "/businessHomePage" , state: { user }}} />
+                        <NavMenuLink title="Business Profile" to={{pathname: "/profile" , state: { user }}} />
+                    </div>
+                   ) :
+                   (
+                    <div className="typeMenu">
+                        <NavMenuLink title="Influencer Home Page" to={{pathname: "/influencerHomePage" , state: { user }}} />
+                        <NavMenuLink title="Star Profile" to={{pathname: "/profile", state: { user }}} />
+                    </div>
+                   )
 
                 }
                 {/* <NavMenuLink title="My Profile" to={{pathname: {(user.Type === "Business Owner") ? "/businessHomePage" : "/influencerHomePage", state: { user } } /> */}

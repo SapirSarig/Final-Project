@@ -3,14 +3,29 @@ import { Link } from 'react-router-dom';
 
 import LayoutButton from '../../../common/layoutButton/layoutButton';
 import NavToggle from '../../navToggle/navToggle';
+import SessionStorageUtil from "../../../utils/SessionStorageUtil";
 
 import './HomePage.css';
 
 class HomePage extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            user:{}
+        };
+    }
+
+    componentDidMount(){
+        let user = SessionStorageUtil.GetLoggedUser();
+        this.setState({user});
+    }
+
     render() {
+        const {user} = this.state;
+        
         return (
             <div className="guestScreenWrapper">
-                <NavToggle />
+                {user && <NavToggle />}
                 <div className="emptyDiv"></div>
                 <div className="leftContainer">
                     <div className="siteHeaderWrapper">
