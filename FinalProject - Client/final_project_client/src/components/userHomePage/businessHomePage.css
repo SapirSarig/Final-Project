@@ -1,10 +1,32 @@
 .businessHomePage{
-    width: 100%;
-    padding: 100px 0;
     display: flex;
     overflow: hidden;
     flex-direction: column;
-    max-width: 80vw;
-    margin: 0 auto;
     font-size: 1.3em;
+}
+
+.TopPage{
+    background: #bb87c4;
+    padding-top: 50px;
+    box-sizing: border-box;
+    border-bottom: 1px solid black;
+}
+
+.contentWrapper{
+    max-width: 80vw;
+    margin: 30px auto;
+}
+
+.myAuctionsBtn{
+    padding: 5px 30px;
+    background: purple;
+    border: none;
+    border-radius: 2em;
+    outline: none;
+    font-family: 'Concert One', cursive;
+    cursor: pointer;
+}
+
+.myAuctionsBtn:hover{
+    opacity: 0.8;
 }

@@ -9,6 +9,7 @@ import Interests from '../../../common/register/Interests';
 import { Route, Redirect } from 'react-router';
 import StringUtil from '../../../utils/StringUtil';
 import auctionUtil from './auctionUtil';
+import LayoutButton from '../../../common/layoutButton/layoutButton';
 
 const styles = theme => ({
     container: {
@@ -253,7 +254,10 @@ class Auction extends Component {
                                 <span className="errorInput" > {errors["EndDate"] && errors["EndDate"]} </span>
                             </div>
                             {/* <div className="submitAuctionBtn designBtn"> */}
-                            <button className={`${this.isAllValid() ? "" : "disableElement"}`} onClick={this.AddAuction}>Submit</button>
+                            <div className={`${this.isAllValid() ? "submitBtn" : "disableElement submitBtn"}`}>
+                                <LayoutButton text="Submit" onClick={this.AddAuction}/>
+                            </div>
+                            {/* <button className={`${this.isAllValid() ? "" : "disableElement"}`} onClick={this.AddAuction}>Submit</button> */}
                             {/* </div> */}
                         </div>
                     </div>

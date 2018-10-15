@@ -6,6 +6,11 @@
   flex: 1;
 }
 
+.typeMenu{
+  display: flex;
+  flex-direction: column;
+}
+
 .linksWrapper{
     display: flex;
     flex-direction: column;

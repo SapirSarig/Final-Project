@@ -73,30 +73,32 @@ class BusinessHomePage extends Component {
                         <div className="TopPage">
                             <HomeHeader user={Object.getOwnPropertyNames(updatedUser).length > 0 ? updatedUser : user} name={user.Name} />
                         </div>
-                        <div className="LeftPage">
-                            {/* We need to add "auctions" when user is created */}
-                            <HotAuctions auctions={user.Auctions} />
-                            <Link className="myAuctions" to={{ pathname: "/myAuctions", state: { auctions: theAuctions } }}>
-                                <button className="myAuctions" onClick={this.onMyAuctionsClick}>
-                                    myAuctions
-                        </button>
+                        <div className="contentWrapper">
+                            <div className="LeftPage">
+                                {/* We need to add "auctions" when user is created */}
+                                <HotAuctions auctions={user.Auctions} />
+                                <Link className="myAuctions" to={{ pathname: "/myAuctions", state: { auctions: theAuctions } }}>
+                                    <button className="myAuctionsBtn" onClick={this.onMyAuctionsClick}>
+                                        my Auctions
+                                    </button>
+                                </Link>
+                            </div>
+                            <div className="RightPage">
+                                {/* We need to add "offers" when user is created */}
+                                <OffersStatus offers={user.Offers} />
+                                {/* <Link className="myOffers" to={{pathname:"/myOffers", state:{offers: theOffers}}}> */}
+                                <button className="myOffers"> All Offers </button>
+                                {/* </Link> */}
+                            </div>
+                            <br />
+                            <Link className="auction" to="/auction">
+                                <button className="auctionBtn">
+                                    Add Auction
+                                </button>
                             </Link>
+                            <br />
+                            <button> All Influencers </button>
                         </div>
-                        <div className="RightPage">
-                            {/* We need to add "offers" when user is created */}
-                            <OffersStatus offers={user.Offers} />
-                            {/* <Link className="myOffers" to={{pathname:"/myOffers", state:{offers: theOffers}}}> */}
-                            <button className="myOffers"> All Offers </button>
-                            {/* </Link> */}
-                        </div>
-                        <br />
-                        <Link className="auction" to="/auction">
-                            <button className="auctionBtn">
-                                Add Auction
-                            </button>
-                        </Link>
-                        <br />
-                        <button> All Influencers </button>
                     </div>}
 
             </div>

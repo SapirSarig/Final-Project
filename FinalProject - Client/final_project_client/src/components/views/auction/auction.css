@@ -22,13 +22,11 @@
     box-sizing: border-box;
     text-decoration:none;
     text-transform:uppercase;
-    font-weight:400;
     color:#FFFFFF;
-    text-align:center;
     transition: all 0.15s;
-    height: 40px;
     cursor: pointer;
     border-radius: 5px;
+    font-family: 'Concert One', cursive;
 }
 
 .designBtn:hover{
@@ -74,6 +72,10 @@
     padding: 10px 20px;
     font-size: 20px;
     font-weight: bolder;
+}
+
+.submitBtn{
+    text-align: center;
 }
 
 @media only screen and (min-width: 1220px){

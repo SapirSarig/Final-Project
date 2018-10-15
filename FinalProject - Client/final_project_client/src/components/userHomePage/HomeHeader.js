@@ -56,14 +56,12 @@ class HomeHeader extends Component {
                 {
                     !EditProfileClicked ?
                         <div>
-                           
-
                             <div className="businessProfileImgWrapper">
                                 <img src={user.Picture} className="profliePic"/>
                             </div>
                             <div className="helloAndLink">
                                 Hello {user.Name} !
-                        </div>
+                            </div>
                             <LayoutButton text ="Edit Profile" onClick={this.EditProfileClicked}/>
                             {/* <button onClick={this.EditProfileClicked}> Edit Profile </button> */}
                         </div>
@@ -72,8 +70,6 @@ class HomeHeader extends Component {
                             state: { user }
                         }} />
                 }
-
-
             </div>
         );
     }
