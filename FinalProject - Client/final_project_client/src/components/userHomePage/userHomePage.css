@@ -1,4 +1,4 @@
-.businessHomePage{
+.businessHomePage, .influencerHomePage{
     display: flex;
     overflow: hidden;
     flex-direction: column;
@@ -17,16 +17,30 @@
     margin: 30px auto;
 }
 
-.myAuctionsBtn{
-    padding: 5px 30px;
-    background: purple;
-    border: none;
-    border-radius: 2em;
-    outline: none;
-    font-family: 'Concert One', cursive;
-    cursor: pointer;
+.auctionBtns{
+    display: flex;
+    flex-direction: row;
 }
 
-.myAuctionsBtn:hover{
+.businessAuctions, .businessOffers, .ifluencerAuctions{
+    margin-bottom: 20px;
+}
+
+.styleLink{
+    padding: 5px 30px;
+    background: purple;
+    border-radius: 2em;
+    color: black;
+    text-decoration: none;
+    font-family: 'Concert One', cursive;
+    cursor: pointer;
+    display: block;
+    width: 200px;
+    text-align: center;
+    margin-right: 20px;
+}
+
+.styleLink:hover{
     opacity: 0.8;
 }
+

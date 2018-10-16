@@ -1,0 +1,9 @@
+.auctionsList{
+    display: flex;
+    justify-content: space-around;
+    margin: 20px;
+}
+
+.noAuctionsMessage{
+    margin-bottom: 20px;
+}
