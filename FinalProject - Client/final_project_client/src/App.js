@@ -24,6 +24,7 @@ import LocalStorageUtil from './utils/LocalStorageUtil';
 import SessionStorageUtil from './utils/SessionStorageUtil';
 import Nav from './components/nav/nav';
 import Overlay from './components/overlay/overlay';
+import Player from './components/player/player';
 
 const CheckIfUserAuthenticated = () => {
   const user = LocalStorageUtil.GetLoggedUser() || SessionStorageUtil.GetLoggedUser();
@@ -113,6 +114,7 @@ class App extends Component {
             <Route path="/forgotPassword" component={ForgotPassword} />
             <Route path="/editProfile" component={EditProfile} />
             <Route path="/resetPassword" component={ResetPassword} />
+            <Route path="/video" component={Player} />
           </div>
         </Router>
       </div>

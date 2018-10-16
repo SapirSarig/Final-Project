@@ -3,6 +3,11 @@ import React, { Component, Fragment } from 'react';
 import './socialMedia.css';
 
 class socialMedia extends Component {
+    // constructor(props) {
+    //     super(props);
+
+    //     this.onChange = this.props.onChange.bind(this);
+    // }
 
     renderExtra({ idName, socialNetworkName }){
 
