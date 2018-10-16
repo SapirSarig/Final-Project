@@ -115,4 +115,23 @@ export default class OfferService {
         console.log(err);
       })
   }
+
+  deleteOffer(offerId){
+    var data = JSON.stringify(offerId);
+    return fetch(`${this.host}/api/Offers/${offerId}`, {
+      method: "DELETE",
+      body: data,
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json"
+      }
+    })
+      .then((res) => {
+        console.log(res);
+        return res.json();
+      })
+      .catch((err) => {
+        console.log(err);
+      })
+  }
 }

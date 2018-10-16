@@ -122,7 +122,7 @@ class Profile extends Component {
                         {user.Interests && user.Interests.length > 0 ?
                             <div className="interests">
                                 {user.Interests.map(interest =>
-                                    (<div> {interest.value} </div>))}
+                                    (<div> {interest.Value} </div>))}
                             </div> : <div>No Interests To Show!</div>}
                     </div>
 

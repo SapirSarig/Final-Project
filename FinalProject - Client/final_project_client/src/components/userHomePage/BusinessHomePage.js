@@ -113,7 +113,7 @@ class BusinessHomePage extends Component {
                         <div className="RightPage">
                             {/* We need to add "offers" when user is created */}
                             <HotOffers user={user} />
-                            <Link className="allOffers" to={{pathname:"/allOffers", state:{user: this.state.user}}}>
+                            <Link className="allOffers" to={{pathname:"/allOffers", state:{user: this.state.user, fromBusiness:true}}}>
                                 <button className="allOffers"> All Offers </button>
                             </Link>
                         </div>

@@ -118,12 +118,23 @@ class Auction extends Component {
         const { errors } = this.state;
 
         let errorMessage;
-        if ((fieldName === "Title") || (fieldName === "Product") || (fieldName === "NumOfMinFollowers")) {
+        if ((fieldName === "Title") || (fieldName === "Product") )  {
             if (StringUtil.isEmptyString(value)) {
                 errorMessage = `${fieldName} is not valid`;
             }
-        } else if ((fieldName === "StartDate") || (fieldName === "EndDate")) {
+        } 
+        else if (fieldName === "NumOfMinFollowers"){
+            if (StringUtil.isEmptyString(value) || auctionUtil.isNegativeNum(value)) {
+                errorMessage = `Value is not valid`;
+            }
+        }
+        else if (fieldName === "StartDate"){
             errorMessage = auctionUtil.dateValidation(value);
+        }
+        else if(fieldName === "EndDate"){
+            let elem = document.getElementById("startDate");
+            let startDate = elem.value;
+            errorMessage = auctionUtil.endDateValidation(startDate, value);
         }
 
         errors[fieldName] = errorMessage;
@@ -160,11 +171,12 @@ class Auction extends Component {
     isAllValid() {
         const { auction } = this.state;
         let startDateErrorMessage = auctionUtil.dateValidation(auction.StartDate);
-        let endDateErrorMessage = auctionUtil.dateValidation(auction.EndDate);
+        let endDateErrorMessage = auctionUtil.endDateValidation(auction.StartDate, auction.EndDate);
         let isValidInputs =
             !StringUtil.isEmptyString(auction.Title)
             && !StringUtil.isEmptyString(auction.Product)
             && !StringUtil.isEmptyString(auction.NumOfMinFollowers)
+            && auctionUtil.isNegativeNum(auction.NumOfMinFollowers) === undefined
             && (startDateErrorMessage === undefined)
             && (endDateErrorMessage === undefined);
 
@@ -198,8 +210,8 @@ class Auction extends Component {
         const theUser = (location && location.state.user) || user;
         console.log("theUser", theUser);
         console.log("theUser.Type", theUser.Type);
-        console.log("bool:", (theUser.Type === "BusinessUser"));
-        return (theUser.Type === "BusinessUser");
+        console.log("bool:", (theUser.Type === "Business Owner"));
+        return (theUser.Type === "Business Owner");
     }
 
 

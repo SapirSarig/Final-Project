@@ -156,6 +156,17 @@ namespace FinalProject.WebApi.Controllers
             return NotFound();
         }
 
+        [HttpPost]
+        [Route("SendMailToInfluencerUser")]
+        public IHttpActionResult SendMailToInfluencerUser(int offerId, string auctionName)
+        {
+            bool isSent = usersBL.SendMailToInfluencerUser(offerId, auctionName);
+            if (isSent)
+            {
+                return Ok(offerId);
+            }
+            return NotFound();
+        }
 
     }
 }

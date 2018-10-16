@@ -64,7 +64,7 @@ class AllOffers extends Component {
         const { offers } = this.state;
         return (
 
-            <OffersList offers={offers} fromBusiness={false} fromAllOffers={true}/>
+            <OffersList offers={offers} fromBusiness={this.props.location.state.fromBusiness} fromAllOffers={true}/>
 
 
             // <form className={classes.container} noValidate autoComplete="off">

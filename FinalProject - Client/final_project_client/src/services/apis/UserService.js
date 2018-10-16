@@ -297,4 +297,22 @@ export default class UserService {
       })
   }
 
+  sendMailToInfluencerUser(offerId,auctionName){
+    var data = JSON.stringify(auctionName);
+    return fetch(`${this.host}/api/Users/SendMailToInfluencerUser?offerId=${offerId}&auctionName=${auctionName}`, {
+      method: "POST",
+      body: data,
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json"
+      }
+    })
+      .then((res) => {
+        return res.json();
+      })
+      .catch((err) => {
+        console.log(err);
+      })
+  }
+
 }

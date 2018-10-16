@@ -57,6 +57,7 @@ class starOffer extends Component {
         this.isAllValid = this.isAllValid.bind(this);
         this.acceptClicked = this.acceptClicked.bind(this);
         this.declinedClicked = this.declinedClicked.bind(this);
+        this.deleteOfferClicked = this.deleteOfferClicked.bind(this);
     }
 
     componentDidMount() {
@@ -173,7 +174,7 @@ class starOffer extends Component {
         let status;
         if (r == true) {
             status = "Accepted";
-            const { OfferId } = this.state;
+            const { OfferId, AuctionName } = this.state;
             this.offerService.updateOffer(OfferId, status).then(req => {
                 if (req) {
                     if (req.Message) {
@@ -181,6 +182,7 @@ class starOffer extends Component {
                     }
                     else {
                         alert("The offer was accepted succefully!");
+                        this.userSerive.sendMailToInfluencerUser(OfferId,AuctionName);
                         this.setState({ OfferStatusUpdated: true });
                     }
                 }
@@ -217,7 +219,7 @@ class starOffer extends Component {
 
 
     sendOfferClicked() {
-        let r = window.confirm("By sending the offer you commit to publish the product in the way you described");
+        let r = window.confirm("By sending the offer you commit to publish the product if the business owner accepts your offer");
         let status;
         if (r == true) {
             const { offer } = this.state;
@@ -248,6 +250,29 @@ class starOffer extends Component {
 
             });
         }
+    }
+
+    deleteOfferClicked(){
+        const { OfferId } = this.state;
+        this.offerService.deleteOffer(OfferId).then(req => {
+            //console.log(req);
+            if (req) {
+                if(req.Message){
+                    alert(req.Message);
+                }
+                else{
+                    alert("Your offer was deleted succefully!");
+                    // this.setState({
+                    //     editOk: true,
+                    //     user: req
+                    // });
+                }
+               
+            }
+            else {
+                alert("Server Error");
+            }
+        });
     }
 
     render() {
@@ -352,6 +377,7 @@ class starOffer extends Component {
                         <div className="btnContainer">
                             {/* className={`${this.isAllValid() ? "" : "disableElement"}`} */}
                             {!(fromAllOffers || fromBusiness) && <LayoutButton text="Send Offer" onClick={this.sendOfferClicked} />}
+                            {(fromAllOffers && !fromBusiness) && <LayoutButton text="Delete Offer" onClick={this.deleteOfferClicked} />}
                             {fromBusiness && offer.Status === "Pending" && <LayoutButton text="Accept" onClick={this.acceptClicked} />}
                             {fromBusiness && offer.Status === "Pending" && <LayoutButton text="Decline" onClick={this.declinedClicked} />}
                         </div>

@@ -159,22 +159,55 @@ namespace FinalProject.DAL
             if (CurrUser != null)
             {            
                 CurrUser.Name = userToUpdate.Name;
-                CurrUser.Interests = userToUpdate.Interests;
+                if(userToUpdate.Interests!=null)
+                {
+                    ICollection<Interest> interests = (CurrUser as InfluencerUser).Interests;
+                    //if(userToUpdate.Interests.Count > CurrUser.Interests.Count)
+
+                    foreach (var newInterest in userToUpdate.Interests)
+                    {
+                        bool found = false;
+                        foreach (var i in interests)
+                        {
+                            if (i.Value == newInterest.Value)
+                            {
+                                found = true;
+                            }
+                        }
+                        if (!found) { interests.Add(newInterest); }
+                    }
+                }
+                
+
                 CurrUser.Picture = userToUpdate.Picture;
                 CurrUser.Description = userToUpdate.Description;
-                (CurrUser as InfluencerUser).SocialNetworks = userToUpdate.SocialNetworks;
+                if(userToUpdate.SocialNetworks != null)
+                {
+                    ICollection<SocialNetwork> socialNetworks = (CurrUser as InfluencerUser).SocialNetworks;
+                    foreach (var newSocialNetwork in userToUpdate.SocialNetworks)
+                    {
+                        bool found = false;
+                        foreach (var sn in socialNetworks)
+                        {
+                            if (sn.Value == newSocialNetwork.Value)
+                            {
+                                found = true;
+                            }
+                        }
+                        if (!found) { socialNetworks.Add(newSocialNetwork); }
+                    }
+                }
+                
+                
+                //(CurrUser as InfluencerUser).SocialNetworks = userToUpdate.SocialNetworks;
                 context.SaveChanges();
             }
         }
 
-        public User UpdateBusinessUser(UpdatedBusinessUserModal userToUpdate)
+        public void UpdateBusinessUser(UpdatedBusinessUserModal userToUpdate)
         {
             User CurrUser = context.Users.FirstOrDefault(u => u.Email == userToUpdate.Email);
-            if (CurrUser == null)
-            {
-                return null;
-            }
-            else
+            if (CurrUser != null)
             {
                 CurrUser.Name = userToUpdate.Name;
                 CurrUser.Interests = userToUpdate.Interests;
@@ -183,8 +216,14 @@ namespace FinalProject.DAL
                 (CurrUser as BusinessUser).WebsiteLink = userToUpdate.WebsiteLink;
                 (CurrUser as BusinessUser).CompanyName = userToUpdate.CompanyName;
                 context.SaveChanges();
-                return CurrUser;
             }
+        }
+
+        public User FindUserByOfferId(int offerId)
+        {
+            Offer offer = context.Offers.FirstOrDefault(o => o.Id == offerId);
+            User user = offer.InfluencerUser;
+            return user;
         }
 
         public void DeleteUser(int id)

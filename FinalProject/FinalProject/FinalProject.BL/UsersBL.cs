@@ -197,6 +197,39 @@ namespace FinalProject.BL
             }
         }
 
+        public bool SendMailToInfluencerUser(int offerId, string auctionName)
+        {
+            try
+            {
+                User user = userCRUD.FindUserByOfferId(offerId);
+                string to = user.Email;
+                //string from = "itsadealteam@gmail.com";
+                //string subject = "Someone sent you an offer!";
+
+                //string body = String.Format(@"
+                //                    Hello {0}! 
+                //                    Your offer for the auction {1} was accepted!
+                //                    Please publish the product in the way yo described.
+                //                    After the product was published succefully, please enter this link to ope a chat with the business owner and settle the payment.
+                //                    Cheers,
+                //                    Its a deal team", user.Name, auctionName);
+
+
+                //MailMessage mail = new MailMessage(from, to, subject, body);
+                //SmtpClient client = new SmtpClient("smtp.gmail.com");
+                //client.Credentials = new NetworkCredential("itsadealteam@gmail.com", "12345@Aa");
+                //client.Port = 25;
+                //client.EnableSsl = true;
+                //client.Send(mail);
+                return true;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return false;
+            }
+        }
+
         public bool SendMailToBusinessUser(int auctionId)
         {
             try
