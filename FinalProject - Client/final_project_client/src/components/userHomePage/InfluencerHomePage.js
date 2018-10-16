@@ -33,7 +33,7 @@ class InfluencerHomePage extends Component {
             }
 
             this.offerService.getAllOffersByBusinessUserId(user.Id).then(req => {
-                if (req.length > 0) this.setState({ isOffers: true });
+                if ((req.length > 0)&& !(req.length === 1 && req[0].Status==="Deleted")) this.setState({ isOffers: true });
             });
         }
     }
@@ -100,7 +100,7 @@ class InfluencerHomePage extends Component {
                             <div className="RightPage">
                                 {/* We need to add "offers" when user is created */}
                                 <HotOffers user={user} />
-                                {isOffers && <Link
+                                {<Link
                                     className="allOffers styleLink"
                                     to={{
                                         pathname: "/allOffers",
@@ -108,7 +108,7 @@ class InfluencerHomePage extends Component {
                                             user:
                                                 Object.getOwnPropertyNames(updatedUser).length > 0
                                                     ? updatedUser
-                                                    : user
+                                                    : user, fromBusiness: false
                                         }
                                     }}
                                 >

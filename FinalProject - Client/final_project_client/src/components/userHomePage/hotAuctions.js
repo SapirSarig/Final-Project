@@ -65,7 +65,7 @@ class hotAuctions extends Component {
                 <div className="auctionsList">
                     {
                         auctions.map((auction) =>
-                        <AuctionInList auction={auction} user={user}/>)
+                        auction.Status !== "Deleted" && <AuctionInList auction={auction} user={user}/>)
                     }
                 </div>
             </div> 

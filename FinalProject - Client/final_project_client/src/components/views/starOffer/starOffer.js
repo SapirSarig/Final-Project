@@ -46,7 +46,8 @@ class starOffer extends Component {
             StarName: '', //props
             offerOk: false,
             OfferId: '',
-            OfferStatusUpdated: false
+            OfferStatusUpdated: false,
+            offerDeleted: false
 
         };
         this.offerService = new OfferService();
@@ -262,10 +263,9 @@ class starOffer extends Component {
                 }
                 else{
                     alert("Your offer was deleted succefully!");
-                    // this.setState({
-                    //     editOk: true,
-                    //     user: req
-                    // });
+                    this.setState({
+                        offerDeleted: true,
+                    });
                 }
                
             }
@@ -278,10 +278,10 @@ class starOffer extends Component {
     render() {
         const { classes } = this.props;
         const { fromBusiness, fromAllOffers, user } = this.props.location.state;
-        let { offer, AuctionName, StarName, offerOk, OfferStatusUpdated } = this.state;
+        let { offer, AuctionName, StarName, offerOk, OfferStatusUpdated, offerDeleted } = this.state;
         return (
             <div className="offerWrapper">
-                {(!offerOk && !OfferStatusUpdated) ?
+                {(!offerOk && !OfferStatusUpdated && !offerDeleted) ?
                     <div className={classes.container} noValidate autoComplete="off">
                         <div className="firstLineWrapper">
                             <TextField
@@ -382,7 +382,7 @@ class starOffer extends Component {
                             {fromBusiness && offer.Status === "Pending" && <LayoutButton text="Decline" onClick={this.declinedClicked} />}
                         </div>
                     </div> :
-                    (offerOk) ?
+                    (offerOk || offerDeleted) ?
                         <Redirect to={{
                             pathname: '/influencerHomePage',
                             state: { user: this.props.location.state.user.user? this.props.location.state.user.user : this.props.location.state.user }//check why

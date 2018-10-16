@@ -97,5 +97,40 @@ export default class AuctionService {
           })
       }
 
-      //delete?
+      deleteAuction(auctionId){
+        var data = JSON.stringify(auctionId);
+        return fetch(`${this.host}/api/Auctions/DeleteAuction?id=${auctionId}`, {
+          method: "POST",
+          body: data,
+          headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json"
+          }
+        })
+          .then((res) => {
+            console.log(res);
+            return res.json();
+          })
+          .catch((err) => {
+            console.log(err);
+          })
+      }
+      closeAuction(auctionId){
+        var data = JSON.stringify(auctionId);
+        return fetch(`${this.host}/api/Auctions/CloseAuction?id=${auctionId}`, {
+          method: "POST",
+          body: data,
+          headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json"
+          }
+        })
+          .then((res) => {
+            console.log(res);
+            return res.json();
+          })
+          .catch((err) => {
+            console.log(err);
+          })
+      }
 }

@@ -53,7 +53,7 @@ class BusinessHomePage extends Component {
             }
 
             this.offerService.getAllOffersByBusinessUserId(user.Id).then(req => {
-                if (req.length > 0) this.setState({ isOffers: true });
+                if ((req.length > 0)&& !(req.length === 1 && req[0].Status==="Deleted")) this.setState({ isOffers: true });
             });
             this.onMyAuctionsClick();
         }
@@ -136,7 +136,7 @@ class BusinessHomePage extends Component {
                                         className="allOffers styleLink"
                                         to={{
                                             pathname: "/allOffers",
-                                            state: { user: this.state.user }
+                                            state: { user: this.state.user, fromBusiness: true }
                                         }}
                                     >
                                         All Offers

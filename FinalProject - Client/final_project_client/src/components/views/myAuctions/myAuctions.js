@@ -60,7 +60,7 @@ class myAuctions extends Component {
                 <div className="auctionsWrapper">
                     {console.log("theAuctions", theAuctions)}
                     {theAuctions && theAuctions.map((auction) =>
-                        <div className="myAuctionWrapper">
+                        auction.Status !== "Deleted" && <div className="myAuctionWrapper">
                             <TextField
                                 id="nameAuction"
                                 label="Auction's name"

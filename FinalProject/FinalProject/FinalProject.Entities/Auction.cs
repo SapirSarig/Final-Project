@@ -38,13 +38,15 @@ namespace FinalProject.Entities
 
         //public double Payment { get; set; }
 
-        public DateTime StartDate { get; set; }
+        //public DateTime StartDate { get; set; }
 
-        public DateTime EndDate { get; set; }
+        //public DateTime EndDate { get; set; }
 
         public virtual ICollection<Offer> Offers { get; set; }
 
         public virtual ICollection<ProductScope> ProductScopes{ get; set; }
+
+        public string Status { get; set; }
 
         //public virtual ICollection<Interest> Interests { get; set; }
 
