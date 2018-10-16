@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
+import LayoutButton from '../../common/layoutButton/layoutButton';
 import UserService from "../../services/apis/UserService";
 import OfferService from "../../services/apis/OfferService";
 
@@ -26,16 +27,6 @@ class HotOffers extends Component {
     this.getAllOffersForUser(user);
   }
 
-  getTop3Offers(offers) {
-    let res = [];
-
-    if (offers && offers.length > 3) {
-      for (let i = 0; i < 3; i++) res[i] = offers[i];
-    } else res = offers;
-
-    return res;
-  }
-
   getAllOffersForUser(user) {
     if (user.Type === "Social Influencer") {
       this.userService.GetAllInfluencerUserOffers(user.Id).then(req => {
@@ -50,12 +41,18 @@ class HotOffers extends Component {
     }
   }
 
+  getTop3Offers(offers) {
+    let res = [];
+
+    if (offers && offers.length > 3) {
+      for (let i = 0; i < 3; i++) res[i] = offers[i];
+    } else res = offers;
+
+    return res;
+  }
+
   render() {
-    // const statusOfOffers = [
-    //     { name: "offer1", status: "pendding" },
-    //     { name: "offer2", status: "waiting for seller to response" },
-    //     { name: "offer3", status: "cancled" }
-    // ];
+    const { user } = this.props;    
     let { offers } = this.state;
 
     return offers && offers.length > 0 ? (
@@ -66,11 +63,11 @@ class HotOffers extends Component {
             <div className="offerContainer">
               <div>offer's name: {offer.Description}</div>
               <div>Status: {offer.Status}</div>
-              {/* <Link className="showOffer" to={{ pathname: "/starOffer", state: { }}} >
-                                <button className="showOfferBtn">
-                                    Show offer
-                                </button>
-                            </Link> */}
+
+              <Link className="goToStarOffer" to={{ pathname: "/starOffer", state: { currOffer: offer, fromBusiness: (user.Type === "Business Owner"), fromAllOffers: true, user } }}>
+                  <LayoutButton text="Go To Offer" />
+              </Link>
+
             </div>
           ))}
         </div>

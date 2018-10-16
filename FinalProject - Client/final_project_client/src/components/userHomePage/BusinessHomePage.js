@@ -23,6 +23,7 @@ class BusinessHomePage extends Component {
     offerService;
     constructor(props) {
         super(props);
+
         this.state = initialState;
 
         this.auctionService = new AuctionService();
@@ -40,6 +41,7 @@ class BusinessHomePage extends Component {
                 this.setState({ updatedUser });
 
                 this.auctionService.getAuctionsByEmail(updatedUser.Email).then(req => {
+                    this.setState({ theAuctions: [] });
                     this.setState({ theAuctions: req });
                     console.log(req);
                 });
@@ -99,7 +101,7 @@ class BusinessHomePage extends Component {
                         <div className="contentWrapper">
                             <div className="businessAuctions">
                                 {/* We need to add "auctions" when user is created */}
-                                <HotAuctions auctions={theAuctions} user={user} />
+                                <HotAuctions user={user} />
                                 <div className="auctionBtns">
                                     {theAuctions.length !== 0 && (
                                         <Link

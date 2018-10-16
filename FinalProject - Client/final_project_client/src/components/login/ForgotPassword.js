@@ -14,7 +14,11 @@ export default class ForgotPassword extends Component {
             Question1: "",
             Question2: "",
             emailError: "",
-            emailSent: false
+            emailSent: false,
+            errors: {
+                Question1: "",
+                Question2: ""
+            },
         }
         this.userService = new UserService();
         this.handleInputChange = this.handleInputChange.bind(this);
@@ -75,14 +79,14 @@ export default class ForgotPassword extends Component {
 
     }
     render() {
-        let { email, question1, question2, emailError, emailSent } = this.state;
+        let { email, Question1, Question2, emailError, emailSent, errors } = this.state;
         return (
             <div>
                 {!emailSent ?
                     <div>
                         <span > Email* </span>
                         <input type="email" name="email" value={email} onChange={this.handleInputChange} />
-                        <VerifyQuestions handleInputChange={this.handleInputChange} question1={question1} question2={question2} signUp={true}/>
+                        <VerifyQuestions handleInputChange={this.handleInputChange} question1={Question1} question2={Question2} signUp={true} errors={errors} />
                         <button className={`${this.isEmailValid() ? "" : "disableElement"}`} onClick={this.submitClicked}>Submit</button>
                         <span className="errorInput" > {emailError} </span>
                     </div> :

@@ -5,11 +5,14 @@ import HotAuctions from "../userHomePage/hotAuctions.js";
 import HotOffers from "../offers/hotOffers.js";
 import NavToggle from "../navToggle/navToggle";
 import OfferService from "../../services/apis/OfferService";
+import UserService from "../../services/apis/UserService";
 // import "../userHomePage/homePages.css";
 import "./userHomePage.css";
 
 class InfluencerHomePage extends Component {
     offerService;
+    userService;
+
     constructor(props) {
         super(props);
         this.state = {
@@ -19,6 +22,7 @@ class InfluencerHomePage extends Component {
         };
 
         this.offerService = new OfferService();
+        this.userService = new UserService();
     }
 
     componentWillMount() {
@@ -32,7 +36,7 @@ class InfluencerHomePage extends Component {
                 this.setState({ user });
             }
 
-            this.offerService.getAllOffersByBusinessUserId(user.Id).then(req => {
+            this.userService.GetAllInfluencerUserOffers(user.Id).then(req => {
                 if (req.length > 0) this.setState({ isOffers: true });
             });
         }

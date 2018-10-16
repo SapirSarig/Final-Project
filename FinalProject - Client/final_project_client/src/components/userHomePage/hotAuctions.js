@@ -20,7 +20,7 @@ class hotAuctions extends Component {
         this.auctionService = new AuctionService();        
     }
 
-    componentDidMount() {
+    componentWillMount() {
         const { user } = this.props;
         this.getAllAuctionsForUser(user);
     }
@@ -33,8 +33,10 @@ class hotAuctions extends Component {
             });
         }
         else { 
-            const top3Auctions = this.getTop3Auctions(user.Auctions);
-            this.setState({ auctions: top3Auctions});
+            this.auctionService.getAuctionsByEmail(user.Email).then(req => {
+                const top3Auctions = this.getTop3Auctions(req);
+                this.setState({ auctions: top3Auctions});
+            });
         }
 
     }

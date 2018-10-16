@@ -7,6 +7,7 @@ export default class EditProfile extends Component {
     userService;
     constructor(props) {
         super(props);
+
         this.state = {
             userInfo: {},
             editOk: false,
@@ -21,7 +22,7 @@ export default class EditProfile extends Component {
         if (location && location.state && location.state.user) {
             const { user } = location.state;
             this.setState({ userInfo: user });
-        }
+        }        
     }
 
     UpdateInfluencerUser(userToUpdate) {
