@@ -23,6 +23,7 @@ class InfluencerHomePage extends Component {
 
         this.offerService = new OfferService();
         this.userService = new UserService();
+        this.checkIfAllOffersDeleted = this.checkIfAllOffersDeleted.bind(this);
     }
 
     componentWillMount() {
@@ -37,9 +38,18 @@ class InfluencerHomePage extends Component {
             }
 
             this.userService.GetAllInfluencerUserOffers(user.Id).then(req => {
-                if ((req.length > 0)&& !(req.length === 1 && req[0].Status==="Deleted")) this.setState({ isOffers: true });
+                if ((req.length > 0)&& !(this.checkIfAllOffersDeleted(req))) this.setState({ isOffers: true });
             });
         }
+    }
+
+    checkIfAllOffersDeleted(req){
+        for(let i=0; i< req.length; i++){
+            if(req[i].Status !=="Deleted"){
+                return false;
+            }
+        }
+        return true;
     }
 
     render() {
@@ -104,7 +114,7 @@ class InfluencerHomePage extends Component {
                             <div className="RightPage">
                                 {/* We need to add "offers" when user is created */}
                                 <HotOffers user={user} />
-                                {<Link
+                                {isOffers && <Link
                                     className="allOffers styleLink"
                                     to={{
                                         pathname: "/allOffers",
