@@ -91,25 +91,27 @@ class UserRating extends Component {
     }
 
     render() {
-        const { user } = this.props;
+        const { user, loggedUser } = this.props;
+        const isSameUser = (user.Name === loggedUser.Name);
+
         if (user && user.NumOfVoters > 0) {
-            let width1 = (user.OneStar / user.NumOfVoters)*100 + "%";
+            let width1 = (user.OneStar / user.NumOfVoters) * 100 + "%";
             var style1 = {
                 width: width1,
             };
-            let width2 = (user.TwoStars / user.NumOfVoters)*100 + "%";
+            let width2 = (user.TwoStars / user.NumOfVoters) * 100 + "%";
             var style2 = {
                 width: width2,
             };
-            let width3 = (user.ThreeStars / user.NumOfVoters)*100 + "%";
+            let width3 = (user.ThreeStars / user.NumOfVoters) * 100 + "%";
             var style3 = {
                 width: width3,
             };
-            let width4 = (user.FourStars / user.NumOfVoters)*100 + "%";
+            let width4 = (user.FourStars / user.NumOfVoters) * 100 + "%";
             var style4 = {
                 width: width4,
             };
-            let width5 = (user.FiveStars / user.NumOfVoters)*100 + "%";
+            let width5 = (user.FiveStars / user.NumOfVoters) * 100 + "%";
             var style5 = {
                 width: width5,
             };
@@ -118,13 +120,15 @@ class UserRating extends Component {
         return (
             <div>
                 <span className="heading">Rating</span>
-                <div>
-                    <img onClick={() => this.color(1, true)} onMouseOver={() => this.color(1, false)} onMouseOut={() => this.noColor(1)} className="noColorStar star1"></img>
-                    <img onClick={() => this.color(2, true)} onMouseOver={() => this.color(2, false)} onMouseOut={() => this.noColor(2)} className="noColorStar star2"></img>
-                    <img onClick={() => this.color(3, true)} onMouseOver={() => this.color(3, false)} onMouseOut={() => this.noColor(3)} className="noColorStar star3"></img>
-                    <img onClick={() => this.color(4, true)} onMouseOver={() => this.color(4, false)} onMouseOut={() => this.noColor(4)} className="noColorStar star4"></img>
-                    <img onClick={() => this.color(5, true)} onMouseOver={() => this.color(5, false)} onMouseOut={() => this.noColor(5)} className="noColorStar star5"></img>
-                </div>
+                {isSameUser ? <div></div> :
+                    <div>
+                        <img onClick={() => this.color(1, true)} onMouseOver={() => this.color(1, false)} onMouseOut={() => this.noColor(1)} className="noColorStar star1"></img>
+                        <img onClick={() => this.color(2, true)} onMouseOver={() => this.color(2, false)} onMouseOut={() => this.noColor(2)} className="noColorStar star2"></img>
+                        <img onClick={() => this.color(3, true)} onMouseOver={() => this.color(3, false)} onMouseOut={() => this.noColor(3)} className="noColorStar star3"></img>
+                        <img onClick={() => this.color(4, true)} onMouseOver={() => this.color(4, false)} onMouseOut={() => this.noColor(4)} className="noColorStar star4"></img>
+                        <img onClick={() => this.color(5, true)} onMouseOver={() => this.color(5, false)} onMouseOut={() => this.noColor(5)} className="noColorStar star5"></img>
+                    </div>
+                }
                 {user &&
                     <div>
                         <div>{user.RateAvg} average based on {user.NumOfVoters} reviews.</div>
