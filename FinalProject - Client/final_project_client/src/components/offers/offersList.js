@@ -47,7 +47,7 @@ class OffersList extends Component {
                     </div>
                 </div>
                 {theOffers && theOffers.map((offer) =>
-                    <div className="offerWrapper">
+                    offer.Status!=="Deleted" && <div className="offerWrapper">
                         {/* <TextField
                             id="date"
                             label="Date"

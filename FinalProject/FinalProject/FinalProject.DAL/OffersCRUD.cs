@@ -30,7 +30,7 @@ namespace FinalProject.DAL
         public void DeleteOffer(int id)
         {
             Offer offer = context.Offers.FirstOrDefault(o => o.Id == id);
-            context.Offers.Remove(offer);
+            offer.Status = "Deleted";
             context.SaveChanges();
         }
 

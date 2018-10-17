@@ -45,10 +45,13 @@ class Auction extends Component {
                 EndDate: '',
                 Offers: [],
                 Interests: [],
-                Picture: ""
+                Picture: "",
+                Status:"Open"
             },
             CompanyName: "",
             auctionOk: false,
+            auctionDeleted:false,
+            auctionClosed:false,
             errors: {
                 Title: "",
                 Product: "",
@@ -67,6 +70,8 @@ class Auction extends Component {
         this.getCompanyName = this.getCompanyName.bind(this);
         this.isBusinessUser = this.isBusinessUser.bind(this);
         this.updateFileImage = this.updateFileImage.bind(this);
+        this.deleteAuction = this.deleteAuction.bind(this);
+        this.closeAuction = this.closeAuction.bind(this);
     }
 
     componentDidMount() {
@@ -74,6 +79,7 @@ class Auction extends Component {
         const { user } = this.props.location.state;
         const theAuction = (this.props.location && this.props.location.state.auction) || auction;
         auction.UserId = user.Id;
+        auction.Status = theAuction.Status;
         this.getCompanyName(theAuction.UserId)
         this.setState({ auction });
     }
@@ -118,20 +124,20 @@ class Auction extends Component {
         const { errors } = this.state;
 
         let errorMessage;
-        if ((fieldName === "Title") || (fieldName === "Product") )  {
+        if ((fieldName === "Title") || (fieldName === "Product")) {
             if (StringUtil.isEmptyString(value)) {
                 errorMessage = `${fieldName} is not valid`;
             }
-        } 
-        else if (fieldName === "NumOfMinFollowers"){
+        }
+        else if (fieldName === "NumOfMinFollowers") {
             if (StringUtil.isEmptyString(value) || auctionUtil.isNegativeNum(value)) {
                 errorMessage = `Value is not valid`;
             }
         }
-        else if (fieldName === "StartDate"){
+        else if (fieldName === "StartDate") {
             errorMessage = auctionUtil.dateValidation(value);
         }
-        else if(fieldName === "EndDate"){
+        else if (fieldName === "EndDate") {
             let elem = document.getElementById("startDate");
             let startDate = elem.value;
             errorMessage = auctionUtil.endDateValidation(startDate, value);
@@ -170,16 +176,13 @@ class Auction extends Component {
 
     isAllValid() {
         const { auction } = this.state;
-        let startDateErrorMessage = auctionUtil.dateValidation(auction.StartDate);
-        let endDateErrorMessage = auctionUtil.endDateValidation(auction.StartDate, auction.EndDate);
+        //let startDateErrorMessage = auctionUtil.dateValidation(auction.StartDate);
+        //let endDateErrorMessage = auctionUtil.endDateValidation(auction.StartDate, auction.EndDate);
         let isValidInputs =
             !StringUtil.isEmptyString(auction.Title)
             && !StringUtil.isEmptyString(auction.Product)
             && !StringUtil.isEmptyString(auction.NumOfMinFollowers)
-            && auctionUtil.isNegativeNum(auction.NumOfMinFollowers) === undefined
-            && (startDateErrorMessage === undefined)
-            && (endDateErrorMessage === undefined);
-
+            && auctionUtil.isNegativeNum(auction.NumOfMinFollowers) === undefined;
         return isValidInputs;
     }
 
@@ -216,23 +219,73 @@ class Auction extends Component {
 
 
     updateFileImage(src) {
-        let{auction} = this.state;
+        let { auction } = this.state;
         auction.Picture = src;
-        this.setState({ auction})
+        this.setState({ auction })
+    }
+
+    deleteAuction() {
+        const { auction } = this.state;
+        const theAuction = (this.props.location && this.props.location.state.auction) || auction;
+        if (theAuction.Id) {
+            this.auctionService.deleteAuction(theAuction.Id).then(req => {
+                //console.log(req);
+                if (req) {
+                    if (req.Message) {
+                        alert(req.Message);
+                    }
+                    else {
+                        alert("Your auction was deleted succefully!");
+                        this.setState({
+                            auctionDeleted: true,
+                        });
+                    }
+
+                }
+                else {
+                    alert("Server Error");
+                }
+            });
+        }
+
+    }
+    closeAuction(){
+        const { auction } = this.state;
+        const theAuction = (this.props.location && this.props.location.state.auction) || auction;
+        if (theAuction.Id) {
+            this.auctionService.closeAuction(theAuction.Id).then(req => {
+                //console.log(req);
+                if (req) {
+                    if (req.Message) {
+                        alert(req.Message);
+                    }
+                    else {
+                        alert("Your auction was closed succefully!");
+                        this.setState({
+                            auctionClosed: true,
+                        });
+                    }
+
+                }
+                else {
+                    alert("Server Error");
+                }
+            });
+        }
     }
 
 
     render() {
         const { classes, isNew, location, user } = this.props;
         //const { UserId, Title, Product, Description, NumOfMinFollowers, StartDate, EndDate } = this.state;
-        const { auction, auctionOk, errors, CompanyName } = this.state;
+        const { auction, auctionOk, errors, CompanyName, auctionDeleted, auctionClosed } = this.state;
         const theAuction = (location && location.state.auction) || auction;
         const isAuctionNew = (location && location.state.isNew);
         const theUser = (location && location.state.user) || user;
 
         return (
             <div>
-                {!auctionOk ?
+                {(!auctionOk && !auctionDeleted && !auctionClosed) ?
                     <div className="auctionWrapper">
                         <div className={classes.container}>
                             <div className="firstLineWrapper">
@@ -286,7 +339,7 @@ class Auction extends Component {
                                     margin="normal"
                                     style={{ width: '60%' }}
                                 />
-                                <FileUploader updateFileImage={this.updateFileImage} imgSrc={theAuction.Picture} isAuctionNew={isAuctionNew}/>
+                                <FileUploader updateFileImage={this.updateFileImage} imgSrc={theAuction.Picture} isAuctionNew={isAuctionNew} />
                             </div>
                             <TextField
                                 id="description"
@@ -322,7 +375,19 @@ class Auction extends Component {
                                 margin="normal"
                             />
                             <span className="errorInput" > {errors["NumOfMinFollowers"] && errors["NumOfMinFollowers"]} </span>
-                            <div className="dueDate">
+                            {!isAuctionNew && <TextField
+                                    id="read-only-input"
+                                    name="AuctionStatus"
+                                    label="Auction Status"
+                                    defaultValue={theAuction.Status}
+                                    className={classes.textField}
+                                    margin="normal"
+                                    InputProps={{
+                                        readOnly: true,
+                                    }}
+                                    style={{ width: '18%' }}
+                                />}
+                            {/* <div className="dueDate">
                                 <TextField
                                     id="startDate"
                                     name="StartDate"
@@ -357,11 +422,9 @@ class Auction extends Component {
                                     }}
                                 />
                                 <span className="errorInput" > {errors["EndDate"] && errors["EndDate"]} </span>
-                            </div>
-                            {/* <div className="submitAuctionBtn designBtn"> */}
-                            {/* <button hidden={!isAuctionNew} className={`${this.isAllValid() ? "" : "disableElement"}`} onClick={this.AddAuction}>Submit</button> */}
+                            </div> */}
                             <div hidden={!isAuctionNew} className={`${this.isAllValid() ? "submitBtn" : "disableElement submitBtn"}`}>
-                                <LayoutButton text="Submit" onClick={this.AddAuction}/>
+                                <LayoutButton text="Submit" onClick={this.AddAuction} />
                             </div>
                             {this.isBusinessUser() && (!isAuctionNew) && <Link className="designBtn" to={{ pathname: "/offersPerAuctionPage", state: { auction: theAuction, user: theUser } }}>
                                 Show Offers
@@ -369,6 +432,8 @@ class Auction extends Component {
                             {!this.isBusinessUser() && <Link className="designBtn" to={{ pathname: "/starOffer", state: { auction: theAuction, user: theUser, fromBusiness: false } }}>
                                 Add Offer
                             </Link>}
+                            {this.isBusinessUser() && (!isAuctionNew) && auction.Status!=="Deleted" && <LayoutButton text="Delete Auction" onClick={this.deleteAuction} />}
+                            {this.isBusinessUser() && (!isAuctionNew) && auction.Status === "Open" && <LayoutButton text="Close Auction" onClick={this.closeAuction} />}
                         </div>
                     </div>
                     :

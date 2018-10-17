@@ -10,6 +10,7 @@ import "../userHomePage/homePages.css";
 import "./userHomePage.css";
 import OffersStatus from "../offers/offersStatus";
 import OfferService from "../../services/apis/OfferService";
+import HomeFooter from './HomeFooter';
 
 const initialState = {
     user: {},
@@ -23,6 +24,7 @@ class BusinessHomePage extends Component {
     offerService;
     constructor(props) {
         super(props);
+
         this.state = initialState;
 
         this.auctionService = new AuctionService();
@@ -40,6 +42,7 @@ class BusinessHomePage extends Component {
                 this.setState({ updatedUser });
 
                 this.auctionService.getAuctionsByEmail(updatedUser.Email).then(req => {
+                    this.setState({ theAuctions: [] });
                     this.setState({ theAuctions: req });
                     console.log(req);
                 });
@@ -53,7 +56,7 @@ class BusinessHomePage extends Component {
             }
 
             this.offerService.getAllOffersByBusinessUserId(user.Id).then(req => {
-                if (req.length > 0) this.setState({ isOffers: true });
+                if ((req.length > 0)&& !(req.length === 1 && req[0].Status==="Deleted")) this.setState({ isOffers: true });
             });
             this.onMyAuctionsClick();
         }
@@ -99,7 +102,7 @@ class BusinessHomePage extends Component {
                         <div className="contentWrapper">
                             <div className="businessAuctions">
                                 {/* We need to add "auctions" when user is created */}
-                                <HotAuctions auctions={theAuctions} user={user} />
+                                <HotAuctions user={user} />
                                 <div className="auctionBtns">
                                     {theAuctions.length !== 0 && (
                                         <Link
@@ -136,19 +139,19 @@ class BusinessHomePage extends Component {
                                         className="allOffers styleLink"
                                         to={{
                                             pathname: "/allOffers",
-                                            state: { user: this.state.user }
+                                            state: { user: this.state.user, fromBusiness: true }
                                         }}
                                     >
                                         All Offers
                                     </Link>
                                 )}
                             </div>
-                            <Link
-                                className="allInfluencers styleLink"
-                                to={{ pathname: "/allInfluencers", state: {} }}
-                            >
-                                All Influencers
-                            </Link>
+                            <HomeFooter user={
+                                    Object.getOwnPropertyNames(updatedUser).length > 0
+                                        ? updatedUser
+                                        : user
+                                }/> 
+                            
                         </div>
                     </div>
                 )}

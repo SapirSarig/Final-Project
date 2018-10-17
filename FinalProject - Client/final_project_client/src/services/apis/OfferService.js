@@ -118,8 +118,8 @@ export default class OfferService {
 
   deleteOffer(offerId){
     var data = JSON.stringify(offerId);
-    return fetch(`${this.host}/api/Offers/${offerId}`, {
-      method: "DELETE",
+    return fetch(`${this.host}/api/Offers/DeleteOffer?id=${offerId}`, {
+      method: "POST",
       body: data,
       headers: {
         Accept: "application/json",

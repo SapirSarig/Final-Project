@@ -25,6 +25,7 @@ import SessionStorageUtil from './utils/SessionStorageUtil';
 import Nav from './components/nav/nav';
 import Overlay from './components/overlay/overlay';
 import Player from './components/player/player';
+import AllNegotiations from './components/negotiation/AllNegotiaions';
 
 const CheckIfUserAuthenticated = () => {
   const user = LocalStorageUtil.GetLoggedUser() || SessionStorageUtil.GetLoggedUser();
@@ -109,6 +110,7 @@ class App extends Component {
             <Route path="/allUsers" component={AllUsers} />
             <Route path="/allInfluencers" component={AllInfluencers} />
             <Route path="/negotiationPage" component={NegotiationPage} />
+            <Route path="/allNegotiations" component={AllNegotiations} />
             <Route path="/offersPerAuctionPage" component={offersPerAuctionPage} />
             {/* check forgot password route */}
             <Route path="/forgotPassword" component={ForgotPassword} />

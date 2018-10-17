@@ -315,4 +315,17 @@ export default class UserService {
       })
   }
 
+  getAllUserChats(userId){
+    return fetch(`${this.host}/api/Users/GetAllChats?id=${userId}`, {
+      method: "GET",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json"
+      }
+    })
+      .then((res) => {
+        return res.json();
+      })
+  }
+
 }

@@ -65,7 +65,14 @@ namespace FinalProject.DAL
         public void DeleteAuction(int id)
         {
             Auction auction = context.Auctions.FirstOrDefault(a => a.Id == id);
-            context.Auctions.Remove(auction);
+            auction.Status = "Deleted";
+            context.SaveChanges();
+        }
+
+        public void CloseAuction(int id)
+        {
+            Auction auction = context.Auctions.FirstOrDefault(a => a.Id == id);
+            auction.Status = "Closed";
             context.SaveChanges();
         }
 

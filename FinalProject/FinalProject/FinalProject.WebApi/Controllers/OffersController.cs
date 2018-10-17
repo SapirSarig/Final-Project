@@ -59,13 +59,14 @@ namespace FinalProject.WebApi.Controllers
            );
         }
 
-        [HttpDelete]
+        [HttpPost]
+        [Route("DeleteOffer")]
         public IHttpActionResult DeleteOffer(int id)
         {
             ErrorMessage errorMessage = offersBL.DeleteOffer(id);
             if (errorMessage.Code == HttpStatusCode.OK)
             {
-                return Ok();
+                return Ok(id);
             }
 
             return new ResponseMessageResult(Request.CreateErrorResponse(

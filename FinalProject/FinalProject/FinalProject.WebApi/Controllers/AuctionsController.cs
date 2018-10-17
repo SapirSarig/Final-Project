@@ -50,13 +50,31 @@ namespace FinalProject.WebApi.Controllers
             return Ok();
         }
 
-        [HttpDelete]
+        [HttpPost]
+        [Route("DeleteAuction")]
         public IHttpActionResult DeleteAuction(int id)
         {
             ErrorMessage errorMessage = auctionsBL.DeleteAuction(id);
             if (errorMessage.Code == HttpStatusCode.OK)
             {
-                return Ok();
+                return Ok(id);
+            }
+
+            return new ResponseMessageResult(Request.CreateErrorResponse(
+                    errorMessage.Code,
+                   new HttpError(errorMessage.Message)
+               )
+           );
+        }
+
+        [HttpPost]
+        [Route("CloseAuction")]
+        public IHttpActionResult CloseAuction(int id)
+        {
+            ErrorMessage errorMessage = auctionsBL.CloseAuction(id);
+            if (errorMessage.Code == HttpStatusCode.OK)
+            {
+                return Ok(id);
             }
 
             return new ResponseMessageResult(Request.CreateErrorResponse(

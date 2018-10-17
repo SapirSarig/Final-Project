@@ -168,5 +168,12 @@ namespace FinalProject.WebApi.Controllers
             return NotFound();
         }
 
+        [HttpGet]
+        [Route("GetAllChats")]
+        public IEnumerable<UserChat> GetAllChats(int id)
+        {
+            return usersBL.GetAllChats(id);
+        }
+
     }
 }

@@ -5,11 +5,15 @@ import HotAuctions from "../userHomePage/hotAuctions.js";
 import HotOffers from "../offers/hotOffers.js";
 import NavToggle from "../navToggle/navToggle";
 import OfferService from "../../services/apis/OfferService";
+import UserService from "../../services/apis/UserService";
 // import "../userHomePage/homePages.css";
 import "./userHomePage.css";
+import HomeFooter from './HomeFooter';
 
 class InfluencerHomePage extends Component {
     offerService;
+    userService;
+
     constructor(props) {
         super(props);
         this.state = {
@@ -19,6 +23,8 @@ class InfluencerHomePage extends Component {
         };
 
         this.offerService = new OfferService();
+        this.userService = new UserService();
+        this.checkIfAllOffersDeleted = this.checkIfAllOffersDeleted.bind(this);
     }
 
     componentWillMount() {
@@ -32,10 +38,19 @@ class InfluencerHomePage extends Component {
                 this.setState({ user });
             }
 
-            this.offerService.getAllOffersByBusinessUserId(user.Id).then(req => {
-                if (req.length > 0) this.setState({ isOffers: true });
+            this.userService.GetAllInfluencerUserOffers(user.Id).then(req => {
+                if ((req.length > 0)&& !(this.checkIfAllOffersDeleted(req))) this.setState({ isOffers: true });
             });
         }
+    }
+
+    checkIfAllOffersDeleted(req){
+        for(let i=0; i< req.length; i++){
+            if(req[i].Status !=="Deleted"){
+                return false;
+            }
+        }
+        return true;
     }
 
     render() {
@@ -108,19 +123,18 @@ class InfluencerHomePage extends Component {
                                             user:
                                                 Object.getOwnPropertyNames(updatedUser).length > 0
                                                     ? updatedUser
-                                                    : user
+                                                    : user, fromBusiness: false
                                         }
                                     }}
                                 >
                                     My Offers
                                 </Link>}
                             </div>
-                            <Link
-                                className="allInfluencers styleLink"
-                                to={{ pathname: "/allInfluencers", state: {} }}
-                            >
-                                All Influencers
-                            </Link>
+                            <HomeFooter user={
+                                    Object.getOwnPropertyNames(updatedUser).length > 0
+                                        ? updatedUser
+                                        : user
+                                }/> 
                         </div>
                     </div>
                 )}
