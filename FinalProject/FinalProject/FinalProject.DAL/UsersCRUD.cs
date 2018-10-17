@@ -204,6 +204,12 @@ namespace FinalProject.DAL
             }
         }
 
+        public IEnumerable<UserChat> GetAllChats(int id)
+        {
+            User user = context.Users.FirstOrDefault(u => u.Id == id);
+            return user.UsersChats.ToList();
+        }
+
         public void UpdateBusinessUser(UpdatedBusinessUserModal userToUpdate)
         {
             User CurrUser = context.Users.FirstOrDefault(u => u.Email == userToUpdate.Email);

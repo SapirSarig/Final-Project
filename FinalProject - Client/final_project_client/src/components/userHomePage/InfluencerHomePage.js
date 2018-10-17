@@ -8,6 +8,7 @@ import OfferService from "../../services/apis/OfferService";
 import UserService from "../../services/apis/UserService";
 // import "../userHomePage/homePages.css";
 import "./userHomePage.css";
+import HomeFooter from './HomeFooter';
 
 class InfluencerHomePage extends Component {
     offerService;
@@ -129,12 +130,11 @@ class InfluencerHomePage extends Component {
                                     My Offers
                                 </Link>}
                             </div>
-                            <Link
-                                className="allInfluencers styleLink"
-                                to={{ pathname: "/allInfluencers", state: {} }}
-                            >
-                                All Influencers
-                            </Link>
+                            <HomeFooter user={
+                                    Object.getOwnPropertyNames(updatedUser).length > 0
+                                        ? updatedUser
+                                        : user
+                                }/> 
                         </div>
                     </div>
                 )}

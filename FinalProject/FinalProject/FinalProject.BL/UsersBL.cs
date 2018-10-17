@@ -197,6 +197,11 @@ namespace FinalProject.BL
             }
         }
 
+        public IEnumerable<UserChat> GetAllChats(int id)
+        {
+            return userCRUD.GetAllChats(id);
+        }
+
         public bool SendMailToInfluencerUser(int offerId, string auctionName)
         {
             try

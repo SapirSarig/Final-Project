@@ -10,6 +10,7 @@ import "../userHomePage/homePages.css";
 import "./userHomePage.css";
 import OffersStatus from "../offers/offersStatus";
 import OfferService from "../../services/apis/OfferService";
+import HomeFooter from './HomeFooter';
 
 const initialState = {
     user: {},
@@ -145,12 +146,12 @@ class BusinessHomePage extends Component {
                                     </Link>
                                 )}
                             </div>
-                            <Link
-                                className="allInfluencers styleLink"
-                                to={{ pathname: "/allInfluencers", state: {} }}
-                            >
-                                All Influencers
-                            </Link>
+                            <HomeFooter user={
+                                    Object.getOwnPropertyNames(updatedUser).length > 0
+                                        ? updatedUser
+                                        : user
+                                }/> 
+                            
                         </div>
                     </div>
                 )}
