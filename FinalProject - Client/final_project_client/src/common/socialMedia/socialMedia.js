@@ -3,24 +3,25 @@ import React, { Component, Fragment } from 'react';
 import './socialMedia.css';
 
 class socialMedia extends Component {
-    // constructor(props) {
-    //     super(props);
+    //   constructor(props) {
+    //       super(props);
 
-    //     this.onChange = this.props.onChange.bind(this);
-    // }
+    //       this.getLink = this.getLink.bind(this);
+    //       this.handleInputChange = this.handleInputChange.bind(this);
+    //   }
 
     renderExtra({ idName, socialNetworkName }){
 
     }
     render() {
-        let {socialNetworks, starOffer, checkIfChecked} = this.props;
+        const { socialNetworks, starOffer, checkIfChecked } = this.props;
         const IsExtra = ({ idName, socialNetworkName }) => {
             if(this.props.isExtra === "true"){
                 return(
                     <Fragment>
                         <span className="linkToProfile">Link To Profile:</span>
                         <div className="inputLinkWrapper">
-                            <input id={idName} disabled={!this.props.checkIfChecked(socialNetworkName)} value={this.props.getLink(socialNetworkName)} type="text" name={idName} onChange={this.props.onChange} />
+                            <input className="inputSocialLink" id={idName} disabled={!this.props.checkIfChecked(socialNetworkName)} value={this.props.getLink(socialNetworkName)} type="text" name={idName} onChange={this.props.onChange} /*autoFocus={true}*//>
                             <span className="errorInput">{this.props.errors[idName] && this.props.errors[idName]}</span>
                         </div>
                     </Fragment>

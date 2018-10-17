@@ -66,6 +66,7 @@ class Register extends Component {
         //     user
         // });
         const { location } = this.props;
+        console.log(location);
         if (location && location.state) {
             {
                 const { user, externalLogin } = location.state;
@@ -304,10 +305,11 @@ class Register extends Component {
 
                     <TextField
                         id="name"
-                        label={user.Name ? "" : "Name *"}
+                        label="Name *"
                         className={classes.textField}
-                        value={user.Name}
+                        // value={user.Name}
                         name="Name"
+                        defaultValue={user.Name !== "" ? user.Name : ""}
                         onChange={this.handleInputChange}
                         disabled={externalLogin}
                         margin="normal"
@@ -318,9 +320,10 @@ class Register extends Component {
 
                     {signUp && <TextField
                         id="email"
-                        label={user.Email ? "" : "Email *"}
+                        label="Email *"
                         className={classes.textField}
-                        value={user.Email}
+                        // value={user.Email}
+                        defaultValue={user.Email !== "" ? user.Email : ""}
                         name="Email"
                         onChange={this.handleInputChange}
                         disabled={externalLogin}
@@ -331,9 +334,10 @@ class Register extends Component {
 
                     {signUp && <TextField
                         id="confirmMail"
-                        label={user.Email ? "" : "Confirm Email *"}
+                        label="Confirm Email *"
                         className={classes.textField}
-                        value={user.ConfirmMail}
+                        // value={user.ConfirmMail}
+                        defaultValue={user.Email !== "" ? user.Email : ""}
                         name="ConfirmMail"
                         onChange={this.handleInputChange}
                         disabled={externalLogin}

@@ -34,35 +34,6 @@ class InfluencerRegister extends Component {
                 LinkToYouTubeProfile: "",
                 DateOfBirth: ""
             },
-            // userInfo: {
-            //     Name: "rinat",
-            //     Email: "rinat@gmail.com",
-            //     ConfirmEmail: "rinat@gmail.com",
-            //     Picture: "string",
-            //     Description: "pop",
-            //     Type: "Social Influencer",
-            //     CompanyName: "cola",
-            //     WebsiteLink: "www.walla.com",
-            //     SocialNetworks: [
-            //         {
-            //             Value: "Facebook",
-            //             LinkToProfile: "www.Facebook.com"
-            //         },
-            //         {
-            //             Value: "Twitter",
-            //             LinkToProfile: "www.Facebook.com"
-            //         }
-            //     ],
-            //     Interests: [
-            //         {
-            //             value: "Sport"
-            //         },
-            //         {
-            //             value: "Music"
-            //         }
-            //     ]
-
-            // }
         }
 
         this.handleInputChange = this.handleInputChange.bind(this);
@@ -199,7 +170,7 @@ class InfluencerRegister extends Component {
         const { userInfo } = this.props;
         const { socialNetworks } = this.state;
         if (Object.getOwnPropertyNames(userInfo).length > 0) {
-            if (socialNetworks) {
+            if (socialNetworks.length > 0) {
                 for (var i = 0; i < socialNetworks.length; i++) {
                     if (socialNetworks[i].Value === value) {
                         return true;
@@ -217,8 +188,8 @@ class InfluencerRegister extends Component {
         const { userInfo } = this.props;
         const { socialNetworks } = this.state;
         if (Object.getOwnPropertyNames(userInfo).length > 0) {
-            if (socialNetworks) {
-                for (var i = 0; i < socialNetworks.length; i++) {
+            if (socialNetworks.length > 0) {
+                for (let i = 0; i < socialNetworks.length; i++) {
                     if (socialNetworks[i].Value === value) {
                         return socialNetworks[i].LinkToProfile;
                     }
@@ -227,7 +198,6 @@ class InfluencerRegister extends Component {
             }
         }
         return "";
-
     }
 
     render() {
@@ -261,7 +231,7 @@ class InfluencerRegister extends Component {
                 {/* <input type="date" name="dateOfBirth" value={dateOfBirth} onChange={this.handleInputChange} /> */}
                 <span className="errorInput">{errors["DateOfBirth"]}</span>
 
-                <SocialMedia isExtra="true" onFocus={this.focusElement} onChange={this.handleInputChange} errors={errors} socialNetworks={socialNetworks} getLink={this.getLink} checkIfChecked={this.checkIfChecked} starOffer={false} />
+                <SocialMedia isExtra="true" onFocus={this.focusElement} onChange={this.handleInputChange} errors={errors} socialNetworks={socialNetworks} getLink={this.getLink} userInfo={userInfo} checkIfChecked={this.checkIfChecked} starOffer={false} />
                 {/* <span> Social Networks: </span>
                 <div className="SocialNetworksContainer">
                     <input type="checkbox" checked={this.checkIfChecked("Twitter")} name="Twitter" onChange={this.focusElement} />
