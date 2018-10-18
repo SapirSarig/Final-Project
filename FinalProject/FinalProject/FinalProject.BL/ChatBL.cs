@@ -34,5 +34,10 @@ namespace FinalProject.BL
         {
             return chatsCRUD.GetChat(id);
         }
+
+        public Chat GetChatByOfferId(int offerId)
+        {
+            return chatsCRUD.GetChatByOfferId(offerId);
+        }
     }
 }

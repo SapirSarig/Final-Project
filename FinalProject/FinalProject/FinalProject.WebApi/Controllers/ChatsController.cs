@@ -34,5 +34,13 @@ namespace FinalProject.WebApi.Controllers
            );
         }
 
+        [HttpGet]
+        [Route("GetChatByOfferId")]
+        public IHttpActionResult GetChatByOfferId(int offerId)
+        {
+            Chat chat = chatBL.GetChatByOfferId(offerId);
+            return Ok(chat);
+
+        }
     }
 }

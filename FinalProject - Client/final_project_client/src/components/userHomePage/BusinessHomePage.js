@@ -30,6 +30,7 @@ class BusinessHomePage extends Component {
         this.auctionService = new AuctionService();
         this.offerService = new OfferService();
         this.onMyAuctionsClick = this.onMyAuctionsClick.bind(this);
+        this.checkIfAllOffersDeleted = this.checkIfAllOffersDeleted.bind(this);
     }
 
     componentWillMount() {
@@ -56,10 +57,20 @@ class BusinessHomePage extends Component {
             }
 
             this.offerService.getAllOffersByBusinessUserId(user.Id).then(req => {
-                if ((req.length > 0)&& !(req.length === 1 && req[0].Status==="Deleted")) this.setState({ isOffers: true });
+                if (req && (req.length > 0)&& !(this.checkIfAllOffersDeleted(req))) this.setState({ isOffers: true });
             });
             this.onMyAuctionsClick();
         }
+    }
+
+    
+    checkIfAllOffersDeleted(req){
+        for(let i=0; i< req.length; i++){
+            if(req[i].Status !=="Deleted"){
+                return false;
+            }
+        }
+        return true;
     }
 
     // componentWillReceiveProps(nextProps){

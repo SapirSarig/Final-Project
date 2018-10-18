@@ -39,7 +39,7 @@ class InfluencerHomePage extends Component {
             }
 
             this.userService.GetAllInfluencerUserOffers(user.Id).then(req => {
-                if ((req.length > 0)&& !(this.checkIfAllOffersDeleted(req))) this.setState({ isOffers: true });
+                if (req && (req.length > 0)&& !(this.checkIfAllOffersDeleted(req))) this.setState({ isOffers: true });
             });
         }
     }

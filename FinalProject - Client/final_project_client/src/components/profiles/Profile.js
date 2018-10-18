@@ -19,7 +19,8 @@ class Profile extends Component {
         this.state = {
             user: {},
             review: "",
-            okDisabled: true
+            okDisabled: true,
+            loggedUser: SessionStorageUtil.GetLoggedUser()
         }
     }
 
@@ -69,7 +70,7 @@ class Profile extends Component {
         const target = event.target;
         const value = target.value;
         const name = target.name;
-        const FromUser = SessionStorageUtil.GetLoggedUser();
+        const FromUser = this.state.loggedUser;
         const currTime = Date().split("GMT");
 
         let obj = {
@@ -134,12 +135,17 @@ class Profile extends Component {
                     {user.Type === "Social Influencer" ?
                         <StarProfile dateOfBirth={user.DateOfBirth} socialNetworks={user.SocialNetworks} /> : null}
 
-                    <UserRating user={user} addStarToUserReviews={this.addStarToUserReviews} />
+                    <UserRating user={user} loggedUser={this.state.loggedUser} addStarToUserReviews={this.addStarToUserReviews} />
 
-                    <br />
-                    <span> Write A Review: </span>
-                    <textarea id="review" type="text" rows="2" name="review" onChange={this.handleInputChange} className="reviewInput" />
-                    <button id="okButton" className={!isOkDisabled ? "reviewOkBtn" + " " + "enable" : "reviewOkBtn"} value={!!document.getElementById("review") ? document.getElementById("review").value : null} disabled={isOkDisabled} onClick={this.handleButtonOkClicked}> OK </button>
+                    {user.Name === this.state.loggedUser.Name ? <div></div> :
+                        <div>
+                            <br/>
+                            <div> Write A Review: </div>
+                            <textarea id="review" type="text" rows="2" name="review" onChange={this.handleInputChange} className="reviewInput" />
+                            <div>
+                                <button id="okButton" className={!isOkDisabled ? "reviewOkBtn" + " " + "enable" : "reviewOkBtn"} value={!!document.getElementById("review") ? document.getElementById("review").value : null} disabled={isOkDisabled} onClick={this.handleButtonOkClicked}> OK </button>
+                            </div>
+                        </div>}
 
                     <div className="reviewsWrapper">
                         <span> Reviews: </span>
@@ -147,7 +153,6 @@ class Profile extends Component {
                             <div className="reviews">
                                 {user.Reviews.map(newReview =>
                                     (<Message key={newReview.Id} message={newReview} isReview={true} />))}
-                                {/* (<div key= {newReview.Id}> {newReview.Value} </div>))} */}
                             </div> : <div>No Reviews Yet!</div>}
                     </div>
                 </div>)}

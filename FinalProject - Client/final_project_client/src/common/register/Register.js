@@ -178,7 +178,7 @@ class Register extends Component {
             errorMessage = RegisterService.confirmValidation(value, user.Email);
         }
         else if ((fieldName === "Question1") || (fieldName === "Question2")){
-            errorMessage = StringUtil.isEmptyString(value) ? "Input not valid" : "";
+            errorMessage = (StringUtil.isEmptyString(value) || StringUtil.hasNumber(value)) ? "Input not valid" : "";
         }
 
         errors[fieldName] = errorMessage;

@@ -18,11 +18,13 @@ namespace FinalProject.Entities
         [Key]
         public int Id { get; set; }
 
-        public string Title { get; set; }
-
         public virtual ICollection<Message> Messages { get; set; }
 
-        public virtual ICollection<UserChat> UsersChats { get; set; }
+        //public virtual ICollection<UserChat> UsersChats { get; set; }
+
+        public int? OfferId { get; set; }
+        [ForeignKey("OfferId")]
+        public virtual Offer Offer { get; set; }
 
     }
 }

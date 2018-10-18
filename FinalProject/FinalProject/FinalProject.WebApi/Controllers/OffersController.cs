@@ -100,5 +100,41 @@ namespace FinalProject.WebApi.Controllers
             return offersBL.GetAllOffersByBusinessUserId(userId);
         }
 
+        [HttpPost]
+        [Route("UpdateIsOpenNegotiation")]
+        public IHttpActionResult UpdateIsOpenNegotiation(int id)
+        {
+            ErrorMessage errorMessage = offersBL.UpdateIsOpenNegotiation(id);
+            
+            if (errorMessage.Code == HttpStatusCode.OK)
+            {
+                Offer updatedOffer = offersBL.GetOffer(id);
+                return Ok(updatedOffer);
+            }
+
+            return new ResponseMessageResult(Request.CreateErrorResponse(
+                    errorMessage.Code,
+                   new HttpError(errorMessage.Message)
+               )
+           );
+        }
+
+        [Route("UpdatePrice")]
+        public IHttpActionResult UpdatePrice(int offerId, string type, int value)
+        {
+            ErrorMessage errorMessage = offersBL.UpdatePrice(offerId, type, value);
+
+            if (errorMessage.Code == HttpStatusCode.OK)
+            {
+                Offer updatedOffer = offersBL.GetOffer(offerId);
+                return Ok(updatedOffer);
+            }
+
+            return new ResponseMessageResult(Request.CreateErrorResponse(
+                    errorMessage.Code,
+                   new HttpError(errorMessage.Message)
+               )
+           );
+        }
     }
 }

@@ -29,6 +29,8 @@ namespace FinalProject.Entities
 
         public string Status { get; set; }
 
+        public bool IsOpenNegotiation { get; set; }
+
         public int? AuctionId { get; set; }
         [ForeignKey("AuctionId")]
         public virtual Auction Auction { get; set; }
@@ -37,5 +39,8 @@ namespace FinalProject.Entities
         [ForeignKey("UserId")]
         public virtual InfluencerUser InfluencerUser { get; set; }
 
+        public int BusinessPrice { get; set; }
+
+        public int InfluencerPrice { get; set; }
     }
 }

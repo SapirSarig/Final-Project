@@ -429,7 +429,7 @@ class Auction extends Component {
                             {this.isBusinessUser() && (!isAuctionNew) && <Link className="designBtn" to={{ pathname: "/offersPerAuctionPage", state: { auction: theAuction, user: theUser } }}>
                                 Show Offers
                             </Link>}
-                            {!this.isBusinessUser() && <Link className="designBtn" to={{ pathname: "/starOffer", state: { auction: theAuction, user: theUser, fromBusiness: false } }}>
+                            {!this.isBusinessUser() && theAuction.Status==="Open" && <Link className="designBtn" to={{ pathname: "/starOffer", state: { auction: theAuction, user: theUser, fromBusiness: false } }}>
                                 Add Offer
                             </Link>}
                             {this.isBusinessUser() && (!isAuctionNew) && auction.Status!=="Deleted" && <LayoutButton text="Delete Auction" onClick={this.deleteAuction} />}

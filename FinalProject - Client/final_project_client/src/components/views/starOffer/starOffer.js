@@ -10,6 +10,9 @@ import OfferService from '../../../services/apis/OfferService';
 import StringUtil from '../../../utils/StringUtil';
 import socialMedia from '../../../common/socialMedia/socialMedia';
 import UserSerive from '../../../services/apis/UserService';
+import NegotiationPage from '../../negotiation/NegotiationPage';
+import SessionStorageUtil from '../../../utils/SessionStorageUtil';
+import NegotiationService from '../../../services/apis/NegotiationService';
 
 const styles = theme => ({
     container: {
@@ -28,9 +31,10 @@ const styles = theme => ({
 class starOffer extends Component {
     offerService;
     userSerive;
+    negotiationService;
     constructor(props) {
         super(props);
-
+        this.negotiationService = new NegotiationService();
         this.state = {
             offer: {
                 UserId: '',
@@ -47,7 +51,11 @@ class starOffer extends Component {
             offerOk: false,
             OfferId: '',
             OfferStatusUpdated: false,
-            offerDeleted: false
+            offerDeleted: false,
+            openNegotiation: false,
+            offerAccepted:false,
+            auctionStatus:''
+            //chat: {}
 
         };
         this.offerService = new OfferService();
@@ -59,6 +67,7 @@ class starOffer extends Component {
         this.acceptClicked = this.acceptClicked.bind(this);
         this.declinedClicked = this.declinedClicked.bind(this);
         this.deleteOfferClicked = this.deleteOfferClicked.bind(this);
+        this.openNegotiation = this.openNegotiation.bind(this);
     }
 
     componentDidMount() {
@@ -81,10 +90,26 @@ class starOffer extends Component {
         else {
             const { auction, user } = this.props.location.state;
             offer.AuctionId = auction.Id;
-            offer.UserId = user.user? user.user.Id : user.Id; //check why
+            offer.UserId = user.user ? user.user.Id : user.Id; //check why
             AuctionName = auction.Title;
-            StarName = user.user? user.user.Name: user.Name; //check why
+            StarName = user.user ? user.user.Name : user.Name; //check why
         }
+        if (OfferId !== "") {
+            this.offerService.getOfferById(OfferId).then(req => {
+                //console.log(req);
+                if (req) {
+                    if (req.Message) {
+                        alert(req.Message);
+                    }
+                    else {
+                        this.setState({
+                            openNegotiation: req.IsOpenNegotiation
+                        });
+                    }
+                }
+            });         
+        }
+
         this.setState({
             AuctionName,
             StarName,
@@ -92,6 +117,7 @@ class starOffer extends Component {
             OfferId
         });
         console.log("#$#$#$$$", offer);
+
 
     }
 
@@ -182,9 +208,22 @@ class starOffer extends Component {
                         alert(req.Message);
                     }
                     else {
-                        alert("The offer was accepted succefully!");
-                        this.userSerive.sendMailToInfluencerUser(OfferId,AuctionName);
-                        this.setState({ OfferStatusUpdated: true });
+                        
+                        this.userSerive.sendMailToInfluencerUser(OfferId, AuctionName).then(req => {
+                            //console.log(req);
+                            if (req) {
+                                if (req.Message) {
+                                    alert(req.Message);
+                                }
+                                else {
+                                    alert("The offer was accepted succefully!");
+                                    this.setState({ OfferStatusUpdated: true });
+                                    this.openNegotiation();
+                                    this.setState({offerAccepted: true});
+                                     
+                                }
+                            }
+                        });         
                     }
                 }
                 else {
@@ -253,21 +292,21 @@ class starOffer extends Component {
         }
     }
 
-    deleteOfferClicked(){
+    deleteOfferClicked() {
         const { OfferId } = this.state;
         this.offerService.deleteOffer(OfferId).then(req => {
             //console.log(req);
             if (req) {
-                if(req.Message){
+                if (req.Message) {
                     alert(req.Message);
                 }
-                else{
+                else {
                     alert("Your offer was deleted succefully!");
                     this.setState({
                         offerDeleted: true,
                     });
                 }
-               
+
             }
             else {
                 alert("Server Error");
@@ -275,10 +314,39 @@ class starOffer extends Component {
         });
     }
 
+    openNegotiation() {
+        this.negotiationService.createChat(this.state.OfferId).then(req => {
+            //console.log(req);
+            if (req) {
+                if (req.Message) {
+                    alert(req.Message);
+                }
+                else {
+                    this.setState({
+                        chat: req
+                    });
+                    this.offerService.updateIsOpenNegotiations(this.state.OfferId).then(req => {
+                        if (req) {
+                            if (req.Message) {
+                                alert(req.Message);
+                            }
+                            else {
+                                this.setState({ openNegotiation: true })
+                            }
+                        }
+                    });
+                }
+            }
+        });
+        
+
+        
+    }
+
     render() {
         const { classes } = this.props;
         const { fromBusiness, fromAllOffers, user } = this.props.location.state;
-        let { offer, AuctionName, StarName, offerOk, OfferStatusUpdated, offerDeleted } = this.state;
+        let { offer, AuctionName, StarName, offerOk, OfferStatusUpdated, offerDeleted, openNegotiation, OfferId, offerAccepted } = this.state;
         return (
             <div className="offerWrapper">
                 {(!offerOk && !OfferStatusUpdated && !offerDeleted) ?
@@ -374,18 +442,23 @@ class starOffer extends Component {
                                 readOnly: (fromAllOffers || fromBusiness) ? true : false,
                             }}
                         />
+                        {
+                            openNegotiation && <NegotiationPage user={SessionStorageUtil.GetLoggedUser()} OfferId={OfferId} offerAccepted={offerAccepted}/>
+                        }
+
                         <div className="btnContainer">
                             {/* className={`${this.isAllValid() ? "" : "disableElement"}`} */}
                             {!(fromAllOffers || fromBusiness) && <LayoutButton text="Send Offer" onClick={this.sendOfferClicked} />}
-                            {(fromAllOffers && !fromBusiness) && <LayoutButton text="Delete Offer" onClick={this.deleteOfferClicked} />}
+                            {(fromAllOffers && !fromBusiness && !offer.Status==="Accepted") && <LayoutButton text="Delete Offer" onClick={this.deleteOfferClicked} />}
                             {fromBusiness && offer.Status === "Pending" && <LayoutButton text="Accept" onClick={this.acceptClicked} />}
                             {fromBusiness && offer.Status === "Pending" && <LayoutButton text="Decline" onClick={this.declinedClicked} />}
+                            {fromBusiness && offer.Status === "Pending" && <LayoutButton text="Open Negotiation" onClick={this.openNegotiation} />}
                         </div>
                     </div> :
                     (offerOk || offerDeleted) ?
                         <Redirect to={{
                             pathname: '/influencerHomePage',
-                            state: { user: this.props.location.state.user.user? this.props.location.state.user.user : this.props.location.state.user }//check why
+                            state: { user: this.props.location.state.user.user ? this.props.location.state.user.user : this.props.location.state.user }//check why
                         }} /> :
                         <Redirect to={{
                             pathname: '/businessHomePage',

@@ -54,6 +54,27 @@ namespace FinalProject.DAL
             return filteredOffers.ToList();
         }
 
+        public void UpdateIsOpenNegotiation(int id)
+        {
+            Offer offer = context.Offers.FirstOrDefault(o => o.Id == id);
+            offer.IsOpenNegotiation = true;
+            context.SaveChanges();
+        }
+
+        public void UpdatePrice(int offerId, string type, int value)
+        {
+            Offer offer = context.Offers.FirstOrDefault(o => o.Id == offerId);
+            if(type == "Business Owner")
+            {
+                offer.BusinessPrice = value;
+            }
+            else
+            {
+                offer.InfluencerPrice = value;
+            }
+            context.SaveChanges();
+        }
+
         #region IDisposable - Do Using
 
         public void Dispose()
