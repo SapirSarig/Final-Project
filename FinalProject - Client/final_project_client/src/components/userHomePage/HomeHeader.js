@@ -15,12 +15,16 @@ class HomeHeader extends Component {
             EditProfileClicked: false,
         }
         this.EditProfileClicked = this.EditProfileClicked.bind(this);
+        this.isUserHasPic = this.isUserHasPic.bind(this);
     }
 
     EditProfileClicked() {
         this.setState({ EditProfileClicked: true });
     }
 
+    isUserHasPic(user){
+        return (user && user.Picture && user.Picture !== "string" && user.Picture !== "no pic")
+    }
 
     render() {
         const { user } = this.props;
@@ -56,9 +60,11 @@ class HomeHeader extends Component {
                 {
                     !EditProfileClicked ?
                         <div>
-                            <div className="businessProfileImgWrapper">
-                                <img src={user.Picture} className="profliePic"/>
-                            </div>
+                            { this.isUserHasPic(user) && 
+                                <div className="businessProfileImgWrapper">
+                                    <img src={user.Picture} className="profliePic"/>
+                                </div>
+                            }
                             <div className="helloAndLink">
                                 Hello {user.Name} !
                             </div>
