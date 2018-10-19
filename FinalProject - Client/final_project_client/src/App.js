@@ -97,22 +97,52 @@ class App extends Component {
             <PublicRoute exact path="/" component={HomePage} />
             <PublicRoute path="/login" component={LoginPage} />
             <PublicRoute path="/signUp" component={SignUpPage} />
+
+            {/* works */}
             <PrivateRoute path="/auction" component={Auction} />
+
+            {/* works */}
             <PrivateRoute path="/allOffers" component={allOffers} />
+
+            {/* works */}
             <PrivateRoute path="/starOffer" component={starOffer} />
+
+            {/* works */}
             <Route path="/myAuctions" component={myAuctions} />
+
+            {/* doesn't work */}
             <PrivateRoute path="/starProfile" component={StarProfile} />
             <PrivateRoute path="/profile" component={Profile} />
+
+            {/* doesn't work */}
             <Route path="/influencerHomePage" component={InfluencerHomePage} />
+
+            {/* doesn't work */}
             <PrivateBusinessUserRoute path="/businessHomePage" component={BusinessHomePage} />
+
+            {/* works */}
             <Route path="/allAuctions" component={AllAuctions} />
+
+            {/* not in use */}
             <PrivateRoute path="/allUsers" component={AllUsers} />
+
+            {/* works */}
             <PrivateRoute path="/allInfluencers" component={AllInfluencers} />
+
+            {/* works */}
             <PrivateRoute path="/negotiationPage" component={NegotiationPage} />
+
+            {/* not in use */}
             <Route path="/allNegotiations" component={AllNegotiations} />
+
+            {/* works */}
             <Route path="/offersPerAuctionPage" component={offersPerAuctionPage} />
+
+
             {/* check forgot password route */}
             <PublicRoute path="/forgotPassword" component={ForgotPassword} />
+
+            {/* works */}
             <PrivateRoute path="/editProfile" component={EditProfile} />
             <PublicRoute path="/resetPassword" component={ResetPassword} />
           </div>

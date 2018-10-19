@@ -180,12 +180,12 @@ class starOffer extends Component {
                 if (name === "AdvertisingForms") {
                     const index = offer.AdvertisingForms.findIndex(advfrm => advfrm.Value === value);
                     if (index !== -1)
-                        offer.AdvertisingForms.splice(index, index + 1);
+                        offer.AdvertisingForms.splice(index,  1);
                 }
                 else {
                     const index = offer.PublishSocialNetworks.findIndex(socialNetwork => socialNetwork.Value === name);
                     if (index !== -1)
-                        offer.PublishSocialNetworks.splice(index, index + 1);
+                        offer.PublishSocialNetworks.splice(index,  1);
                 }
             }
         }

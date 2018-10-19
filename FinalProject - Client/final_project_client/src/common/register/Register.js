@@ -127,7 +127,7 @@ class Register extends Component {
                 }
                 else {
                     const index = user.Interests.findIndex((interest) => interest.Value === value);
-                    user.Interests.splice(index, index + 1);
+                    user.Interests.splice(index, 1);
                     this.setState({
                         user
                     });

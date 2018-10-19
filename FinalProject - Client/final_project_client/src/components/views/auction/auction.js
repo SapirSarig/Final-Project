@@ -106,7 +106,7 @@ class Auction extends Component {
                 }
                 else {
                     const index = auction.Interests.findIndex((interest) => interest.value === value);
-                    auction.Interests.splice(index, index + 1);
+                    auction.Interests.splice(index,  1);
                 }
             }
         }

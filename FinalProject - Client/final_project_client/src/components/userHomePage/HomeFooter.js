@@ -16,16 +16,6 @@ export default class HomeHeader extends Component {
                 >
                     All Influencers
                 </Link>
-                <Link
-                    className="chats styleLink"
-                    to={{
-                        pathname: "/allNegotiations", state: {
-                            user
-                        }
-                    }}
-                >
-                    All Chats
-                </Link>
             </div>
         )
     }

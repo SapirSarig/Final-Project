@@ -189,7 +189,7 @@ class InfluencerRegister extends Component {
             }
             const index = socialNetworks.findIndex(socialNetwork => socialNetwork.Value === name);
             if (index !== -1)
-                socialNetworks.splice(index, index + 1);
+                socialNetworks.splice(index, 1);
         }
         this.setState({ errors, socialNetworks },() => this.updateChooseTypeState(this.state));
         console.log("@@@@@", this.state);
