@@ -11,6 +11,9 @@ import "./userHomePage.css";
 import OffersStatus from "../offers/offersStatus";
 import OfferService from "../../services/apis/OfferService";
 import HomeFooter from './HomeFooter';
+import SessionStorageUtil from "../../utils/SessionStorageUtil";
+import LocalStorageUtil from "../../utils/LocalStorageUtil";
+import UserService from '../../services/apis/UserService';
 
 const initialState = {
     user: {},
@@ -22,11 +25,12 @@ const initialState = {
 class BusinessHomePage extends Component {
     auctionService;
     offerService;
+    userService;
     constructor(props) {
         super(props);
 
         this.state = initialState;
-
+        this.userService = new UserService();
         this.auctionService = new AuctionService();
         this.offerService = new OfferService();
         this.onMyAuctionsClick = this.onMyAuctionsClick.bind(this);
@@ -39,6 +43,18 @@ class BusinessHomePage extends Component {
         if (location && location.state) {
             const { user } = location.state;
             const { updatedUser } = location.state;
+            this.initUserDetails(user, updatedUser);
+        } else {
+            const user = SessionStorageUtil.GetLoggedUser() || LocalStorageUtil.GetLoggedUser;
+            this.userService.getUserById(user.Id).then(req => {
+                this.initUserDetails(req);
+            })
+        }
+        
+    }
+
+    initUserDetails(user, updatedUser){
+        if(user) {
             if (updatedUser) {
                 this.setState({ updatedUser });
 
@@ -63,7 +79,6 @@ class BusinessHomePage extends Component {
         }
     }
 
-    
     checkIfAllOffersDeleted(req){
         for(let i=0; i< req.length; i++){
             if(req[i].Status !=="Deleted"){
@@ -98,7 +113,7 @@ class BusinessHomePage extends Component {
         return (
             <div className="businessHomePage">
                 <NavToggle />
-                {user && (
+                {Object.getOwnPropertyNames(user).length > 0 && Object.getOwnPropertyNames(theAuctions).length > 0 &&  (
                     <div>
                         <div className="TopPage">
                             <HomeHeader

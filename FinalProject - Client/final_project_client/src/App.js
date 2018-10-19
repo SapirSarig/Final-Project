@@ -97,54 +97,28 @@ class App extends Component {
             <PublicRoute exact path="/" component={HomePage} />
             <PublicRoute path="/login" component={LoginPage} />
             <PublicRoute path="/signUp" component={SignUpPage} />
+            <PublicRoute path="/resetPassword" component={ResetPassword} />
+            <PublicRoute path="/forgotPassword" component={ForgotPassword} />
 
-            {/* works */}
+            <PrivateRoute path="/editProfile" component={EditProfile} />
             <PrivateRoute path="/auction" component={Auction} />
-
-            {/* works */}
             <PrivateRoute path="/allOffers" component={allOffers} />
-
-            {/* works */}
             <PrivateRoute path="/starOffer" component={starOffer} />
+            <PrivateRoute path="/allUsers" component={AllUsers} />
+            <PrivateRoute path="/allInfluencers" component={AllInfluencers} />
+            <PrivateRoute path="/negotiationPage" component={NegotiationPage} />
+            <PrivateRoute path="/allNegotiations" component={AllNegotiations} />
 
-            {/* works */}
-            <Route path="/myAuctions" component={myAuctions} />
-
-            {/* doesn't work */}
+            {/* To check that need to add :userId to url and get data from server in every refresh */}
             <PrivateRoute path="/starProfile" component={StarProfile} />
             <PrivateRoute path="/profile" component={Profile} />
 
-            {/* doesn't work */}
-            <Route path="/influencerHomePage" component={InfluencerHomePage} />
-
-            {/* doesn't work */}
+            <PrivateInfluencerUserRoute path="/influencerHomePage" component={InfluencerHomePage} />
+            <PrivateInfluencerUserRoute path="/allAuctions" component={AllAuctions} />
             <PrivateBusinessUserRoute path="/businessHomePage" component={BusinessHomePage} />
-
-            {/* works */}
-            <Route path="/allAuctions" component={AllAuctions} />
-
-            {/* not in use */}
-            <PrivateRoute path="/allUsers" component={AllUsers} />
-
-            {/* works */}
-            <PrivateRoute path="/allInfluencers" component={AllInfluencers} />
-
-            {/* works */}
-            <PrivateRoute path="/negotiationPage" component={NegotiationPage} />
-
-            {/* not in use */}
-            <Route path="/allNegotiations" component={AllNegotiations} />
-
-            {/* works */}
-            <Route path="/offersPerAuctionPage" component={offersPerAuctionPage} />
-
-
-            {/* check forgot password route */}
-            <PublicRoute path="/forgotPassword" component={ForgotPassword} />
-
-            {/* works */}
-            <PrivateRoute path="/editProfile" component={EditProfile} />
-            <PublicRoute path="/resetPassword" component={ResetPassword} />
+            <PrivateBusinessUserRoute path="/myAuctions" component={myAuctions} />
+            <PrivateBusinessUserRoute path="/offersPerAuctionPage" component={offersPerAuctionPage} />
+        
           </div>
         </Router>
       </div>

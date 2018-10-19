@@ -9,6 +9,8 @@ import UserService from "../../services/apis/UserService";
 // import "../userHomePage/homePages.css";
 import "./userHomePage.css";
 import HomeFooter from './HomeFooter';
+import SessionStorageUtil from "../../utils/SessionStorageUtil";
+import LocalStorageUtil from "../../utils/LocalStorageUtil";
 
 class InfluencerHomePage extends Component {
     offerService;
@@ -37,16 +39,25 @@ class InfluencerHomePage extends Component {
             } else {
                 this.setState({ user });
             }
-
-            this.userService.GetAllInfluencerUserOffers(user.Id).then(req => {
-                if (req && (req.length > 0)&& !(this.checkIfAllOffersDeleted(req))) this.setState({ isOffers: true });
-            });
+            this.getUserOffers(user.Id);
+        } else {
+            const user = SessionStorageUtil.GetLoggedUser() || LocalStorageUtil.GetLoggedUser;
+            this.userService.getUserById(user.Id).then(req => {
+                this.setState({ user: req });
+                this.getUserOffers(req.Id);
+            })
         }
     }
 
-    checkIfAllOffersDeleted(req){
-        for(let i=0; i< req.length; i++){
-            if(req[i].Status !=="Deleted"){
+    getUserOffers(userId) {
+        this.userService.GetAllInfluencerUserOffers(userId).then(req => {
+            if (req && (req.length > 0) && !(this.checkIfAllOffersDeleted(req))) this.setState({ isOffers: true });
+        });
+    }
+
+    checkIfAllOffersDeleted(req) {
+        for (let i = 0; i < req.length; i++) {
+            if (req[i].Status !== "Deleted") {
                 return false;
             }
         }
@@ -82,7 +93,7 @@ class InfluencerHomePage extends Component {
         return (
             <div className="influencerHomePage">
                 <NavToggle />
-                {user && (
+                {Object.getOwnPropertyNames(user).length > 0 && (
                     <div>
                         <div className="TopPage">
                             <HomeHeader
@@ -131,10 +142,10 @@ class InfluencerHomePage extends Component {
                                 </Link>}
                             </div>
                             <HomeFooter user={
-                                    Object.getOwnPropertyNames(updatedUser).length > 0
-                                        ? updatedUser
-                                        : user
-                                }/> 
+                                Object.getOwnPropertyNames(updatedUser).length > 0
+                                    ? updatedUser
+                                    : user
+                            } />
                         </div>
                     </div>
                 )}
