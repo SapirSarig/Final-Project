@@ -23,14 +23,15 @@ class Status extends Component {
         this.state = {
             disablePostCheckBox: true,
             user: {},
-            businessPrice: '',
-            influencerPrice: '',
+            businessPrice: { value: '', hasChanged: false },
+            influencerPrice: { value: '', hasChanged: false },
             priceSettled: false
         }
         this.offerService = new OfferService();
         this.PostedChecked = this.PostedChecked.bind(this);
         this.handleOkClicked = this.handleOkClicked.bind(this);
         this.getstatuscontent = this.getstatuscontent.bind(this);
+        this.handleInputPriceChange = this.handleInputPriceChange.bind(this);
     }
 
     componentDidMount() {
@@ -41,16 +42,24 @@ class Status extends Component {
 
     getstatuscontent() {
         const { offerId } = this.props;
+        const { businessPrice, influencerPrice } = this.state;
         this.offerService.getOfferById(offerId).then(req => {
             if (req) {
                 if (req.message) {
                     alert(req.message);
                 }
                 else {
-                    this.setState({
-                        businessPrice: req.BusinessPrice,
-                        influencerPrice: req.InfluencerPrice,
-                    })
+                    if(!businessPrice.hasChanged) {
+                        this.setState({
+                            businessPrice: { value: req.BusinessPrice, hasChanged: false },
+                        })
+                    }
+                    if(!influencerPrice.hasChanged) {
+                        this.setState({
+                            influencerPrice: { value: req.InfluencerPrice, hasChanged: false },
+                        })
+                    }
+                    influencerPrice.value === businessPrice.value && influencerPrice.value > 0 && businessPrice.value > 0 && this.setState({ priceSettled: true })
                 }
 
             }
@@ -68,12 +77,10 @@ class Status extends Component {
 
 
     handleOkClicked() {
-        const { user } = this.state;
+        const { user, influencerPrice, businessPrice } = this.state;
         const { offerId } = this.props;
-        let influencerElem = document.getElementById("InfluencerPrice");
-        let influencerValue = influencerElem.value;
-        let businessElem = document.getElementById("BusinessPrice");
-        let businessValue = businessElem.value;
+        let influencerValue = influencerPrice.value;
+        let businessValue = businessPrice.value;
 
         this.offerService.updatePrice(offerId, user.Type, user.Type === "Business Owner" ? businessValue : influencerValue).then(req => {
             if (req) {
@@ -84,11 +91,7 @@ class Status extends Component {
                     this.setState({
                         businessPrice: req.BusinessPrice,
                         influencerPrice: req.InfluencerPrice,
-                    });
-                    if (this.state.influencerPrice === this.state.businessPrice) {
-                       
-                        this.setState({ priceSettled: true })
-                    }
+                    }, () => influencerPrice.value === businessPrice.value && influencerPrice.value > 0 && businessPrice.value > 0 && this.setState({ priceSettled: true }));
                 }
 
             }
@@ -97,6 +100,16 @@ class Status extends Component {
             }
         });
 
+    }
+
+    handleInputPriceChange(e) {
+        const target = e.target;
+        const value = target.value;
+        const name = target.name;
+
+        this.setState({
+            [name]: {value, hasChanged: true}
+        });
     }
 
     render() {
@@ -108,10 +121,10 @@ class Status extends Component {
                     <span className="title"> Influncer's Price: </span>
                     <TextField
                         id="InfluencerPrice"
-                        name="InfluencerPrice"
-                        defaultValue={`${influencerPrice}`}
+                        name="influencerPrice"
+                        value={influencerPrice.value}
                         //value={theAuction.NumOfMinFollowers}
-                        onChange={this.handleChange}
+                        onChange={this.handleInputPriceChange}
                         InputProps={{
                             readOnly: Boolean(user.Type === "Business Owner" || priceSettled)
                         }}
@@ -122,16 +135,16 @@ class Status extends Component {
                         }}
                         margin="normal"
                     />
-                    {!priceSettled && <LayoutButton text="Ok" onClick={this.handleOkClicked} />}
+                    {(!priceSettled && user.Type === "Social Influencer") && <LayoutButton text="Ok" onClick={this.handleOkClicked} />}
                 </div>
                 <div>
                     <span className="title"> Bussniess' Price: </span>
                     <TextField
                         id="BusinessPrice"
-                        name="BusinessPrice"
-                        defaultValue={`${businessPrice}`}
+                        name="businessPrice"
+                        value={businessPrice.value}
                         //value={theAuction.NumOfMinFollowers}
-                        onChange={this.handleChange}
+                        onChange={this.handleInputPriceChange}
                         InputProps={{
                             readOnly: Boolean(user.Type === "Social Influencer" || priceSettled)
                         }}
@@ -142,13 +155,13 @@ class Status extends Component {
                         }}
                         margin="normal"
                     />
-                    {!priceSettled && <LayoutButton text="Ok" onClick={this.handleOkClicked} />}
-                    {priceSettled && 
-                    <div>
-                        {(user.Type === "Business Owner")? 
-                            <span>Congratulations! You have settled the price. The Influencer must now publish your product. Please return to this chat to settle the payment.</span>
-                        :   <span>Congratulations! You have settled the price. Please publish the product and return to this chat to settle the payment.</span>
-                        }}
+                    {(!priceSettled && user.Type === "Business Owner") && <LayoutButton text="Ok" onClick={this.handleOkClicked} />}
+                    {priceSettled &&
+                        <div>
+                            {(user.Type === "Business Owner") ?
+                                <span>Congratulations! You have settled the price. The Influencer must now publish your product. Please return to this chat to settle the payment.</span>
+                                : <span>Congratulations! You have settled the price. Please publish the product and return to this chat to settle the payment.</span>
+                            }
                     </div>}
                 </div>
                 <div className="sepratorLine"></div>

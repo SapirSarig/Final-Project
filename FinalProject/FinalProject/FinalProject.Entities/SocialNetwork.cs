@@ -18,9 +18,5 @@ namespace FinalProject.Entities
         public string Value { get; set; }
 
         public string LinkToProfile { get; set; }
-
-        public int UserId { get; set; }
-        [ForeignKey("UserId")]
-        public virtual InfluencerUser InfluencerUser { get; set; }
     }
 }

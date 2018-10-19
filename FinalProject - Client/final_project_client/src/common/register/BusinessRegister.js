@@ -55,6 +55,7 @@ class BusinessRegister extends Component {
         }, () => this.updateChooseTypeState(this.state));
         this.checkValidation(name, value);
     }
+    
     checkValidation(name, value) {
         const { errors, LinksToProfiles } = this.state;
         let errorMessage;

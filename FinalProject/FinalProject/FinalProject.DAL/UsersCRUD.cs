@@ -161,21 +161,15 @@ namespace FinalProject.DAL
                 CurrUser.Name = userToUpdate.Name;
                 if(userToUpdate.Interests!=null)
                 {
-                    ICollection<Interest> interests = (CurrUser as InfluencerUser).Interests;
-                    //if(userToUpdate.Interests.Count > CurrUser.Interests.Count)
+                    ICollection<Interest> newInterests = new List<Interest>();
+                    (CurrUser as InfluencerUser).Interests.Clear();
 
                     foreach (var newInterest in userToUpdate.Interests)
                     {
-                        bool found = false;
-                        foreach (var i in interests)
-                        {
-                            if (i.Value == newInterest.Value)
-                            {
-                                found = true;
-                            }
-                        }
-                        if (!found) { interests.Add(newInterest); }
+                        newInterests.Add(newInterest);
                     }
+
+                    (CurrUser as InfluencerUser).Interests = newInterests;
                 }
                 
 
@@ -183,23 +177,17 @@ namespace FinalProject.DAL
                 CurrUser.Description = userToUpdate.Description;
                 if(userToUpdate.SocialNetworks != null)
                 {
-                    ICollection<SocialNetwork> socialNetworks = (CurrUser as InfluencerUser).SocialNetworks;
+                    ICollection<SocialNetwork> newSocialNetworks = new List<SocialNetwork>();
+                    (CurrUser as InfluencerUser).SocialNetworks.Clear();
+
                     foreach (var newSocialNetwork in userToUpdate.SocialNetworks)
                     {
-                        bool found = false;
-                        foreach (var sn in socialNetworks)
-                        {
-                            if (sn.Value == newSocialNetwork.Value)
-                            {
-                                found = true;
-                            }
-                        }
-                        if (!found) { socialNetworks.Add(newSocialNetwork); }
+                        newSocialNetworks.Add(newSocialNetwork);
                     }
+
+                    (CurrUser as InfluencerUser).SocialNetworks = newSocialNetworks;
+
                 }
-                
-                
-                //(CurrUser as InfluencerUser).SocialNetworks = userToUpdate.SocialNetworks;
                 context.SaveChanges();
             }
         }

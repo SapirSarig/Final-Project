@@ -15,6 +15,7 @@ class AuctionInList extends Component {
                 <div> <span className="AuctionName"> Auction:  </span> {auction.Title}</div>
                 <div> Product: {auction.Product} </div>
                 <div> Description: {auction.Description}</div>
+                <div> Status: {auction.Status} </div>
                 {/* <div className="AuctionDescription">
                     {auction.Description}
                 </div> */}

@@ -54,6 +54,7 @@ class starOffer extends Component {
             offerDeleted: false,
             openNegotiation: false,
             offerAccepted:false,
+            offerDeclined: false,
             auctionStatus:''
             //chat: {}
 
@@ -103,7 +104,8 @@ class starOffer extends Component {
                     }
                     else {
                         this.setState({
-                            openNegotiation: req.IsOpenNegotiation
+                            openNegotiation: req.IsOpenNegotiation,
+                            offerAccepted: req.Status === "Accepted" ? true : false
                         });
                     }
                 }
@@ -202,10 +204,10 @@ class starOffer extends Component {
         if (r == true) {
             status = "Accepted";
             const { OfferId, AuctionName } = this.state;
-            this.offerService.updateOffer(OfferId, status).then(req => {
-                if (req) {
-                    if (req.Message) {
-                        alert(req.Message);
+            this.offerService.updateOffer(OfferId, status).then(updateOfferReq => {
+                if (updateOfferReq) {
+                    if (updateOfferReq.Message) {
+                        alert(updateOfferReq.Message);
                     }
                     else {
                         
@@ -217,9 +219,9 @@ class starOffer extends Component {
                                 }
                                 else {
                                     alert("The offer was accepted succefully!");
-                                    this.setState({ OfferStatusUpdated: true });
+                                    //this.setState({ OfferStatusUpdated: true });
                                     this.openNegotiation();
-                                    this.setState({offerAccepted: true});
+                                    this.setState({offerAccepted: updateOfferReq.Status === "Accepted" ? true : false});
                                      
                                 }
                             }
@@ -246,7 +248,8 @@ class starOffer extends Component {
                     }
                     else {
                         alert("The offer was declined succefully");
-                        this.setState({ OfferStatusUpdated: true });
+                        this.setState({ OfferStatusUpdated: true ,
+                            offerDeclined : req.Status === "Declined" ? true : false});
                     }
                 }
                 else {
@@ -331,7 +334,7 @@ class starOffer extends Component {
                                 alert(req.Message);
                             }
                             else {
-                                this.setState({ openNegotiation: true })
+                                this.setState({ openNegotiation: req.IsOpenNegotiation })
                             }
                         }
                     });
@@ -346,7 +349,7 @@ class starOffer extends Component {
     render() {
         const { classes } = this.props;
         const { fromBusiness, fromAllOffers, user } = this.props.location.state;
-        let { offer, AuctionName, StarName, offerOk, OfferStatusUpdated, offerDeleted, openNegotiation, OfferId, offerAccepted } = this.state;
+        let { offer, AuctionName, StarName, offerOk, OfferStatusUpdated, offerDeleted, openNegotiation, OfferId, offerAccepted, offerDeclined } = this.state;
         return (
             <div className="offerWrapper">
                 {(!offerOk && !OfferStatusUpdated && !offerDeleted) ?
@@ -431,7 +434,7 @@ class starOffer extends Component {
                         <TextField
                             id="payment"
                             name="Payment"
-                            label="Payment ($) *"
+                            label="Initial Payment ($) *"
                             value={offer.Payment}
                             onChange={this.handleChange}
                             type="number"
@@ -450,9 +453,9 @@ class starOffer extends Component {
                             {/* className={`${this.isAllValid() ? "" : "disableElement"}`} */}
                             {!(fromAllOffers || fromBusiness) && <LayoutButton text="Send Offer" onClick={this.sendOfferClicked} />}
                             {(fromAllOffers && !fromBusiness && !offer.Status==="Accepted") && <LayoutButton text="Delete Offer" onClick={this.deleteOfferClicked} />}
-                            {fromBusiness && offer.Status === "Pending" && <LayoutButton text="Accept" onClick={this.acceptClicked} />}
-                            {fromBusiness && offer.Status === "Pending" && <LayoutButton text="Decline" onClick={this.declinedClicked} />}
-                            {fromBusiness && offer.Status === "Pending" && <LayoutButton text="Open Negotiation" onClick={this.openNegotiation} />}
+                            {fromBusiness && !offerAccepted && !offerDeclined && !openNegotiation && offer.Status === "Pending" && <LayoutButton text="Accept" onClick={this.acceptClicked} />}
+                            {fromBusiness && !offerAccepted && !offerDeclined && !openNegotiation && offer.Status === "Pending" && <LayoutButton text="Decline" onClick={this.declinedClicked} />}
+                            {fromBusiness && !offerAccepted && !offerDeclined && !openNegotiation && offer.Status === "Pending" && <LayoutButton text="Open Negotiation" onClick={this.openNegotiation} />}
                         </div>
                     </div> :
                     (offerOk || offerDeleted) ?
@@ -460,10 +463,10 @@ class starOffer extends Component {
                             pathname: '/influencerHomePage',
                             state: { user: this.props.location.state.user.user ? this.props.location.state.user.user : this.props.location.state.user }//check why
                         }} /> :
-                        <Redirect to={{
+                        offerDeclined && (<Redirect to={{
                             pathname: '/businessHomePage',
                             state: { user }//check why
-                        }} />}
+                        }} />)}
             </div>
         );
     }

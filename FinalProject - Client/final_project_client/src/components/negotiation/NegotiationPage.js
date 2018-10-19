@@ -55,7 +55,7 @@ class NegotiationPage extends Component {
         }
 
         //this.setState({chat});
-        this.getNegotiationContent();
+        this.getNegotiationContent(); // ????
         setInterval(this.getNegotiationContent, 10000);
         // this.offerService.updateIsOpenNegotiations(OfferId).then(req => {
         //     //console.log(req);

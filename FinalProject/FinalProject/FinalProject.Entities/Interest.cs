@@ -13,9 +13,9 @@ namespace FinalProject.Entities
         public int Id { get; set; }
         public string Value { get; set; }
 
-        public int UserId { get; set; }
-        [ForeignKey("UserId")]
-        public virtual User User { get; set; }
+        //public int UserId { get; set; }
+        //[ForeignKey("UserId")]
+        //public virtual User User { get; set; }
 
 
         //public int? AuctionId { get; set; }
