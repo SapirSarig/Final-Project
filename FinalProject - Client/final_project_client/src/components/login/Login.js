@@ -144,7 +144,11 @@ class Login extends Component {
                         alert(req.Message);
                     }
                     else {
-                        LocalStorageUtil.SaveLoggedUser(req);
+                        if (rememberMe) {
+                            LocalStorageUtil.SaveLoggedUser(req);
+                        } else {
+                            SessionStorageUtil.SaveLoggedUser(req);
+                        }
                         this.setState({ loggedIn: true, user: req })
                     }
 
