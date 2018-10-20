@@ -65,30 +65,6 @@ class InfluencerHomePage extends Component {
     }
 
     render() {
-        const userInfo = {
-            Name: "rinat",
-            Email: "rinat@gmail.com",
-            ConfirmEmail: "rinat@gmail.com",
-            Picture: "string",
-            Description: "pop",
-            Type: "Social Influencer",
-            CompanyName: "cola",
-            WebsiteLink: "www.walla.com",
-            SocialNetworks: [
-                {
-                    Value: "Facebook",
-                    LinkToProfile: "www.Facebook.com"
-                }
-            ],
-            Interests: [
-                {
-                    Value: "Sport"
-                },
-                {
-                    Value: "Music"
-                }
-            ]
-        };
         const { updatedUser, user, isOffers } = this.state;
         return (
             <div className="influencerHomePage">

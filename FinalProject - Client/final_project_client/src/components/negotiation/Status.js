@@ -25,7 +25,8 @@ class Status extends Component {
             user: {},
             businessPrice: { value: '', hasChanged: false },
             influencerPrice: { value: '', hasChanged: false },
-            priceSettled: false
+            priceSettled: false,
+            okClicked: false
         }
         this.offerService = new OfferService();
         this.PostedChecked = this.PostedChecked.bind(this);
@@ -49,12 +50,12 @@ class Status extends Component {
                     alert(req.message);
                 }
                 else {
-                    if(!businessPrice.hasChanged) {
+                    if (!businessPrice.hasChanged) {
                         this.setState({
                             businessPrice: { value: req.BusinessPrice, hasChanged: false },
                         })
                     }
-                    if(!influencerPrice.hasChanged) {
+                    if (!influencerPrice.hasChanged) {
                         this.setState({
                             influencerPrice: { value: req.InfluencerPrice, hasChanged: false },
                         })
@@ -82,6 +83,7 @@ class Status extends Component {
         let influencerValue = influencerPrice.value;
         let businessValue = businessPrice.value;
 
+        this.setState({ okClicked: true });
         this.offerService.updatePrice(offerId, user.Type, user.Type === "Business Owner" ? businessValue : influencerValue).then(req => {
             if (req) {
                 if (req.message) {
@@ -91,7 +93,25 @@ class Status extends Component {
                     this.setState({
                         businessPrice: req.BusinessPrice,
                         influencerPrice: req.InfluencerPrice,
-                    }, () => influencerPrice.value === businessPrice.value && influencerPrice.value > 0 && businessPrice.value > 0 && this.setState({ priceSettled: true }));
+                    }, () =>{
+                        if(parseInt(influencerPrice.value) === parseInt(businessPrice.value) && influencerPrice.value > 0 && businessPrice.value > 0){
+                            this.setState({ priceSettled: true }, ()=>{
+                                this.offerService.updateOffer(offerId, "Accepted").then(req=>{
+                                    if (req) {
+                                        if (req.message) {
+                                            alert(req.message);
+                                        }
+                                    }
+                                    else{
+                                        alert("Server error!");
+                        
+                                    }
+                                })
+
+                            });
+                        }
+                    });   
+                     
                 }
 
             }
@@ -108,13 +128,13 @@ class Status extends Component {
         const name = target.name;
 
         this.setState({
-            [name]: {value, hasChanged: true}
+            [name]: { value, hasChanged: true }
         });
     }
 
     render() {
         const { classes } = this.props;
-        const { disablePostCheckBox, user, businessPrice, influencerPrice, priceSettled } = this.state;
+        const { disablePostCheckBox, user, businessPrice, influencerPrice, priceSettled, okClicked } = this.state;
         return (
             <div className="Status">
                 <div>
@@ -135,6 +155,8 @@ class Status extends Component {
                         }}
                         margin="normal"
                     />
+                    <br/>
+                    {!priceSettled && okClicked && user.Type === "Social Influencer" && <label>Waiting for response...</label>}
                     {(!priceSettled && user.Type === "Social Influencer") && <LayoutButton text="Ok" onClick={this.handleOkClicked} />}
                 </div>
                 <div>
@@ -155,6 +177,8 @@ class Status extends Component {
                         }}
                         margin="normal"
                     />
+                    <br/>
+                    {!priceSettled && okClicked && user.Type === "Business Owner" && <label>Waiting for response...</label>}
                     {(!priceSettled && user.Type === "Business Owner") && <LayoutButton text="Ok" onClick={this.handleOkClicked} />}
                     {priceSettled &&
                         <div>
@@ -162,7 +186,7 @@ class Status extends Component {
                                 <span>Congratulations! You have settled the price. The Influencer must now publish your product. Please return to this chat to settle the payment.</span>
                                 : <span>Congratulations! You have settled the price. Please publish the product and return to this chat to settle the payment.</span>
                             }
-                    </div>}
+                        </div>}
                 </div>
                 <div className="sepratorLine"></div>
             </div>
