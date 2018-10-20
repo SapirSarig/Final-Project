@@ -25,6 +25,8 @@ import SessionStorageUtil from './utils/SessionStorageUtil';
 import Nav from './components/nav/nav';
 import Overlay from './components/overlay/overlay';
 import AllNegotiations from './components/negotiation/AllNegotiaions';
+import Player from './components/player/player';
+
 
 const CheckIfUserAuthenticated = () => {
   const user = LocalStorageUtil.GetLoggedUser() || SessionStorageUtil.GetLoggedUser();
@@ -99,7 +101,8 @@ class App extends Component {
             <PublicRoute path="/signUp" component={SignUpPage} />
             <PublicRoute path="/resetPassword" component={ResetPassword} />
             <PublicRoute path="/forgotPassword" component={ForgotPassword} />
-
+            <PublicRoute path="/video" component={Player} />
+            
             <PrivateRoute path="/editProfile" component={EditProfile} />
             <PrivateRoute path="/auction" component={Auction} />
             <PrivateRoute path="/allOffers" component={allOffers} />

@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import MyAuctions from '../views/myAuctions/myAuctions.js';
 import AuctionService from '../../services/apis/AuctionService';
+import NavToggle from '../navToggle/navToggle';
 import './AllAuctions.css';
 
 class AllAuctions extends Component {
@@ -32,6 +33,7 @@ class AllAuctions extends Component {
 
         return (
             <div className="allAuctions">
+                <NavToggle />
                 <label className="searchFieldLabel"> Search: </label>
                 <input className="searchFieldInput" onChange={this.handleSearchFieldChange} />
                 <MyAuctions user={user} auctions={auctions} title="All Auctions"/>

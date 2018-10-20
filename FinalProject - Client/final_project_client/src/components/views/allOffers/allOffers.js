@@ -8,6 +8,7 @@ import './allOffers.css';
 import UserService from '../../../services/apis/UserService';
 import OfferService from '../../../services/apis/OfferService';
 import OffersList from '../../offers/offersList';
+import NavToggle from "../../navToggle/navToggle"
 
 const styles = theme => ({
     container: {
@@ -63,67 +64,10 @@ class AllOffers extends Component {
         const { classes } = this.props;
         const { offers, user } = this.state;
         return (
-
-            <OffersList offers={offers} fromBusiness={this.props.location.state.fromBusiness} fromAllOffers={true} user={user}/>
-
-
-            // <form className={classes.container} noValidate autoComplete="off">
-            //     <div className="offersTitleContainer">
-            //         <div className="offersTitle">
-            //             Offers
-            //         </div>
-            //     </div>
-            //     {offers && offers.map((offer) =>
-            //         <div className="offerWrapper">
-            //             {/* <TextField
-            //                 id="date"
-            //                 label="Date"
-            //                 defaultValue= {offer.date}
-            //                 className={classes.textField}
-            //                 margin="normal"
-            //                 InputProps={{
-            //                     readOnly: true,
-            //                 }}
-            //             /> */}
-            //             <TextField
-            //                 id="offerDescription"
-            //                 label="Offer's description"
-            //                 defaultValue={offer.Description}
-            //                 className={classes.textField}
-            //                 margin="normal"
-            //                 InputProps={{
-            //                     readOnly: true,
-            //                 }}
-            //             />
-            //             <TextField
-            //                 id="nameAuction"
-            //                 label="Auction's name"
-            //                 defaultValue={offer.Auction.Title}
-            //                 className={classes.textField}
-            //                 margin="normal"
-            //                 InputProps={{
-            //                     readOnly: true,
-            //                 }}
-            //             />
-            //             <div className="bottomWrapper">
-            //                 <TextField
-            //                     id="numberAuction"
-            //                     label="Auction's number"
-            //                     defaultValue={offer.Auction.Id}
-            //                     className={classes.textField}
-            //                     margin="normal"
-            //                     InputProps={{
-            //                         readOnly: true,
-            //                     }}
-            //                 />
-            //                 <Link className="goToStarOffer" to={{pathname: "/starOffer" , state: {currOffer: offer, fromAllOffers:true}}}>
-            //                     <LayoutButton text="Go To Offer" />
-            //                 </Link>
-            //             </div>
-            //             <div className="separatorLine"></div>
-            //         </div>
-            //     )}
-            // </form>
+            <div>    
+                <NavToggle />
+                <OffersList offers={offers} fromBusiness={this.props.location.state.fromBusiness} fromAllOffers={true} user={user}/>
+            </div>
         );
     }
 }

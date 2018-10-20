@@ -13,6 +13,8 @@ import UserSerive from '../../../services/apis/UserService';
 import NegotiationPage from '../../negotiation/NegotiationPage';
 import SessionStorageUtil from '../../../utils/SessionStorageUtil';
 import NegotiationService from '../../../services/apis/NegotiationService';
+import NavToggle from "../../navToggle/navToggle";
+
 
 const styles = theme => ({
     container: {
@@ -352,6 +354,7 @@ class starOffer extends Component {
         let { offer, AuctionName, StarName, offerOk, OfferStatusUpdated, offerDeleted, openNegotiation, OfferId, offerAccepted, offerDeclined } = this.state;
         return (
             <div className="offerWrapper">
+            <NavToggle />
                 {(!offerOk && !OfferStatusUpdated && !offerDeleted) ?
                     <div className={classes.container} noValidate autoComplete="off">
                         <div className="firstLineWrapper">

@@ -5,12 +5,23 @@
     font-size: 1.3em;
 }
 
-.TopPage{
+.influencerTopPage{
+    background-image: url("../../images/stars.jpg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    padding-top: 50px;
+    box-sizing: border-box;
+    border-bottom: 1px solid black;
+}
+
+.businessTopPage{
     background: #bb87c4;
     padding-top: 50px;
     box-sizing: border-box;
     border-bottom: 1px solid black;
 }
+
 
 .contentWrapper{
     max-width: 80vw;

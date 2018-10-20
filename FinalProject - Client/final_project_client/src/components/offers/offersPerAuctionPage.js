@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import OfferService from '../../services/apis/OfferService';
 import OffersList from './offersList';
+import NavToggle from "../navToggle/navToggle"
+
 
 class offersPerAuctionPage extends Component {
     OfferService
@@ -35,6 +37,7 @@ class offersPerAuctionPage extends Component {
         return (
 
             <div className="offersPerAuctionContainer" >
+                <NavToggle />
                 {console.log("user", this.props.location.state.user)} 
                 {console.log("auction", this.props.location.state.auction)}
 
