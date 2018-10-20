@@ -5,7 +5,7 @@
 }
 
 .profliePic{
-    width: 200px;
+    width: 180px;
     border: 1px solid white;
     border-radius: 50%;
     overflow: hidden;
@@ -13,14 +13,15 @@
 
 .helloAndLink{
     text-align: center;
+    color: linen;
 }
 
-.icon {
+.userProfileIcon {
     display: inline-block;
-    width: 3em;
-    height: 3em;
+    width: 9em;
+    height: 9em;
     stroke-width: 0;
     stroke: currentColor;
-    fill: currentColor;
-    margin-left: 23px;
+    fill: linen;
+    margin-left: 24px;
   }

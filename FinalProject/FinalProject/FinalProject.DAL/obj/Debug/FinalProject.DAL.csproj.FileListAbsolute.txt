@@ -12,3 +12,17 @@ C:\Users\Admin\Documents\GitHub\Final-Project\FinalProject\FinalProject\FinalPro
 C:\Users\Admin\Documents\GitHub\Final-Project\FinalProject\FinalProject\FinalProject.DAL\obj\Debug\FinalProject.DAL.csproj.CopyComplete
 C:\Users\Admin\Documents\GitHub\Final-Project\FinalProject\FinalProject\FinalProject.DAL\obj\Debug\FinalProject.DAL.dll
 C:\Users\Admin\Documents\GitHub\Final-Project\FinalProject\FinalProject\FinalProject.DAL\obj\Debug\FinalProject.DAL.pdb
+C:\Users\Avi-Laptop\Documents\GitHub\Final-Project\FinalProject\FinalProject\FinalProject.DAL\bin\Debug\FinalProject.DAL.dll.config
+C:\Users\Avi-Laptop\Documents\GitHub\Final-Project\FinalProject\FinalProject\FinalProject.DAL\bin\Debug\FinalProject.DAL.dll
+C:\Users\Avi-Laptop\Documents\GitHub\Final-Project\FinalProject\FinalProject\FinalProject.DAL\bin\Debug\FinalProject.DAL.pdb
+C:\Users\Avi-Laptop\Documents\GitHub\Final-Project\FinalProject\FinalProject\FinalProject.DAL\bin\Debug\EntityFramework.dll
+C:\Users\Avi-Laptop\Documents\GitHub\Final-Project\FinalProject\FinalProject\FinalProject.DAL\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\Avi-Laptop\Documents\GitHub\Final-Project\FinalProject\FinalProject\FinalProject.DAL\bin\Debug\FinalProject.Entities.dll
+C:\Users\Avi-Laptop\Documents\GitHub\Final-Project\FinalProject\FinalProject\FinalProject.DAL\bin\Debug\FinalProject.Entities.pdb
+C:\Users\Avi-Laptop\Documents\GitHub\Final-Project\FinalProject\FinalProject\FinalProject.DAL\bin\Debug\EntityFramework.xml
+C:\Users\Avi-Laptop\Documents\GitHub\Final-Project\FinalProject\FinalProject\FinalProject.DAL\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\Avi-Laptop\Documents\GitHub\Final-Project\FinalProject\FinalProject\FinalProject.DAL\obj\Debug\FinalProject.DAL.csprojAssemblyReference.cache
+C:\Users\Avi-Laptop\Documents\GitHub\Final-Project\FinalProject\FinalProject\FinalProject.DAL\obj\Debug\FinalProject.DAL.csproj.CoreCompileInputs.cache
+C:\Users\Avi-Laptop\Documents\GitHub\Final-Project\FinalProject\FinalProject\FinalProject.DAL\obj\Debug\FinalProject.DAL.csproj.CopyComplete
+C:\Users\Avi-Laptop\Documents\GitHub\Final-Project\FinalProject\FinalProject\FinalProject.DAL\obj\Debug\FinalProject.DAL.dll
+C:\Users\Avi-Laptop\Documents\GitHub\Final-Project\FinalProject\FinalProject\FinalProject.DAL\obj\Debug\FinalProject.DAL.pdb
