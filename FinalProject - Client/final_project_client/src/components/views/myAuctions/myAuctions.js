@@ -4,6 +4,8 @@ import TextField from '@material-ui/core/TextField';
 import { withStyles } from '@material-ui/core/styles';
 import { Link } from 'react-router-dom';
 import './myAuctions.css';
+import NavToggle from "../../navToggle/navToggle";
+
 
 const styles = theme => ({
     container: {
@@ -52,6 +54,7 @@ class myAuctions extends Component {
 
         return (
             <form className={classes.container} noValidate autoComplete="off">
+                <NavToggle />
                 <div className="myAuctionsTitleContainer">
                     <div className="myAuctionsTitle">
                         {theTitle}

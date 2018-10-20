@@ -1,0 +1,25 @@
+.firstLine{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.userPicWrapper{
+    height: 50px;
+    width: 60px;
+    border-radius: 50%;
+    overflow: hidden;
+    padding: 0;
+}
+
+.detailsWrapper{
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.detailsLink{
+    padding: 3px 20px;
+}

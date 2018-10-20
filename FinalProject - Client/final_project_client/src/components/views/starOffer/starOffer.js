@@ -10,6 +10,8 @@ import OfferService from '../../../services/apis/OfferService';
 import StringUtil from '../../../utils/StringUtil';
 import socialMedia from '../../../common/socialMedia/socialMedia';
 import UserSerive from '../../../services/apis/UserService';
+import NavToggle from "../../navToggle/navToggle";
+
 
 const styles = theme => ({
     container: {
@@ -281,6 +283,7 @@ class starOffer extends Component {
         let { offer, AuctionName, StarName, offerOk, OfferStatusUpdated, offerDeleted } = this.state;
         return (
             <div className="offerWrapper">
+            <NavToggle />
                 {(!offerOk && !OfferStatusUpdated && !offerDeleted) ?
                     <div className={classes.container} noValidate autoComplete="off">
                         <div className="firstLineWrapper">

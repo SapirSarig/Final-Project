@@ -83,7 +83,7 @@ class InfluencerHomePage extends Component {
                 <NavToggle />
                 {user && (
                     <div>
-                        <div className="TopPage">
+                        <div className="influencerTopPage">
                             <HomeHeader
                                 user={
                                     Object.getOwnPropertyNames(updatedUser).length > 0

@@ -42,28 +42,25 @@ class UsersContainer extends Component {
                 <div className="auctionsWrapper">
                     {theUsers && theUsers.map((user) =>
                         <div className="myAuctionWrapper">
-                            <TextField
-                                id="nameAuction"
-                                label="User's name"
-                                defaultValue= {user.Name}
-                                className={classes.textField}
-                                margin="normal"
-                                InputProps={{
-                                    readOnly: true,
-                                }}
-                            />
-
-                            <div className="btnWrapper">
-                                <div className="detailsContainer ">
-                                    <Link className="detailsBtn designBtn" to={{ pathname: "/Profile", state: {user:user, okDisabled:false} }}>
-                                        Details
-                                    </Link>
+                            <div className="firstLine">
+                                <TextField
+                                    id="nameAuction"
+                                    label="User's name"
+                                    defaultValue= {user.Name}
+                                    className={classes.textField}
+                                    margin="normal"
+                                    InputProps={{
+                                        readOnly: true,
+                                    }}
+                                />
+                                <div className="userPicWrapper designBtn">
+                                    <img src={user.Picture} className="userPic" />
                                 </div>
-                                <div className="offersContainer">
-                                    <div className="OffersBtn designBtn">
-                                        <img src={user.Picture} className="userPic" />
-                                    </div>
-                                </div>
+                            </div>
+                            <div className="detailsWrapper">
+                                <Link className="detailsLink designBtn" to={{ pathname: "/Profile", state: {user:user, okDisabled:false} }}>
+                                    Details
+                                </Link>
                             </div>
                         </div>
                     )}

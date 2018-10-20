@@ -88,7 +88,7 @@ class BusinessHomePage extends Component {
                 <NavToggle />
                 {user && (
                     <div>
-                        <div className="TopPage">
+                        <div className="businessTopPage">
                             <HomeHeader
                                 user={
                                     Object.getOwnPropertyNames(updatedUser).length > 0
