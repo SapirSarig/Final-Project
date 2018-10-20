@@ -15,7 +15,7 @@ import PropTypes from 'prop-types';
 import TextField from '@material-ui/core/TextField';
 import { withStyles } from '@material-ui/core/styles';
 
-import { logout, setUser } from '../../actions/';
+import { logout } from '../../actions/';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
@@ -28,8 +28,8 @@ const initialState = {
         Password: "",
         ConfirmPassword: "",
         ConfirmMail: "",
-        Question1:"",
-        Question2:""
+        Question1: "",
+        Question2: ""
     },
     externalLogin: false
 
@@ -82,9 +82,11 @@ class Register extends Component {
         }
         else {
             const { user } = this.props;
-            this.setState({
-                user
-            });
+            if (user) {
+                this.setState({
+                    user
+                });
+            }
         }
     }
     // const { location } = this.props;
@@ -181,7 +183,7 @@ class Register extends Component {
         } else if (fieldName === "ConfirmMail") {
             errorMessage = RegisterService.confirmValidation(value, user.Email);
         }
-        else if ((fieldName === "Question1") || (fieldName === "Question2")){
+        else if ((fieldName === "Question1") || (fieldName === "Question2")) {
             errorMessage = (StringUtil.isEmptyString(value) || StringUtil.hasNumber(value)) ? "Input not valid" : "";
         }
 
@@ -256,7 +258,7 @@ class Register extends Component {
             if (StringUtil.isEmptyString(user.CompanyName)) {
                 return false;
             }
-            if(chooseTypeState && chooseTypeState.errors && chooseTypeState.errors.WebsiteLink !== undefined){
+            if (chooseTypeState && chooseTypeState.errors && chooseTypeState.errors.WebsiteLink !== undefined) {
                 return false;
             }
         }
@@ -385,7 +387,7 @@ class Register extends Component {
                     />
                     {/* <input type="text" name="description" onChange={this.handleInputChange} /> */}
 
-                    <VerifyQuestions signUp={signUp} handleInputChange={this.handleInputChange} question1={user.Question1} question2={user.Question2} errors={errors}/>
+                    <VerifyQuestions signUp={signUp} handleInputChange={this.handleInputChange} question1={user.Question1} question2={user.Question2} errors={errors} />
 
 
                     {signUp && <div className={`${this.isAllValid() ? "signUpBtnWrapper" : "disableElement signUpBtnWrapper"}`}>
@@ -410,16 +412,14 @@ Register.propTypes = {
 // export default withStyles(styles)(Register);
 
 const mapStateToProps = (state) => {
-    return {
-      user: state.userState,
-    };
-  };
-  
+    return { };
+};
+
 const mapDispatchToProps = (dispatch) => {
-    return bindActionCreators({ logout, setUser }, dispatch);
-  };
-  
+    return bindActionCreators({ logout }, dispatch);
+};
+
 export default withStyles(styles)(connect(
     mapStateToProps,
     mapDispatchToProps
-  )(Register));
+)(Register));

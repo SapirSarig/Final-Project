@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { closeNav, logout, setUser } from "../../actions";
+import { closeNav, logout } from "../../actions";
 import { bindActionCreators } from 'redux';
 import './navMenu.css';
 import NavMenuLink from './navMenuLink';
@@ -49,7 +49,6 @@ class NavMenu extends Component {
         const isUserSet = user ? !!Object.keys(user).length : false;
         const logoutHandler = () => {
             logout();
-            setUser();
             closeNav();
         };
 
@@ -88,13 +87,11 @@ class NavMenu extends Component {
 // export default connect()(NavMenu);
 
 const mapStateToProps = (state) => {
-    return {
-        user: state.userState,
-    };
+    return { };
 };
 
 const mapDispatchToProps = (dispatch) => {
-    return bindActionCreators({ closeNav, logout, setUser }, dispatch);
+    return bindActionCreators({ closeNav, logout }, dispatch);
 };
 
 export default connect(

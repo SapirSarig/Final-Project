@@ -54,6 +54,7 @@ class SignUp extends Component {
             });
         }
     }
+    
     CreateInfluencerUser(user) {
         //const userInfo = Object.assign({}, registerObj, this.state);
         //console.log('#########', userInfo);
