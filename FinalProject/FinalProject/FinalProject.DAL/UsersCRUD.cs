@@ -72,12 +72,9 @@ namespace FinalProject.DAL
                                                        select user;
                 return filteredInfluencers.ToList();
             }
-
-
-
         }
 
-        public bool AddStars(int id, int numOfStars)
+        public bool AddStars(int id, int numOfStars, int RateByUser)
         {
             bool res = false;
             User CurrUser = context.Users.FirstOrDefault(u => u.Id == id);
@@ -106,6 +103,9 @@ namespace FinalProject.DAL
                 CurrUser.NumOfVoters++;
                 double avg = (double)CurrUser.Stars / CurrUser.NumOfVoters;
                 CurrUser.RateAvg = Convert.ToDouble(String.Format("{0:0.00}", avg));
+                RateBy rateBy = new RateBy();
+                rateBy.RatedByUserId = RateByUser;
+                CurrUser.RateByUsers.Add(rateBy);
                 context.SaveChanges();
                 res = true;
             }
@@ -121,6 +121,9 @@ namespace FinalProject.DAL
             }
             else
             {
+                ReviewBy reviewedBy = new ReviewBy();
+                reviewedBy.ReviewedByUserId = review.ByUserId;
+                user.ReviewByUsers.Add(reviewedBy);
                 user.Reviews.Add(review);
                 context.SaveChanges();
                 return true;
@@ -247,6 +250,7 @@ namespace FinalProject.DAL
             return user;
         }
 
+       
         public bool IsEmailExist(string email)
         {
             User res = context.Users.FirstOrDefault(user => user.Email == email);
@@ -254,6 +258,37 @@ namespace FinalProject.DAL
                 return true;
             return false;
         }
+
+        public bool IsRatedByUserId(int RatedUserId, int RatedByUserId)
+        {
+            bool res = false;
+            User currUser = context.Users.FirstOrDefault(user => user.Id == RatedUserId);
+            foreach(RateBy rateBy in currUser.RateByUsers)
+            {
+                if (rateBy.RatedByUserId == RatedByUserId)
+                {
+                    res = true;
+                    break;
+                }
+            }
+            return res;
+        }
+
+        public bool IsReviewedByUserId(int ReviewedUserId, int ReviewedByUserId)
+        {
+            bool res = false;
+            User currUser = context.Users.FirstOrDefault(user => user.Id == ReviewedUserId);
+            foreach (ReviewBy reviewBy in currUser.ReviewByUsers)
+            {
+                if (reviewBy.ReviewedByUserId == ReviewedByUserId)
+                {
+                    res = true;
+                    break;
+                }
+            }
+            return res;
+        }
+
         #region IDisposable - Do Using
 
         public void Dispose()

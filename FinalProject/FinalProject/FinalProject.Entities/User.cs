@@ -13,6 +13,8 @@ namespace FinalProject.Entities
         {
             Interests = new HashSet<Interest>();
             Reviews = new HashSet<Review>();
+            RateByUsers = new HashSet<RateBy>();
+            ReviewByUsers = new HashSet<ReviewBy>();
         }
         [Key]
         public int Id { get; set; }
@@ -52,6 +54,10 @@ namespace FinalProject.Entities
         public virtual ICollection<Review> Reviews { get; set; }
 
         public virtual ICollection<UserChat> UsersChats { get; set; }
+
+        public virtual ICollection<ReviewBy> ReviewByUsers { get; set; }
+
+        public virtual ICollection<RateBy> RateByUsers { get; set; }
 
     }
 }

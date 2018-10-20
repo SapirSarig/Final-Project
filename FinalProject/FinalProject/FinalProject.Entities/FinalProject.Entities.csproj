@@ -64,7 +64,9 @@
     <Compile Include="ProductScope.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="PublishSocialNetwork.cs" />
+    <Compile Include="RateBy.cs" />
     <Compile Include="Review.cs" />
+    <Compile Include="ReviewBy.cs" />
     <Compile Include="SocialNetwork.cs" />
     <Compile Include="User.cs" />
     <Compile Include="UserChat.cs" />

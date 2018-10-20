@@ -77,11 +77,11 @@ namespace FinalProject.BL
             }
         }
 
-        public ErrorMessage AddStars(int id, int NumOfStars)
+        public ErrorMessage AddStars(int id, int NumOfStars, int RateByUser)
         {
             try
             {
-                bool isAdded = (userCRUD.AddStars(id,NumOfStars));
+                bool isAdded = (userCRUD.AddStars(id,NumOfStars, RateByUser));
                 if (isAdded)
                 {
 
@@ -288,6 +288,16 @@ namespace FinalProject.BL
                 return true;
             }
             return false;
+        }
+
+        public bool IsRatedByUserId(int RatedUserId, int RatedByUserId)
+        {
+            return userCRUD.IsRatedByUserId(RatedUserId, RatedByUserId);
+        }
+
+        public bool IsReviewedByUserId(int ReviewedUserId, int ReviewedByUserId)
+        {
+            return userCRUD.IsReviewedByUserId(ReviewedUserId, ReviewedByUserId);
         }
     }
 }
