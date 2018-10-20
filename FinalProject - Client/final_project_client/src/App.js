@@ -57,7 +57,7 @@ const PublicRoute = ({ component: Component, ...rest }) => (
 const PrivateRoute = ({ component: Component, ...rest }) => (
   <Route {...rest} render={(props) => (
     CheckIfUserAuthenticated() === true
-      ? <Component {...props}  />
+      ? <div> <Nav /> <Component {...props}  /> </div>
       : <Redirect to='/login' />
   )} />
 )
@@ -66,7 +66,7 @@ const PrivateBusinessUserRoute = ({ component: Component, ...rest }) => (
   <Route {...rest} render={(props) => (
     CheckIfUserAuthenticated() === true 
     ? CheckIfCurrentTypeUserLogged("Business Owner")
-      ? <Component {...props} />
+      ? <div> <Nav />  <Component {...props} /> </div>
       : CheckIfCurrentTypeUserLogged("Social Influencer")
         ? <Redirect state={LocalStorageUtil.GetLoggedUser() || SessionStorageUtil.GetLoggedUser()} to='/influencerHomePage' />
         : <Redirect to='/' />
@@ -78,7 +78,7 @@ const PrivateInfluencerUserRoute = ({ component: Component, ...rest }) => (
   <Route {...rest} render={(props) => (
     CheckIfUserAuthenticated() === true 
     ? CheckIfCurrentTypeUserLogged("Social Influencer")
-      ? <Component {...props} />
+      ? <div> <Nav /><Component {...props} /> </div>
       : CheckIfCurrentTypeUserLogged("Business Owner")
         ? <Redirect state={LocalStorageUtil.GetLoggedUser() || SessionStorageUtil.GetLoggedUser()} to='/businessHomePage' />
         : <Redirect to='/' />
@@ -95,7 +95,6 @@ class App extends Component {
         <Overlay />
         <Router>
           <div className="routeContainer">
-            <Nav />
             <PublicRoute exact path="/" component={HomePage} />
             <PublicRoute path="/login" component={LoginPage} />
             <PublicRoute path="/signUp" component={SignUpPage} />

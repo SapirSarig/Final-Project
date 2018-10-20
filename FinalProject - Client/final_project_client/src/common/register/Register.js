@@ -15,6 +15,10 @@ import PropTypes from 'prop-types';
 import TextField from '@material-ui/core/TextField';
 import { withStyles } from '@material-ui/core/styles';
 
+import { logout, setUser } from '../../actions/';
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
+
 const initialState = {
     user: {},
     chooseTypeState: {},
@@ -403,4 +407,19 @@ Register.propTypes = {
     classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles)(Register);
+// export default withStyles(styles)(Register);
+
+const mapStateToProps = (state) => {
+    return {
+      user: state.userState,
+    };
+  };
+  
+const mapDispatchToProps = (dispatch) => {
+    return bindActionCreators({ logout, setUser }, dispatch);
+  };
+  
+export default withStyles(styles)(connect(
+    mapStateToProps,
+    mapDispatchToProps
+  )(Register));

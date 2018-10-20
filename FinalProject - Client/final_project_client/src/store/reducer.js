@@ -2,12 +2,16 @@ import {
   TOGGLE_NAVIGATION,
   CLOSE_NAVIGATION,
   PLAY_VIDEO,
-  CLOSE_VIDEO
+  CLOSE_VIDEO,
+  SET_USER,
 } from "../actions";
 
 const initialState = {
   isNavOpen: false,
-  isVideodPlaying: false
+  isVideodPlaying: false,
+  userState: {
+    user:null
+  }
 };
 
 const reducer = (state = initialState, action) => {
@@ -29,6 +33,11 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         isVideodPlaying: false
+      };
+    case SET_USER:
+      return {
+        ...state,
+        ...action.payload.userState,
       };
     default:
       return state;

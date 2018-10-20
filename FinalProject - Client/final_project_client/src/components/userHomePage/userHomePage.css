@@ -16,7 +16,10 @@
 }
 
 .businessTopPage{
-    background: #bb87c4;
+    background-image: url("../../images/dollars.jpg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
     padding-top: 50px;
     box-sizing: border-box;
     border-bottom: 1px solid black;

@@ -1,8 +1,14 @@
+import LocalStorageUtil from "../utils/LocalStorageUtil";
+import SessionStorageUtil from "../utils/SessionStorageUtil";
+
 // Action types
 export const TOGGLE_NAVIGATION = 'TOGGLE_NAVIGATION';
 export const CLOSE_NAVIGATION = 'CLOSE_NAVIGATION';
 export const PLAY_VIDEO = 'PLAY_VIDEO';
 export const CLOSE_VIDEO = 'CLOSE_VIDEO';
+export const SET_USER = 'SET_USER';
+export const LOGOUT_USER = 'LOGOUT_USER';
+
 
 // action creators
 export function toggleNav() {
@@ -19,4 +25,14 @@ export function playMainVideo() {
 
 export function closeMainVideo() {
   return { type: CLOSE_VIDEO };
+}
+
+export function setUser(user = null) {
+  return { type: SET_USER, payload: { userState: { user: user } } };
+}
+
+export function logout() {  
+  LocalStorageUtil.RemoveLoggedUser();
+  SessionStorageUtil.RemoveLoggedUser();
+  return { type: LOGOUT_USER };
 }
