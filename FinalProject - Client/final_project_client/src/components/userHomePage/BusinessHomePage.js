@@ -35,6 +35,7 @@ class BusinessHomePage extends Component {
         this.offerService = new OfferService();
         this.onMyAuctionsClick = this.onMyAuctionsClick.bind(this);
         this.checkIfAllOffersDeleted = this.checkIfAllOffersDeleted.bind(this);
+        this.initUserDetails = this.initUserDetails.bind(this);
     }
 
     componentWillMount() {

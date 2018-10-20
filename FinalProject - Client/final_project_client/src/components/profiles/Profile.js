@@ -16,17 +16,20 @@ class Profile extends Component {
         this.handleButtonOkClicked = this.handleButtonOkClicked.bind(this);
         this.userService = new UserService();
         this.addStarToUserReviews = this.addStarToUserReviews.bind(this);
+        this.checkIsReviewedByUser = this.checkIsReviewedByUser.bind(this);
+        this.checkIsRatedByUser = this.checkIsRatedByUser.bind(this);
         this.state = {
             user: {},
             review: "",
             okDisabled: true,
-            loggedUser: SessionStorageUtil.GetLoggedUser()
+            loggedUser: SessionStorageUtil.GetLoggedUser(),
+            isRatedByUserVar: false,
+            isReviewedByUserVar: false,
         }
     }
 
     componentDidMount() {
         let { user, location } = this.props;
-
         if (!user && location) {
             user = location.state.user;
         }
@@ -34,6 +37,44 @@ class Profile extends Component {
         this.setState({
             user
         })
+
+        let rateId, reviewId;
+
+        rateId =  setInterval(this.checkIsRatedByUser, 2000);
+        reviewId = setInterval(this.checkIsReviewedByUser, 2000);
+        this.setState({ rateIntervalId: rateId });
+        this.setState({ reviewIntervalId: reviewId });
+        this.checkIsRatedByUser();
+        this.checkIsReviewedByUser();
+    }
+
+    checkIsRatedByUser() {
+        this.userService.isRatedByUserId(this.state.user.Id, this.state.loggedUser.Id).then(req => {
+            if (req.message) {
+                alert(req.message);
+            }
+            else {
+                if (req == true) {
+                    clearInterval(this.state.rateIntervalId);
+                }
+                this.setState({ isRatedByUserVar: req });
+            }
+
+        });
+    }
+
+    checkIsReviewedByUser() {
+        this.userService.isReviewedByUserId(this.state.user.Id, this.state.loggedUser.Id).then(req => {
+            if (req.message) {
+                alert(req.message);
+            }
+            else {
+                if (req == true) {
+                    clearInterval(this.state.reviewIntervalId);
+                }
+                this.setState({ isReviewedByUserVar: req });
+            }
+        });
     }
 
     handleInputChange(event) {
@@ -50,14 +91,15 @@ class Profile extends Component {
     }
 
     addStarToUserReviews(starNum) {
-        this.userService.AddStar(this.state.user.Id, starNum).then(req => {
+        this.userService.AddStar(this.state.user.Id, starNum, this.state.loggedUser.Id).then(req => {
             if (req) {
                 if (req.message) {
                     alert(req.message);
                 }
                 else {
-                    this.setState({ user: req })
-                }
+                    this.setState({ user: req });
+                    clearInterval(this.state.rateIntervalId);
+                    this.setState({isRatedByUserVar:true});                }
             }
             else {
                 alert("Server error!");
@@ -76,16 +118,20 @@ class Profile extends Component {
         let obj = {
             "Text": value,
             "From": FromUser.Name,
+            "ByUserId": FromUser.Id,
             "TimeSent": currTime[0]
         }
+
         this.userService.AddReviewToUser(user.Id, obj).then(req => {
             //console.log(req);
-            if (req !== undefined) {
-                alert("Server Error");
+            if (req) {
+                user.Reviews.push(obj);
+                this.setState({ user: req });
+                clearInterval(this.state.reviewIntervalId);
+                this.setState({isReviewedByUserVar:true});
             }
             else {
-                user.Reviews.push(obj);
-                this.setState({ user });
+                alert("Server Error");
             }
         }
         );
@@ -94,7 +140,6 @@ class Profile extends Component {
         inputelem.disabled = true;
         let okButton = document.getElementById("okButton");
         okButton.disabled = true;
-
     }
 
     render() {
@@ -102,8 +147,7 @@ class Profile extends Component {
         //const { user } = this.state;
         const { location } = this.props;
         const { user } = this.state;
-        let { okDisabled } = this.state;
-
+        let { okDisabled, isRatedByUserVar, isReviewedByUserVar } = this.state;
         const isOkDisabled = (location && location.state.okDisabled) || okDisabled;
 
         console.log(user);
@@ -135,11 +179,11 @@ class Profile extends Component {
                     {user.Type === "Social Influencer" ?
                         <StarProfile dateOfBirth={user.DateOfBirth} socialNetworks={user.SocialNetworks} /> : null}
 
-                    <UserRating user={user} loggedUser={this.state.loggedUser} addStarToUserReviews={this.addStarToUserReviews} />
+                    <UserRating user={user} loggedUser={this.state.loggedUser} addStarToUserReviews={this.addStarToUserReviews} isRatedByUser={isRatedByUserVar} />
 
-                    {user.Name === this.state.loggedUser.Name ? <div></div> :
+                    {(user.Name === this.state.loggedUser.Name || isReviewedByUserVar) ? <div></div> :
                         <div>
-                            <br/>
+                            <br />
                             <div> Write A Review: </div>
                             <textarea id="review" type="text" rows="2" name="review" onChange={this.handleInputChange} className="reviewInput" />
                             <div>

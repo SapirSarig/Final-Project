@@ -134,7 +134,7 @@ class Login extends Component {
     }
 
     responseFacebook(response) {
-        const { clickOnLoginFaceBook } = this.state;
+        const { clickOnLoginFaceBook, rememberMe } = this.state;
         if (clickOnLoginFaceBook && response.accessToken) {
             //if(isLogged && this.checkIfUserSignUp(response.email))
             //false 

@@ -152,7 +152,6 @@ export default class UserService {
       })
   }
 
-  //check
   AddReviewToUser(userId, review) {
     //var data = new FormData();
     //data.append("json", JSON.stringify(user));
@@ -281,8 +280,8 @@ export default class UserService {
 
   }
 
-  AddStar(Id, NumOfStars) {
-    return fetch(`${this.host}/api/Users/AddStars?id=${Id}&NumOfStars=${NumOfStars}`, {
+  AddStar(Id, NumOfStars, LoggedUserId) {
+    return fetch(`${this.host}/api/Users/AddStars?id=${Id}&NumOfStars=${NumOfStars}&RateByUser=${LoggedUserId}`, {
       method: "POST",
       headers: {
         Accept: "application/json",
@@ -325,6 +324,38 @@ export default class UserService {
     })
       .then((res) => {
         return res.json();
+      })
+  }
+
+  isReviewedByUserId(ReviewedUserId, ReviewedByUserId)
+  {
+    return fetch(`${this.host}/api/Users/IsReviewedByUserId?ReviewedUserId=${ReviewedUserId}&ReviewedByUserId=${ReviewedByUserId}`, {
+      method: "GET",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json"
+      }
+    })
+      .then((res) => {
+        return res.json();
+      }).catch((err) => {
+        console.log(err);
+      })
+  }
+
+  isRatedByUserId(RatedUserId, RatedByUserId)
+  {
+    return fetch(`${this.host}/api/Users/IsRatedByUserId?RatedUserId=${RatedUserId}&RatedByUserId=${RatedByUserId}`, {
+      method: "GET",
+      headers: {  
+        Accept: "application/json",
+        "Content-Type": "application/json"
+      }
+    })
+      .then((res) => {
+        return res.json();
+      }).catch((err) => {
+        console.log(err);
       })
   }
 

@@ -63,6 +63,10 @@
     text-align: center;
     color: white;
 }
+.rating{
+    border-top:solid;
+    margin-top:20px;
+}
 
 /* Individual bars */
 .bar-5 {width:0%; height: 18px; background-color: #4CAF50;}

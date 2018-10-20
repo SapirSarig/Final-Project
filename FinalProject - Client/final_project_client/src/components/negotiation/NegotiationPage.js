@@ -97,6 +97,7 @@ class NegotiationPage extends Component {
 
         return (
             <div>
+                Negotiation
                 {!offerAccepted && <Status offerId={this.props.OfferId}/>}
                 <NewMessageArea addNewMessageToList={this.addNewMessageToList} />
                 <br />

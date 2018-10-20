@@ -92,7 +92,8 @@ namespace FinalProject.WebApi.Controllers
             ErrorMessage errorMessage = usersBL.AddReview(userId, review);
             if (errorMessage.Code == HttpStatusCode.OK)
             {
-                return Ok();
+                User updatedUser = usersBL.GetUser(userId);
+                return Ok(updatedUser);
             }
 
             return new ResponseMessageResult(Request.CreateErrorResponse(
@@ -103,9 +104,9 @@ namespace FinalProject.WebApi.Controllers
         }
 
         [Route("AddStars")]
-        public IHttpActionResult AddStars(int id, int NumOfStars)
+        public IHttpActionResult AddStars(int id, int NumOfStars, int RateByUser)
         {
-            ErrorMessage errorMessage = usersBL.AddStars(id, NumOfStars);
+            ErrorMessage errorMessage = usersBL.AddStars(id, NumOfStars, RateByUser);
             if (errorMessage.Code == HttpStatusCode.OK)
             {
                 User updatedUser = usersBL.GetUser(id);
@@ -173,6 +174,20 @@ namespace FinalProject.WebApi.Controllers
         public IEnumerable<UserChat> GetAllChats(int id)
         {
             return usersBL.GetAllChats(id);
+        }
+
+        [HttpGet]
+        [Route("IsRatedByUserId")]
+        public IHttpActionResult IsRatedByUserId(int RatedUserId, int RatedByUserId)
+        {
+            return Ok(usersBL.IsRatedByUserId(RatedUserId, RatedByUserId));
+        }
+
+        [HttpGet]
+        [Route("IsReviewedByUserId")]
+        public IHttpActionResult IsReviewedByUserId(int ReviewedUserId, int ReviewedByUserId)
+        {
+            return Ok(usersBL.IsReviewedByUserId(ReviewedUserId, ReviewedByUserId));
         }
 
     }

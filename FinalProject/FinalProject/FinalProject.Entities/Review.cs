@@ -12,6 +12,7 @@ namespace FinalProject.Entities
         public string Text { get; set; }
         public string From { get; set; }
         public string TimeSent { get; set; }
-   
+        public int ByUserId { get; set; }
+
     }
 }
