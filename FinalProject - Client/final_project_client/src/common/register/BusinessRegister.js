@@ -93,7 +93,8 @@ class BusinessRegister extends Component {
     }
 
     updateFileImage(src) {
-        this.setState({ src })
+        this.setState({ src },() => this.updateChooseTypeState(this.state));
+        console.log("STATE!!", this.state);
     }
 
     render() {

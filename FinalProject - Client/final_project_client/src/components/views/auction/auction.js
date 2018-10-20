@@ -5,8 +5,7 @@ import { withStyles } from '@material-ui/core/styles';
 import FileUploader from '../../fileUploader/fileUploader';
 import './auction.css';
 import AuctionService from '../../../services/apis/AuctionService';
-import Interests from '../../../common/register/Interests';
-import { Route, Redirect } from 'react-router';
+import { Redirect } from 'react-router';
 import StringUtil from '../../../utils/StringUtil';
 import auctionUtil from './auctionUtil';
 import UserService from '../../../services/apis/UserService';
@@ -277,7 +276,7 @@ class Auction extends Component {
 
 
     render() {
-        const { classes, isNew, location, user } = this.props;
+        const { classes, location, user } = this.props;
         //const { UserId, Title, Product, Description, NumOfMinFollowers, StartDate, EndDate } = this.state;
         const { auction, auctionOk, errors, CompanyName, auctionDeleted, auctionClosed } = this.state;
         const theAuction = (location && location.state.auction) || auction;

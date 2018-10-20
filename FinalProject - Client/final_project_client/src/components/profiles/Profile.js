@@ -34,13 +34,27 @@ class Profile extends Component {
             user = location.state.user;
         }
 
-        this.setState({
-            user
+        // this.setState({
+        //     user
+        // })
+
+        this.userService.getUserById(user.Id).then(req => {
+            if (req) {
+                if (req.message) {
+                    alert(req.message);
+                }
+                else {
+                    this.setState({ user: req });
+                }
+            }
+            else {
+                alert("Server error!");
+            }
         })
 
         let rateId, reviewId;
 
-        rateId =  setInterval(this.checkIsRatedByUser, 2000);
+        rateId = setInterval(this.checkIsRatedByUser, 2000);
         reviewId = setInterval(this.checkIsReviewedByUser, 2000);
         this.setState({ rateIntervalId: rateId });
         this.setState({ reviewIntervalId: reviewId });
@@ -56,8 +70,8 @@ class Profile extends Component {
             else {
                 if (req == true) {
                     clearInterval(this.state.rateIntervalId);
+                    this.setState({ isRatedByUserVar: req });
                 }
-                this.setState({ isRatedByUserVar: req });
             }
 
         });
@@ -71,8 +85,8 @@ class Profile extends Component {
             else {
                 if (req == true) {
                     clearInterval(this.state.reviewIntervalId);
+                    this.setState({ isReviewedByUserVar: req });
                 }
-                this.setState({ isReviewedByUserVar: req });
             }
         });
     }
@@ -99,7 +113,8 @@ class Profile extends Component {
                 else {
                     this.setState({ user: req });
                     clearInterval(this.state.rateIntervalId);
-                    this.setState({isRatedByUserVar:true});                }
+                    this.setState({ isRatedByUserVar: true });
+                }
             }
             else {
                 alert("Server error!");
@@ -128,7 +143,7 @@ class Profile extends Component {
                 user.Reviews.push(obj);
                 this.setState({ user: req });
                 clearInterval(this.state.reviewIntervalId);
-                this.setState({isReviewedByUserVar:true});
+                this.setState({ isReviewedByUserVar: true });
             }
             else {
                 alert("Server Error");

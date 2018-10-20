@@ -14,10 +14,28 @@ class UserRating extends Component {
         this.noColor = this.noColor.bind(this);
         this.state = {
             starWasClicked: false,
+            user:{},
             starNum: 0
         }
         this.userService = new UserService();
     }
+
+    // componentDidMount()
+    // {
+    //     this.userService.getUserById(this.props.user.Id).then(req=>{
+    //         if (req) {
+    //             if (req.message) {
+    //                 alert(req.message);
+    //             }
+    //             else {
+    //                 this.setState({ user: req });
+    //             }
+    //         }
+    //         else {
+    //             alert("Server error!");
+    //         }
+    //     })
+    // }
 
     color(num, clicked) {
         if (!this.state.starWasClicked) {
@@ -93,7 +111,8 @@ class UserRating extends Component {
     }
 
     render() {
-        const { user, loggedUser, isRatedByUser } = this.props;
+        const {user, loggedUser, isRatedByUser } = this.props;
+        //const {user} = this.state;
         const isSameUser = (user.Name === loggedUser.Name);
 
         if (user && user.NumOfVoters > 0) {
@@ -123,7 +142,7 @@ class UserRating extends Component {
             <div className="rating">
                 <span className="heading">Rating</span>
                 {isSameUser || isRatedByUser ? <div></div> :
-                    <div>
+                    user && <div>
                         <img onClick={() => this.color(1, true)} onMouseOver={() => this.color(1, false)} onMouseOut={() => this.noColor(1)} className="noColorStar star1"></img>
                         <img onClick={() => this.color(2, true)} onMouseOver={() => this.color(2, false)} onMouseOut={() => this.noColor(2)} className="noColorStar star2"></img>
                         <img onClick={() => this.color(3, true)} onMouseOver={() => this.color(3, false)} onMouseOut={() => this.noColor(3)} className="noColorStar star3"></img>

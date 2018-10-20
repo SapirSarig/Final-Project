@@ -165,7 +165,7 @@ namespace FinalProject.BL
                 try
                 {
                     string to = verifyPasswordObject.Email;
-                    string from = "itsadealteam@gmail.com";
+                    string from = "itsadealgroup@gmail.com";
                     string subject = "Your Password";
 
                     string tokenEmailPassword = JwtManager.GenerateToken(user.Email, user.Password);
@@ -174,12 +174,12 @@ namespace FinalProject.BL
                                     Please click the following link to reset your password:
                                     {1}://{2}/resetPassword?authUser={3}
                                     Thanks!
-                                    Its a deal team", user.Name, Scheme, Authority, tokenEmailPassword);
+                                    It's a deal team", user.Name, Scheme, Authority, tokenEmailPassword);
 
 
                     MailMessage mail = new MailMessage(from, to, subject, body);
                     SmtpClient client = new SmtpClient("smtp.gmail.com");
-                    client.Credentials = new NetworkCredential("itsadealteam@gmail.com", "12345@Aa");
+                    client.Credentials = new NetworkCredential("itsadealgroup@gmail.com", "Aa@123456");
                     client.Port = 25;
                     client.EnableSsl = true;
                     client.Send(mail);
@@ -208,24 +208,24 @@ namespace FinalProject.BL
             {
                 User user = userCRUD.FindUserByOfferId(offerId);
                 string to = user.Email;
-                //string from = "itsadealteam@gmail.com";
-                //string subject = "Someone sent you an offer!";
+                string from = "itsadealteam@gmail.com";
+                string subject = "Your offer was accepted!";
 
-                //string body = String.Format(@"
-                //                    Hello {0}! 
-                //                    Your offer for the auction {1} was accepted!
-                //                    Please publish the product in the way yo described.
-                //                    After the product was published succefully, please enter this link to ope a chat with the business owner and settle the payment.
-                //                    Cheers,
-                //                    Its a deal team", user.Name, auctionName);
+                string body = String.Format(@"
+                                    Hello {0}! 
+                                    Your offer for the auction {1} was accepted!
+                                    Please publish the product as you described.
+                                    After the product was published succefully, please enter the offer page to settle the payment with the businss owner.
+                                    Cheers,
+                                    Its a deal team", user.Name, auctionName);
 
 
-                //MailMessage mail = new MailMessage(from, to, subject, body);
-                //SmtpClient client = new SmtpClient("smtp.gmail.com");
-                //client.Credentials = new NetworkCredential("itsadealteam@gmail.com", "12345@Aa");
-                //client.Port = 25;
-                //client.EnableSsl = true;
-                //client.Send(mail);
+                MailMessage mail = new MailMessage(from, to, subject, body);
+                SmtpClient client = new SmtpClient("smtp.gmail.com");
+                client.Credentials = new NetworkCredential("itsadealgroup@gmail.com", "Aa@123456");
+                client.Port = 25;
+                client.EnableSsl = true;
+                client.Send(mail);
                 return true;
             }
             catch (Exception ex)
@@ -246,15 +246,15 @@ namespace FinalProject.BL
 
                 string body = String.Format(@"
                                     Hello {0}! 
-                                    An Influencer user has sent an offer to one of your auctions.
-                                    Take a look here: (link)
+                                    An Influencer has sent an offer to one of your auctions!
+                                    Please take a look at your profile.
                                     Cheers,
                                     Its a deal team", user.Name);
 
 
                 MailMessage mail = new MailMessage(from, to, subject, body);
                 SmtpClient client = new SmtpClient("smtp.gmail.com");
-                client.Credentials = new NetworkCredential("itsadealteam@gmail.com", "12345@Aa");
+                client.Credentials = new NetworkCredential("itsadealgroup@gmail.com", "Aa@123456");
                 client.Port = 25;
                 client.EnableSsl = true;
                 client.Send(mail);
