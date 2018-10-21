@@ -11,7 +11,10 @@ const styles = theme => ({
         display: 'flex',
         flexWrap: 'wrap',
         flexDirection: 'column',
-        width: '100%'
+        width: '100%',
+        height: '100vh',
+        paddingTop: '100px',
+        paddingLeft: '100px',
     },
     textField: {
         marginLeft: theme.spacing.unit,

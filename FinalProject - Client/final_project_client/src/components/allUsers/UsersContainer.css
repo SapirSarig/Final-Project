@@ -5,11 +5,15 @@
 }
 
 .userPicWrapper{
+    display: flex;
+
     height: 50px;
     width: 60px;
-    border-radius: 50%;
     overflow: hidden;
     padding: 0;
+
+    border: 1px solid linen;
+    border-radius: 50%;
 }
 
 .detailsWrapper{
@@ -23,3 +27,20 @@
 .detailsLink{
     padding: 3px 20px;
 }
+
+
+.userProfileIconInSearch {
+    display: inline-block;
+    width: 4em;
+    height: 4em;
+    stroke-width: 0;
+    stroke: currentColor;
+    fill: linen;
+  }
+
+  .allUsersTitle{
+      width: 100%;
+      text-align: center;
+      font-size: 2em;
+      margin-bottom: 25px;
+  }

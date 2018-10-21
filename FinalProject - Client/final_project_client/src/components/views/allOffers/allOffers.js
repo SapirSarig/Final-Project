@@ -5,7 +5,9 @@ import './allOffers.css';
 import UserService from '../../../services/apis/UserService';
 import OfferService from '../../../services/apis/OfferService';
 import OffersList from '../../offers/offersList';
-import NavToggle from "../../navToggle/navToggle"
+// import NavToggle from "../../navToggle/navToggle";
+import FixedHeader from '../../../common/fixedHeader/fixedHeader';
+
 
 const styles = theme => ({
     container: {
@@ -62,7 +64,8 @@ class AllOffers extends Component {
         const { offers, user } = this.state;
         return (
             <div>    
-                <NavToggle />
+                {/* <NavToggle /> */}
+                <FixedHeader />
                 <OffersList offers={offers} fromBusiness={this.props.location.state.fromBusiness} fromAllOffers={true} user={user}/>
             </div>
         );

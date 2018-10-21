@@ -1,0 +1,20 @@
+.allUsers{
+    height: 100vh;
+}
+
+.allInfluencerContainer{
+    margin: 120px 20px 10px 20px;
+    overflow: auto;
+}
+
+.searchWrapper{
+    margin-left: 17px;
+}
+
+.searchFieldInput{
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid black;
+    outline: none;
+    font-size: 1.1em;
+}

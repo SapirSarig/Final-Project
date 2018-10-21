@@ -13,15 +13,18 @@ import UserSerive from '../../../services/apis/UserService';
 import NegotiationPage from '../../negotiation/NegotiationPage';
 import SessionStorageUtil from '../../../utils/SessionStorageUtil';
 import NegotiationService from '../../../services/apis/NegotiationService';
-import NavToggle from "../../navToggle/navToggle";
+// import NavToggle from "../../navToggle/navToggle";
+import FixedHeader from '../../../common/fixedHeader/fixedHeader';
 
 
 const styles = theme => ({
     container: {
         display: 'flex',
-        flexWrap: 'wrap',
+        flexWrap: 'nowrap',
         flexDirection: 'column',
-        width: '100%'
+        width: '100%',
+        paddingTop: '100px',
+        paddingLeft: '100px',
     },
     textField: {
         marginLeft: theme.spacing.unit,
@@ -347,7 +350,8 @@ class starOffer extends Component {
         let { offer, AuctionName, StarName, offerOk, OfferStatusUpdated, offerDeleted, openNegotiation, OfferId, offerAccepted, offerDeclined } = this.state;
         return (
             <div className="offerWrapper">
-            <NavToggle />
+                {/* <NavToggle /> */}
+                <FixedHeader />
                 {(!offerOk && !OfferStatusUpdated && !offerDeleted) ?
                     <div className={classes.container} noValidate autoComplete="off">
                         <div className="firstLineWrapper">

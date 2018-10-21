@@ -2,6 +2,8 @@
 import React, { Component } from 'react';
 import UserService from '../../services/apis/UserService';
 import UsersContainer from './UsersContainer';
+// import NavToggle from '../navToggle/navToggle';
+import FixedHeader from '../../common/fixedHeader/fixedHeader';
 import './AllUsers.css';
 
 class AllUsers extends Component {
@@ -28,9 +30,15 @@ class AllUsers extends Component {
         
         return (
             <div className="allUsers">
-                <label className="searchFieldLabel"> Search: </label>
-                <input className="searchFieldInput" onChange={this.handleSearchFieldChange} />
-                <UsersContainer users={users} title={"All Users"}/>
+                {/* <NavToggle /> */}               
+                <FixedHeader />
+                <div className="allInfluencerContainer">
+                    <div className="searchWrapper">
+                        <label className="searchFieldLabel"> Search By Name: </label>
+                        <input className="searchFieldInput" onChange={this.handleSearchFieldChange} />
+                    </div>
+                    <UsersContainer users={users} title={"All Users"}/>
+                </div>                
             </div>
         );
     }

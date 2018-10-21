@@ -36,3 +36,10 @@
   stroke: currentColor;
   fill: black;
 }
+
+.userNameInMenu{
+  font-size: 1.8em;
+  position: absolute;
+  top: 13px;
+  color: black;
+}

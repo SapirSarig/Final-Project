@@ -11,7 +11,7 @@ import auctionUtil from './auctionUtil';
 import UserService from '../../../services/apis/UserService';
 import { Link } from 'react-router-dom';
 import LayoutButton from '../../../common/layoutButton/layoutButton';
-import NavToggle from "../../navToggle/navToggle";
+import FixedHeader from '../../../common/fixedHeader/fixedHeader';
 
 const styles = theme => ({
     container: {
@@ -280,7 +280,7 @@ class Auction extends Component {
 
         return (
             <div>
-                <NavToggle />
+                <FixedHeader />
                 {(!auctionOk && !auctionDeleted && !auctionClosed) ?
                     <div className="auctionWrapper">
                         <div className={classes.container}>
@@ -301,10 +301,8 @@ class Auction extends Component {
                                     Edit auction
                                 </div>} */}
                             </div>
-                            <div className="businessNameContainer">
-                                <div className="businessWrapper">
-                                    <label> {CompanyName} </label>
-                                </div>
+                            <div className="businessName">
+                                {CompanyName}
                             </div>
                             <TextField
                                 id="name"

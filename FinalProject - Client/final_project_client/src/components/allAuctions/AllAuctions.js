@@ -2,7 +2,8 @@
 import React, { Component } from 'react';
 import MyAuctions from '../views/myAuctions/myAuctions.js';
 import AuctionService from '../../services/apis/AuctionService';
-import NavToggle from '../navToggle/navToggle';
+// import NavToggle from '../navToggle/navToggle';
+import FixedHeader from '../../common/fixedHeader/fixedHeader';
 import './AllAuctions.css';
 
 class AllAuctions extends Component {
@@ -32,9 +33,12 @@ class AllAuctions extends Component {
 
         return (
             <div className="allAuctions">
-                <NavToggle />
-                <label className="searchFieldLabel"> Search: </label>
-                <input className="searchFieldInput" onChange={this.handleSearchFieldChange} />
+                {/* <NavToggle /> */}
+                <FixedHeader />
+                <div className="searchWrapper">
+                    <label className="searchFieldLabel"> Search By Name: </label>
+                    <input className="searchFieldInput" onChange={this.handleSearchFieldChange} />
+                </div>
                 <MyAuctions user={user} auctions={auctions} title="All Auctions"/>
             </div>
         );

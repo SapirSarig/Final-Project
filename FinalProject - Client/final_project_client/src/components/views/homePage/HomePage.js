@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 
 import LayoutButton from '../../../common/layoutButton/layoutButton';
 import NavToggle from '../../navToggle/navToggle';
+import Logo from '../../../common/logo/logo';
 import SessionStorageUtil from "../../../utils/SessionStorageUtil";
 
 import './HomePage.css';
@@ -26,11 +27,9 @@ class HomePage extends Component {
         return (
             <div className="guestScreenWrapper">
                 {user && <NavToggle />}
+                <Logo />
                 <div className="emptyDiv"></div>
                 <div className="leftContainer">
-                    <div className="siteHeaderWrapper">
-                        <div className="siteName"> It's A Deal</div>
-                    </div>
                     <div className="loginButtons">
                         <Link className="signUp" to="/signUp">
                             <LayoutButton text="Sign Up"/>
