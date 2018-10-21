@@ -1,3 +1,7 @@
+.myAuctionsContainer{
+    margin-top: 140px;
+}
+
 .myAuctionWrapper{
     padding: 30px;
     display: flex;
@@ -59,18 +63,8 @@
     width: 40%;
 }
 
-.myAuctionsTitleContainer{
-    display: flex;
-    width: 100%;
-    justify-content: center;
-    align-items: center;
-    margin: 30px 0;
-}
-
 .myAuctionsTitle{
-    border: 1px solid black;
-    border-radius: 5px;
-    padding: 10px 20px;
-    font-size: 20px;
-    font-weight: bolder;
+    text-align: center;
+    font-size: 2em;
+    margin-bottom: 25px;
 }

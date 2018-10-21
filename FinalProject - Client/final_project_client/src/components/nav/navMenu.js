@@ -58,7 +58,7 @@ class NavMenu extends Component {
                     user && user.Type === "Business Owner" ?
                         (
                             <div className="typeMenu">
-                                <div>{user.Name}</div>
+                                <div className="userNameInMenu">{user.Name}</div>
                                 {this.renderProfilePic()}
                                 <NavMenuLink title="Home Page" to={{ pathname: "/businessHomePage", state: { user } }} />
                                 <NavMenuLink title="Profile" to={{ pathname: "/profile", state: { user } }} />
@@ -66,7 +66,7 @@ class NavMenu extends Component {
                         ) :
                         (
                             <div className="typeMenu">
-                                <div>{user.Name}</div>
+                                <div className="userNameInMenu">{user.Name}</div>
                                 {this.renderProfilePic()}
                                 <NavMenuLink title="Home Page" to={{ pathname: "/influencerHomePage", state: { user } }} />
                                 <NavMenuLink title="Profile" to={{ pathname: "/profile", state: { user } }} />

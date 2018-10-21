@@ -1,11 +1,9 @@
 .offerWrapper{
-    height: 100%;
     width: 100%;
     padding: 30px 0;
     display: flex;
     overflow-x: hidden;
     max-width: 80vw;
-    margin: 0 auto;
 }
 
 .firstLineWrapper{

@@ -6,6 +6,7 @@ import HotAuctions from "../userHomePage/hotAuctions.js";
 import HotOffers from "../offers/hotOffers.js";
 import AuctionService from "../../services/apis/AuctionService";
 import NavToggle from "../navToggle/navToggle";
+import Logo from '../../common/logo/logo';
 import "../userHomePage/homePages.css";
 import "./userHomePage.css";
 import OffersStatus from "../offers/offersStatus";
@@ -114,6 +115,7 @@ class BusinessHomePage extends Component {
         return (
             <div className="businessHomePage">
                 <NavToggle />
+                <Logo />
                 {Object.getOwnPropertyNames(user).length > 0 && Object.getOwnPropertyNames(theAuctions).length > 0 &&  (
                     <div>
                         <div className="businessTopPage">

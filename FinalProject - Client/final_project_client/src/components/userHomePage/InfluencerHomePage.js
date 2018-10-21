@@ -4,6 +4,7 @@ import HomeHeader from "./HomeHeader.js";
 import HotAuctions from "../userHomePage/hotAuctions.js";
 import HotOffers from "../offers/hotOffers.js";
 import NavToggle from "../navToggle/navToggle";
+import Logo from "../../common/logo/logo";
 import OfferService from "../../services/apis/OfferService";
 import UserService from "../../services/apis/UserService";
 // import "../userHomePage/homePages.css";
@@ -69,6 +70,7 @@ class InfluencerHomePage extends Component {
         return (
             <div className="influencerHomePage">
                 <NavToggle />
+                <Logo />
                 {Object.getOwnPropertyNames(user).length > 0 && (
                     <div>
                         <div className="influencerTopPage">

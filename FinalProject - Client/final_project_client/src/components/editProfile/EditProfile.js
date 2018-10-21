@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import Register from "../../common/register/Register";
 import { Route, Redirect } from 'react-router';
 import UserService from "../../services/apis/UserService";
-import NavToggle from "../navToggle/navToggle";
+// import NavToggle from "../navToggle/navToggle";
+import FixedHeader from '../../common/fixedHeader/fixedHeader';
 
 export default class EditProfile extends Component {
     userService;
@@ -71,7 +72,8 @@ export default class EditProfile extends Component {
         const { userInfo, editOk, user } = this.state;
         return (
             <div>
-                <NavToggle />
+                {/* <NavToggle />                */}
+                <FixedHeader />
                 {editOk ?
                     (userInfo.Type === "Social Influencer") ?
                         <Redirect to={{

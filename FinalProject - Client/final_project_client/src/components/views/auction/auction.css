@@ -3,9 +3,8 @@
     max-width: 80vw;
     margin: 0 auto;
     width: 100%;
-    padding: 30px 0;
+    padding: 100px 0 30px 0;
     display: flex;
-    overflow-x: hidden;
 }
 
 .firstLineWrapper{
@@ -66,12 +65,10 @@
     pointer-events: none;
 }
 
-.businessWrapper{
-    border: 1px solid black;
-    border-radius: 5px;
-    padding: 10px 20px;
-    font-size: 20px;
-    font-weight: bolder;
+.businessName{
+    text-align: center;
+    font-size: 2em;
+    margin-bottom: 25px;
 }
 
 .submitBtn{

@@ -4,7 +4,8 @@ import TextField from '@material-ui/core/TextField';
 import { withStyles } from '@material-ui/core/styles';
 import { Link } from 'react-router-dom';
 import './myAuctions.css';
-import NavToggle from "../../navToggle/navToggle";
+// import NavToggle from "../../navToggle/navToggle";
+import FixedHeader from '../../../common/fixedHeader/fixedHeader';
 
 
 const styles = theme => ({
@@ -13,7 +14,8 @@ const styles = theme => ({
         flexWrap: 'wrap',
         flexDirection: 'column',
         flexWrap: 'nowrap',
-        width: '100%'
+        width: '100%',
+        height: '100vh',
     },
     textField: {
         marginLeft: theme.spacing.unit,
@@ -27,24 +29,18 @@ class myAuctions extends Component {
     constructor(props) {
         super(props);
 
-        // this.state = {
-        //     user:{}
-        // };
-        // this.auctions = [{
-        //     nameOfAuction: 'Tal',
-        // }, {
-        //     nameOfAuction: 'Tal2',
-        // },{
-        //     nameOfAuction: 'Tal3',
-        // },{
-        //     nameOfAuction: 'Tal4',
-        // }];
+        this.state = {
+            styleMargin: {
+                marginTop:'100px',
+            }
+        };
     }
 
-    // componentDidMount(){
-    //     const {user} = this.props;
-    //     this.setState({user});
-    // }
+    componentWillMount(){
+        if(this.props.title === "All Auctions"){
+            this.setState({styleMargin: {marginTop:'40px'}});
+        }
+    }
 
     render() {
         const { classes, location, auctions, title, user } = this.props;
@@ -54,51 +50,37 @@ class myAuctions extends Component {
 
         return (
             <form className={classes.container} noValidate autoComplete="off">
-                <NavToggle />
-                <div className="myAuctionsTitleContainer">
+                {/* <NavToggle /> */}
+                <FixedHeader />  
+                <div className="myAuctionsContainer" style={this.state.styleMargin}>
                     <div className="myAuctionsTitle">
                         {theTitle}
                     </div>
-                </div>
-                <div className="auctionsWrapper">
-                    {console.log("theAuctions", theAuctions)}
-                    {theAuctions && theAuctions.map((auction) =>
-                        auction.Status !== "Deleted" && <div className="myAuctionWrapper">
-                            <TextField
-                                id="nameAuction"
-                                label="Auction's name"
-                                defaultValue={auction.Title}
-                                className={classes.textField}
-                                margin="normal"
-                                InputProps={{
-                                    readOnly: true,
-                                }}
-                            />
-                            
-                            <div className="btnWrapper">
-                                <div className="detailsContainer ">
-                                    {console.log("user: ", theUser)}
-                                    <Link className="detailsBtn designBtn" to={{ pathname: "/auction", state: { auction: auction, isNew: false, user:theUser } }}>
-                                        Details
-                                    </Link>
-                                </div>
-
-                                {/* {theUser.Type === "Social Influencer" ?
-                                    <div className="offersContainer">
-                                        <Link className="OffersBtn designBtn" to={{ pathname: "/starOffer", state: {user} }}>
-                                            Add Offer
-                                        </Link>
-                                    </div> :
-                                    <div className="offersContainer">
-                                        <Link className="OffersBtn designBtn" to={{ pathname: "/offersPerAuctionPage" }}>
-                                            Offers
+                    <div className="auctionsWrapper">                    
+                        {theAuctions && theAuctions.map((auction) =>
+                            auction.Status !== "Deleted" && <div className="myAuctionWrapper">
+                                <TextField
+                                    id="nameAuction"
+                                    label="Auction's name"
+                                    defaultValue={auction.Title}
+                                    className={classes.textField}
+                                    margin="normal"
+                                    InputProps={{
+                                        readOnly: true,
+                                    }}
+                                />
+                                
+                                <div className="btnWrapper">
+                                    <div className="detailsContainer ">                                    
+                                        <Link className="detailsBtn designBtn" to={{ pathname: "/auction", state: { auction: auction, isNew: false, user:theUser } }}>
+                                            Details
                                         </Link>
                                     </div>
-                                } */}
-                                
+                                    
+                                </div>
                             </div>
-                        </div>
-                    )}
+                        )}
+                    </div>
                 </div>
             </form>
         );

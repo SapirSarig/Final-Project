@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import OfferService from '../../services/apis/OfferService';
 import OffersList from './offersList';
-import NavToggle from "../navToggle/navToggle"
+// import NavToggle from "../navToggle/navToggle";
+import FixedHeader from '../../common/fixedHeader/fixedHeader';
 
 
 class offersPerAuctionPage extends Component {
@@ -37,7 +38,8 @@ class offersPerAuctionPage extends Component {
         return (
 
             <div className="offersPerAuctionContainer" >
-                <NavToggle />
+                {/* <NavToggle />                */}
+                <FixedHeader />
                 {console.log("user", this.props.location.state.user)} 
                 {console.log("auction", this.props.location.state.auction)}
 
