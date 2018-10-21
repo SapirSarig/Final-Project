@@ -196,7 +196,7 @@ class Profile extends Component {
                         <div>
                             <span> Website Link: </span>
                             {/* <a href={user.WebsiteLink}>{user.CompanyName} </a> */}
-                            <a href={`https://${user.WebsiteLink}`}>{user.CompanyName} </a>
+                            <a className="websiteLink" href={user.WebsiteLink.includes("http")? user.WebsiteLink : `https://${user.WebsiteLink}`}>{user.CompanyName} </a>
 
                         </div>
                     }

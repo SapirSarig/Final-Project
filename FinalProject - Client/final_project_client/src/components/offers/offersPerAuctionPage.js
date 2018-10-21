@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import OfferService from '../../services/apis/OfferService';
 import OffersList from './offersList';
 import NavToggle from "../navToggle/navToggle"
-
+import "./offersPerAuctionPage.css";
 
 class offersPerAuctionPage extends Component {
     OfferService
@@ -38,16 +38,15 @@ class offersPerAuctionPage extends Component {
 
             <div className="offersPerAuctionContainer" >
                 <NavToggle />
-                {console.log("user", this.props.location.state.user)} 
+                {console.log("user", this.props.location.state.user)}
                 {console.log("auction", this.props.location.state.auction)}
 
                 <div className="offersPerAuctionHeader">
-                    <div>Auction No. : {auction.Id}</div>
                     <div>Auction Name : {auction.Title}</div>
+                    <div>Auction No. : {auction.Id}</div>
                     <br />
                 </div>
-                {console.log("offers", offers)}
-                <OffersList offers={offers} fromBusiness={true} user={user}/>
+                <OffersList offers={offers} fromBusiness={true} user={user} />
             </div>
         );
     }

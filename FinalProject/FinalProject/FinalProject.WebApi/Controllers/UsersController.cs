@@ -125,12 +125,16 @@ namespace FinalProject.WebApi.Controllers
         [Route("SendLinkToResetPassword")]
         public IHttpActionResult SendLinkToResetPassword(VerifyPasswordModal verifyPasswordObject)
         {
-            bool isSent = usersBL.SendLinkToResetPassword(verifyPasswordObject, Request.Headers.Referrer.Authority, Request.Headers.Referrer.Scheme);
-            if (isSent)
+            ErrorMessage errorMessage = usersBL.SendLinkToResetPassword(verifyPasswordObject, Request.Headers.Referrer.Authority, Request.Headers.Referrer.Scheme);
+            if (errorMessage.Code == HttpStatusCode.OK)
             {
                 return Ok(verifyPasswordObject);
             }
-            return NotFound();
+            return new ResponseMessageResult(Request.CreateErrorResponse(
+                    errorMessage.Code,
+                   new HttpError(errorMessage.Message)
+               )
+           );
         }
 
         [HttpPost]
@@ -152,7 +156,7 @@ namespace FinalProject.WebApi.Controllers
             bool isSent = usersBL.ResetPassword(ResetPasswordModal.AuthUser, ResetPasswordModal.Password);
             if (isSent)
             {
-                return Ok("sdasda");
+                return Ok("reset");
             }
             return NotFound();
         }

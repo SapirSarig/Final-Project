@@ -68,3 +68,11 @@
     background: rgb(198, 137, 255);
     cursor: pointer;
 }
+
+.websiteLink:hover{
+    color: white;
+}
+
+.websiteLink:link{
+    color: purple;
+}

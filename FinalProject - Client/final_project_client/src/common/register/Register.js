@@ -223,6 +223,7 @@ class Register extends Component {
             userToCreate["auctions"] = [];
             CreateBusinessUser(userToCreate);
         }
+
         //if there are no validtion errors
 
     }

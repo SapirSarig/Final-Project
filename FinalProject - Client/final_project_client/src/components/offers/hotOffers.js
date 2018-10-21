@@ -62,11 +62,11 @@ class HotOffers extends Component {
           {offers.map(offer => (
             
             offer.Status!=="Deleted" && <div className="offerContainer">
-              <div>Offer's description: {offer.Description}</div>
-              <div>Status: {offer.Status}</div>
+              <div><span className="offerTitles">Offer's description:</span> <br/>{offer.Description}</div>
+              <div><span className="offerTitles">Status: </span> {offer.Status}</div>
 
               <Link className="goToStarOffer" to={{ pathname: "/starOffer", state: { currOffer: offer, fromBusiness: (user.Type === "Business Owner"), fromAllOffers: true, user } }}>
-                  <LayoutButton text="Go To Offer" />
+                  Go To Offer
               </Link>
 
             </div>

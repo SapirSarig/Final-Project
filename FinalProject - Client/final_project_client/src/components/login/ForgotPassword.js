@@ -54,12 +54,15 @@ export default class ForgotPassword extends Component {
         this.userService.SendLinkToResetPassword(obj).then(req => {
             //console.log(req);
             if (req) {
-                //this.setState({ signUpOk: true });
-                alert("A link to reset your password was succefully sent to your email!");
-                this.setState({
-                    emailSent: true
-                });
-
+                if (req.Message) {
+                    alert(req.Message);
+                }
+                else {
+                    alert("A link to reset your password was succefully sent to your email!");
+                    this.setState({
+                        emailSent: true
+                    });
+                }
             }
             else {
                 alert("Server Error");

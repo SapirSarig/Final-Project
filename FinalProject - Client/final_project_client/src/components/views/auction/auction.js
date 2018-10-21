@@ -46,12 +46,12 @@ class Auction extends Component {
                 Offers: [],
                 Interests: [],
                 Picture: "",
-                Status:"Open"
+                Status: "Open"
             },
             CompanyName: "",
             auctionOk: false,
-            auctionDeleted:false,
-            auctionClosed:false,
+            auctionDeleted: false,
+            auctionClosed: false,
             errors: {
                 Title: "",
                 Product: "",
@@ -106,7 +106,7 @@ class Auction extends Component {
                 }
                 else {
                     const index = auction.Interests.findIndex((interest) => interest.value === value);
-                    auction.Interests.splice(index,  1);
+                    auction.Interests.splice(index, 1);
                 }
             }
         }
@@ -249,7 +249,7 @@ class Auction extends Component {
         }
 
     }
-    closeAuction(){
+    closeAuction() {
         const { auction } = this.state;
         const theAuction = (this.props.location && this.props.location.state.auction) || auction;
         if (theAuction.Id) {
@@ -377,64 +377,27 @@ class Auction extends Component {
                             />
                             <span className="errorInput" > {errors["NumOfMinFollowers"] && errors["NumOfMinFollowers"]} </span>
                             {!isAuctionNew && <TextField
-                                    id="read-only-input"
-                                    name="AuctionStatus"
-                                    label="Auction Status"
-                                    defaultValue={theAuction.Status}
-                                    className={classes.textField}
-                                    margin="normal"
-                                    InputProps={{
-                                        readOnly: true,
-                                    }}
-                                    style={{ width: '18%' }}
-                                />}
-                            {/* <div className="dueDate">
-                                <TextField
-                                    id="startDate"
-                                    name="StartDate"
-                                    label="Start date*"
-                                    type="date"
-                                    className={classes.textField}
-                                    defaultValue={isAuctionNew ? "" : this.convertDate(theAuction.StartDate)}
-                                    //value={theAuction.StartDate}
-                                    onChange={this.handleChange}
-                                    InputProps={{
-                                        readOnly: Boolean(!isAuctionNew)
-                                    }}
-                                    InputLabelProps={{
-                                        shrink: true,
-                                    }}
-                                />
-                                <span className="errorInput"> {errors["StartDate"] && errors["StartDate"]} </span>
-                                <TextField
-                                    id="endDate"
-                                    name="EndDate"
-                                    label="End date*"
-                                    type="date"
-                                    className={classes.textField}
-                                    defaultValue={isAuctionNew ? "" : this.convertDate(theAuction.EndDate)}
-                                    //value={theAuction.EndDate}
-                                    onChange={this.handleChange}
-                                    InputProps={{
-                                        readOnly: Boolean(!isAuctionNew)
-                                    }}
-                                    InputLabelProps={{
-                                        shrink: true,
-                                    }}
-                                />
-                                <span className="errorInput" > {errors["EndDate"] && errors["EndDate"]} </span>
-                            </div> */}
+                                id="read-only-input"
+                                name="AuctionStatus"
+                                label="Auction Status"
+                                defaultValue={theAuction.Status}
+                                className={classes.textField}
+                                margin="normal"
+                                InputProps={{
+                                    readOnly: true,
+                                }}
+                                style={{ width: '18%' }}
+                            />}
                             <div hidden={!isAuctionNew} className={`${this.isAllValid() ? "submitBtn" : "disableElement submitBtn"}`}>
                                 <LayoutButton text="Submit" onClick={this.AddAuction} />
                             </div>
-                            {this.isBusinessUser() && (!isAuctionNew) && <Link className="designBtn" to={{ pathname: "/offersPerAuctionPage", state: { auction: theAuction, user: theUser } }}>
-                                Show Offers
-                            </Link>}
-                            {!this.isBusinessUser() && theAuction.Status==="Open" && <Link className="designBtn" to={{ pathname: "/starOffer", state: { auction: theAuction, user: theUser, fromBusiness: false } }}>
-                                Add Offer
-                            </Link>}
-                            {this.isBusinessUser() && (!isAuctionNew) && auction.Status!=="Deleted" && <LayoutButton text="Delete Auction" onClick={this.deleteAuction} />}
-                            {this.isBusinessUser() && (!isAuctionNew) && auction.Status === "Open" && <LayoutButton text="Close Auction" onClick={this.closeAuction} />}
+
+                            {!this.isBusinessUser() && theAuction.Status === "Open" && <LayoutButton text="Add Offer" className="designBtn" to={{ pathname: "/starOffer", state: { auction: theAuction, user: theUser, fromBusiness: false } }}/>}
+                            <div className="businessBtnsContainer">
+                                {this.isBusinessUser() && (!isAuctionNew) && <LayoutButton text="Show Offers" className="designBtn" to={{ pathname: "/offersPerAuctionPage", state: { auction: theAuction, user: theUser } }} />}
+                                {this.isBusinessUser() && (!isAuctionNew) && auction.Status !== "Deleted" && <LayoutButton text="Delete Auction" onClick={this.deleteAuction} />}
+                                {this.isBusinessUser() && (!isAuctionNew) && auction.Status === "Open" && <LayoutButton text="Close Auction" onClick={this.closeAuction} />}
+                            </div>
                         </div>
                     </div>
                     :

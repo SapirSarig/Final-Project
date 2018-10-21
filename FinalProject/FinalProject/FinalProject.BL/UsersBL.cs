@@ -156,8 +156,9 @@ namespace FinalProject.BL
             }
         }
 
-        public bool SendLinkToResetPassword(VerifyPasswordModal verifyPasswordObject, string Authority, string Scheme)
+        public ErrorMessage SendLinkToResetPassword(VerifyPasswordModal verifyPasswordObject, string Authority, string Scheme)
         {
+            ErrorMessage errorMessage;
             User user;
             if (checkUserAnswers(verifyPasswordObject, out user))
             {
@@ -166,7 +167,7 @@ namespace FinalProject.BL
                 {
                     string to = verifyPasswordObject.Email;
                     string from = "itsadealgroup@gmail.com";
-                    string subject = "Your Password";
+                    string subject = "Reset your Password";
 
                     string tokenEmailPassword = JwtManager.GenerateToken(user.Email, user.Password);
                     string body = String.Format(@"
@@ -183,17 +184,26 @@ namespace FinalProject.BL
                     client.Port = 25;
                     client.EnableSsl = true;
                     client.Send(mail);
-                    return true;
+                    errorMessage = new ErrorMessage
+                    {
+                        Code = HttpStatusCode.OK
+                    };
+                    return errorMessage;
                 }
                 catch (Exception ex)
                 {
-                    Console.WriteLine(ex.Message);
-                    return false;
+                    return null;
+                    throw;
                 }
             }
             else
             {
-                return false;
+                errorMessage = new ErrorMessage
+                {
+                    Code = HttpStatusCode.NotModified,
+                    Message = "Validation Error"
+                };
+                return errorMessage;
             }
         }
 
@@ -288,7 +298,7 @@ namespace FinalProject.BL
         private bool checkUserAnswers(VerifyPasswordModal verifyPasswordObject, out User user)
         {
             user = userCRUD.GetUserByEmail(verifyPasswordObject.Email);
-            if (user.Question1 == verifyPasswordObject.Question1 && user.Question2 == verifyPasswordObject.Question2)
+            if (user.Email == verifyPasswordObject.Email && user.Question1 == verifyPasswordObject.Question1 && user.Question2 == verifyPasswordObject.Question2)
             {
                 return true;
             }

@@ -12,10 +12,10 @@ class AuctionInList extends Component {
 
         return (
             <div className="AuctionContainer">
-                <div> <span className="AuctionName"> Auction:  </span> {auction.Title}</div>
-                <div> Product: {auction.Product} </div>
-                <div> Description: {auction.Description}</div>
-                <div> Status: {auction.Status} </div>
+                <div> <span className="AuctionName auctionTitles"> Auction:  </span> {auction.Title}</div>
+                <div> <span className="auctionTitles">Product:</span> {auction.Product} </div>
+                <div> <span className="auctionTitles">Description:</span><br/> {auction.Description}</div>
+                <div> <span className="auctionTitles">Status:</span> {auction.Status} </div>
                 {/* <div className="AuctionDescription">
                     {auction.Description}
                 </div> */}

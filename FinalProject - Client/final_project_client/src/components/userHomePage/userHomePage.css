@@ -42,9 +42,9 @@
 
 .styleLink{
     padding: 5px 30px;
-    background: purple;
+    background: white;
     border-radius: 2em;
-    color: black;
+    color: lightseagreen;
     text-decoration: none;
     font-family: 'Concert One', cursive;
     cursor: pointer;
@@ -55,6 +55,11 @@
 }
 
 .styleLink:hover{
+    background-color:lightseagreen;
+    color: white;
     opacity: 0.8;
 }
 
+.allUsers{
+    margin-top: 15px;
+}
