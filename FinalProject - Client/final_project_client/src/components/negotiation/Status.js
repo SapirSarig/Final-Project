@@ -1,6 +1,5 @@
 
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
 import './Negotiation.css';
 import PropTypes from 'prop-types';
 import TextField from '@material-ui/core/TextField';

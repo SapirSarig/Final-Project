@@ -1,11 +1,8 @@
 
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
 import './homePages.css';
 import './homeHeader.css';
-import { Route, Redirect } from 'react-router';
-import LocalStorageUtil from '../../utils/LocalStorageUtil';
-import SessionStorageUtil from '../../utils/SessionStorageUtil';
+import { Redirect } from 'react-router';
 import LayoutButton from '../../common/layoutButton/layoutButton';
 
 class HomeHeader extends Component {

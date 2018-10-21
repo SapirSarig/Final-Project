@@ -1,9 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import TextField from '@material-ui/core/TextField';
 import { withStyles } from '@material-ui/core/styles';
-import { Link } from 'react-router-dom';
-import LayoutButton from '../../../common/layoutButton/layoutButton';
 import './allOffers.css';
 import UserService from '../../../services/apis/UserService';
 import OfferService from '../../../services/apis/OfferService';

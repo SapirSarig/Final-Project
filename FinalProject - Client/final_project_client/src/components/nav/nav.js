@@ -1,7 +1,6 @@
 import React from "react";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
-import { BrowserRouter as Router, NavLink  } from "react-router-dom";
 
 import { closeNav } from "../../actions";
 import NavMenu from "./navMenu";

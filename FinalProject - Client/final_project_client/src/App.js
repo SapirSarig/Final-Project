@@ -3,7 +3,7 @@ import HomePage from './components/views/homePage/HomePage';
 import LoginPage from './components/views/loginPage/LoginPage';
 import Auction from './components/views/auction/auction';
 import SignUpPage from './components/views/signUpPage/SignUpPage';
-import { BrowserRouter as Router, Route, Link, Redirect } from "react-router-dom";
+import { BrowserRouter as Router, Route, Redirect } from "react-router-dom";
 import './App.css';
 import BusinessHomePage from './components/userHomePage/BusinessHomePage';
 import InfluencerHomePage from './components/userHomePage/InfluencerHomePage';

@@ -32,15 +32,11 @@ class offersPerAuctionPage extends Component {
 
     render() {
         const { auction, user } = this.props.location.state;
-        //const Auction = { id: 1, Title: "cola" };
         const { offers } = this.state;
         return (
 
             <div className="offersPerAuctionContainer" >
                 <NavToggle />
-                {console.log("user", this.props.location.state.user)}
-                {console.log("auction", this.props.location.state.auction)}
-
                 <div className="offersPerAuctionHeader">
                     <div>Auction Name : {auction.Title}</div>
                     <div>Auction No. : {auction.Id}</div>

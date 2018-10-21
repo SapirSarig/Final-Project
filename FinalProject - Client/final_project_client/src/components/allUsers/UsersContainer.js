@@ -38,7 +38,6 @@ class UsersContainer extends Component {
                         {this.props.title}
                     </div>
                 </div>
-                {console.log(theUsers)}
                 <div className="auctionsWrapper">
                     {theUsers && theUsers.map((user) =>
                         <div className="myAuctionWrapper">

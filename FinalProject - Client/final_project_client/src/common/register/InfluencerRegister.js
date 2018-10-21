@@ -191,7 +191,6 @@ class InfluencerRegister extends Component {
                 socialNetworks.splice(index, 1);
         }
         this.setState({ errors, socialNetworks }, () => this.updateChooseTypeState(this.state));
-        console.log("@@@@@", this.state);
     }
 
     checkIfChecked(value) {

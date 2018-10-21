@@ -57,7 +57,7 @@ class BusinessRegister extends Component {
     }
     
     checkValidation(name, value) {
-        const { errors, LinksToProfiles } = this.state;
+        const { errors } = this.state;
         let errorMessage;
         if (name === "WebsiteLink") {
             errorMessage = RegisterService.linkValidation(value);
@@ -94,7 +94,6 @@ class BusinessRegister extends Component {
 
     updateFileImage(src) {
         this.setState({ src },() => this.updateChooseTypeState(this.state));
-        console.log("STATE!!", this.state);
     }
 
     render() {
@@ -118,10 +117,6 @@ class BusinessRegister extends Component {
                     <span> Company's logo: </span>
                     <FileUploader updateFileImage={this.updateFileImage} imgSrc={userInfo.Picture}/>
                 </div>
-                {/* src={Object.getOwnPropertyNames(userInfo).length > 0? userInfo.Picture : src} 
-                <span> Company's logo </span>
-                <img id="uploadPreview" src={src} className="logo" />
-                <input type="file" name="myFile" onChange={this.handleImgChange} /> */}
 
                 <TextField
                     id="companyLink"

@@ -99,7 +99,6 @@ class starOffer extends Component {
         }
         if (OfferId !== "") {
             this.offerService.getOfferById(OfferId).then(req => {
-                //console.log(req);
                 if (req) {
                     if (req.Message) {
                         alert(req.Message);
@@ -120,9 +119,6 @@ class starOffer extends Component {
             offer,
             OfferId
         });
-        console.log("#$#$#$$$", offer);
-
-
     }
 
     isAllValid() {
@@ -214,7 +210,6 @@ class starOffer extends Component {
                     else {
                         
                         this.userSerive.sendMailToInfluencerUser(OfferId, AuctionName).then(req => {
-                            //console.log(req);
                             if (req) {
                                 if (req.Message) {
                                     alert(req.Message);
@@ -300,7 +295,6 @@ class starOffer extends Component {
     deleteOfferClicked() {
         const { OfferId } = this.state;
         this.offerService.deleteOffer(OfferId).then(req => {
-            //console.log(req);
             if (req) {
                 if (req.Message) {
                     alert(req.Message);
@@ -321,7 +315,6 @@ class starOffer extends Component {
 
     openNegotiation() {
         this.negotiationService.createChat(this.state.OfferId).then(req => {
-            //console.log(req);
             if (req) {
                 if (req.Message) {
                     alert(req.Message);

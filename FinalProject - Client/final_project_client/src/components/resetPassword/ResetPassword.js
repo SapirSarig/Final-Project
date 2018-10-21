@@ -75,7 +75,6 @@ export default class ResetPassword extends Component {
     submitClicked() {
         const { authUser, Password } = this.state;
         this.userService.resetPasswordToUser(authUser, Password).then(req => {
-            //console.log(req);
             if (req) {
                 if (req.Message) {
                     alert(req.Message);

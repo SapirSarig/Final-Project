@@ -1,6 +1,5 @@
 
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
 import NegotiationService from '../../services/apis/NegotiationService';
 import History from './History';
 import NewMessageArea from './NewMessageArea';
@@ -26,21 +25,7 @@ class NegotiationPage extends Component {
     componentDidMount() {
         const {OfferId} = this.props;
         if (OfferId !== "") {
-            // this.offerService.getOfferById(OfferId).then(req => {
-            //     //console.log(req);
-            //     if (req) {
-            //         if (req.Message) {
-            //             alert(req.Message);
-            //         }
-            //         else {
-            //             this.setState({
-            //                 openNegotiation: req.IsOpenNegotiation
-            //             });
-            //         }
-            //     }
-            // });
             this.negotiationService.getChatByOfferId(OfferId).then(req => {
-                //console.log(req);
                 if (req) {
                     if (req.Message) {
                         alert(req.Message);
@@ -53,22 +38,12 @@ class NegotiationPage extends Component {
                 }
             });
         }
-
-        //this.setState({chat});
-        this.getNegotiationContent(); // ????
+        this.getNegotiationContent(); 
         setInterval(this.getNegotiationContent, 10000);
-        // this.offerService.updateIsOpenNegotiations(OfferId).then(req => {
-        //     //console.log(req);
-        //     if (req) {
-        //         if (req.Message) {
-        //             alert(req.Message);
-        //         }
-        //     }
-        // });
+
     }
 
     getNegotiationContent() {
-        //const { chatId } = this.props;
         const {OfferId} = this.props;
         this.negotiationService.getMessagesByOfferId(OfferId).then(messages => {
             this.setState({ messages });
@@ -77,8 +52,6 @@ class NegotiationPage extends Component {
 
     addNewMessageToList(Text) {
         const {chat} = this.state;
-        const newList = this.state.messages;
-        //const From = this.props.user.Name;
         const From = this.props.user.Name;
         const TimeSent = null;
         const messageToAdd = {

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Register from "../../common/register/Register";
-import { Route, Redirect } from 'react-router';
+import { Redirect } from 'react-router';
 import UserService from "../../services/apis/UserService";
 import NavToggle from "../navToggle/navToggle";
 
@@ -28,7 +28,6 @@ export default class EditProfile extends Component {
 
     UpdateInfluencerUser(userToUpdate) {
         this.userService.UpdateInfluencerUser(userToUpdate).then(req => {
-            //console.log(req);
             if (req) {
                 if(req.Message){
                     alert(req.Message);
@@ -49,7 +48,6 @@ export default class EditProfile extends Component {
 
     UpdateBusinessUser(userToUpdate) {
         this.userService.UpdateBusinessUser(userToUpdate).then(req => {
-            //console.log(req);
             if (req) {
                 if (req.Message) {
                     alert(req.Message);

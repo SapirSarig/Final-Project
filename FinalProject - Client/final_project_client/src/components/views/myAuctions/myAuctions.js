@@ -61,7 +61,6 @@ class myAuctions extends Component {
                     </div>
                 </div>
                 <div className="auctionsWrapper">
-                    {console.log("theAuctions", theAuctions)}
                     {theAuctions && theAuctions.map((auction) =>
                         auction.Status !== "Deleted" && <div className="myAuctionWrapper">
                             <TextField
@@ -77,7 +76,6 @@ class myAuctions extends Component {
                             
                             <div className="btnWrapper">
                                 <div className="detailsContainer ">
-                                    {console.log("user: ", theUser)}
                                     <Link className="detailsBtn designBtn" to={{ pathname: "/auction", state: { auction: auction, isNew: false, user:theUser } }}>
                                         Details
                                     </Link>

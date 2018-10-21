@@ -3,7 +3,7 @@ import VerifyQuestions from "../../common/verifyQuestions/VerifyQuestions";
 import UserService from "../../services/apis/UserService";
 import ValidationUtil from '../../utils/ValidationUtil';
 import RegisterService from '../../services/register/RegisterService';
-import { Route, Redirect } from 'react-router';
+import { Redirect } from 'react-router';
 import LayoutButton from '../../common/layoutButton/layoutButton';
 import './ForgotPassword.css';
 
@@ -45,14 +45,12 @@ export default class ForgotPassword extends Component {
 
     submitClicked() {
         const { email, Question1, Question2 } = this.state;
-        let { emailSent } = this.state;
         let obj = {
             "Email": email,
             "Question1": Question1,
             "Question2": Question2
         }
         this.userService.SendLinkToResetPassword(obj).then(req => {
-            //console.log(req);
             if (req) {
                 if (req.Message) {
                     alert(req.Message);

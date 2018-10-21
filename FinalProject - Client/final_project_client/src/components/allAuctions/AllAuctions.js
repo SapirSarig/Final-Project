@@ -1,6 +1,5 @@
 
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
 import MyAuctions from '../views/myAuctions/myAuctions.js';
 import AuctionService from '../../services/apis/AuctionService';
 import NavToggle from '../navToggle/navToggle';

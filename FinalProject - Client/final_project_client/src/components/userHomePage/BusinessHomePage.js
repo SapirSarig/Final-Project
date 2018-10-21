@@ -40,7 +40,6 @@ class BusinessHomePage extends Component {
 
     componentWillMount() {
         const { location } = this.props;
-        console.log("location", location);
         if (location && location.state) {
             const { user } = location.state;
             const { updatedUser } = location.state;
@@ -62,14 +61,12 @@ class BusinessHomePage extends Component {
                 this.auctionService.getAuctionsByEmail(updatedUser.Email).then(req => {
                     this.setState({ theAuctions: [] });
                     this.setState({ theAuctions: req });
-                    console.log(req);
                 });
             } else {
                 this.setState({ user });
 
                 this.auctionService.getAuctionsByEmail(user.Email).then(req => {
                     this.setState({ theAuctions: req });
-                    console.log(req);
                 });
             }
 
@@ -99,18 +96,15 @@ class BusinessHomePage extends Component {
     // }
     onMyAuctionsClick(event) {
         const { user } = this.state;
-        //console.log("userInfo", userInfo);
         if (user) {
             this.auctionService.getAuctionsByEmail(user.Email).then(req => {
                 this.setState({ theAuctions: req });
-                console.log(req);
             });
         }
     }
 
     render() {
         const { updatedUser, user, theAuctions, isOffers } = this.state;
-        console.log("theAuctions", theAuctions);
         return (
             <div className="businessHomePage">
                 <NavToggle />

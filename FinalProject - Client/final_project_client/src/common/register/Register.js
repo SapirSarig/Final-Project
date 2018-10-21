@@ -154,12 +154,10 @@ class Register extends Component {
             });
             this.checkValidation(name, value);
         }
-        console.log("%^%^%^%", this.state);
     }
 
 
     updateChooseTypeStateObject(obj) {
-        console.log(obj);
         this.setState({
             chooseTypeState: obj
         });

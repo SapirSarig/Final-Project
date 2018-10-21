@@ -211,9 +211,6 @@ class Auction extends Component {
     isBusinessUser() {
         const { user, location } = this.props;
         const theUser = (location && location.state.user) || user;
-        console.log("theUser", theUser);
-        console.log("theUser.Type", theUser.Type);
-        console.log("bool:", (theUser.Type === "Business Owner"));
         return (theUser.Type === "Business Owner");
     }
 
@@ -229,7 +226,6 @@ class Auction extends Component {
         const theAuction = (this.props.location && this.props.location.state.auction) || auction;
         if (theAuction.Id) {
             this.auctionService.deleteAuction(theAuction.Id).then(req => {
-                //console.log(req);
                 if (req) {
                     if (req.Message) {
                         alert(req.Message);
@@ -254,7 +250,6 @@ class Auction extends Component {
         const theAuction = (this.props.location && this.props.location.state.auction) || auction;
         if (theAuction.Id) {
             this.auctionService.closeAuction(theAuction.Id).then(req => {
-                //console.log(req);
                 if (req) {
                     if (req.Message) {
                         alert(req.Message);

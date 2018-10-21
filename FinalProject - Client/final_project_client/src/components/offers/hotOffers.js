@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-import LayoutButton from '../../common/layoutButton/layoutButton';
 import UserService from "../../services/apis/UserService";
 import OfferService from "../../services/apis/OfferService";
 

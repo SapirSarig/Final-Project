@@ -169,7 +169,6 @@ class Login extends Component {
     render() {
         const { classes } = this.props;
         const { email, password, rememberMe, errors, loggedIn, externalLogin, user } = this.state;
-        console.log(user);
         return (
             externalLogin ?
                 <Redirect to={{

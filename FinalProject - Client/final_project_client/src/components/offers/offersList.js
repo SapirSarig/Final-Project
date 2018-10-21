@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import OfferInList from './offerInList';
 import './offersList.css';
 import PropTypes from 'prop-types';
 import TextField from '@material-ui/core/TextField';
@@ -33,13 +32,6 @@ class OffersList extends Component {
         const theOffers = (location && location.state.offers) || offers;
 
         return (
-            //To Remove:
-            // offers && offers.length > 0 ? <div className="offersList">
-            //     {offers.map((offer,index) =>
-            //         <OfferInList key ={index} offer={offer} />)
-            //     }
-            // </div> : <div>No Offers Yet!</div>
-
             <form className={classes.container} noValidate autoComplete="off">
                 <div className="offersTitleContainer">
                     <div className="offersTitle">

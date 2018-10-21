@@ -1,6 +1,5 @@
 
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
 import './Negotiation.css';
 
 class NewMessageArea extends Component {
@@ -15,9 +14,6 @@ class NewMessageArea extends Component {
     }
 
     handleSubmit(event) {
-        //const { ChatId, User } = this.props;
-        const ChatId = 1;
-        //const { negotiationId, userId } = this.props;
         this.props.addNewMessageToList(this.state.message);
         this.setState({ message: '' });
     }

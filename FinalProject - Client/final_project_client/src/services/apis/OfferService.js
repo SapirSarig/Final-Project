@@ -14,7 +14,6 @@ export default class OfferService {
       }
     })
       .then((res) => {
-        console.log(res);
         return res.json();
       })
       .catch((err) => {
@@ -91,7 +90,6 @@ export default class OfferService {
       }
     })
       .then((res) => {
-        console.log(res);
         return res.json();
       })
       .catch((err) => {
@@ -127,7 +125,6 @@ export default class OfferService {
       }
     })
       .then((res) => {
-        console.log(res);
         return res.json();
       })
       .catch((err) => {
@@ -145,7 +142,6 @@ export default class OfferService {
       }
     })
       .then((res) => {
-        console.log(res);
         return res.json();
       })
       .catch((err) => {
@@ -164,7 +160,6 @@ export default class OfferService {
       }
     })
       .then((res) => {
-        console.log(res);
         return res.json();
       })
       .catch((err) => {

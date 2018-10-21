@@ -68,7 +68,7 @@ class Profile extends Component {
                 alert(req.message);
             }
             else {
-                if (req == true) {
+                if (req === true) {
                     clearInterval(this.state.rateIntervalId);
                     this.setState({ isRatedByUserVar: req });
                 }
@@ -83,7 +83,7 @@ class Profile extends Component {
                 alert(req.message);
             }
             else {
-                if (req == true) {
+                if (req === true) {
                     clearInterval(this.state.reviewIntervalId);
                     this.setState({ isReviewedByUserVar: req });
                 }
@@ -96,7 +96,7 @@ class Profile extends Component {
         const target = event.target;
         const value = target.value;
         const name = target.name;
-        let { okDisabled } = this.state;
+        //let { okDisabled } = this.state;
 
         this.setState({
             [name]: value,
@@ -126,7 +126,7 @@ class Profile extends Component {
         const { user } = this.state;
         const target = event.target;
         const value = target.value;
-        const name = target.name;
+        //const name = target.name;
         const FromUser = this.state.loggedUser;
         const currTime = Date().split("GMT");
 
@@ -138,7 +138,6 @@ class Profile extends Component {
         }
 
         this.userService.AddReviewToUser(user.Id, obj).then(req => {
-            //console.log(req);
             if (req) {
                 user.Reviews.push(obj);
                 this.setState({ user: req });
@@ -158,21 +157,18 @@ class Profile extends Component {
     }
 
     render() {
-        //const { review, type, name, interests, description, reviews, dateOfBirth, socialNetworks } = this.state;
-        //const { user } = this.state;
         const { location } = this.props;
         const { user } = this.state;
         let { okDisabled, isRatedByUserVar, isReviewedByUserVar } = this.state;
         const isOkDisabled = (location && location.state.okDisabled) || okDisabled;
 
-        console.log(user);
         return (
             <div>
                 <NavToggle />
                 {user && (<div className="profileContainer">
                     <div className="rightSideWrapper">
                         <div className="profileImgWrapper">
-                            <img src={user.Picture} className="profliePic" />
+                            <img src={user.Picture} alt="userPicture" className="profliePic" />
                         </div>
                         <span className="name"> {user.Name} </span>
                     </div>
