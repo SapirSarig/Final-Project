@@ -168,6 +168,8 @@ class UserRating extends Component {
                                     <div>{user.FiveStars}</div>
                                 </div>
                             </div>
+                            <br />
+
                             <div className="div4Star">
                                 <div className="side">
                                     <div>4 stars</div>
@@ -181,6 +183,8 @@ class UserRating extends Component {
                                     <div>{user.FourStars}</div>
                                 </div>
                             </div>
+                            <br />
+
                             <div className="div3Star">
                                 <div className="side">
                                     <div>3 stars</div>
@@ -194,6 +198,8 @@ class UserRating extends Component {
                                     <div>{user.ThreeStars}</div>
                                 </div>
                             </div>
+                            <br />
+
                             <div className="div2Star">
                                 <div className="side">
                                     <div>2 stars</div>
@@ -207,6 +213,8 @@ class UserRating extends Component {
                                     <div>{user.TwoStars}</div>
                                 </div>
                             </div>
+                            <br />
+
                             <div className="div1Star">
                                 <div className="side">
                                     <div>1 star</div>

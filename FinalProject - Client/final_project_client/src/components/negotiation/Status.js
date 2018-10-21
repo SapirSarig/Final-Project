@@ -157,7 +157,7 @@ class Status extends Component {
                     />
                     <br/>
                     {!priceSettled && okClicked && user.Type === "Social Influencer" && <label>Waiting for response...</label>}
-                    {(!priceSettled && user.Type === "Social Influencer") && <LayoutButton text="Ok" onClick={this.handleOkClicked} />}
+                    {(!priceSettled && user.Type === "Social Influencer") && <LayoutButton text="Send" onClick={this.handleOkClicked} />}
                 </div>
                 <div>
                     <span className="title"> Bussniess' Price: </span>
@@ -179,7 +179,7 @@ class Status extends Component {
                     />
                     <br/>
                     {!priceSettled && okClicked && user.Type === "Business Owner" && <label>Waiting for response...</label>}
-                    {(!priceSettled && user.Type === "Business Owner") && <LayoutButton text="Ok" onClick={this.handleOkClicked} />}
+                    {(!priceSettled && user.Type === "Business Owner") && <LayoutButton text="Send" onClick={this.handleOkClicked} />}
                     {priceSettled &&
                         <div>
                             {(user.Type === "Business Owner") ?

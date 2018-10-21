@@ -106,17 +106,6 @@ export default class ResetPassword extends Component {
             <div className="Container">
                 {(authUserValid && !passwordUpdated) ?
                     <div>
-                        {/* <div className="passwordContainer">
-                            <span > New Password</span>
-                            <input type="password" placeholder="Min 6 chars, at least one number and one lower case English letter" name="Password" value={Password} onChange={this.handleInputChange} />
-                            <span className="errorInput" > {errors["Password"] && errors["Password"]} </span>
-                        </div>
-
-                        <div className="confirmPasswordContainer">
-                            <span > Confirm Password  </span>
-                            <input type="password" name="ConfirmPassword" value={ConfirmPassword} onChange={this.handleInputChange} />
-                            <span className="errorInput" > {errors["ConfirmPassword"] && errors["ConfirmPassword"]} </span>
-                        </div> */}
                         <PasswordInput name="Password" style={{ width: '75%' }} placeholder="Min 6 chars, one number and one lower case letter" value={Password} onChange={this.handleInputChange} label={"New Password "} />
                         <span className="errorInput" > {errors["Password"] && errors["Password"]} </span>
 

@@ -191,6 +191,16 @@ class Profile extends Component {
                         <span> {user.Description} </span>
                     </div>
 
+                    {
+                        user.Type === "Business Owner" &&
+                        <div>
+                            <span> Website Link: </span>
+                            {/* <a href={user.WebsiteLink}>{user.CompanyName} </a> */}
+                            <a href={`https://${user.WebsiteLink}`}>{user.CompanyName} </a>
+
+                        </div>
+                    }
+
                     {user.Type === "Social Influencer" ?
                         <StarProfile dateOfBirth={user.DateOfBirth} socialNetworks={user.SocialNetworks} /> : null}
 

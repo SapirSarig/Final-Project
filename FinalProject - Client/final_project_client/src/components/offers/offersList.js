@@ -48,16 +48,6 @@ class OffersList extends Component {
                 </div>
                 {theOffers && theOffers.map((offer) =>
                     offer.Status!=="Deleted" && <div className="offerWrapper">
-                        {/* <TextField
-                            id="date"
-                            label="Date"
-                            defaultValue= {offer.date}
-                            className={classes.textField}
-                            margin="normal"
-                            InputProps={{
-                                readOnly: true,
-                            }}
-                        /> */}
                         <TextField
                             id="offerDescription"
                             label="Offer's Description"
@@ -68,7 +58,7 @@ class OffersList extends Component {
                                 readOnly: true,
                             }}
                         />
-                        {!this.props.fromBusiness && <TextField
+                        <TextField
                             id="nameAuction"
                             label="Auction's Name"
                             defaultValue={offer.Auction.Title}
@@ -77,7 +67,7 @@ class OffersList extends Component {
                             InputProps={{
                                 readOnly: true,
                             }}
-                        />}
+                        />
                         {!this.props.fromBusiness && <TextField
                             id="numberAuction"
                             label="Auction's Number"
