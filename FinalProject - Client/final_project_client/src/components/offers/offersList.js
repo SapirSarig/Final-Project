@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import OfferInList from './offerInList';
 import './offersList.css';
 import PropTypes from 'prop-types';
 import TextField from '@material-ui/core/TextField';
@@ -35,64 +36,72 @@ class OffersList extends Component {
         const theOffers = (location && location.state.offers) || offers;
 
         return (
-            <form className={classes.container} noValidate autoComplete="off">
-                <div className="offersTitleContainer">
-                    <div className="offersTitle">
-                        Offers
+            //To Remove:
+            // offers && offers.length > 0 ? <div className="offersList">
+            //     {offers.map((offer,index) =>
+            //         <OfferInList key ={index} offer={offer} />)
+            //     }
+            // </div> : <div>No Offers Yet!</div>
+            <div>
+                <form className={classes.container} noValidate autoComplete="off" style={{display: 'flex', flexDirection: 'row'}}>
+                    <div className="offersTitleContainer">
+                        <div className="offersTitle">
+                            Offers
+                         </div>
                     </div>
-                </div>
-                {theOffers && theOffers.map((offer) =>
-                    offer.Status!=="Deleted" && <div className="offerWrapper">
-                        <TextField
-                            id="offerDescription"
-                            label="Offer's Description"
-                            defaultValue={offer.Description}
-                            className={classes.textField}
-                            margin="normal"
-                            InputProps={{
-                                readOnly: true,
-                            }}
-                        />
-                        <TextField
-                            id="nameAuction"
-                            label="Auction's Name"
-                            defaultValue={offer.Auction.Title}
-                            className={classes.textField}
-                            margin="normal"
-                            InputProps={{
-                                readOnly: true,
-                            }}
-                        />
-                        {!this.props.fromBusiness && <TextField
-                            id="numberAuction"
-                            label="Auction's Number"
-                            defaultValue={offer.Auction.Id}
-                            className={classes.textField}
-                            margin="normal"
-                            InputProps={{
-                                readOnly: true,
-                            }}
-                        />}
-
-                        <div className="bottomWrapper">
+                    {theOffers && theOffers.map((offer) =>
+                        offer.Status !== "Deleted" && <div className="offerWrapper">
                             <TextField
-                                id="offerStatus"
-                                label="Offer's Status"
-                                defaultValue={offer.Status}
+                                id="offerDescription"
+                                label="Offer's Description"
+                                defaultValue={offer.Description}
                                 className={classes.textField}
                                 margin="normal"
                                 InputProps={{
                                     readOnly: true,
                                 }}
                             />
-                            <Link className="goToStarOffer" to={{ pathname: "/starOffer", state: { currOffer: offer, fromBusiness: this.props.fromBusiness, fromAllOffers: this.props.fromAllOffers, user } }}>
-                                <LayoutButton text="Go To Offer" />
-                            </Link>
+                            <TextField
+                                id="nameAuction"
+                                label="Auction's Name"
+                                defaultValue={offer.Auction.Title}
+                                className={classes.textField}
+                                margin="normal"
+                                InputProps={{
+                                    readOnly: true,
+                                }}
+                            />
+                            {!this.props.fromBusiness && <TextField
+                                id="numberAuction"
+                                label="Auction's Number"
+                                defaultValue={offer.Auction.Id}
+                                className={classes.textField}
+                                margin="normal"
+                                InputProps={{
+                                    readOnly: true,
+                                }}
+                            />}
+
+                            <div className="bottomWrapper">
+                                <TextField
+                                    id="offerStatus"
+                                    label="Offer's Status"
+                                    defaultValue={offer.Status}
+                                    className={classes.textField}
+                                    margin="normal"
+                                    InputProps={{
+                                        readOnly: true,
+                                    }}
+                                />
+                                <Link className="goToStarOffer" to={{ pathname: "/starOffer", state: { currOffer: offer, fromBusiness: this.props.fromBusiness, fromAllOffers: this.props.fromAllOffers, user } }}>
+                                    <LayoutButton text="Go To Offer" />
+                                </Link>
+                            </div>
+                            <div className="separatorLine"></div>
                         </div>
-                        <div className="separatorLine"></div>
-                    </div>
-                )}
-            </form>
+                    )}
+                </form>
+            </div>
         );
     }
 }

@@ -14,6 +14,7 @@ import SessionStorageUtil from '../../utils/SessionStorageUtil';
 
 import PasswordInput from '../passwordInput/passwordInput';
 import LayoutButton from '../../common/layoutButton/layoutButton';
+import Logo from '../../common/logo/logo';
 
 const initialState = {
     email: "",
@@ -186,6 +187,7 @@ class Login extends Component {
                         state: { user }
                     }} /> :
                     (<div className="Container">
+                        <Logo />
                         <div className="wrapper">
                             <TextField
                                 id="email"

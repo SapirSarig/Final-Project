@@ -122,11 +122,11 @@ class UserRating extends Component {
                 <span className="heading">Rating</span>
                 {isSameUser || isRatedByUser ? <div></div> :
                     user && <div>
-                        <img alt="star" onClick={() => this.color(1, true)} onMouseOver={() => this.color(1, false)} onMouseOut={() => this.noColor(1)} className="noColorStar star1"></img>
-                        <img alt="star" onClick={() => this.color(2, true)} onMouseOver={() => this.color(2, false)} onMouseOut={() => this.noColor(2)} className="noColorStar star2"></img>
-                        <img alt="star" onClick={() => this.color(3, true)} onMouseOver={() => this.color(3, false)} onMouseOut={() => this.noColor(3)} className="noColorStar star3"></img>
-                        <img alt="star" onClick={() => this.color(4, true)} onMouseOver={() => this.color(4, false)} onMouseOut={() => this.noColor(4)} className="noColorStar star4"></img>
-                        <img alt="star" onClick={() => this.color(5, true)} onMouseOver={() => this.color(5, false)} onMouseOut={() => this.noColor(5)} className="noColorStar star5"></img>
+                        <img onClick={() => this.color(1, true)} onMouseOver={() => this.color(1, false)} onMouseOut={() => this.noColor(1)} className="noColorStar star1"></img>
+                        <img onClick={() => this.color(2, true)} onMouseOver={() => this.color(2, false)} onMouseOut={() => this.noColor(2)} className="noColorStar star2"></img>
+                        <img onClick={() => this.color(3, true)} onMouseOver={() => this.color(3, false)} onMouseOut={() => this.noColor(3)} className="noColorStar star3"></img>
+                        <img onClick={() => this.color(4, true)} onMouseOver={() => this.color(4, false)} onMouseOut={() => this.noColor(4)} className="noColorStar star4"></img>
+                        <img onClick={() => this.color(5, true)} onMouseOver={() => this.color(5, false)} onMouseOut={() => this.noColor(5)} className="noColorStar star5"></img>
                     </div>
                 }
                 {user &&

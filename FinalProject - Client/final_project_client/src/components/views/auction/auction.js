@@ -385,9 +385,15 @@ class Auction extends Component {
                                 <LayoutButton text="Submit" onClick={this.AddAuction} />
                             </div>
 
-                            {!this.isBusinessUser() && theAuction.Status === "Open" && <LayoutButton text="Add Offer" className="designBtn" to={{ pathname: "/starOffer", state: { auction: theAuction, user: theUser, fromBusiness: false } }}/>}
+                            {!this.isBusinessUser() && theAuction.Status === "Open" &&
+                                <Link to={{ pathname: "/starOffer", state: { auction: theAuction, user: theUser, fromBusiness: false } }}>
+                                    <LayoutButton text="Add Offer" className="designBtn" />
+                                </Link>}
                             <div className="businessBtnsContainer">
-                                {this.isBusinessUser() && (!isAuctionNew) && <LayoutButton text="Show Offers" className="designBtn" to={{ pathname: "/offersPerAuctionPage", state: { auction: theAuction, user: theUser } }} />}
+                                {this.isBusinessUser() && (!isAuctionNew) &&
+                                    <Link to={{ pathname: "/offersPerAuctionPage", state: { auction: theAuction, user: theUser } }}>
+                                        <LayoutButton text="Show Offers" className="designBtn" />
+                                    </Link>}
                                 {this.isBusinessUser() && (!isAuctionNew) && auction.Status !== "Deleted" && <LayoutButton text="Delete Auction" onClick={this.deleteAuction} />}
                                 {this.isBusinessUser() && (!isAuctionNew) && auction.Status === "Open" && <LayoutButton text="Close Auction" onClick={this.closeAuction} />}
                             </div>

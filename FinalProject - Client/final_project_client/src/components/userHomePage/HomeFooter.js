@@ -17,7 +17,7 @@ export default class HomeHeader extends Component {
                     All Influencers
                 </Link>:
                 <Link
-                className="allUsers styleLink"
+                className="styleLink"
                 to={{ pathname: "/allUsers", state: {} }}
             >
                 All Users
