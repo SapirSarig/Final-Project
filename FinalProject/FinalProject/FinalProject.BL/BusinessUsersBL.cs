@@ -68,7 +68,8 @@ namespace FinalProject.BL
 
         public ErrorMessage UpdateBusinessUser(UpdatedBusinessUserModal userToUpdate)
         {
-            User user = userCRUD.UpdateBusinessUser(userToUpdate);
+            userCRUD.UpdateBusinessUser(userToUpdate);
+            User user = userCRUD.GetUserByEmail(userToUpdate.Email);
             if (user == null)
             {
                 ErrorMessage message = new ErrorMessage

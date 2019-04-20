@@ -10,13 +10,21 @@ import OfferService from '../../../services/apis/OfferService';
 import StringUtil from '../../../utils/StringUtil';
 import socialMedia from '../../../common/socialMedia/socialMedia';
 import UserSerive from '../../../services/apis/UserService';
+import NegotiationPage from '../../negotiation/NegotiationPage';
+import SessionStorageUtil from '../../../utils/SessionStorageUtil';
+import NegotiationService from '../../../services/apis/NegotiationService';
+// import NavToggle from "../../navToggle/navToggle";
+import FixedHeader from '../../../common/fixedHeader/fixedHeader';
+
 
 const styles = theme => ({
     container: {
         display: 'flex',
-        flexWrap: 'wrap',
+        flexWrap: 'nowrap',
         flexDirection: 'column',
-        width: '100%'
+        width: '100%',
+        paddingTop: '100px',
+        paddingLeft: '100px',
     },
     textField: {
         marginLeft: theme.spacing.unit,
@@ -28,9 +36,10 @@ const styles = theme => ({
 class starOffer extends Component {
     offerService;
     userSerive;
+    negotiationService;
     constructor(props) {
         super(props);
-
+        this.negotiationService = new NegotiationService();
         this.state = {
             offer: {
                 UserId: '',
@@ -46,7 +55,13 @@ class starOffer extends Component {
             StarName: '', //props
             offerOk: false,
             OfferId: '',
-            OfferStatusUpdated: false
+            OfferStatusUpdated: false,
+            offerDeleted: false,
+            openNegotiation: false,
+            offerAccepted:false,
+            offerDeclined: false,
+            auctionStatus:''
+            //chat: {}
 
         };
         this.offerService = new OfferService();
@@ -57,6 +72,8 @@ class starOffer extends Component {
         this.isAllValid = this.isAllValid.bind(this);
         this.acceptClicked = this.acceptClicked.bind(this);
         this.declinedClicked = this.declinedClicked.bind(this);
+        this.deleteOfferClicked = this.deleteOfferClicked.bind(this);
+        this.openNegotiation = this.openNegotiation.bind(this);
     }
 
     componentDidMount() {
@@ -79,18 +96,32 @@ class starOffer extends Component {
         else {
             const { auction, user } = this.props.location.state;
             offer.AuctionId = auction.Id;
-            offer.UserId = user.user? user.user.Id : user.Id; //check why
+            offer.UserId = user.user ? user.user.Id : user.Id; //check why
             AuctionName = auction.Title;
-            StarName = user.user? user.user.Name: user.Name; //check why
+            StarName = user.user ? user.user.Name : user.Name; //check why
         }
+        if (OfferId !== "") {
+            this.offerService.getOfferById(OfferId).then(req => {
+                if (req) {
+                    if (req.Message) {
+                        alert(req.Message);
+                    }
+                    else {
+                        this.setState({
+                            openNegotiation: req.IsOpenNegotiation,
+                            offerAccepted: req.Status === "Accepted" ? true : false
+                        });
+                    }
+                }
+            });         
+        }
+
         this.setState({
             AuctionName,
             StarName,
             offer,
             OfferId
         });
-        console.log("#$#$#$$$", offer);
-
     }
 
     isAllValid() {
@@ -150,12 +181,12 @@ class starOffer extends Component {
                 if (name === "AdvertisingForms") {
                     const index = offer.AdvertisingForms.findIndex(advfrm => advfrm.Value === value);
                     if (index !== -1)
-                        offer.AdvertisingForms.splice(index, index + 1);
+                        offer.AdvertisingForms.splice(index,  1);
                 }
                 else {
                     const index = offer.PublishSocialNetworks.findIndex(socialNetwork => socialNetwork.Value === name);
                     if (index !== -1)
-                        offer.PublishSocialNetworks.splice(index, index + 1);
+                        offer.PublishSocialNetworks.splice(index,  1);
                 }
             }
         }
@@ -173,15 +204,28 @@ class starOffer extends Component {
         let status;
         if (r == true) {
             status = "Accepted";
-            const { OfferId } = this.state;
-            this.offerService.updateOffer(OfferId, status).then(req => {
-                if (req) {
-                    if (req.Message) {
-                        alert(req.Message);
+            const { OfferId, AuctionName } = this.state;
+            this.offerService.updateOffer(OfferId, status).then(updateOfferReq => {
+                if (updateOfferReq) {
+                    if (updateOfferReq.Message) {
+                        alert(updateOfferReq.Message);
                     }
                     else {
-                        alert("The offer was accepted succefully!");
-                        this.setState({ OfferStatusUpdated: true });
+                        
+                        this.userSerive.sendMailToInfluencerUser(OfferId, AuctionName).then(req => {
+                            if (req) {
+                                if (req.Message) {
+                                    alert(req.Message);
+                                }
+                                else {
+                                    alert("The offer was accepted succefully!");
+                                    //this.setState({ OfferStatusUpdated: true });
+                                    this.openNegotiation();
+                                    this.setState({offerAccepted: updateOfferReq.Status === "Accepted" ? true : false});
+                                     
+                                }
+                            }
+                        });         
                     }
                 }
                 else {
@@ -204,7 +248,8 @@ class starOffer extends Component {
                     }
                     else {
                         alert("The offer was declined succefully");
-                        this.setState({ OfferStatusUpdated: true });
+                        this.setState({ OfferStatusUpdated: true ,
+                            offerDeclined : req.Status === "Declined" ? true : false});
                     }
                 }
                 else {
@@ -217,7 +262,7 @@ class starOffer extends Component {
 
 
     sendOfferClicked() {
-        let r = window.confirm("By sending the offer you commit to publish the product in the way you described");
+        let r = window.confirm("By sending the offer you commit to publish the product if the business owner accepts your offer");
         let status;
         if (r == true) {
             const { offer } = this.state;
@@ -228,16 +273,16 @@ class starOffer extends Component {
                     }
                     else {
                         alert("Your offer was submitted succefully!");
-                        // this.userSerive.sendMailToBusinessUser(offer.AuctionId).then(req => {
-                        //     if (req) {
-                        //         if (req.Message) {
-                        //             alert(req.Message);
-                        //         }
-                        //     }
-                        //     else {
-                        //         this.setState({ offerOk: true });
-                        //     }
-                        // });
+                        this.userSerive.sendMailToBusinessUser(offer.AuctionId).then(req => {
+                            if (req) {
+                                if (req.Message) {
+                                    alert(req.Message);
+                                }
+                            }
+                            else {
+                                this.setState({ offerOk: true });
+                            }
+                        });
                         this.setState({ offerOk: true });
 
                     }
@@ -250,13 +295,64 @@ class starOffer extends Component {
         }
     }
 
+    deleteOfferClicked() {
+        const { OfferId } = this.state;
+        this.offerService.deleteOffer(OfferId).then(req => {
+            if (req) {
+                if (req.Message) {
+                    alert(req.Message);
+                }
+                else {
+                    alert("Your offer was deleted succefully!");
+                    this.setState({
+                        offerDeleted: true,
+                    });
+                }
+
+            }
+            else {
+                alert("Server Error");
+            }
+        });
+    }
+
+    openNegotiation() {
+        this.negotiationService.createChat(this.state.OfferId).then(req => {
+            if (req) {
+                if (req.Message) {
+                    alert(req.Message);
+                }
+                else {
+                    this.setState({
+                        chat: req
+                    });
+                    this.offerService.updateIsOpenNegotiations(this.state.OfferId).then(req => {
+                        if (req) {
+                            if (req.Message) {
+                                alert(req.Message);
+                            }
+                            else {
+                                this.setState({ openNegotiation: req.IsOpenNegotiation })
+                            }
+                        }
+                    });
+                }
+            }
+        });
+        
+
+        
+    }
+
     render() {
         const { classes } = this.props;
         const { fromBusiness, fromAllOffers, user } = this.props.location.state;
-        let { offer, AuctionName, StarName, offerOk, OfferStatusUpdated } = this.state;
+        let { offer, AuctionName, StarName, offerOk, OfferStatusUpdated, offerDeleted, openNegotiation, OfferId, offerAccepted, offerDeclined } = this.state;
         return (
             <div className="offerWrapper">
-                {(!offerOk && !OfferStatusUpdated) ?
+                {/* <NavToggle /> */}
+                <FixedHeader />
+                {(!offerOk && !OfferStatusUpdated && !offerDeleted) ?
                     <div className={classes.container} noValidate autoComplete="off">
                         <div className="firstLineWrapper">
                             <TextField
@@ -338,7 +434,7 @@ class starOffer extends Component {
                         <TextField
                             id="payment"
                             name="Payment"
-                            label="Payment ($) *"
+                            label="Initial Payment ($) *"
                             value={offer.Payment}
                             onChange={this.handleChange}
                             type="number"
@@ -349,22 +445,28 @@ class starOffer extends Component {
                                 readOnly: (fromAllOffers || fromBusiness) ? true : false,
                             }}
                         />
+                        {
+                            openNegotiation && <NegotiationPage user={SessionStorageUtil.GetLoggedUser()} OfferId={OfferId} offerAccepted={offerAccepted}/>
+                        }
+
                         <div className="btnContainer">
                             {/* className={`${this.isAllValid() ? "" : "disableElement"}`} */}
                             {!(fromAllOffers || fromBusiness) && <LayoutButton text="Send Offer" onClick={this.sendOfferClicked} />}
-                            {fromBusiness && offer.Status === "Pending" && <LayoutButton text="Accept" onClick={this.acceptClicked} />}
-                            {fromBusiness && offer.Status === "Pending" && <LayoutButton text="Decline" onClick={this.declinedClicked} />}
+                            {(fromAllOffers && !fromBusiness && !offer.Status==="Accepted") && <LayoutButton text="Delete Offer" onClick={this.deleteOfferClicked} />}
+                            {fromBusiness && !offerAccepted && !offerDeclined && !openNegotiation && offer.Status === "Pending" && <LayoutButton text="Accept" onClick={this.acceptClicked} />}
+                            {fromBusiness && !offerAccepted && !offerDeclined && !openNegotiation && offer.Status === "Pending" && <LayoutButton text="Decline" onClick={this.declinedClicked} />}
+                            {fromBusiness && !offerAccepted && !offerDeclined && !openNegotiation && offer.Status === "Pending" && <LayoutButton text="Open Negotiation" onClick={this.openNegotiation} />}
                         </div>
                     </div> :
-                    (offerOk) ?
+                    (offerOk || offerDeleted) ?
                         <Redirect to={{
                             pathname: '/influencerHomePage',
-                            state: { user: this.props.location.state.user.user? this.props.location.state.user.user : this.props.location.state.user }//check why
+                            state: { user: this.props.location.state.user.user ? this.props.location.state.user.user : this.props.location.state.user }//check why
                         }} /> :
-                        <Redirect to={{
+                        offerDeclined && (<Redirect to={{
                             pathname: '/businessHomePage',
                             state: { user }//check why
-                        }} />}
+                        }} />)}
             </div>
         );
     }

@@ -14,7 +14,6 @@ export default class OfferService {
       }
     })
       .then((res) => {
-        console.log(res);
         return res.json();
       })
       .catch((err) => {
@@ -91,7 +90,6 @@ export default class OfferService {
       }
     })
       .then((res) => {
-        console.log(res);
         return res.json();
       })
       .catch((err) => {
@@ -112,6 +110,59 @@ export default class OfferService {
       })
       .catch((err) => {
       
+        console.log(err);
+      })
+  }
+
+  deleteOffer(offerId){
+    var data = JSON.stringify(offerId);
+    return fetch(`${this.host}/api/Offers/DeleteOffer?id=${offerId}`, {
+      method: "POST",
+      body: data,
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json"
+      }
+    })
+      .then((res) => {
+        return res.json();
+      })
+      .catch((err) => {
+        console.log(err);
+      })
+  }
+
+  updateIsOpenNegotiations(OfferId){
+    //var data = JSON.stringify(offerId);
+    return fetch(`${this.host}/api/Offers/UpdateIsOpenNegotiation?id=${OfferId}`, {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json"
+      }
+    })
+      .then((res) => {
+        return res.json();
+      })
+      .catch((err) => {
+        console.log(err);
+      })
+  }
+
+  updatePrice(offerId, type, value){
+    var data = JSON.stringify({type, value});
+    return fetch(`${this.host}/api/Offers/UpdatePrice?offerId=${offerId}&type=${type}&value=${value}`, {
+      method: "POST",
+      body: data,
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json"
+      }
+    })
+      .then((res) => {
+        return res.json();
+      })
+      .catch((err) => {
         console.log(err);
       })
   }

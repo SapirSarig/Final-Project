@@ -53,5 +53,8 @@ namespace FinalProject.Entities
 
         public virtual ICollection<UserChat> UsersChats { get; set; }
 
+        public virtual ICollection<ReviewBy> ReviewByUsers { get; set; }
+
+        public virtual ICollection<RateBy> RateByUsers { get; set; }
     }
 }

@@ -2,6 +2,9 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import OfferService from '../../services/apis/OfferService';
 import OffersList from './offersList';
+import "./offersPerAuctionPage.css";
+import FixedHeader from '../../common/fixedHeader/fixedHeader';
+
 
 class offersPerAuctionPage extends Component {
     OfferService
@@ -30,21 +33,17 @@ class offersPerAuctionPage extends Component {
 
     render() {
         const { auction, user } = this.props.location.state;
-        //const Auction = { id: 1, Title: "cola" };
         const { offers } = this.state;
         return (
 
             <div className="offersPerAuctionContainer" >
-                {console.log("user", this.props.location.state.user)} 
-                {console.log("auction", this.props.location.state.auction)}
-
+                <FixedHeader />
                 <div className="offersPerAuctionHeader">
-                    <div>Auction No. : {auction.Id}</div>
                     <div>Auction Name : {auction.Title}</div>
+                    <div>Auction No. : {auction.Id}</div>
                     <br />
                 </div>
-                {console.log("offers", offers)}
-                <OffersList offers={offers} fromBusiness={true} user={user}/>
+                <OffersList offers={offers} fromBusiness={true} user={user} />
             </div>
         );
     }

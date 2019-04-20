@@ -12,17 +12,18 @@ class AuctionInList extends Component {
 
         return (
             <div className="AuctionContainer">
-                <div> <span className="AuctionName"> Auction:  </span> {auction.Title}</div>
-                <div> Product: {auction.Product} </div>
-                <div> Description: {auction.Description}</div>
+                <div> <span className="AuctionName auctionTitles"> Auction:  </span> {auction.Title}</div>
+                <div> <span className="auctionTitles">Product:</span> {auction.Product} </div>
+                <div> <span className="auctionTitles">Description:</span><br/> {auction.Description}</div>
+                <div> <span className="auctionTitles">Status:</span> {auction.Status} </div>
                 {/* <div className="AuctionDescription">
                     {auction.Description}
                 </div> */}
                 {/* send in props that the auction is already exist and need to show its details */}
-                <Link className="auction" to={{ pathname: "/auction", state: { auction: auction, isNew: false, user:user}}} >
-                    <button className="auctionBtn">
+                <Link className="auctioLink" to={{ pathname: "/auction", state: { auction: auction, isNew: false, user:user}}} >
+                    {/* <button className="auctionBtn"> */}
                         Show Auction
-                    </button>
+                    {/* </button> */}
                 </Link>
             </div >
         );

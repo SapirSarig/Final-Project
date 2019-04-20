@@ -3,6 +3,8 @@ import { Link } from 'react-router-dom';
 import AuctionInList from './auctionInList';
 import AuctionService from '../../services/apis/AuctionService';
 
+import './hotAuctions.css';
+
 class hotAuctions extends Component {
     auctionService;
 
@@ -14,11 +16,11 @@ class hotAuctions extends Component {
         }
 
         this.getTop3Auctions = this.getTop3Auctions.bind(this);
-        this.getAllAuctionsForUser =  this.getAllAuctionsForUser.bind(this);
-        this.auctionService = new AuctionService();        
+        this.getAllAuctionsForUser = this.getAllAuctionsForUser.bind(this);
+        this.auctionService = new AuctionService();
     }
 
-    componentDidMount() {
+    componentWillMount() {
         const { user } = this.props;
         this.getAllAuctionsForUser(user);
     }
@@ -30,43 +32,52 @@ class hotAuctions extends Component {
                 this.setState({ auctions: top3Auctions });
             });
         }
-        else { 
-            const top3Auctions = this.getTop3Auctions(user.Auctions);
-            this.setState({ auctions: top3Auctions});
+        else {
+            this.auctionService.getAuctionsByEmail(user.Email).then(req => {
+                const top3Auctions = this.getTop3Auctions(req);
+                this.setState({ auctions: top3Auctions });
+            });
         }
 
     }
 
-    getTop3Auctions(auctions){
+    getTop3Auctions(auctions) {
         let res = [];
+        let counter = 0;
+        if (auctions && auctions.length > 3) {
+            for (let i = 0; counter < 3 && i < auctions.length; i++) {
+                if (auctions[i].Status !== "Deleted") {
+                    res[i] = auctions[i];
+                    counter++;
+                }
+            }
 
-        if(auctions && auctions.length > 3){
-            for(let i = 0; i < 3; i++)
-                res[i] = auctions[i];
         }
         else
             res = auctions;
-            
+
         return res;
     }
 
     render() {
 
-        const {user} = this.props;
-        const {auctions} = this.state;
-        
+        const { user } = this.props;
+        const { auctions } = this.state;
+
         return (
             auctions &&
-            auctions.length > 0 ?  
-            <div className="hotAuctions">
-                Hot Auctions:
-                {
-                    auctions.map((auction) =>
-                    <AuctionInList auction={auction} user={user}/>)
-                }
-            </div> 
-            : <div>No Auctions Yet!</div>
+                auctions.length > 0 ?
+                <div className="hotAuctions">
+                    Hot Auctions:
+                <div className="auctionsList">
+                        {
+                            auctions.map((auction) =>
+                                auction.Status !== "Deleted" && <AuctionInList auction={auction} user={user} />)
+                        }
+                    </div>
+                </div>
+                : <div className="noAuctionsMessage">No Auctions Yet!</div>
         );
     }
-} 
+}
 export default hotAuctions;

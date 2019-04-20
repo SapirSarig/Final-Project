@@ -12,7 +12,10 @@ const styles = theme => ({
         display: 'flex',
         flexWrap: 'wrap',
         flexDirection: 'column',
-        width: '100%'
+        width: '100%',
+        height: '100vh',
+        paddingTop: '100px',
+        paddingLeft: '100px',
     },
     textField: {
         marginLeft: theme.spacing.unit,
@@ -39,75 +42,66 @@ class OffersList extends Component {
             //         <OfferInList key ={index} offer={offer} />)
             //     }
             // </div> : <div>No Offers Yet!</div>
-
-            <form className={classes.container} noValidate autoComplete="off">
-                <div className="offersTitleContainer">
-                    <div className="offersTitle">
-                        Offers
+            <div>
+                <form className={classes.container} noValidate autoComplete="off" style={{display: 'flex', flexDirection: 'row'}}>
+                    <div className="offersTitleContainer">
+                        <div className="offersTitle">
+                            Offers
+                         </div>
                     </div>
-                </div>
-                {theOffers && theOffers.map((offer) =>
-                    <div className="offerWrapper">
-                        {/* <TextField
-                            id="date"
-                            label="Date"
-                            defaultValue= {offer.date}
-                            className={classes.textField}
-                            margin="normal"
-                            InputProps={{
-                                readOnly: true,
-                            }}
-                        /> */}
-                        <TextField
-                            id="offerDescription"
-                            label="Offer's Description"
-                            defaultValue={offer.Description}
-                            className={classes.textField}
-                            margin="normal"
-                            InputProps={{
-                                readOnly: true,
-                            }}
-                        />
-                        {!this.props.fromBusiness && <TextField
-                            id="nameAuction"
-                            label="Auction's Name"
-                            defaultValue={offer.Auction.Title}
-                            className={classes.textField}
-                            margin="normal"
-                            InputProps={{
-                                readOnly: true,
-                            }}
-                        />}
-                        {!this.props.fromBusiness && <TextField
-                            id="numberAuction"
-                            label="Auction's Number"
-                            defaultValue={offer.Auction.Id}
-                            className={classes.textField}
-                            margin="normal"
-                            InputProps={{
-                                readOnly: true,
-                            }}
-                        />}
-
-                        <div className="bottomWrapper">
+                    {theOffers && theOffers.map((offer) =>
+                        offer.Status !== "Deleted" && <div className="offerWrapper">
                             <TextField
-                                id="offerStatus"
-                                label="Offer's Status"
-                                defaultValue={offer.Status}
+                                id="offerDescription"
+                                label="Offer's Description"
+                                defaultValue={offer.Description}
                                 className={classes.textField}
                                 margin="normal"
                                 InputProps={{
                                     readOnly: true,
                                 }}
                             />
-                            <Link className="goToStarOffer" to={{ pathname: "/starOffer", state: { currOffer: offer, fromBusiness: this.props.fromBusiness, fromAllOffers: this.props.fromAllOffers, user } }}>
-                                <LayoutButton text="Go To Offer" />
-                            </Link>
+                            <TextField
+                                id="nameAuction"
+                                label="Auction's Name"
+                                defaultValue={offer.Auction.Title}
+                                className={classes.textField}
+                                margin="normal"
+                                InputProps={{
+                                    readOnly: true,
+                                }}
+                            />
+                            {!this.props.fromBusiness && <TextField
+                                id="numberAuction"
+                                label="Auction's Number"
+                                defaultValue={offer.Auction.Id}
+                                className={classes.textField}
+                                margin="normal"
+                                InputProps={{
+                                    readOnly: true,
+                                }}
+                            />}
+
+                            <div className="bottomWrapper">
+                                <TextField
+                                    id="offerStatus"
+                                    label="Offer's Status"
+                                    defaultValue={offer.Status}
+                                    className={classes.textField}
+                                    margin="normal"
+                                    InputProps={{
+                                        readOnly: true,
+                                    }}
+                                />
+                                <Link className="goToStarOffer" to={{ pathname: "/starOffer", state: { currOffer: offer, fromBusiness: this.props.fromBusiness, fromAllOffers: this.props.fromAllOffers, user } }}>
+                                    <LayoutButton text="Go To Offer" />
+                                </Link>
+                            </div>
+                            <div className="separatorLine"></div>
                         </div>
-                        <div className="separatorLine"></div>
-                    </div>
-                )}
-            </form>
+                    )}
+                </form>
+            </div>
         );
     }
 }

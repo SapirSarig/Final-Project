@@ -14,6 +14,7 @@ import SessionStorageUtil from '../../utils/SessionStorageUtil';
 
 import PasswordInput from '../passwordInput/passwordInput';
 import LayoutButton from '../../common/layoutButton/layoutButton';
+import Logo from '../../common/logo/logo';
 
 const initialState = {
     email: "",
@@ -123,7 +124,7 @@ class Login extends Component {
                         } else {
                             //LocalStorageUtil.RemoveLoggedUser();
                             SessionStorageUtil.SaveLoggedUser(req);
-                        }
+                        }                        
                     });
                 }
 
@@ -134,7 +135,7 @@ class Login extends Component {
     }
 
     responseFacebook(response) {
-        const { clickOnLoginFaceBook } = this.state;
+        const { clickOnLoginFaceBook, rememberMe } = this.state;
         if (clickOnLoginFaceBook && response.accessToken) {
             //if(isLogged && this.checkIfUserSignUp(response.email))
             //false 
@@ -144,7 +145,11 @@ class Login extends Component {
                         alert(req.Message);
                     }
                     else {
-                        LocalStorageUtil.SaveLoggedUser(req);
+                        if (rememberMe) {
+                            LocalStorageUtil.SaveLoggedUser(req);
+                        } else {
+                            SessionStorageUtil.SaveLoggedUser(req);
+                        }
                         this.setState({ loggedIn: true, user: req })
                     }
 
@@ -165,7 +170,6 @@ class Login extends Component {
     render() {
         const { classes } = this.props;
         const { email, password, rememberMe, errors, loggedIn, externalLogin, user } = this.state;
-        console.log(user);
         return (
             externalLogin ?
                 <Redirect to={{
@@ -183,6 +187,7 @@ class Login extends Component {
                         state: { user }
                     }} /> :
                     (<div className="Container">
+                        <Logo />
                         <div className="wrapper">
                             <TextField
                                 id="email"

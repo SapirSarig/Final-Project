@@ -1,25 +1,26 @@
 
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
 import './UserRating.css';
+import UserService from '../../services/apis/UserService';
 
 var $ = require("jquery");
 
 class UserRating extends Component {
-
+    userService;
     constructor(props) {
         super(props);
         this.color = this.color.bind(this);
         this.noColor = this.noColor.bind(this);
         this.state = {
             starWasClicked: false,
+            user:{},
             starNum: 0
         }
+        this.userService = new UserService();
     }
 
     color(num, clicked) {
         if (!this.state.starWasClicked) {
-            console.log("color - function");
             var starClass = "star";
             if (num >= 1) {
                 starClass = "star" + 1;
@@ -60,7 +61,6 @@ class UserRating extends Component {
 
     noColor(num) {
         if (!this.state.starWasClicked) {
-            console.log("NOcolor - function");
             var starClass;
             if (num >= 1) {
                 starClass = "star" + 1;
@@ -91,99 +91,121 @@ class UserRating extends Component {
     }
 
     render() {
-        const { user } = this.props;
+        const {user, loggedUser, isRatedByUser } = this.props;
+        const isSameUser = (user.Name === loggedUser.Name);
+
         if (user && user.NumOfVoters > 0) {
-            let width1 = (user.OneStar / user.NumOfVoters)*100 + "%";
+            let width1 = (user.OneStar / user.NumOfVoters) * 100 + "%";
             var style1 = {
                 width: width1,
             };
-            let width2 = (user.TwoStars / user.NumOfVoters)*100 + "%";
+            let width2 = (user.TwoStars / user.NumOfVoters) * 100 + "%";
             var style2 = {
                 width: width2,
             };
-            let width3 = (user.ThreeStars / user.NumOfVoters)*100 + "%";
+            let width3 = (user.ThreeStars / user.NumOfVoters) * 100 + "%";
             var style3 = {
                 width: width3,
             };
-            let width4 = (user.FourStars / user.NumOfVoters)*100 + "%";
+            let width4 = (user.FourStars / user.NumOfVoters) * 100 + "%";
             var style4 = {
                 width: width4,
             };
-            let width5 = (user.FiveStars / user.NumOfVoters)*100 + "%";
+            let width5 = (user.FiveStars / user.NumOfVoters) * 100 + "%";
             var style5 = {
                 width: width5,
             };
         }
 
         return (
-            <div>
+            <div className="rating">
                 <span className="heading">Rating</span>
-                <div>
-                    <img onClick={() => this.color(1, true)} onMouseOver={() => this.color(1, false)} onMouseOut={() => this.noColor(1)} className="noColorStar star1"></img>
-                    <img onClick={() => this.color(2, true)} onMouseOver={() => this.color(2, false)} onMouseOut={() => this.noColor(2)} className="noColorStar star2"></img>
-                    <img onClick={() => this.color(3, true)} onMouseOver={() => this.color(3, false)} onMouseOut={() => this.noColor(3)} className="noColorStar star3"></img>
-                    <img onClick={() => this.color(4, true)} onMouseOver={() => this.color(4, false)} onMouseOut={() => this.noColor(4)} className="noColorStar star4"></img>
-                    <img onClick={() => this.color(5, true)} onMouseOver={() => this.color(5, false)} onMouseOut={() => this.noColor(5)} className="noColorStar star5"></img>
-                </div>
+                {isSameUser || isRatedByUser ? <div></div> :
+                    user && <div>
+                        <img onClick={() => this.color(1, true)} onMouseOver={() => this.color(1, false)} onMouseOut={() => this.noColor(1)} className="noColorStar star1"></img>
+                        <img onClick={() => this.color(2, true)} onMouseOver={() => this.color(2, false)} onMouseOut={() => this.noColor(2)} className="noColorStar star2"></img>
+                        <img onClick={() => this.color(3, true)} onMouseOver={() => this.color(3, false)} onMouseOut={() => this.noColor(3)} className="noColorStar star3"></img>
+                        <img onClick={() => this.color(4, true)} onMouseOver={() => this.color(4, false)} onMouseOut={() => this.noColor(4)} className="noColorStar star4"></img>
+                        <img onClick={() => this.color(5, true)} onMouseOver={() => this.color(5, false)} onMouseOut={() => this.noColor(5)} className="noColorStar star5"></img>
+                    </div>
+                }
                 {user &&
                     <div>
                         <div>{user.RateAvg} average based on {user.NumOfVoters} reviews.</div>
                         <br />
-                        <div className="row">
-                            <div className="side">
-                                <div>5 stars</div>
-                            </div>
-                            <div className="middle">
-                                <div className="bar-container">
-                                    <div className="bar-5" style={style5}></div>
+                            <div className="row">
+                            <div className="div5Star">
+                                <div className="side">
+                                    <div>5 stars</div>
+                                </div>
+                                <div className="middle">
+                                    <div className="bar-container">
+                                        <div className="bar-5" style={style5}></div>
+                                    </div>
+                                </div>
+                                <div className="side right">
+                                    <div>{user.FiveStars}</div>
                                 </div>
                             </div>
-                            <div className="side right">
-                                <div>{user.FiveStars}</div>
-                            </div>
-                            <div className="side">
-                                <div>4 stars</div>
-                            </div>
-                            <div className="middle">
-                                <div className="bar-container">
-                                    <div className="bar-4" style={style4}></div>
+                            <br />
+
+                            <div className="div4Star">
+                                <div className="side">
+                                    <div>4 stars</div>
+                                </div>
+                                <div className="middle">
+                                    <div className="bar-container">
+                                        <div className="bar-4" style={style4}></div>
+                                    </div>
+                                </div>
+                                <div className="side right">
+                                    <div>{user.FourStars}</div>
                                 </div>
                             </div>
-                            <div className="side right">
-                                <div>{user.FourStars}</div>
-                            </div>
-                            <div className="side">
-                                <div>3 stars</div>
-                            </div>
-                            <div className="middle">
-                                <div className="bar-container">
-                                    <div className="bar-3" style={style3}></div>
+                            <br />
+
+                            <div className="div3Star">
+                                <div className="side">
+                                    <div>3 stars</div>
+                                </div>
+                                <div className="middle">
+                                    <div className="bar-container">
+                                        <div className="bar-3" style={style3}></div>
+                                    </div>
+                                </div>
+                                <div className="side right">
+                                    <div>{user.ThreeStars}</div>
                                 </div>
                             </div>
-                            <div className="side right">
-                                <div>{user.ThreeStars}</div>
-                            </div>
-                            <div className="side">
-                                <div>2 stars</div>
-                            </div>
-                            <div className="middle">
-                                <div className="bar-container">
-                                    <div className="bar-2" style={style2}></div>
+                            <br />
+
+                            <div className="div2Star">
+                                <div className="side">
+                                    <div>2 stars</div>
+                                </div>
+                                <div className="middle">
+                                    <div className="bar-container">
+                                        <div className="bar-2" style={style2}></div>
+                                    </div>
+                                </div>
+                                <div className="side right">
+                                    <div>{user.TwoStars}</div>
                                 </div>
                             </div>
-                            <div className="side right">
-                                <div>{user.TwoStars}</div>
-                            </div>
-                            <div className="side">
-                                <div>1 star</div>
-                            </div>
-                            <div className="middle">
-                                <div className="bar-container">
-                                    <div className="bar-1" style={style1}></div>
+                            <br />
+
+                            <div className="div1Star">
+                                <div className="side">
+                                    <div>1 star</div>
                                 </div>
-                            </div>
-                            <div className="side right">
-                                <div>{user.OneStar}</div>
+                                <div className="middle">
+                                    <div className="bar-container">
+                                        <div className="bar-1" style={style1}></div>
+                                    </div>
+                                </div>
+                                <div className="side right">
+                                    <div>{user.OneStar}</div>
+                                </div>
                             </div>
                         </div>
                     </div>}

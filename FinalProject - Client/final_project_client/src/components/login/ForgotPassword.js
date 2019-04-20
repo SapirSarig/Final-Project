@@ -3,7 +3,9 @@ import VerifyQuestions from "../../common/verifyQuestions/VerifyQuestions";
 import UserService from "../../services/apis/UserService";
 import ValidationUtil from '../../utils/ValidationUtil';
 import RegisterService from '../../services/register/RegisterService';
-import { Route, Redirect } from 'react-router';
+import { Redirect } from 'react-router';
+import LayoutButton from '../../common/layoutButton/layoutButton';
+import './ForgotPassword.css';
 
 export default class ForgotPassword extends Component {
     userService;
@@ -14,7 +16,11 @@ export default class ForgotPassword extends Component {
             Question1: "",
             Question2: "",
             emailError: "",
-            emailSent: false
+            emailSent: false,
+            errors: {
+                Question1: "",
+                Question2: ""
+            },
         }
         this.userService = new UserService();
         this.handleInputChange = this.handleInputChange.bind(this);
@@ -39,21 +45,22 @@ export default class ForgotPassword extends Component {
 
     submitClicked() {
         const { email, Question1, Question2 } = this.state;
-        let { emailSent } = this.state;
         let obj = {
             "Email": email,
             "Question1": Question1,
             "Question2": Question2
         }
         this.userService.SendLinkToResetPassword(obj).then(req => {
-            //console.log(req);
             if (req) {
-                //this.setState({ signUpOk: true });
-                alert("A link to reset your password was succefully sent to your email!");
-                this.setState({
-                    emailSent: true
-                });
-
+                if (req.Message) {
+                    alert(req.Message);
+                }
+                else {
+                    alert("A link to reset your password was succefully sent to your email!");
+                    this.setState({
+                        emailSent: true
+                    });
+                }
             }
             else {
                 alert("Server Error");
@@ -75,15 +82,19 @@ export default class ForgotPassword extends Component {
 
     }
     render() {
-        let { email, question1, question2, emailError, emailSent } = this.state;
+        let { email, Question1, Question2, emailError, emailSent, errors } = this.state;
         return (
             <div>
                 {!emailSent ?
-                    <div>
+                    <div className="container">
                         <span > Email* </span>
                         <input type="email" name="email" value={email} onChange={this.handleInputChange} />
-                        <VerifyQuestions handleInputChange={this.handleInputChange} question1={question1} question2={question2} signUp={true}/>
-                        <button className={`${this.isEmailValid() ? "" : "disableElement"}`} onClick={this.submitClicked}>Submit</button>
+                        <VerifyQuestions handleInputChange={this.handleInputChange} question1={Question1} question2={Question2} signUp={true} errors={errors} />
+                        <div className="btnContainer">
+                            <div className={`${this.isEmailValid() ? "" : "disableElement"}`} onClick={this.submitClicked}>
+                                <LayoutButton text="Submit" />
+                            </div>
+                        </div>
                         <span className="errorInput" > {emailError} </span>
                     </div> :
                     <Redirect to={{

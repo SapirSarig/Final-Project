@@ -15,6 +15,7 @@
   transition: background 0.3s ease-in, border 0.3s ease-out, transform 0.1s cubic-bezier(0.91, 0.8, 0.54, 1);
   margin: 10px 0;
   min-width: 20vw;
+  font-family: 'Concert One', cursive;
 }
 
 .layoutButton:hover{
@@ -22,4 +23,8 @@
     border-color: rgb(198, 137, 255);
     transform: scale(1);
     transition: transform 0.1s cubic-bezier(0.91, 0.8, 0.54, 1);
+}
+
+.layoutButtonWrapper{
+  text-align: center;
 }

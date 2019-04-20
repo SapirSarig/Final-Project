@@ -77,7 +77,7 @@ namespace FinalProject.DAL
 
         }
 
-        public bool AddStars(int id, int numOfStars)
+        public bool AddStars(int id, int numOfStars, int RateByUser)
         {
             bool res = false;
             User CurrUser = context.Users.FirstOrDefault(u => u.Id == id);
@@ -106,6 +106,9 @@ namespace FinalProject.DAL
                 CurrUser.NumOfVoters++;
                 double avg = (double)CurrUser.Stars / CurrUser.NumOfVoters;
                 CurrUser.RateAvg = Convert.ToDouble(String.Format("{0:0.00}", avg));
+                RateBy rateBy = new RateBy();
+                rateBy.RatedByUserId = RateByUser;
+                CurrUser.RateByUsers.Add(rateBy);
                 context.SaveChanges();
                 res = true;
             }
@@ -121,6 +124,9 @@ namespace FinalProject.DAL
             }
             else
             {
+                ReviewBy reviewedBy = new ReviewBy();
+                reviewedBy.ReviewedByUserId = review.ByUserId;
+                user.ReviewByUsers.Add(reviewedBy);
                 user.Reviews.Add(review);
                 context.SaveChanges();
                 return true;
@@ -159,22 +165,49 @@ namespace FinalProject.DAL
             if (CurrUser != null)
             {            
                 CurrUser.Name = userToUpdate.Name;
-                CurrUser.Interests = userToUpdate.Interests;
+                if(userToUpdate.Interests!=null)
+                {
+                    ICollection<Interest> newInterests = new List<Interest>();
+                    (CurrUser as InfluencerUser).Interests.Clear();
+
+                    foreach (var newInterest in userToUpdate.Interests)
+                    {
+                        newInterests.Add(newInterest);
+                    }
+
+                    (CurrUser as InfluencerUser).Interests = newInterests;
+                }
+                
+
                 CurrUser.Picture = userToUpdate.Picture;
                 CurrUser.Description = userToUpdate.Description;
-                (CurrUser as InfluencerUser).SocialNetworks = userToUpdate.SocialNetworks;
+                if(userToUpdate.SocialNetworks != null)
+                {
+                    ICollection<SocialNetwork> newSocialNetworks = new List<SocialNetwork>();
+                    (CurrUser as InfluencerUser).SocialNetworks.Clear();
+
+                    foreach (var newSocialNetwork in userToUpdate.SocialNetworks)
+                    {
+                        newSocialNetworks.Add(newSocialNetwork);
+                    }
+
+                    (CurrUser as InfluencerUser).SocialNetworks = newSocialNetworks;
+
+                }
                 context.SaveChanges();
             }
         }
 
-        public User UpdateBusinessUser(UpdatedBusinessUserModal userToUpdate)
+        public IEnumerable<UserChat> GetAllChats(int id)
+        {
+            User user = context.Users.FirstOrDefault(u => u.Id == id);
+            return user.UsersChats.ToList();
+        }
+
+        public void UpdateBusinessUser(UpdatedBusinessUserModal userToUpdate)
         {
             User CurrUser = context.Users.FirstOrDefault(u => u.Email == userToUpdate.Email);
-            if (CurrUser == null)
-            {
-                return null;
-            }
-            else
+            if (CurrUser != null)
             {
                 CurrUser.Name = userToUpdate.Name;
                 CurrUser.Interests = userToUpdate.Interests;
@@ -183,8 +216,14 @@ namespace FinalProject.DAL
                 (CurrUser as BusinessUser).WebsiteLink = userToUpdate.WebsiteLink;
                 (CurrUser as BusinessUser).CompanyName = userToUpdate.CompanyName;
                 context.SaveChanges();
-                return CurrUser;
             }
+        }
+
+        public User FindUserByOfferId(int offerId)
+        {
+            Offer offer = context.Offers.FirstOrDefault(o => o.Id == offerId);
+            User user = offer.InfluencerUser;
+            return user;
         }
 
         public void DeleteUser(int id)
@@ -214,6 +253,36 @@ namespace FinalProject.DAL
             if (res != null)
                 return true;
             return false;
+        }
+
+        public bool IsRatedByUserId(int RatedUserId, int RatedByUserId)
+        {
+            bool res = false;
+            User currUser = context.Users.FirstOrDefault(user => user.Id == RatedUserId);
+            foreach (RateBy rateBy in currUser.RateByUsers)
+            {
+                if (rateBy.RatedByUserId == RatedByUserId)
+                {
+                    res = true;
+                    break;
+                }
+            }
+            return res;
+        }
+
+        public bool IsReviewedByUserId(int ReviewedUserId, int ReviewedByUserId)
+        {
+            bool res = false;
+            User currUser = context.Users.FirstOrDefault(user => user.Id == ReviewedUserId);
+            foreach (ReviewBy reviewBy in currUser.ReviewByUsers)
+            {
+                if (reviewBy.ReviewedByUserId == ReviewedByUserId)
+                {
+                    res = true;
+                    break;
+                }
+            }
+            return res;
         }
         #region IDisposable - Do Using
 

@@ -1,55 +1,90 @@
 // change to user from userInfo
-import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
-import HomeHeader from './HomeHeader.js';
-import HotAuctions from '../userHomePage/hotAuctions.js';
-import HotOffers from '../offers/hotOffers.js';
-import AuctionService from '../../services/apis/AuctionService';
-import NavToggle from '../navToggle/navToggle';
-import '../userHomePage/homePages.css';
-import './businessHomePage.css';
+import React, { Component } from "react";
+import { Link } from "react-router-dom";
+import HomeHeader from "./HomeHeader.js";
+import HotAuctions from "../userHomePage/hotAuctions.js";
+import HotOffers from "../offers/hotOffers.js";
+import AuctionService from "../../services/apis/AuctionService";
+import NavToggle from "../navToggle/navToggle";
+import Logo from '../../common/logo/logo';
+import "../userHomePage/homePages.css";
+import "./userHomePage.css";
+import OffersStatus from "../offers/offersStatus";
+import OfferService from "../../services/apis/OfferService";
+import HomeFooter from './HomeFooter';
+import SessionStorageUtil from "../../utils/SessionStorageUtil";
+import LocalStorageUtil from "../../utils/LocalStorageUtil";
+import UserService from '../../services/apis/UserService';
 
 const initialState = {
     user: {},
     theAuctions: [],
-    updatedUser: {}
+    updatedUser: {},
+    isOffers: false
 };
 
 class BusinessHomePage extends Component {
     auctionService;
+    offerService;
+    userService;
     constructor(props) {
         super(props);
-        this.state = initialState;
 
+        this.state = initialState;
+        this.userService = new UserService();
         this.auctionService = new AuctionService();
+        this.offerService = new OfferService();
         this.onMyAuctionsClick = this.onMyAuctionsClick.bind(this);
+        this.checkIfAllOffersDeleted = this.checkIfAllOffersDeleted.bind(this);
+        this.initUserDetails = this.initUserDetails.bind(this);
     }
 
     componentWillMount() {
         const { location } = this.props;
-        console.log("location", location);
         if (location && location.state) {
             const { user } = location.state;
             const { updatedUser } = location.state;
+            this.initUserDetails(user, updatedUser);
+        } else {
+            const user = SessionStorageUtil.GetLoggedUser() || LocalStorageUtil.GetLoggedUser;
+            this.userService.getUserById(user.Id).then(req => {
+                this.initUserDetails(req);
+            })
+        }
+        
+    }
+
+    initUserDetails(user, updatedUser){
+        if(user) {
             if (updatedUser) {
                 this.setState({ updatedUser });
 
                 this.auctionService.getAuctionsByEmail(updatedUser.Email).then(req => {
+                    this.setState({ theAuctions: [] });
                     this.setState({ theAuctions: req });
-                    console.log(req);
-                })
-            }
-            else {
+                });
+            } else {
                 this.setState({ user });
 
                 this.auctionService.getAuctionsByEmail(user.Email).then(req => {
                     this.setState({ theAuctions: req });
-                    console.log(req);
-                })
+                });
             }
-            this.onMyAuctionsClick();
 
+            this.offerService.getAllOffersByBusinessUserId(user.Id).then(req => {
+                if (req && (req.length > 0)&& !(this.checkIfAllOffersDeleted(req))) this.setState({ isOffers: true });
+            });
+            this.onMyAuctionsClick();
         }
+    }
+
+    checkIfAllOffersDeleted(req){
+        for(let i=0; i< req.length; i++){
+            if(req[i].Status !=="Deleted"){
+                return false;
+            }
+        }
+        return true;
     }
 
     // componentWillReceiveProps(nextProps){
@@ -58,61 +93,91 @@ class BusinessHomePage extends Component {
     //         const { userInfo } = location.state;
     //         this.setState({ userInfo });
 
-
     //     }
     // }
     onMyAuctionsClick(event) {
         const { user } = this.state;
-        //console.log("userInfo", userInfo);
         if (user) {
             this.auctionService.getAuctionsByEmail(user.Email).then(req => {
                 this.setState({ theAuctions: req });
-                console.log(req);
-            })
+            });
         }
     }
 
     render() {
-        const { updatedUser, user, theAuctions } = this.state;
-        console.log("theAuctions", theAuctions);
+        const { updatedUser, user, theAuctions, isOffers } = this.state;
         return (
             <div className="businessHomePage">
                 <NavToggle />
-                {user &&
+                <Logo />
+                {Object.getOwnPropertyNames(user).length > 0 && Object.getOwnPropertyNames(theAuctions).length > 0 &&  (
                     <div>
-                        <div className="TopPage">
-                            <HomeHeader user={Object.getOwnPropertyNames(updatedUser).length > 0 ? updatedUser : user} name={user.Name} />
+                        <div className="businessTopPage">
+                            <HomeHeader
+                                user={
+                                    Object.getOwnPropertyNames(updatedUser).length > 0
+                                        ? updatedUser
+                                        : user
+                                }
+                                name={user.Name}
+                            />
                         </div>
-                        <div className="LeftPage">
-                            {/* We need to add "auctions" when user is created */}
-                            <HotAuctions auctions={theAuctions} user={user} />
-                            <Link className="myAuctions" to={{ pathname: "/myAuctions", state: { auctions: theAuctions, title: "My Auctions", user: user } }}>
-                                <button className="myAuctions" onClick={this.onMyAuctionsClick}>
-                                    myAuctions
-                                </button>
-                            </Link>
+                        <div className="contentWrapper">
+                            <div className="businessAuctions">
+                                {/* We need to add "auctions" when user is created */}
+                                <HotAuctions user={user} />
+                                <div className="auctionBtns">
+                                    {theAuctions.length !== 0 && (
+                                        <Link
+                                            className="myAuctionsLink styleLink"
+                                            to={{
+                                                pathname: "/myAuctions",
+                                                state: {
+                                                    auctions: theAuctions,
+                                                    title: "My Auctions",
+                                                    user: user
+                                                }
+                                            }}
+                                            onClick={this.onMyAuctionsClick}
+                                        >
+                                            my Auctions
+                                        </Link>
+                                    )}
+                                    <Link
+                                        className="addAuction styleLink"
+                                        to={{
+                                            pathname: "/auction",
+                                            state: { user: this.state.user, isNew: true }
+                                        }}
+                                    >
+                                        Add Auction
+                                    </Link>
+                                </div>
+                            </div>
+                            <div className="businessOffers">
+                                {/* We need to add "offers" when user is created */}
+                                <HotOffers user={user} />
+                                {isOffers && (
+                                    <Link
+                                        className="allOffers styleLink"
+                                        to={{
+                                            pathname: "/allOffers",
+                                            state: { user: this.state.user, fromBusiness: true }
+                                        }}
+                                    >
+                                        All Offers
+                                    </Link>
+                                )}
+                            </div>
+                            <HomeFooter user={
+                                    Object.getOwnPropertyNames(updatedUser).length > 0
+                                        ? updatedUser
+                                        : user
+                                }/> 
+                            
                         </div>
-                        <div className="RightPage">
-                            {/* We need to add "offers" when user is created */}
-                            <HotOffers user={user} />
-                            <Link className="allOffers" to={{pathname:"/allOffers", state:{user: this.state.user}}}>
-                                <button className="allOffers"> All Offers </button>
-                            </Link>
-                        </div>
-                        <br />
-                        <Link className="auction" to={{ pathname: "/auction", state: { user: this.state.user, isNew: true } }}>
-                            <button className="auctionBtn">
-                                Add Auction
-                            </button>
-                        </Link>
-                        <br />
-
-                        <Link className="allInfluencers" to={{ pathname: "/allInfluencers", state: { } }}>
-                            <button className="allInfluencersBtn">
-                                All Influencers
-                            </button>
-                        </Link>
-                    </div>}
+                    </div>
+                )}
             </div>
         );
     }

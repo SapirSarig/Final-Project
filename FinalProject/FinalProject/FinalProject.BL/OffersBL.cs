@@ -112,5 +112,51 @@ namespace FinalProject.BL
             }
         }
 
+        public ErrorMessage UpdateIsOpenNegotiation(int id)
+        {
+            offersCRUD.UpdateIsOpenNegotiation(id);
+            Offer offer = offersCRUD.GetOffer(id);
+            if (offer == null)
+            {
+                ErrorMessage message = new ErrorMessage
+                {
+                    Message = "Error Updating User",
+                    Code = HttpStatusCode.NotModified
+                };
+                return message;
+            }
+            else
+            {
+                ErrorMessage message = new ErrorMessage
+                {
+                    Code = HttpStatusCode.OK
+                };
+                return message;
+            }
+        }
+
+        public ErrorMessage UpdatePrice(int offerId, string type, int value)
+        {
+            offersCRUD.UpdatePrice(offerId, type, value);
+            Offer offer = offersCRUD.GetOffer(offerId);
+            if (offer == null)
+            {
+                ErrorMessage message = new ErrorMessage
+                {
+                    Message = "Error Updating User",
+                    Code = HttpStatusCode.NotModified
+                };
+                return message;
+            }
+            else
+            {
+                ErrorMessage message = new ErrorMessage
+                {
+                    Code = HttpStatusCode.OK
+                };
+                return message;
+            }
+        }
+
     }
 }

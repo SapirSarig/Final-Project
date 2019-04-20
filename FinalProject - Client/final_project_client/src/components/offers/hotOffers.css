@@ -1,0 +1,24 @@
+.offersList{
+    display: flex;
+    justify-content: space-around;
+    margin: 20px;
+}
+
+.offerContainer{
+    display: flex;
+    flex-direction: column;
+    margin-left: 8px;
+    width: 100%;
+    border: 1px solid black;
+    border-radius: 5px;
+    padding: 10px 20px;
+    font-size: 20px;
+}
+
+.offerTitles{
+    text-decoration: underline;
+}
+
+.noOffersMessage{
+    margin-bottom: 20px;
+}

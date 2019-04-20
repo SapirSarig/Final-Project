@@ -105,6 +105,7 @@ class InfluencerRegister extends Component {
         let socialNetworkName;
 
         if (name.startsWith("LinkTo")) {
+
             if (name.includes("Twitter")) {
                 socialNetworkName = "Twitter";
             }
@@ -118,19 +119,17 @@ class InfluencerRegister extends Component {
                 socialNetworkName = "YouTube";
             }
 
-            if (value) {
-                const currSocialNetwork = socialNetworks.find(sn => sn.Value === socialNetworkName);
-                if (currSocialNetwork) {
-                    currSocialNetwork.LinkToProfile = value;
-                }
+            const currSocialNetworkIndex = socialNetworks.findIndex(sn => sn.Value === socialNetworkName);
+            if (socialNetworks[currSocialNetworkIndex]) {
+                socialNetworks[currSocialNetworkIndex].LinkToProfile = value;
             }
 
-            if (this.checkValidation(name, value)) {
-                this.setState({ socialNetworks }, () => this.updateChooseTypeState(this.state))
-            }
-            else {
-                this.setState({ socialNetworks })
-            }
+            this.setState({ socialNetworks }, () => {
+                if (this.checkValidation(name, value)) {
+                    this.updateChooseTypeState(this.state)
+                }
+            })
+
         } else {
             if (value) {
                 if (this.checkValidation(name, value)) {
@@ -189,10 +188,9 @@ class InfluencerRegister extends Component {
             }
             const index = socialNetworks.findIndex(socialNetwork => socialNetwork.Value === name);
             if (index !== -1)
-                socialNetworks.splice(index, index + 1);
+                socialNetworks.splice(index, 1);
         }
-        this.setState({ errors, socialNetworks },() => this.updateChooseTypeState(this.state));
-        console.log("@@@@@", this.state);
+        this.setState({ errors, socialNetworks }, () => this.updateChooseTypeState(this.state));
     }
 
     checkIfChecked(value) {
@@ -260,7 +258,7 @@ class InfluencerRegister extends Component {
                 />}
                 {/* <input type="date" name="dateOfBirth" value={dateOfBirth} onChange={this.handleInputChange} /> */}
                 <span className="errorInput">{errors["DateOfBirth"]}</span>
-
+ 
                 <SocialMedia isExtra="true" onFocus={this.focusElement} onChange={this.handleInputChange} errors={errors} socialNetworks={socialNetworks} getLink={this.getLink} checkIfChecked={this.checkIfChecked} starOffer={false} />
                 {/* <span> Social Networks: </span>
                 <div className="SocialNetworksContainer">

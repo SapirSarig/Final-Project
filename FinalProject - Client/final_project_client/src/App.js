@@ -3,7 +3,7 @@ import HomePage from './components/views/homePage/HomePage';
 import LoginPage from './components/views/loginPage/LoginPage';
 import Auction from './components/views/auction/auction';
 import SignUpPage from './components/views/signUpPage/SignUpPage';
-import { BrowserRouter as Router, Route, Link, Redirect } from "react-router-dom";
+import { BrowserRouter as Router, Route, Redirect } from "react-router-dom";
 import './App.css';
 import BusinessHomePage from './components/userHomePage/BusinessHomePage';
 import InfluencerHomePage from './components/userHomePage/InfluencerHomePage';
@@ -24,6 +24,9 @@ import LocalStorageUtil from './utils/LocalStorageUtil';
 import SessionStorageUtil from './utils/SessionStorageUtil';
 import Nav from './components/nav/nav';
 import Overlay from './components/overlay/overlay';
+import AllNegotiations from './components/negotiation/AllNegotiaions';
+import Player from './components/player/player';
+
 
 const CheckIfUserAuthenticated = () => {
   const user = LocalStorageUtil.GetLoggedUser() || SessionStorageUtil.GetLoggedUser();
@@ -54,7 +57,7 @@ const PublicRoute = ({ component: Component, ...rest }) => (
 const PrivateRoute = ({ component: Component, ...rest }) => (
   <Route {...rest} render={(props) => (
     CheckIfUserAuthenticated() === true
-      ? <Component {...props} />
+      ? <div> <Nav /> <Component {...props}  /> </div>
       : <Redirect to='/login' />
   )} />
 )
@@ -63,7 +66,7 @@ const PrivateBusinessUserRoute = ({ component: Component, ...rest }) => (
   <Route {...rest} render={(props) => (
     CheckIfUserAuthenticated() === true 
     ? CheckIfCurrentTypeUserLogged("Business Owner")
-      ? <Component {...props} />
+      ? <div> <Nav />  <Component {...props} /> </div>
       : CheckIfCurrentTypeUserLogged("Social Influencer")
         ? <Redirect state={LocalStorageUtil.GetLoggedUser() || SessionStorageUtil.GetLoggedUser()} to='/influencerHomePage' />
         : <Redirect to='/' />
@@ -75,7 +78,7 @@ const PrivateInfluencerUserRoute = ({ component: Component, ...rest }) => (
   <Route {...rest} render={(props) => (
     CheckIfUserAuthenticated() === true 
     ? CheckIfCurrentTypeUserLogged("Social Influencer")
-      ? <Component {...props} />
+      ? <div> <Nav /><Component {...props} /> </div>
       : CheckIfCurrentTypeUserLogged("Business Owner")
         ? <Redirect state={LocalStorageUtil.GetLoggedUser() || SessionStorageUtil.GetLoggedUser()} to='/businessHomePage' />
         : <Redirect to='/' />
@@ -92,27 +95,32 @@ class App extends Component {
         <Overlay />
         <Router>
           <div className="routeContainer">
-            <Nav />
-            <Route exact path="/" component={HomePage} />
-            <Route path="/login" component={LoginPage} />
-            <Route path="/signUp" component={SignUpPage} />
-            <Route path="/auction" component={Auction} />
-            <Route path="/allOffers" component={allOffers} />
-            <Route path="/starOffer" component={starOffer} />
-            <Route path="/myAuctions" component={myAuctions} />
-            <Route path="/starProfile" component={StarProfile} />
-            <Route path="/profile" component={Profile} />
-            <Route path="/influencerHomePage" component={InfluencerHomePage} />
-            <Route path="/businessHomePage" component={BusinessHomePage} />
-            <Route path="/allAuctions" component={AllAuctions} />
-            <Route path="/allUsers" component={AllUsers} />
-            <Route path="/allInfluencers" component={AllInfluencers} />
-            <Route path="/negotiationPage" component={NegotiationPage} />
-            <Route path="/offersPerAuctionPage" component={offersPerAuctionPage} />
-            {/* check forgot password route */}
-            <Route path="/forgotPassword" component={ForgotPassword} />
-            <Route path="/editProfile" component={EditProfile} />
-            <Route path="/resetPassword" component={ResetPassword} />
+            <PublicRoute exact path="/" component={HomePage} />
+            <PublicRoute path="/login" component={LoginPage} />
+            <PublicRoute path="/signUp" component={SignUpPage} />
+            <PublicRoute path="/resetPassword" component={ResetPassword} />
+            <PublicRoute path="/forgotPassword" component={ForgotPassword} />
+            <PublicRoute path="/video" component={Player} />
+            
+            <PrivateRoute path="/editProfile" component={EditProfile} />
+            <PrivateRoute path="/auction" component={Auction} />
+            <PrivateRoute path="/allOffers" component={allOffers} />
+            <PrivateRoute path="/starOffer" component={starOffer} />
+            <PrivateRoute path="/allUsers" component={AllUsers} />
+            <PrivateRoute path="/allInfluencers" component={AllInfluencers} />
+            <PrivateRoute path="/negotiationPage" component={NegotiationPage} />
+            <PrivateRoute path="/allNegotiations" component={AllNegotiations} />
+
+            {/* To check that need to add :userId to url and get data from server in every refresh */}
+            <PrivateRoute path="/starProfile" component={StarProfile} />
+            <PrivateRoute path="/profile" component={Profile} />
+
+            <PrivateInfluencerUserRoute path="/influencerHomePage" component={InfluencerHomePage} />
+            <PrivateInfluencerUserRoute path="/allAuctions" component={AllAuctions} />
+            <PrivateBusinessUserRoute path="/businessHomePage" component={BusinessHomePage} />
+            <PrivateBusinessUserRoute path="/myAuctions" component={myAuctions} />
+            <PrivateBusinessUserRoute path="/offersPerAuctionPage" component={offersPerAuctionPage} />
+        
           </div>
         </Router>
       </div>

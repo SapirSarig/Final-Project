@@ -6,7 +6,40 @@
   flex: 1;
 }
 
+.typeMenu{
+  display: flex;
+  flex-direction: column;
+}
+
 .linksWrapper{
     display: flex;
     flex-direction: column;
+}
+
+.userPicInMenu{
+  display: flex;
+  justify-content: flex-start;
+  height: 100px;
+}
+
+.userPicMenu{
+  width: 122px;
+  border: 1px solid black;
+  border-radius: 50%;
+}
+
+.userProfileIconInMenu{
+  display: inline-block;
+  width: 8em;
+  height: 8em;
+  stroke-width: 0;
+  stroke: currentColor;
+  fill: black;
+}
+
+.userNameInMenu{
+  font-size: 1.8em;
+  position: absolute;
+  top: 13px;
+  color: black;
 }

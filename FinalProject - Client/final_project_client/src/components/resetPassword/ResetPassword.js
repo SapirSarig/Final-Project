@@ -1,8 +1,11 @@
 import React, { Component } from 'react';
 import RegisterService from "../../services/register/RegisterService";
-import UserServicr from "../../services/apis/UserService";
 import UserService from '../../services/apis/UserService';
-import { Route, Redirect } from 'react-router';
+import { Redirect } from 'react-router';
+import LayoutButton from '../../common/layoutButton/layoutButton';
+import PasswordInput from '../passwordInput/passwordInput';
+import './ResetPassword.css';
+import StringUtil from '../../utils/StringUtil';
 
 export default class ResetPassword extends Component {
     userService;
@@ -17,12 +20,13 @@ export default class ResetPassword extends Component {
                 ConfirmPassword: ""
             },
             authUser: "",
-            authUserValid: true
+            authUserValid: true,
+            passwordUpdated: false
         }
         this.handleInputChange = this.handleInputChange.bind(this);
         this.checkValidation = this.checkValidation.bind(this);
         this.submitClicked = this.submitClicked.bind(this);
-
+        this.isAllValid = this.isAllValid.bind(this);
     }
 
     componentDidMount() {
@@ -70,34 +74,54 @@ export default class ResetPassword extends Component {
 
     submitClicked() {
         const { authUser, Password } = this.state;
-        this.userService.resetPasswordToUser(authUser, Password)
+        this.userService.resetPasswordToUser(authUser, Password).then(req => {
+            if (req) {
+                if (req.Message) {
+                    alert(req.Message);
+                }
+                else {
+                    this.setState({ passwordUpdated: true })
+                }
+
+            }
+            else {
+                alert("Server Error");
+            }
+        });
+    }
+
+    isAllValid(){
+        const {Password, ConfirmPassword} = this.state;
+        if ((StringUtil.isEmptyString(RegisterService.passwordValidation(Password))) &&
+        (StringUtil.isEmptyString(RegisterService.confirmValidation(ConfirmPassword, Password)))) {
+            return true;
+        }
+        return false;
     }
 
     render() {
-        let { Password, ConfirmPassword, errors, authUserValid } = this.state;
+        let { Password, ConfirmPassword, errors, authUserValid, passwordUpdated } = this.state;
         return (
             <div className="Container">
-                {authUserValid ?
+                {(authUserValid && !passwordUpdated) ?
                     <div>
-                        <div className="passwordContainer">
-                            <span > New Password</span>
-                            <input type="password" placeholder="Min 6 chars, at least one number and one lower case English letter" name="Password" value={Password} onChange={this.handleInputChange} />
-                            <span className="errorInput" > {errors["Password"] && errors["Password"]} </span>
-                        </div>
+                        <PasswordInput name="Password" style={{ width: '75%' }} placeholder="Min 6 chars, one number and one lower case letter" value={Password} onChange={this.handleInputChange} label={"New Password "} />
+                        <span className="errorInput" > {errors["Password"] && errors["Password"]} </span>
 
-                        <div className="confirmPasswordContainer">
-                            <span > Confirm Password  </span>
-                            <input type="password" name="ConfirmPassword" value={ConfirmPassword} onChange={this.handleInputChange} />
-                            <span className="errorInput" > {errors["ConfirmPassword"] && errors["ConfirmPassword"]} </span>
-                        </div>
+                        <PasswordInput name="ConfirmPassword" style={{ width: '75%' }} value={ConfirmPassword} onChange={this.handleInputChange} label={"Confirm Password "} />
+                        <span className="errorInput" > {errors["ConfirmPassword"] && errors["ConfirmPassword"]} </span>
 
-                        <button onClick={this.submitClicked}>Submit</button>
+                        <div className="btnContainer">
+                            <div className={`${this.isAllValid() ? "" : "disableElement"}`} onClick={this.submitClicked}>
+                                <LayoutButton text="Submit" />
+                            </div>
+                        </div>
                     </div> : <Redirect to={{
                         pathname: '/'
                         // state: { userInfo }
                     }} />}
             </div>
-            
+
         )
-}
+    }
 }

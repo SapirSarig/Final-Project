@@ -33,4 +33,37 @@ export default class NegotiationService {
             console.log(err);
           })
       }
+
+      createChat(offerId){
+        var data = JSON.stringify({"OfferId":offerId});
+        return fetch(`${this.host}/api/Chats`, {
+          method: "POST",
+          body: data,
+          headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json"
+          }
+        })
+          .then((res) => {
+            return res.json();
+          }).catch((err)=> {
+            console.log(err);
+          })
+      }
+
+      getChatByOfferId(id)
+      {
+        return fetch(`${this.host}/api/Chats/GetChatByOfferId?offerId=${id}`, {
+          method: "GET",
+          headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json"
+          }
+        })
+          .then((res) => {
+            return res.json();
+          }).catch((err)=> {
+            console.log(err);
+          })
+      }
 }

@@ -1,12 +1,15 @@
 import React, { Component } from 'react';
 import Register from "../../common/register/Register";
-import { Route, Redirect } from 'react-router';
+import { Redirect } from 'react-router';
 import UserService from "../../services/apis/UserService";
+// import NavToggle from "../navToggle/navToggle";
+import FixedHeader from '../../common/fixedHeader/fixedHeader';
 
 export default class EditProfile extends Component {
     userService;
     constructor(props) {
         super(props);
+
         this.state = {
             userInfo: {},
             editOk: false,
@@ -21,12 +24,11 @@ export default class EditProfile extends Component {
         if (location && location.state && location.state.user) {
             const { user } = location.state;
             this.setState({ userInfo: user });
-        }
+        }        
     }
 
     UpdateInfluencerUser(userToUpdate) {
         this.userService.UpdateInfluencerUser(userToUpdate).then(req => {
-            //console.log(req);
             if (req) {
                 if(req.Message){
                     alert(req.Message);
@@ -47,7 +49,6 @@ export default class EditProfile extends Component {
 
     UpdateBusinessUser(userToUpdate) {
         this.userService.UpdateBusinessUser(userToUpdate).then(req => {
-            //console.log(req);
             if (req) {
                 if (req.Message) {
                     alert(req.Message);
@@ -69,6 +70,8 @@ export default class EditProfile extends Component {
         const { userInfo, editOk, user } = this.state;
         return (
             <div>
+                {/* <NavToggle />                */}
+                <FixedHeader />
                 {editOk ?
                     (userInfo.Type === "Social Influencer") ?
                         <Redirect to={{

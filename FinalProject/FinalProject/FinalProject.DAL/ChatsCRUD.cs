@@ -22,6 +22,11 @@ namespace FinalProject.DAL
             return context.Chats.FirstOrDefault((chat)=>chat.Id == id);
         }
 
+        public Chat GetChatByOfferId(int id)
+        {
+           return context.Chats.FirstOrDefault((c) => c.OfferId == id);
+        }
+
         #region IDisposable - Do Using
 
         public void Dispose()

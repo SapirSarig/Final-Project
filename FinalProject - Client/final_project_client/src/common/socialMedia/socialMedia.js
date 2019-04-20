@@ -1,5 +1,5 @@
 import React, { Component, Fragment } from 'react';
-
+ 
 import './socialMedia.css';
 
 class socialMedia extends Component {
@@ -50,7 +50,7 @@ class socialMedia extends Component {
                     </div>
                     <div className="twitter socialMediatWrapper">
                         <div className="checkboxforSocialMedia">
-                            <input type="checkbox" checked={checkIfChecked("Twitter","PublishSocialNetworks")} value="3" id="checkboxTwitterInput" name="Twitter" onChange={starOffer? this.props.onChange : this.props.onFocus}/>
+                            <input type="checkbox" checked={checkIfChecked("Twitter","PublishSocialNetworks")} id="checkboxTwitterInput" name="Twitter" onChange={starOffer? this.props.onChange : this.props.onFocus}/>
                             <label for="checkboxTwitterInput"></label>
                         </div>
                         <svg width="32" height="32" viewBox="0 0 32 32" className="icon">
@@ -60,7 +60,7 @@ class socialMedia extends Component {
                     </div>
                     <div className="youtube socialMediatWrapper">
                         <div className="checkboxforSocialMedia">
-                            <input type="checkbox" checked={checkIfChecked("YouTube","PublishSocialNetworks")} value="4" id="checkboxYoutubeInput" name="YouTube" onChange={starOffer? this.props.onChange : this.props.onFocus}/>
+                            <input type="checkbox" checked={checkIfChecked("YouTube","PublishSocialNetworks")} id="checkboxYoutubeInput" name="YouTube" onChange={starOffer? this.props.onChange : this.props.onFocus}/>
                             <label for="checkboxYoutubeInput"></label>
                         </div>
                         <svg width="32" height="32" viewBox="0 0 32 32" className="icon">

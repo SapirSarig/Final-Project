@@ -87,6 +87,23 @@ namespace FinalProject.BL
             }
         }
 
+        public ErrorMessage CloseAuction(int id)
+        {
+            try
+            {
+                auctionsCRUD.CloseAuction(id);
+                ErrorMessage message = new ErrorMessage
+                {
+                    Code = HttpStatusCode.OK
+                };
+                return message;
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
+
         public IEnumerable<Offer> GetOffersByAuctionId(int auctionId)
         {
             return auctionsCRUD.GetOffersByAuctionId(auctionId);

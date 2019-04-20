@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import Register from '../../common/register/Register';
 import UserService from '../../services/apis/UserService';
-import { Route, Redirect } from 'react-router';
-import LocalStorageUtil from '../../utils/LocalStorageUtil';
+import { Redirect } from 'react-router';
 import SessionStorageUtil from '../../utils/SessionStorageUtil';
 
 
@@ -54,12 +53,10 @@ class SignUp extends Component {
             });
         }
     }
+    
     CreateInfluencerUser(user) {
-        //const userInfo = Object.assign({}, registerObj, this.state);
-        //console.log('#########', userInfo);
         this.setState({ user });
         this.userService.createInfluencerUser(user).then(req => {
-            //console.log(req);
             if (req) {
                 if (req.Message) {
                     alert(req.Message);
@@ -68,8 +65,6 @@ class SignUp extends Component {
                         signUpOk: true,
                         user: req
                     }, () => {
-                        //LocalStorageUtil.RemoveLoggedUser();
-                        //SessionStorageUtil.RemoveLoggedUser();
                         SessionStorageUtil.SaveLoggedUser(req);
                     });
                 }
@@ -81,18 +76,13 @@ class SignUp extends Component {
     }
 
     CreateBusinessUser(user) {
-        //const userInfo = Object.assign({}, registerObj, this.state);
-        //console.log('#########', userInfo);
         this.setState({ user });
         this.userService.createBusinessUser(user).then(req => {
-            //console.log(req);
             if (req) {
                 this.setState({
                     signUpOk: true,
                     user: req
                 }, () => {
-                    //LocalStorageUtil.RemoveLoggedUser();
-                    //SessionStorageUtil.RemoveLoggedUser();
                     SessionStorageUtil.SaveLoggedUser(req);
                 });
             }

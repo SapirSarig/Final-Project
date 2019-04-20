@@ -77,11 +77,11 @@ namespace FinalProject.BL
             }
         }
 
-        public ErrorMessage AddStars(int id, int NumOfStars)
+        public ErrorMessage AddStars(int id, int NumOfStars, int RateByUser)
         {
             try
             {
-                bool isAdded = (userCRUD.AddStars(id,NumOfStars));
+                bool isAdded = (userCRUD.AddStars(id,NumOfStars, RateByUser));
                 if (isAdded)
                 {
 
@@ -156,8 +156,9 @@ namespace FinalProject.BL
             }
         }
 
-        public bool SendLinkToResetPassword(VerifyPasswordModal verifyPasswordObject, string Authority, string Scheme)
+        public ErrorMessage SendLinkToResetPassword(VerifyPasswordModal verifyPasswordObject, string Authority, string Scheme)
         {
+            ErrorMessage errorMessage;
             User user;
             if (checkUserAnswers(verifyPasswordObject, out user))
             {
@@ -165,8 +166,8 @@ namespace FinalProject.BL
                 try
                 {
                     string to = verifyPasswordObject.Email;
-                    string from = "itsadealteam@gmail.com";
-                    string subject = "Your Password";
+                    string from = "itsadealgroup@gmail.com";
+                    string subject = "Reset your Password";
 
                     string tokenEmailPassword = JwtManager.GenerateToken(user.Email, user.Password);
                     string body = String.Format(@"
@@ -174,25 +175,72 @@ namespace FinalProject.BL
                                     Please click the following link to reset your password:
                                     {1}://{2}/resetPassword?authUser={3}
                                     Thanks!
-                                    Its a deal team", user.Name, Scheme, Authority, tokenEmailPassword);
+                                    It's a deal team", user.Name, Scheme, Authority, tokenEmailPassword);
 
 
                     MailMessage mail = new MailMessage(from, to, subject, body);
                     SmtpClient client = new SmtpClient("smtp.gmail.com");
-                    client.Credentials = new NetworkCredential("itsadealteam@gmail.com", "12345@Aa");
+                    client.Credentials = new NetworkCredential("itsadealgroup@gmail.com", "Aa@123456");
                     client.Port = 25;
                     client.EnableSsl = true;
                     client.Send(mail);
-                    return true;
+                    errorMessage = new ErrorMessage
+                    {
+                        Code = HttpStatusCode.OK
+                    };
+                    return errorMessage;
                 }
                 catch (Exception ex)
                 {
-                    Console.WriteLine(ex.Message);
-                    return false;
+                    return null;
+                    throw;
                 }
             }
             else
             {
+                errorMessage = new ErrorMessage
+                {
+                    Code = HttpStatusCode.NotModified,
+                    Message = "Validation Error"
+                };
+                return errorMessage;
+            }
+        }
+
+        public IEnumerable<UserChat> GetAllChats(int id)
+        {
+            return userCRUD.GetAllChats(id);
+        }
+
+        public bool SendMailToInfluencerUser(int offerId, string auctionName)
+        {
+            try
+            {
+                User user = userCRUD.FindUserByOfferId(offerId);
+                string to = user.Email;
+                string from = "itsadealteam@gmail.com";
+                string subject = "Your offer was accepted!";
+
+                string body = String.Format(@"
+                                    Hello {0}! 
+                                    Your offer for the auction {1} was accepted!
+                                    Please publish the product as you described.
+                                    After the product was published succefully, please enter the offer page to settle the payment with the businss owner.
+                                    Cheers,
+                                    Its a deal team", user.Name, auctionName);
+
+
+                MailMessage mail = new MailMessage(from, to, subject, body);
+                SmtpClient client = new SmtpClient("smtp.gmail.com");
+                client.Credentials = new NetworkCredential("itsadealgroup@gmail.com", "Aa@123456");
+                client.Port = 25;
+                client.EnableSsl = true;
+                client.Send(mail);
+                return true;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
                 return false;
             }
         }
@@ -208,15 +256,15 @@ namespace FinalProject.BL
 
                 string body = String.Format(@"
                                     Hello {0}! 
-                                    An Influencer user has sent an offer to one of your auctions.
-                                    Take a look here: (link)
+                                    An Influencer has sent an offer to one of your auctions!
+                                    Please take a look at your profile.
                                     Cheers,
                                     Its a deal team", user.Name);
 
 
                 MailMessage mail = new MailMessage(from, to, subject, body);
                 SmtpClient client = new SmtpClient("smtp.gmail.com");
-                client.Credentials = new NetworkCredential("itsadealteam@gmail.com", "12345@Aa");
+                client.Credentials = new NetworkCredential("itsadealgroup@gmail.com", "Aa@123456");
                 client.Port = 25;
                 client.EnableSsl = true;
                 client.Send(mail);
@@ -250,11 +298,21 @@ namespace FinalProject.BL
         private bool checkUserAnswers(VerifyPasswordModal verifyPasswordObject, out User user)
         {
             user = userCRUD.GetUserByEmail(verifyPasswordObject.Email);
-            if (user.Question1 == verifyPasswordObject.Question1 && user.Question2 == verifyPasswordObject.Question2)
+            if (user.Email == verifyPasswordObject.Email && user.Question1 == verifyPasswordObject.Question1 && user.Question2 == verifyPasswordObject.Question2)
             {
                 return true;
             }
             return false;
+        }
+
+        public bool IsRatedByUserId(int RatedUserId, int RatedByUserId)
+        {
+            return userCRUD.IsRatedByUserId(RatedUserId, RatedByUserId);
+        }
+
+        public bool IsReviewedByUserId(int ReviewedUserId, int ReviewedByUserId)
+        {
+            return userCRUD.IsReviewedByUserId(ReviewedUserId, ReviewedByUserId);
         }
     }
 }

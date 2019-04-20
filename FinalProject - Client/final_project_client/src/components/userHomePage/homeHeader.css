@@ -1,10 +1,27 @@
 .businessProfileImgWrapper{
     display: flex;
     height: 25vh;
-    justify-content: flex-end;
+    justify-content: center;
 }
 
 .profliePic{
-    width: 200px;
+    width: 180px;
     border: 1px solid white;
+    border-radius: 50%;
+    overflow: hidden;
 }
+
+.helloAndLink{
+    text-align: center;
+    color: linen;
+}
+
+.userProfileIcon {
+    display: inline-block;
+    width: 9em;
+    height: 9em;
+    stroke-width: 0;
+    stroke: currentColor;
+    fill: linen;
+    margin-left: 24px;
+  }

@@ -10,10 +10,15 @@ import VerifyQuestions from "../../common/verifyQuestions/VerifyQuestions";
 import SignUp from '../../components/signUp/SignUp';
 import PasswordInput from '../../components/passwordInput/passwordInput';
 import LayoutButton from '../layoutButton/layoutButton';
+import Logo from '../../common/logo/logo';
 
 import PropTypes from 'prop-types';
 import TextField from '@material-ui/core/TextField';
 import { withStyles } from '@material-ui/core/styles';
+
+import { logout } from '../../actions/';
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
 
 const initialState = {
     user: {},
@@ -24,8 +29,8 @@ const initialState = {
         Password: "",
         ConfirmPassword: "",
         ConfirmMail: "",
-        Question1:"",
-        Question2:""
+        Question1: "",
+        Question2: ""
     },
     externalLogin: false
 
@@ -49,22 +54,8 @@ class Register extends Component {
         this.updateChooseTypeStateObject = this.updateChooseTypeStateObject.bind(this);
         this.handleSubmitClicked = this.handleSubmitClicked.bind(this);
         this.isSubmitBtnValid = this.isSubmitBtnValid.bind(this);
-        // this.isPasswordSet = this.isPasswordSet.bind(this);
     }
-
-    // componentWillMount(){
-    //     const {userInfo} = this.props;
-    //     if(userInfo){
-
-    //     }
-    // }
-
     componentDidMount() {
-        // } else {
-        // const { user } = this.props;
-        // this.setState({
-        //     user
-        // });
         const { location } = this.props;
         if (location && location.state) {
             {
@@ -78,33 +69,13 @@ class Register extends Component {
         }
         else {
             const { user } = this.props;
-            this.setState({
-                user
-            });
+            if (user) {
+                this.setState({
+                    user
+                });
+            }
         }
     }
-    // const { location } = this.props;
-    // if (location && location.state) {
-    //     const { loggedUser, externalLogin, user } = location.state;
-    //     if (loggedUser && externalLogin) {
-    //         const { email, name } = loggedUser;
-    //         user.Email = email;
-    //         user.Name = name;
-    //         user.ExternalLogin = externalLogin;
-    //         user.ConfirmMail = email;
-    //     }
-    //     this.setState({
-    //         user
-    //     });
-
-    // } else {
-    //     const { user } = this.props;
-    //     this.setState({
-    //         user
-    //     });
-    // }
-
-
 
     handleInputChange(event) {
 
@@ -127,7 +98,7 @@ class Register extends Component {
                 }
                 else {
                     const index = user.Interests.findIndex((interest) => interest.Value === value);
-                    user.Interests.splice(index, index + 1);
+                    user.Interests.splice(index, 1);
                     this.setState({
                         user
                     });
@@ -148,12 +119,10 @@ class Register extends Component {
             });
             this.checkValidation(name, value);
         }
-        console.log("%^%^%^%", this.state);
     }
 
 
     updateChooseTypeStateObject(obj) {
-        console.log(obj);
         this.setState({
             chooseTypeState: obj
         });
@@ -177,8 +146,8 @@ class Register extends Component {
         } else if (fieldName === "ConfirmMail") {
             errorMessage = RegisterService.confirmValidation(value, user.Email);
         }
-        else if ((fieldName === "Question1") || (fieldName === "Question2")){
-            errorMessage = StringUtil.isEmptyString(value) ? "Input not valid" : "";
+        else if ((fieldName === "Question1") || (fieldName === "Question2")) {
+            errorMessage = (StringUtil.isEmptyString(value) || StringUtil.hasNumber(value)) ? "Input not valid" : "";
         }
 
         errors[fieldName] = errorMessage;
@@ -217,8 +186,6 @@ class Register extends Component {
             userToCreate["auctions"] = [];
             CreateBusinessUser(userToCreate);
         }
-        //if there are no validtion errors
-
     }
 
     isAllValid() {
@@ -252,20 +219,11 @@ class Register extends Component {
             if (StringUtil.isEmptyString(user.CompanyName)) {
                 return false;
             }
-            if(chooseTypeState && chooseTypeState.errors && chooseTypeState.errors.WebsiteLink !== undefined){
+            if (chooseTypeState && chooseTypeState.errors && chooseTypeState.errors.WebsiteLink !== undefined) {
                 return false;
             }
         }
         return true;
-        // if(StringUtil.isEmptyString(RegisterService.nameValidation(user.Name)))
-        // if(user.Type === "Business Owner"){
-        //     if (StringUtil.isEmptyString(RegisterService.nameValidation(user.CompanyName))){
-        //         res = false;
-        //     }
-        // }
-        // else{
-        //     if (StringUtil.isEmptyString(RegisterService.nameValidation(user.CompanyName)))
-
     }
     handleSubmitClicked() {
         const { user, chooseTypeState } = this.state;
@@ -287,19 +245,12 @@ class Register extends Component {
         }
     }
 
-
-    // isPasswordSet(password){
-    //     return StringUtil.isEmptyString(password);
-    // }
-    // updateUserInfo(userInfo){
-    //     this.setState({userInfo})
-    // }
-
     render() {
         const { children, signUp, classes } = this.props;
         const { user, errors, externalLogin } = this.state;
         return (
             <div className="registerContainer">
+                <Logo />
                 {user && <React.Fragment>
 
                     <TextField
@@ -326,7 +277,6 @@ class Register extends Component {
                         disabled={externalLogin}
                         margin="normal"
                     />}
-                    {/* < input type="email" name="email" disabled={externalLogin} value={email} onChange={this.handleInputChange} /> */}
                     <span className="errorInput" > {errors["Email"] && errors["Email"]} </span>
 
                     {signUp && <TextField
@@ -339,17 +289,12 @@ class Register extends Component {
                         disabled={externalLogin}
                         margin="normal"
                     />}
-                    {/* < input type="email" name="confirmMail" disabled={externalLogin} value={confirmMail} onChange={this.handleInputChange} /> */}
                     <span className="errorInput" > {errors["ConfirmMail"] && errors["ConfirmMail"]} </span>
 
                     {signUp && <PasswordInput name="Password" style={{ width: '75%' }} placeholder="Min 6 chars, one number and one lower case letter" value={user.Password} onChange={this.handleInputChange} label={"Password *"} />}
-                    {/* <span > Password {externalLogin && (<span>for the website </span>)} *</span> */}
-
-                    {/* <input type="password" placeholder="Min 6 chars, at least one number and one lower case English letter" name="password" value={password} onChange={this.handleInputChange} /> */}
                     <span className="errorInput" > {errors["Password"] && errors["Password"]} </span>
 
                     {signUp && <PasswordInput name="ConfirmPassword" style={{ width: '75%' }} value={user.ConfirmPassword} onChange={this.handleInputChange} label={"Confirm Password *"} />}
-                    {/* <input type="password" name="confirmPassword" value={confirmPassword} onChange={this.handleInputChange} /> */}
                     <span className="errorInput" > {errors["ConfirmPassword"] && errors["ConfirmPassword"]} </span>
 
                     {signUp && <div className="typeOfUser">
@@ -379,9 +324,8 @@ class Register extends Component {
                         margin="normal"
                         style={{ width: '80%' }}
                     />
-                    {/* <input type="text" name="description" onChange={this.handleInputChange} /> */}
 
-                    <VerifyQuestions signUp={signUp} handleInputChange={this.handleInputChange} question1={user.Question1} question2={user.Question2} errors={errors}/>
+                    <VerifyQuestions signUp={signUp} handleInputChange={this.handleInputChange} question1={user.Question1} question2={user.Question2} errors={errors} />
 
 
                     {signUp && <div className={`${this.isAllValid() ? "signUpBtnWrapper" : "disableElement signUpBtnWrapper"}`}>
@@ -392,8 +336,6 @@ class Register extends Component {
                         <LayoutButton text="Submit!" onClick={this.handleSubmitClicked} />
                     </div>}
                 </React.Fragment>}
-
-                {/* <input type="button" className={`${this.isAllValid() ? "" : "disableElement"}`} onClick={this.createUserClicked} value="Sign up!" /> */}
             </div>
         );
     }
@@ -403,4 +345,15 @@ Register.propTypes = {
     classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles)(Register);
+const mapStateToProps = (state) => {
+    return { };
+};
+
+const mapDispatchToProps = (dispatch) => {
+    return bindActionCreators({ logout }, dispatch);
+};
+
+export default withStyles(styles)(connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(Register));
